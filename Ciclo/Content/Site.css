@@ -23,6 +23,11 @@ textarea {
     max-width: 100%;
 }
 
+.tg-sectionspace {
+    padding: 50px 0 !important;
+}
+
+
 .tg-innerbannercontent {
     padding: 55px 0 20px !important;
     text-align: left !important;
@@ -30,4 +35,35 @@ textarea {
 
 .p10 {
     padding:10px;
+}
+
+.counter {
+    text-align: center;
+}
+
+.employees, .customer, .design, .order {
+    margin-bottom: 70px;
+}
+
+table input {
+    width:16px;
+    height:16px;
+}
+
+.counter-count {
+    font-size: 48px;
+    background-color: #808080;
+    position: relative;
+    color: #ffffff;
+    text-align: center;
+    line-height: 92px;
+    width: 90%;
+    height: 92px;
+    display: inline-block;
+}
+
+.employee-p, .customer-p, .order-p, .design-p {
+    font-size: 24px;
+    color: #000000;
+    line-height: 34px;
 }

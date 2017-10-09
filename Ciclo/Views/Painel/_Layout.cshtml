@@ -1,0 +1,103 @@
+﻿<!doctype html>
+<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ciclo - Instrutores</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/template")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="tg-home tg-homevtwo">
+
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+
+        <header id="tg-header" class="tg-header tg-headervtwo tg-haslayout">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <strong class="tg-logo"><a href="#"><img src="~/images/logo.png" alt="company logo here"></a></strong>
+                        <div class="tg-navigationarea">
+                            <nav id="tg-nav" class="tg-nav">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                                    <ul>
+                                        <li><a href="~/Painel">Dashboard</a></li>
+                                        <li><a href="~/Painel/Instrutores">Instrutores</a></li>
+                                        <li><a href="~/Painel/Turmas">Turmas</a></li>
+                                        <li><a href="~/Painel/Alunos">Alunos</a></li>
+                                        <li class="menu-item-has-children">
+                                            <a href="javascript:void(0);">Relatórios</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="~/Painel/Configuracoes">Configurações</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <a class="tg-btn tg-btnbookseat" href="javascript:void(0);">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        @RenderBody()
+
+        <footer id="tg-footer" class="tg-haslayout">
+            <div class="tg-foorterbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <p class="tg-copyrights">2017 Todos os direitos reservados</p>
+                            <ul class="tg-socialicons">
+                                <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
+                                <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+                                <li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                                <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                            <strong class="tg-logo"><a href="index.html"><img src="~/images/logo.png" alt="company logo here"></a></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>            
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/template")
+    @Scripts.Render("~/bundles/painel")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+
+
+
+        
+        
+    
+
+

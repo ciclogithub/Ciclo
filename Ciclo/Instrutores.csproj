@@ -147,6 +147,7 @@
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PainelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +224,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
     <Content Include="Scripts\js\cadastro.js" />
+    <Content Include="Scripts\js\painel.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\packery.pkgd.min.js" />
@@ -244,6 +246,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Cadastro\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Painel\Index.cshtml" />
+    <Content Include="Views\Painel\_Layout.cshtml" />
+    <Content Include="Views\Painel\_ViewStart.cshtml" />
+    <Content Include="Views\Painel\Configuracoes.cshtml" />
+    <Content Include="Views\Painel\Instrutores.cshtml" />
+    <Content Include="Views\Painel\Turmas.cshtml" />
+    <Content Include="Views\Painel\Alunos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

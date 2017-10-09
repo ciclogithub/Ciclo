@@ -26,6 +26,9 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/cadastro").Include(
                       "~/Scripts/js/cadastro.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/painel").Include(
+                      "~/Scripts/js/painel.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
                 "~/Scripts/customScrollbar.min.js",
                 "~/Scripts/packery.pkgd.min.js",

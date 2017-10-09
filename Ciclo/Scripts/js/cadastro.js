@@ -55,8 +55,8 @@ function CadastroEmpresa() {
             data: $('#form_cadastro_empresa :input').serialize(),
             dataType: "json",
             traditional: true,
-            success: function (retorno) {
-                if (retorno.retorno == 0) {
+            success: function (retorno) {              
+                if (retorno.id == 0) {
                     $("#form-error").addClass("bg-danger").html(retorno.mensagem);
                 } else {
                     $("#form-error").addClass("bg-success").html(retorno.mensagem);
