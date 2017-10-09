@@ -44,11 +44,11 @@ namespace Biblioteca.Funcoes
                     retorno.erro = false;
                     retorno.mensagem = "Redirecionando...";
 
-                    System.Web.HttpCookie cookie = new HttpCookie("ciclo_instrutores");
+                    HttpCookie cookie = new HttpCookie("ciclo_instrutores");
                     cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
                     if (cookie == null)
                         cookie = new HttpCookie("ciclo_instrutores");
-                    cookie.Value = new EmpresasDB().Email(empresaview.txemail).idempresa;
+                    cookie.Value = Convert.ToString(new EmpresasDB().Email(empresaview.txemail).idempresa);
                     HttpContext.Current.Response.Cookies.Add(cookie);
 
                 }

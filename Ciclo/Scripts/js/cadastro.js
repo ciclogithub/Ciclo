@@ -60,6 +60,7 @@ function CadastroEmpresa() {
                     $("#form-error").addClass("bg-danger").html(retorno.mensagem);
                 } else {
                     $("#form-error").addClass("bg-success").html(retorno.mensagem);
+                    window.location = "/Painel";
                 }
             }
         });
