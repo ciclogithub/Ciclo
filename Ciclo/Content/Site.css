@@ -20,5 +20,14 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
+}
+
+.tg-innerbannercontent {
+    padding: 55px 0 20px !important;
+    text-align: left !important;
+}   
+
+.p10 {
+    padding:10px;
 }

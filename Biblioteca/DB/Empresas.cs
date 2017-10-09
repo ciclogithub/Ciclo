@@ -4,11 +4,91 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Biblioteca.Entidades;
+using System.Data;
 
 namespace Biblioteca.DB
 {
     public class EmpresasDB
     {
+
+        public Empresas Email(string email)
+        {
+            try
+            {
+                Empresas empresas = null;
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("SELECT isnull(idempresa, 0) AS idempresa, txempresa, txemail, txsenha, txtelefone, txdescritivo FROM Empresas WHERE txemail = @email");
+                quey.SetParameter("email", email);
+                IDataReader reader = quey.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txsenha"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
+                }
+                reader.Close();
+                session.Close();
+
+                return empresas;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public Empresas Buscar(int codigo)
+        {
+            try
+            {
+                Empresas empresas = null;
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("SELECT isnull(idempresa, 0) AS idempresa, txempresa, txemail, txsenha, txtelefone, txdescritivo FROM Empresas WHERE idempresa = @codigo");
+                quey.SetParameter("codigo", codigo);
+                IDataReader reader = quey.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txsenha"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
+                }
+                reader.Close();
+                session.Close();
+
+                return empresas;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public bool ExisteEmail(string email)
+        {
+            try
+            {
+                bool empresa = false;
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idempresa FROM Empresas WHERE txemail = @email");
+                query.SetParameter("email", email);
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    empresa = true;
+                }
+                reader.Close();
+                session.Close();
+
+                return empresa;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public void Salvar(Empresas variavel)
         {
             try

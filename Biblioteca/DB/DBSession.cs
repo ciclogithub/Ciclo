@@ -39,7 +39,7 @@ namespace Biblioteca.DB
         private IDbConnection conexao;
         public DBSession()
         {
-            string conec = "Data Source=FSOARES-PC\SQLEXPRESS; Initial Catalog=Instrutores; User ID=sa; Password=Ciclo2017; Language=Portuguese;  Max Pool Size=10000; Database=Instrutores";
+            string conec = "Data Source=FSOARES-PC\\SQLEXPRESS; Initial Catalog=Instrutores; User ID=sa; Password=Ciclo2017; Language=Portuguese;  Max Pool Size=10000; Database=Instrutores";
 
             conexao = new SqlConnection(conec);
 

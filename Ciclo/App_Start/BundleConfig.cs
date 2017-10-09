@@ -23,9 +23,33 @@ namespace Ciclo
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/cadastro").Include(
+                      "~/Scripts/js/cadastro.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/template").Include(
+                "~/Scripts/customScrollbar.min.js",
+                "~/Scripts/packery.pkgd.min.js",
+                "~/Scripts/query.hoverdir.js",
+                "~/Scripts/jquery.vide.min.js",
+                "~/Scripts/jquery.fullpage.js",
+                "~/Scripts/isotope.pkgd.js",
+                "~/Scripts/main.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/template").Include(
+                    "~/Content/normalize.css",
+                    "~/Content/font-awesome.min.css",
+                    "~/Content/icomoon.css",
+                    "~/Content/customScrollbar.css",
+                    "~/Content/animate.css",
+                    "~/Content/jquery.fullpage.css",
+                    "~/Content/transitions.css",
+                    "~/Content/main.css",
+                    "~/Content/color.css",
+                    "~/Content/responsive.css"));
         }
     }
 }
