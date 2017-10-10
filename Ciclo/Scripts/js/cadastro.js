@@ -1,58 +1,64 @@
 ﻿$(document).ready(function () {
 
-    $("#btn_cadastro_empresa").click(function () {
-        CadastroEmpresa();
+    $("#btn_cadastro_organizador").click(function () {
+        CadastroOrganizador();
     });
 
-    $("#btn_login").click(function () {
-        LoginEmpresa();
+    $("#btn_login_organizador").click(function () {
+        CadastroOrganizador();
     });
 });
 
-function CadastroEmpresa() {
+function CadastroOrganizador() {
     
-    var empresa = $("#txempresa").val();
+    var organizador = $("#txorganizador").val();
     var email = $("#txemail").val();
     var telefone = $("#txtelefone").val();
     var senha = $("#txsenha").val();
+    var confsenha = $("#txconfsenha").val();
     var descricao = $("#txdescritivo").val();
 
     var erro = false;
     var erroMsg = "";
+    var erroMsg2 = "";
 
-    if (empresa.length < 2) {
+    if (organizador.length < 2) {
         erro = true;
-        erroMsg += "Nome da Empresa/Instrutor";
+        erroMsg += "organizador";
     }
 
     if (email.length < 2) {
         erro = true;
         if (erroMsg != "")
             erroMsg += ", ";
-        erroMsg += "E-mail";
+        erroMsg += "e-mail";
     }
 
     if (telefone.length < 2) {
         erro = true;
         if (erroMsg != "")
             erroMsg += ", ";
-        erroMsg += "Telefone";
+        erroMsg += "telefone";
     }
 
     if (senha.length < 2) {
         erro = true;
         if (erroMsg != "")
             erroMsg += ", ";
-        erroMsg += "Senha";
+        erroMsg += "senha";
     }
 
-    
+    if (senha != confsenha) {
+        erro = true;
+        erroMsg2 += "Senha e confirmação devem ser iguais";
+    }
+
     if (!erro) {
         $("#form-error").addClass("bg-info").html('Aguarde...');
         $.ajax({
             type: "POST",
             url: "/Cadastro/Formulario/",
-            data: $('#form_cadastro_empresa :input').serialize(),
+            data: $('#form_cadastro_organizador :input').serialize(),
             dataType: "json",
             traditional: true,
             success: function (retorno) {              
@@ -65,11 +71,11 @@ function CadastroEmpresa() {
             }
         });
     } else {
-            $("#form-error").addClass("bg-danger").html('Preencha ' + erroMsg + ' corretamente.');
+        $("#form-error").addClass("bg-danger").html((erroMsg2 == '' ? 'Preencha ' + erroMsg + ' corretamente. ' : erroMsg2));
     }
 }
 
-function LoginEmpresa() {
+function CadastroOrganizador() {
 
     var email = $("#txemail").val();
     var senha = $("#txsenha").val();
@@ -79,14 +85,14 @@ function LoginEmpresa() {
 
     if (email.length < 2) {
         erro = true;
-        erroMsg += "E-mail";
+        erroMsg += "e-mail";
     }
 
     if (senha.length < 2) {
         erro = true;
         if (erroMsg != "")
             erroMsg += ", ";
-        erroMsg += "Senha";
+        erroMsg += "senha";
     }
 
     if (!erro) {
@@ -94,7 +100,7 @@ function LoginEmpresa() {
         $.ajax({
             type: "POST",
             url: "/Login/Formulario/",
-            data: $('#form_login :input').serialize(),
+            data: $('#form_login_organizador :input').serialize(),
             dataType: "json",
             traditional: true,
             success: function (retorno) {
@@ -102,7 +108,7 @@ function LoginEmpresa() {
                     $("#form-error").addClass("bg-danger").html(retorno.mensagem);
                 } else {
                     $("#form-error").addClass("bg-success").html(retorno.mensagem);
-                    //window.location = "/Cadastro/Formulario/" + retorno.idempresa;
+                    window.location = "/Painel";
                 }
             }
         });

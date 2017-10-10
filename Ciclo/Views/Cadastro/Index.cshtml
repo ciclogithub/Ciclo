@@ -21,32 +21,47 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <form class="tg-formtheme tg-formcontactus" id="form_cadastro_empresa">
-                        <fieldset>
-                            <div class="form-group">
-                                <input type="text" name="txempresa" id="txempresa" class="form-control" placeholder="Nome da Empresa/Instrutor *">
+                    <form id="form_cadastro_organizador">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <input type="text" name="txorganizador" id="txorganizador" class="form-control" placeholder="Organizador *">
                             </div>
-                            <div class="form-group">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="password" name="txsenha" id="txsenha" class="form-control" placeholder="Senha *">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <input type="text" name="txemail" id="txemail" class="form-control" placeholder="E-mail *">
                             </div>
-                            <div class="form-group">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <input type="password" name="txconfsenha" id="txconfsenha" class="form-control" placeholder="Confirmar Senha *">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <input type="text" name="txtelefone" id="txtelefone" class="form-control" placeholder="Telefone *">
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição"></textarea>
                             </div>
-                            <div class="form-group">
-                                <input type="password" name="txsenha" id="txsenha" class="form-control" placeholder="Senha *">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <input type="checkbox" name="flinstrutor" id="flinstrutor" value="1">&nbsp;&nbsp;O organizador também é o instrutor?
                             </div>
-                            <div class="form-group">
-                                <textarea name="txdescritivo" id="txdescritivo" placeholder="Descrição"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="tg-btn" type="button" id="btn_cadastro_empresa">Cadastrar</button>
-                            </div>
-                            <div class="form-group">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                 <div id="form-error" class="p10"></div>
                             </div>
-                        </fieldset>
-                    </form>
-                    
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">
+                                <button class="tg-btn" type="button" id="btn_cadastro_organizador">Cadastrar</button>
+                            </div>                            
+                        </div>
+                    </form>                    
                 </div>
             </div>
         </div>

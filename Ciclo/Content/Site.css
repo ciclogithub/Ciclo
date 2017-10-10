@@ -45,6 +45,9 @@ textarea {
     margin-bottom: 70px;
 }
 
+table {
+    margin-top:20px;
+}
 table input {
     width:16px;
     height:16px;
@@ -66,4 +69,8 @@ table input {
     font-size: 24px;
     color: #000000;
     line-height: 34px;
+}
+
+#form_cadastro_organizador .row {
+    margin-bottom: 10px;
 }

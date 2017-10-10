@@ -17,6 +17,11 @@ namespace Ciclo.Controllers
             return View();
         }
 
+        [Route("Login/Formulario")]
+        public JsonResult Formulario(Organizadores organizadoresview)
+        {
+            return Json(new Inclusao().Cadastro(organizadoresview));
+        }
 
     }
 }

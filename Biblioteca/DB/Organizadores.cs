@@ -8,28 +8,28 @@ using System.Data;
 
 namespace Biblioteca.DB
 {
-    public class EmpresasDB
+    public class OrganizadoresDB
     {
 
-        public Empresas Email(string email)
+        public Organizadores Email(string email)
         {
             try
             {
-                Empresas empresas = null;
+                Organizadores organizadores = null;
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("SELECT isnull(idempresa, 0) AS idempresa, txempresa, txemail, txsenha, txtelefone, txdescritivo FROM Empresas WHERE txemail = @email");
+                Query quey = session.CreateQuery("SELECT isnull(idorganizador, 0) AS idorganizador, txorganizador, txemail, txsenha, txtelefone, txdescritivo FROM Organizadores WHERE txemail = @email");
                 quey.SetParameter("email", email);
                 IDataReader reader = quey.ExecuteQuery();
 
                 if (reader.Read())
                 {
-                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txsenha"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
+                    organizadores = new Organizadores(Convert.ToInt32(reader["idorganizador"]), Convert.ToString(reader["txorganizador"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txsenha"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
                 }
                 reader.Close();
                 session.Close();
 
-                return empresas;
+                return organizadores;
             }
             catch (Exception error)
             {
@@ -37,25 +37,25 @@ namespace Biblioteca.DB
             }
         }
 
-        public Empresas Buscar(int codigo)
+        public Organizadores Buscar(int codigo)
         {
             try
             {
-                Empresas empresas = null;
+                Organizadores organizadores = null;
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("SELECT isnull(idempresa, 0) AS idempresa, txempresa, txemail, txsenha, txtelefone, txdescritivo FROM Empresas WHERE idempresa = @codigo");
+                Query quey = session.CreateQuery("SELECT isnull(idorganizador, 0) AS idorganizador, txorganizador, txemail, txsenha, txtelefone, txdescritivo FROM Organizadores WHERE idorganizador = @codigo");
                 quey.SetParameter("codigo", codigo);
                 IDataReader reader = quey.ExecuteQuery();
 
                 if (reader.Read())
                 {
-                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txsenha"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
+                    organizadores = new Organizadores(Convert.ToInt32(reader["idorganizador"]), Convert.ToString(reader["txorganizador"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txsenha"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
                 }
                 reader.Close();
                 session.Close();
 
-                return empresas;
+                return organizadores;
             }
             catch (Exception error)
             {
@@ -70,7 +70,7 @@ namespace Biblioteca.DB
                 bool empresa = false;
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("SELECT idempresa FROM Empresas WHERE txemail = @email");
+                Query query = session.CreateQuery("SELECT idorganizador FROM Organizadores WHERE txemail = @email");
                 query.SetParameter("email", email);
                 IDataReader reader = query.ExecuteQuery();
 
@@ -89,13 +89,13 @@ namespace Biblioteca.DB
             }
         }
 
-        public void Salvar(Empresas variavel)
+        public void Salvar(Organizadores variavel)
         {
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Empresas (txempresa, txemail, txsenha, txtelefone, txdescritivo) VALUES (@empresa, @email, @senha, @telefone, @descritivo) ");
-                query.SetParameter("empresa", variavel.txempresa);
+                Query query = session.CreateQuery("INSERT INTO Organizadores (txorganizador, txemail, txsenha, txtelefone, txdescritivo) VALUES (@organizador, @email, @senha, @telefone, @descritivo) ");
+                query.SetParameter("organizador", variavel.txorganizador);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("senha", variavel.txsenha);
                 query.SetParameter("telefone", variavel.txtelefone);
@@ -109,14 +109,14 @@ namespace Biblioteca.DB
             }
         }
 
-        public void Alterar(Empresas variavel)
+        public void Alterar(Organizadores variavel)
         {
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Empresas SET txempresa = @empresa, txemail = @email, txsenha = @senha, txtelefone = @telefone, txdescritivo = @descritivo WHERE idempresa = @id");
-                query.SetParameter("id", variavel.idempresa);
-                query.SetParameter("empresa", variavel.txempresa);
+                Query query = session.CreateQuery("UPDATE Organizadores SET txorganizador = @organizador, txemail = @email, txsenha = @senha, txtelefone = @telefone, txdescritivo = @descritivo WHERE idorganizador = @id");
+                query.SetParameter("id", variavel.idorganizador);
+                query.SetParameter("organizador", variavel.txorganizador);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("senha", variavel.txsenha);
                 query.SetParameter("telefone", variavel.txtelefone);
@@ -130,13 +130,13 @@ namespace Biblioteca.DB
             }
         }
 
-        public void Excluir(Empresas variavel)
+        public void Excluir(Organizadores variavel)
         {
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("DELETE FROM Empresas WHERE idempresa = @id");
-                query.SetParameter("id", variavel.idempresa);
+                Query query = session.CreateQuery("DELETE FROM Organizadores WHERE idorganizador = @id");
+                query.SetParameter("id", variavel.idorganizador);
                 query.ExecuteUpdate();
                 session.Close();
             }

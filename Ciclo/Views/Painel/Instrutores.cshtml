@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "DAshboard";
+    ViewBag.Title = "Instrutores";
 }
 
 <div class="tg-bgparallax">
@@ -22,10 +22,10 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <h2>INSTRUTORES</h2>
+                    <input type="text" />&nbsp;<button class="tg-btn" type="button">LOCALIZAR</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button">NOVO</button>
+                    <button class="tg-btn" type="button" onclick="Instrutores(0);">NOVO</button>
                     <button class="tg-btn" type="button">ALTERAR</button>
                     <button class="tg-btn" type="button">EXCLUIR</button>
                 </div>
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item">
@@ -121,6 +121,8 @@
                             <li class="page-item"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
@@ -129,9 +131,6 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9 text-right">
-                    <input type="text" />&nbsp;<button class="tg-btn" type="button">LOCALIZAR</button>
                 </div>
             </div>
         </div>

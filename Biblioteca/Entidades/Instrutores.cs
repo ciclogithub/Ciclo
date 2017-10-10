@@ -24,6 +24,14 @@ namespace Biblioteca.Entidades
             this.txdescritivo = "";
         }
 
+        public Instrutores(Organizadores organizadores)
+        {
+            this.txinstrutor = organizadores.txorganizador;
+            this.txemail = organizadores.txemail;
+            this.txtelefone = organizadores.txtelefone;
+            this.txdescritivo = organizadores.txdescritivo;
+        }
+
         public Instrutores(int id, string instrutor, string email, string telefone, string descritivo)
         {
             this.idinstrutor = id;

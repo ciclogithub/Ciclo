@@ -251,8 +251,9 @@
     <Content Include="Views\Painel\_ViewStart.cshtml" />
     <Content Include="Views\Painel\Configuracoes.cshtml" />
     <Content Include="Views\Painel\Instrutores.cshtml" />
-    <Content Include="Views\Painel\Turmas.cshtml" />
+    <Content Include="Views\Painel\Cursos.cshtml" />
     <Content Include="Views\Painel\Alunos.cshtml" />
+    <Content Include="Views\Painel\Locais.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

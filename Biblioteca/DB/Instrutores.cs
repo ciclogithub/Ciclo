@@ -14,8 +14,8 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Instrutores (txinstrutor, txemail, txtelefone, txdescritivo) VALUES (@empresa, @email, @senha, @telefone, @descritivo) ");
-                query.SetParameter("empresa", variavel.txinstrutor);
+                Query query = session.CreateQuery("INSERT INTO Instrutores (txinstrutor, txemail, txtelefone, txdescritivo) VALUES (@instrutor, @email, @telefone, @descritivo) ");
+                query.SetParameter("instrutor", variavel.txinstrutor);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("telefone", variavel.txtelefone);
                 query.SetParameter("descritivo", variavel.txdescritivo);

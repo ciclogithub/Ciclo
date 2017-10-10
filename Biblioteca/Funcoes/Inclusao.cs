@@ -15,36 +15,42 @@ namespace Biblioteca.Funcoes
 {
     public class Inclusao
     {
-        public Retorno Cadastro(Empresas empresaview)
+        public Retorno Cadastro(Organizadores organizadoresview)
         {
             Retorno retorno = new Retorno();
-            if (empresaview != null)
+            if (organizadoresview != null)
             {
-                empresaview.txemail = empresaview.txemail.TrimStart().TrimEnd();
+                organizadoresview.txemail = organizadoresview.txemail.TrimStart().TrimEnd();
 
-                if (new EmpresasDB().ExisteEmail(empresaview.txemail) && empresaview.idempresa == 0)
+                if (new OrganizadoresDB().ExisteEmail(organizadoresview.txemail) && organizadoresview.idorganizador == 0)
                 {
                     retorno.erro = true;
                     retorno.mensagem = "E-mail já cadastrado";
                 }
                 else
                 {
-                    Empresas empresa = new Empresas();
-                    if (empresaview.idempresa == 0)
+                    Organizadores organizadores = new Organizadores();
+                    if (organizadoresview.idorganizador == 0)
                     {
-                        empresa = empresaview.Retornar();
-                        empresa.Salvar();
+                        organizadores = organizadoresview.Retornar();
+                        organizadores.Salvar();
+
+                        if (Convert.ToBoolean(organizadoresview.flinstrutor))
+                        {
+                            Instrutores instrutor = new Instrutores(organizadoresview);
+                            instrutor.Salvar();
+                        }
                     }
                     else
                     {
-                        empresa = empresaview.Atualizar(new EmpresasDB().Buscar(empresaview.idempresa));
-                        empresa.Alterar();
+                        organizadores = organizadoresview.Atualizar(new OrganizadoresDB().Buscar(organizadoresview.idorganizador));
+                        organizadores.Alterar();
                     }
 
                     retorno.erro = false;
                     retorno.mensagem = "Redirecionando...";
 
-                    var id = new EmpresasDB().Email(empresaview.txemail).idempresa;
+                    var id = new OrganizadoresDB().Email(organizadoresview.txemail).idorganizador;
 
                     retorno.id = id;
 
