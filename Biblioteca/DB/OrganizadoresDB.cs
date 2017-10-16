@@ -145,5 +145,32 @@ namespace Biblioteca.DB
                 throw erro;
             }
         }
+
+        public Organizadores Nome(int codigo)
+        {
+            try
+            {
+                Organizadores organizadores = null;
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select txorganizador from organizadores where idorganizador = @id");
+                query.SetParameter("id", codigo);
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    organizadores = new Organizadores(Convert.ToString(reader["txorganizador"]));
+                }
+                reader.Close();
+                session.Close();
+
+                return organizadores;
+
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Biblioteca.Entidades;
+using System.Data;
 
 namespace Biblioteca.DB
 {
@@ -61,6 +62,31 @@ namespace Biblioteca.DB
             catch (Exception erro)
             {
                 throw erro;
+            }
+        }
+
+        public List<Instrutores> Listar()
+        {
+            try
+            {
+                List<Instrutores> instrutor = new List<Instrutores>();
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("select * from Instrutores ORDER by txinstrutor");
+                IDataReader reader = quey.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
             }
         }
     }

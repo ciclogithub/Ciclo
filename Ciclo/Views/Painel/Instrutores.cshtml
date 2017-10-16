@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Biblioteca.Entidades.Instrutores>
+
+@{
     ViewBag.Title = "Instrutores";
 }
 
@@ -6,7 +8,7 @@
     <div class="container">
         <div class="tg-innerbannercontent">
             <div class="tg-pagetitle">
-                <h1>DIOGO</h1>
+                <h1>@Html.Action("Usuario", "Painel")</h1>
             </div>
             <ol class="tg-breadcrumb">
                 <li><a href="~/Painel">Dashboard</a></li>
@@ -26,7 +28,9 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
                     <button class="tg-btn" type="button" onclick="Instrutores(0);">NOVO</button>
+                    &nbsp;
                     <button class="tg-btn" type="button">ALTERAR</button>
+                    &nbsp;
                     <button class="tg-btn" type="button">EXCLUIR</button>
                 </div>
             </div>
@@ -43,66 +47,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach (var p in Model)
+                        {
                             <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mdo</td>
+                                <th scope="row"><input type="checkbox" value="@p.idinstrutor" /></th>
+                                <td>@p.txinstrutor</td>
+                                <td>@p.txemail</td>
+                                <td>@p.txtelefone</td>
                             </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" /></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>TwBootstrap</td>
-                            </tr>
+                        }
                         </tbody>
                     </table>
 

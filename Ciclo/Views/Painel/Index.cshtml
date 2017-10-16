@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "DAshboard";
+    ViewBag.Title = "Dashboard";
 }
 
 <div class="tg-bgparallax">
     <div class="container">
         <div class="tg-innerbannercontent">
             <div class="tg-pagetitle">
-                <h1>DIOGO</h1>
+                <h1>@Html.Action("Usuario", "Painel")</h1>
             </div>
             <ol class="tg-breadcrumb">
                 <li class="tg-active">Dashboard</li>
@@ -26,25 +26,25 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="employees">
-                                        <p class="counter-count">0</p>
+                                        <p class="counter-count">@ViewBag.contadores.cont_instrutor</p>
                                         <p class="employee-p">Instrutores</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="customer">
-                                        <p class="counter-count">0</p>
-                                        <p class="customer-p">Turmas</p>
+                                        <p class="counter-count">@ViewBag.contadores.cont_curso</p>
+                                        <p class="customer-p">Cursos</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="design">
-                                        <p class="counter-count">0</p>
+                                        <p class="counter-count">@ViewBag.contadores.cont_aluno</p>
                                         <p class="design-p">Alunos</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="order">
-                                        <p class="counter-count">0</p>
+                                        <p class="counter-count">@ViewBag.contadores.avaliacao</p>
                                         <p class="order-p">Avaliação Média</p>
                                     </div>
                                 </div>

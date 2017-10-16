@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Biblioteca.Entidades;
+using Biblioteca.DB;
 using Biblioteca.Filters;
+using Ciclo.Models;
 
 namespace Ciclo.Controllers
 {
@@ -14,13 +17,27 @@ namespace Ciclo.Controllers
         [Autenticacao]
         public ActionResult Index()
         {
+            HttpCookie cookie = Request.Cookies["ciclo_instrutores"];
+            ViewBag.usuario = new OrganizadoresDB().Nome(Convert.ToInt32(cookie.Value));
+
+            ViewBag.contadores = new Biblioteca.DB.ContadoresDB().Listar();
             return View();
+        }
+
+        [Autenticacao]
+        public ActionResult Usuario()
+        {
+            return PartialView(new Logado().Buscar());
         }
 
         [Autenticacao]
         public ActionResult Instrutores()
         {
-            return View();
+
+            List<Instrutores> list = new List<Instrutores>();
+            list = new InstrutoresDB().Listar();  
+
+            return View(list);
         }
 
         [Autenticacao]
@@ -45,6 +62,16 @@ namespace Ciclo.Controllers
         public ActionResult Configuracoes()
         {
             return View();
+        }
+
+        public ActionResult Sair()
+        {
+            HttpCookie cookie = Request.Cookies["ciclo_instrutores"];
+            cookie.Value = "";
+            cookie.Expires = DateTime.Now.AddDays(-1d);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }

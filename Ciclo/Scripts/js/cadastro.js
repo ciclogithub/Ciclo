@@ -5,12 +5,12 @@
     });
 
     $("#btn_login_organizador").click(function () {
-        CadastroOrganizador();
+        LoginOrganizador();
     });
 });
 
 function CadastroOrganizador() {
-    
+
     var organizador = $("#txorganizador").val();
     var email = $("#txemail").val();
     var telefone = $("#txtelefone").val();
@@ -75,7 +75,7 @@ function CadastroOrganizador() {
     }
 }
 
-function CadastroOrganizador() {
+function LoginOrganizador() {
 
     var email = $("#txemail").val();
     var senha = $("#txsenha").val();
@@ -103,12 +103,20 @@ function CadastroOrganizador() {
             data: $('#form_login_organizador :input').serialize(),
             dataType: "json",
             traditional: true,
-            success: function (retorno) {
-                if (retorno.retorno == 0) {
-                    $("#form-error").addClass("bg-danger").html(retorno.mensagem);
-                } else {
-                    $("#form-error").addClass("bg-success").html(retorno.mensagem);
+            success: function (msg) {
+                var json = $.parseJSON(msg);
+
+                if (json.retorno === "OK") {
+                    $("#form-error").addClass("bg-success").html(json.retorno);
                     window.location = "/Painel";
+                }
+
+                if (json.retorno === "Dados incorretos") {
+                    $("#form-error").addClass("bg-danger").html(json.retorno);
+                }
+
+                if (json.retorno === "Usuário desativado, por favor entre em contato") {
+                    $("#form-error").addClass("bg-danger").html(json.retorno);
                 }
             }
         });

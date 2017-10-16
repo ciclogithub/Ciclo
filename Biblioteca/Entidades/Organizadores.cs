@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,17 +17,6 @@ namespace Biblioteca.Entidades
         public string txtelefone { get; set; }
         public string txdescritivo { get; set; }
         public Byte flinstrutor { get; set; }
-
-        public Organizadores(Organizadores organizadores)
-        {
-            this.idorganizador = organizadores.idorganizador;
-            this.txorganizador = organizadores.txorganizador;
-            this.txemail = organizadores.txemail;
-            this.txsenha = organizadores.txsenha;
-            this.txtelefone = organizadores.txtelefone;
-            this.txdescritivo = organizadores.txdescritivo;
-            this.flinstrutor = organizadores.flinstrutor;
-        }
 
         public Organizadores()
         {
@@ -47,6 +37,11 @@ namespace Biblioteca.Entidades
             this.txsenha = senha;
             this.txtelefone = telefone;
             this.txdescritivo = descritivo;
+        }
+
+        public Organizadores(string organizador)
+        {
+            this.txorganizador = organizador;
         }
 
         public void Salvar()

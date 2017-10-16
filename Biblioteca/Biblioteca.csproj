@@ -44,18 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\AlunosDB.cs" />
+    <Compile Include="DB\ContadoresDB.cs" />
     <Compile Include="DB\DBSession.cs" />
-    <Compile Include="DB\Organizadores.cs" />
-    <Compile Include="DB\Instrutores.cs" />
-    <Compile Include="DB\Painel.cs" />
-    <Compile Include="DB\Turmas.cs" />
-    <Compile Include="Entidades\Alunos.cs" />
+    <Compile Include="DB\OrganizadoresDB.cs" />
+    <Compile Include="DB\InstrutoresDB.cs" />
+    <Compile Include="DB\PainelDB.cs" />
+    <Compile Include="Entidades\Contadores.cs" />
     <Compile Include="Entidades\Organizadores.cs" />
     <Compile Include="Entidades\Instrutores.cs" />
     <Compile Include="Entidades\Painel.cs" />
     <Compile Include="Entidades\Retorno.cs" />
-    <Compile Include="Entidades\Turmas.cs" />
     <Compile Include="Filters\AutenticacaoAttribute.cs" />
     <Compile Include="Funcoes\Inclusao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
