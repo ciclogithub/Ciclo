@@ -8,7 +8,7 @@ using Biblioteca.DB;
 using Biblioteca.Filters;
 using Ciclo.Models;
 
-namespace Ciclo.Controllers
+namespace Ciclo.Controllers 
 {
     [Autenticacao]
     public class PainelController : Controller
