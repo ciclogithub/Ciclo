@@ -17,9 +17,6 @@ namespace Ciclo.Controllers
         [Autenticacao]
         public ActionResult Index()
         {
-            HttpCookie cookie = Request.Cookies["ciclo_instrutores"];
-            ViewBag.usuario = new OrganizadoresDB().Nome(Convert.ToInt32(cookie.Value));
-
             ViewBag.contadores = new Biblioteca.DB.ContadoresDB().Listar();
             return View();
         }
