@@ -11,15 +11,16 @@ namespace Biblioteca.DB
 
     public class ContadoresDB
     {
-        public Contadores Listar()
+        public Contadores Listar(int organizador)
         {
             try
             {
                 Contadores contador = null;
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("select (select count(*) from Instrutores) instrutor, (select count(*) from cursos) cursos, (select count(*) from alunos) alunos, (0) avaliacaoes");
-                IDataReader reader = quey.ExecuteQuery();
+                Query query = session.CreateQuery("select (select count(*) from Organizadores_Instrutores where idorganizador = @organizador) instrutor, (select count(*) from cursos) cursos, (select count(*) from alunos) alunos, (0) avaliacaoes");
+                query.SetParameter("organizador", organizador);
+                IDataReader reader = query.ExecuteQuery();
 
                 if (reader.Read())
                 {

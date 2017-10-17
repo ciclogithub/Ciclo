@@ -33,12 +33,15 @@ namespace Biblioteca.Funcoes
                     if (organizadoresview.idorganizador == 0)
                     {
                         organizadores = organizadoresview.Retornar();
-                        organizadores.Salvar();
+                        int idorganizador = organizadores.Salvar();
 
                         if (Convert.ToBoolean(organizadoresview.flinstrutor))
                         {
                             Instrutores instrutor = new Instrutores(organizadoresview);
-                            instrutor.Salvar();
+                            int idinstrutor = instrutor.Salvar();
+
+                            Organizadores_Instrutor organizadores_instrutor = new Organizadores_Instrutor(idorganizador, idinstrutor);
+                            organizadores_instrutor.Salvar();
                         }
                     }
                     else

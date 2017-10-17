@@ -44,9 +44,10 @@ namespace Biblioteca.Entidades
             this.txorganizador = organizador;
         }
 
-        public void Salvar()
+        public int Salvar()
         {
-            new OrganizadoresDB().Salvar(this);
+            int ident = new OrganizadoresDB().Salvar(this);
+            return ident;
         }
 
         public void Alterar()

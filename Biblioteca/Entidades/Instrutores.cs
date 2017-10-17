@@ -41,9 +41,10 @@ namespace Biblioteca.Entidades
             this.txdescritivo = descritivo;
         }
 
-        public void Salvar()
+        public int Salvar()
         {
-            new InstrutoresDB().Salvar(this);
+            int ident = new InstrutoresDB().Salvar(this);
+            return ident;
         }
 
         public void Alterar()
@@ -51,9 +52,9 @@ namespace Biblioteca.Entidades
             new InstrutoresDB().Alterar(this);
         }
 
-        public void Excluir()
+        public void Excluir(int ident)
         {
-            new InstrutoresDB().Excluir(this);
+            new InstrutoresDB().Excluir(ident);
         }
     }
 }

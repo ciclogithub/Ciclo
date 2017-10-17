@@ -24,14 +24,14 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" />&nbsp;<button class="tg-btn" type="button">LOCALIZAR</button>
+                    <input type="text" id="instrutor" name="instrutor" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_instrutor">LOCALIZAR</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
                     <button class="tg-btn" type="button" onclick="Instrutores(0);">NOVO</button>
                     &nbsp;
                     <button class="tg-btn" type="button">ALTERAR</button>
                     &nbsp;
-                    <button class="tg-btn" type="button">EXCLUIR</button>
+                    <button class="tg-btn" type="button" onclick="InstrutorExcluir()">EXCLUIR</button>
                 </div>
             </div>
             <div class="row pt">
@@ -50,7 +50,7 @@
                         @foreach (var p in Model)
                         {
                             <tr>
-                                <th scope="row"><input type="checkbox" value="@p.idinstrutor" /></th>
+                                <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinstrutor" /></th>
                                 <td>@p.txinstrutor</td>
                                 <td>@p.txemail</td>
                                 <td>@p.txtelefone</td>
@@ -91,5 +91,8 @@
 </main>
 
 
+@section scripts {
+    @Scripts.Render("~/bundles/instrutores")
+}
 
 

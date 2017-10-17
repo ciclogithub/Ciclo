@@ -5,23 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Biblioteca.Entidades;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Biblioteca.DB
 {
     public class InstrutoresDB
     {
-        public void Salvar(Instrutores variavel)
+        public int Salvar(Instrutores variavel)
         {
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Instrutores (txinstrutor, txemail, txtelefone, txdescritivo) VALUES (@instrutor, @email, @telefone, @descritivo) ");
+                Query query = session.CreateQuery("INSERT INTO Instrutores (txinstrutor, txemail, txtelefone, txdescritivo) output INSERTED.idinstrutor VALUES (@instrutor, @email, @telefone, @descritivo)");
                 query.SetParameter("instrutor", variavel.txinstrutor);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("telefone", variavel.txtelefone);
                 query.SetParameter("descritivo", variavel.txdescritivo);
-                query.ExecuteUpdate();
+                int ident = query.ExecuteScalar();
                 session.Close();
+                return ident;
+
+          
             }
             catch (Exception erro)
             {
@@ -49,13 +53,13 @@ namespace Biblioteca.DB
             }
         }
 
-        public void Excluir(Instrutores variavel)
+        public void Excluir(int id)
         {
             try
             {
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Instrutores WHERE idinstrutor = @id");
-                query.SetParameter("id", variavel.idinstrutor);
+                query.SetParameter("id", id);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -69,20 +73,46 @@ namespace Biblioteca.DB
         {
             try
             {
-                List<Instrutores> instrutor = new List<Instrutores>();
+                List<Instrutores> list_instrutor = new List<Instrutores>();
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("select * from Instrutores ORDER by txinstrutor");
-                IDataReader reader = quey.ExecuteQuery();
+                Query query = session.CreateQuery("select * from Instrutores ORDER by txinstrutor");
+                IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"])));
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"])));
                 }
                 reader.Close();
                 session.Close();
 
-                return instrutor;
+                return list_instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Instrutores> Listar(string instrutor)
+        {
+            try
+            {
+                List<Instrutores> list_instrutor = new List<Instrutores>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Instrutores WHERE txinstrutor LIKE @instrutor ORDER by txinstrutor");
+                query.SetParameter("instrutor", "%" + list_instrutor + "%");
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_instrutor;
             }
             catch (Exception error)
             {

@@ -16,6 +16,7 @@ namespace Biblioteca.DB
             comando = connection.CreateCommand();
             comando.CommandText = sql;
         }
+
         public void ExecuteUpdate()
         {
             comando.ExecuteNonQuery();
@@ -32,7 +33,12 @@ namespace Biblioteca.DB
             comando.Parameters.Add(parametro);
             return this;
         }
+        public int ExecuteScalar()
+        {
+            return (int)comando.ExecuteScalar();
+        }
     }
+
 
     public class DBSession
     {
@@ -53,5 +59,6 @@ namespace Biblioteca.DB
         {
             return new Query(sql, conexao);
         }
+
     }
 }

@@ -46,10 +46,12 @@
   <ItemGroup>
     <Compile Include="DB\ContadoresDB.cs" />
     <Compile Include="DB\DBSession.cs" />
+    <Compile Include="DB\Organizadores_InstrutorDB.cs" />
     <Compile Include="DB\OrganizadoresDB.cs" />
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
     <Compile Include="Entidades\Contadores.cs" />
+    <Compile Include="Entidades\Organizadores_Instrutor .cs" />
     <Compile Include="Entidades\Organizadores.cs" />
     <Compile Include="Entidades\Instrutores.cs" />
     <Compile Include="Entidades\Painel.cs" />

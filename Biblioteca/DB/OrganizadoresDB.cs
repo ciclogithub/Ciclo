@@ -89,19 +89,22 @@ namespace Biblioteca.DB
             }
         }
 
-        public void Salvar(Organizadores variavel)
+        public int Salvar(Organizadores variavel)
         {
             try
             {
+
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Organizadores (txorganizador, txemail, txsenha, txtelefone, txdescritivo) VALUES (@organizador, @email, @senha, @telefone, @descritivo) ");
+                Query query = session.CreateQuery("INSERT INTO Organizadores (txorganizador, txemail, txsenha, txtelefone, txdescritivo) output INSERTED.idorganizador VALUES (@organizador, @email, @senha, @telefone, @descritivo) ");
                 query.SetParameter("organizador", variavel.txorganizador);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("senha", variavel.txsenha);
                 query.SetParameter("telefone", variavel.txtelefone);
                 query.SetParameter("descritivo", variavel.txdescritivo);
-                query.ExecuteUpdate();
+                int ident = query.ExecuteScalar();
                 session.Close();
+                return ident;
+
             }
             catch (Exception erro)
             {

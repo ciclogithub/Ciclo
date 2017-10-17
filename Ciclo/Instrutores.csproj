@@ -225,6 +225,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
     <Content Include="Scripts\js\cadastro.js" />
+    <Content Include="Scripts\js\instrutores.js" />
     <Content Include="Scripts\js\painel.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />

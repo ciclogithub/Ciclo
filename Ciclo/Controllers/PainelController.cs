@@ -17,7 +17,8 @@ namespace Ciclo.Controllers
         [Autenticacao]
         public ActionResult Index()
         {
-            ViewBag.contadores = new Biblioteca.DB.ContadoresDB().Listar();
+            HttpCookie cookie = Request.Cookies["ciclo_instrutores"];
+            ViewBag.contadores = new Biblioteca.DB.ContadoresDB().Listar(Convert.ToInt32(cookie.Value));
             return View();
         }
 
@@ -28,13 +29,29 @@ namespace Ciclo.Controllers
         }
 
         [Autenticacao]
-        public ActionResult Instrutores()
+        public ActionResult Instrutores(string instrutor = "")
         {
-
             List<Instrutores> list = new List<Instrutores>();
-            list = new InstrutoresDB().Listar();  
+            ViewBag.instrutor = instrutor;
+
+            if (instrutor == "")
+                list = new InstrutoresDB().Listar();
+            else
+                list = new InstrutoresDB().Listar(instrutor);
 
             return View(list);
+        }
+
+        [Autenticacao]
+        public JsonResult InstrutorExcluir(string ident)
+        {
+            var arr = ident.Split(',');
+            foreach(var i in arr)
+            {
+                new InstrutoresDB().Excluir(Convert.ToInt32(i));
+            }
+            
+            return Json(new Retorno());
         }
 
         [Autenticacao]
