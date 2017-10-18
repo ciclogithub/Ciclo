@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Biblioteca.Entidades;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace Biblioteca.DB
 {
@@ -15,6 +16,8 @@ namespace Biblioteca.DB
         {
             try
             {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("INSERT INTO Instrutores (txinstrutor, txemail, txtelefone, txdescritivo) output INSERTED.idinstrutor VALUES (@instrutor, @email, @telefone, @descritivo)");
                 query.SetParameter("instrutor", variavel.txinstrutor);
@@ -23,8 +26,15 @@ namespace Biblioteca.DB
                 query.SetParameter("descritivo", variavel.txdescritivo);
                 int ident = query.ExecuteScalar();
                 session.Close();
-                return ident;
 
+                DBSession sessioni = new DBSession();
+                Query queryi = sessioni.CreateQuery("INSERT INTO Organizadores_Instrutores (idorganizador, idinstrutor) VALUES (@organizador, @instrutor)");
+                queryi.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                queryi.SetParameter("instrutor", ident);
+                queryi.ExecuteUpdate();
+                sessioni.Close();
+
+                return ident;
           
             }
             catch (Exception erro)
@@ -57,6 +67,12 @@ namespace Biblioteca.DB
         {
             try
             {
+                DBSession sessioni = new DBSession();
+                Query queryi = sessioni.CreateQuery("DELETE FROM Organizadores_Instrutores WHERE idinstrutor = @id");
+                queryi.SetParameter("id", id);
+                queryi.ExecuteUpdate();
+                sessioni.Close();
+
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Instrutores WHERE idinstrutor = @id");
                 query.SetParameter("id", id);
@@ -75,8 +91,11 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from Instrutores ORDER by txinstrutor");
+                Query query = session.CreateQuery("select i.* from Instrutores i inner join Organizadores_Instrutores oi on oi.idinstrutor = i.idinstrutor WHERE oi.idorganizador = @idorganizador ORDER by i.txinstrutor");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
@@ -100,9 +119,12 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from Instrutores WHERE txinstrutor LIKE @instrutor ORDER by txinstrutor");
+                Query query = session.CreateQuery("select i.* from Instrutores i inner join Organizadores_Instrutores oi on oi.idinstrutor = i.idinstrutor WHERE oi.idorganizador = @idorganizador and i.txinstrutor LIKE @instrutor ORDER by i.txinstrutor");
                 query.SetParameter("instrutor", "%" + list_instrutor + "%");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
@@ -113,6 +135,32 @@ namespace Biblioteca.DB
                 session.Close();
 
                 return list_instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public Instrutores Buscar(int id)
+        {
+            try
+            {
+                Instrutores instrutores = null;
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("SELECT * FROM instrutores WHERE idinstrutor = @id");
+                quey.SetParameter("id", id);
+                IDataReader reader = quey.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    instrutores = new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
+                }
+                reader.Close();
+                session.Close();
+
+                return instrutores;
             }
             catch (Exception error)
             {

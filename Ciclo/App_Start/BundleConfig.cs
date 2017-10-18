@@ -23,11 +23,13 @@ namespace Ciclo
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/cadastro").Include(
-                      "~/Scripts/js/cadastro.js"));
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                      "~/Scripts/js/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/painel").Include(
-                      "~/Scripts/js/painel.js"));
+                    "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
+                    "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
+                    "~/Scripts/js/painel.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/instrutores").Include(
                       "~/Scripts/js/instrutores.js"));
@@ -55,6 +57,7 @@ namespace Ciclo
                     "~/Content/transitions.css",
                     "~/Content/main.css",
                     "~/Content/color.css",
+                    "~/Scripts/plugins/validate/css/validationEngine.jquery.css",
                     "~/Content/responsive.css"));
         }
     }

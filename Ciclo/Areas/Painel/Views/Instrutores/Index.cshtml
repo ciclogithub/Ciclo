@@ -29,7 +29,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
                     <button class="tg-btn" type="button" onclick="Instrutores(0);">NOVO</button>
                     &nbsp;
-                    <button class="tg-btn" type="button">ALTERAR</button>
+                    <button class="tg-btn" type="button" onclick="InstrutorAlterar()">ALTERAR</button>
                     &nbsp;
                     <button class="tg-btn" type="button" onclick="InstrutorExcluir()">EXCLUIR</button>
                 </div>
@@ -47,15 +47,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach (var p in Model)
-                        {
-                            <tr>
-                                <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinstrutor" /></th>
-                                <td>@p.txinstrutor</td>
-                                <td>@p.txemail</td>
-                                <td>@p.txtelefone</td>
-                            </tr>
-                        }
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinstrutor" /></th>
+                                    <td>@p.txinstrutor</td>
+                                    <td>@p.txemail</td>
+                                    <td>@p.txtelefone</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
 

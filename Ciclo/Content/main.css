@@ -224,7 +224,7 @@ label {
 	color: #414141;
 	display: block;
 	font-weight: 400;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 }
 form p {
 	float: left;
@@ -335,11 +335,12 @@ address { font-style: italic; }
 	text-transform: capitalize;
 	font:500 14px/40px 'Poppins', Arial, Helvetica, sans-serif;
 }
-.tg-btn:hover{
-	background:#fff;
-	-webkit-box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
-	box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
-}
+    .tg-btn:hover {
+        background: #5fb536;
+        color: #fff !important;
+        -webkit-box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
+        box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
+    }
 .tg-btn-lg{ width: 100%;}
 .tg-socialicons{
 	width:100%;
