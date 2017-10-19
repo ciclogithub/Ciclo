@@ -18,6 +18,7 @@
     <div class="panel-body">
         <form method="post" action="" id="form-modal">
             <input type="hidden" id="idlocal" name="idlocal" value="@Model.idlocal" />
+            <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
             <div class="form-group">
                 <label class="control-label" for="txinstrutor">Nome *</label>
                 <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txlocal" name="txlocal" value="@Model.txlocal" maxlength="200" />
@@ -34,7 +35,7 @@
                             <option value="">-- Selecione --</option>
                             @foreach (var t in ViewBag.estados)
                             {
-                                <option value="@t.idestado" @(Model.idcidade == t.idestado ? "selected" : "")>@t.txestado</option>
+                                <option value="@t.idestado" @(Model.txestado == t.txestado ? "selected" : "")>@t.txestado</option>
                             }
                         </select>
                     </div>

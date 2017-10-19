@@ -16,29 +16,40 @@
             $("#dv_cidade").html("<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione o estado --</option></select>");
         } else {
             $("#dv_cidade").html("Carregando lista ...");
-
-            $.ajax({
-                url: "/Painel/Locais/ListaCidades",
-                data: { id: $(this).val() },
-                cache: false,
-                type: "POST",
-                success: function (data) {
-                    var temp = "";
-                    temp += "<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione --</option>";
-                    for (var x = 0; x < data.length; x++) {
-                        temp += "<option value=" + data[x].idcidade + ">" + data[x].txcidade + "</option>";
-                    }
-                    temp += "</select>";
-                    $("#dv_cidade").html(temp);
-                },
-                error: function (reponse) {
-                    $("#dv_cidade").html("Não foi possível carregar a lista de cidades");
-                }
-            });
+            ListaCidades($(this).val(), 0)            
         }
     })
 
+    if ($("#idestado")) {
+        if ($("#idestado").val() != "") {
+            ListaCidades($("#idestado").val(), $("#tempcidade").val()); 
+        }
+    }
+
 });
+
+function ListaCidades(estado, cidade) {
+    $.ajax({
+        url: "/Painel/Locais/ListaCidades",
+        data: { id: estado },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            var temp = "";
+            temp += "<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione --</option>";
+            for (var x = 0; x < data.length; x++) {
+                temp += "<option value=" + data[x].idcidade;
+                if (data[x].idcidade == cidade) { temp += " selected " }
+                temp += ">" + data[x].txcidade + "</option>";
+            }
+            temp += "</select>";
+            $("#dv_cidade").html(temp);
+        },
+        error: function (reponse) {
+            $("#dv_cidade").html("Não foi possível carregar a lista de cidades");
+        }
+    });
+}
 
 function LocalPesquisar() {
     window.location = "/Painel/Locais/?local=" + $("#local").val();
