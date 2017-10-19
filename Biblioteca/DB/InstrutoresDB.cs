@@ -123,7 +123,7 @@ namespace Biblioteca.DB
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select i.* from Instrutores i inner join Organizadores_Instrutores oi on oi.idinstrutor = i.idinstrutor WHERE oi.idorganizador = @idorganizador and i.txinstrutor LIKE @instrutor ORDER by i.txinstrutor");
-                query.SetParameter("instrutor", "%" + list_instrutor + "%");
+                query.SetParameter("instrutor", "%" + instrutor.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 

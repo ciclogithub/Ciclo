@@ -1,0 +1,38 @@
+﻿@model Biblioteca.Entidades.Alunos
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idaluno == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Aluno
+        </h4>
+    </div>
+
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal">
+            <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
+            <div class="form-group">
+                <label class="control-label" for="txinstrutor">Nome *</label>
+                <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="txemail">CPF</label>
+                <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
+            </div>
+            <div class="text-center">
+                <button id="incluir_btn" class="tg-btn text-center" type="button">ENVIAR</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/alunos")
+@Scripts.Render("~/bundles/mask")

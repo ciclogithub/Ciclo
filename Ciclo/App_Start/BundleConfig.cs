@@ -31,8 +31,23 @@ namespace Ciclo
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                     "~/Scripts/js/painel.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/mask").Include(
+                    "~/Scripts/jquery.mask.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/instrutores").Include(
                       "~/Scripts/js/instrutores.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/alunos").Include(
+                      "~/Scripts/js/alunos.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/locais").Include(
+                      "~/Scripts/js/locais.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cursos").Include(
+                      "~/Scripts/js/cursos.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/configuracoes").Include(
+                      "~/Scripts/js/configuracoes.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
                 "~/Scripts/customScrollbar.min.js",

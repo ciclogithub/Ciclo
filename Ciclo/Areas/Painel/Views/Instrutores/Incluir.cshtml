@@ -19,15 +19,15 @@
         <form method="post" action="" id="form-modal">
             <input type="hidden" id="idinstrutor" name="idinstrutor" value="@Model.idinstrutor" />
             <div class="form-group">
-                <label class="control-label" for="txinstrutor">Nome</label>
+                <label class="control-label" for="txinstrutor">Nome *</label>
                 <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txinstrutor" name="txinstrutor" value="@Model.txinstrutor" maxlength="200" />
             </div>
             <div class="form-group">
-                <label class="control-label" for="txemail">E-mail</label>
+                <label class="control-label" for="txemail">E-mail *</label>
                 <input type="text" class="form-control validate[required,minSize[3],maxSize[200],email]" id="txemail" name="txemail" value="@Model.txemail" maxlength="200" />
             </div>
             <div class="form-group">
-                <label class="control-label" for="txtelefone">Telefone</label>
+                <label class="control-label" for="txtelefone">Telefone *</label>
                 <input type="text" class="form-control validate[required,minSize[3],maxSize[100]]" id="txtelefone" name="txtelefone" value="@Model.txtelefone" maxlength="100" />
             </div>
             <div class="form-group">

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Biblioteca.Entidades.Alunos>
+
+@{
     ViewBag.Title = "Alunos";
 }
 
@@ -19,12 +21,80 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
+
             <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" id="aluno" name="aluno" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">LOCALIZAR</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <button class="tg-btn" type="button" onclick="Alunos(0);">NOVO</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="AlunoAlterar()">ALTERAR</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="AlunoExcluir()">EXCLUIR</button>
+                </div>
+            </div>
+            <div class="row pt">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>ALUNO</th>
+                                <th>CPF</th>
+                                <th>E-MAIL</th>
+                                <th>TELEFONE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idaluno" /></th>
+                                    <td>@p.txaluno</td>
+                                    <td>@p.txcpf</td>
+                                    <td>@*@p.txemail*@</td>
+                                    <td>@*@p.txtelefone*@</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
+            @*<div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>*@
         </div>
     </div>
 </main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/alunos")
+}
+
+

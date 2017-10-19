@@ -44,13 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\CidadesDB.cs" />
+    <Compile Include="DB\EstadosDB.cs" />
+    <Compile Include="DB\LocaisDB.cs" />
     <Compile Include="DB\ContadoresDB.cs" />
     <Compile Include="DB\DBSession.cs" />
+    <Compile Include="DB\AlunosDB.cs" />
     <Compile Include="DB\Organizadores_InstrutorDB.cs" />
     <Compile Include="DB\OrganizadoresDB.cs" />
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
+    <Compile Include="Entidades\Cidades.cs" />
+    <Compile Include="Entidades\Estados.cs" />
+    <Compile Include="Entidades\Locais.cs" />
     <Compile Include="Entidades\Contadores.cs" />
+    <Compile Include="Entidades\Alunos.cs" />
     <Compile Include="Entidades\Organizadores_Instrutor .cs" />
     <Compile Include="Entidades\Organizadores.cs" />
     <Compile Include="Entidades\Instrutores.cs" />

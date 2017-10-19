@@ -1,0 +1,56 @@
+﻿@model Biblioteca.Entidades.Locais
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idlocal == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Locais
+        </h4>
+    </div>
+
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal">
+            <input type="hidden" id="idlocal" name="idlocal" value="@Model.idlocal" />
+            <div class="form-group">
+                <label class="control-label" for="txinstrutor">Nome *</label>
+                <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txlocal" name="txlocal" value="@Model.txlocal" maxlength="200" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="txinstrutor">Logradouro *</label>
+                <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txlogradouro" name="txlogradouro" value="@Model.txlogradouro" maxlength="300" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="txinstrutor">Cidade / Estado *</label>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <select id="idestado" name="idestado" class="form-control validate[required]">
+                            <option value="">-- Selecione --</option>
+                            @foreach (var t in ViewBag.estados)
+                            {
+                                <option value="@t.idestado" @(Model.idcidade == t.idestado ? "selected" : "")>@t.txestado</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12" id="dv_cidade">
+                        <select id="idcidade" name="idcidade" class="form-control validate[required]">
+                            <option value="">-- Selecione o estado --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button id="incluir_btn" class="tg-btn text-center" type="button">ENVIAR</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/locais")

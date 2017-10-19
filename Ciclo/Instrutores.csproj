@@ -214,6 +214,8 @@
     <Content Include="Areas\Painel\Views\Instrutores\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Locais\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Instrutores\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Alunos\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Locais\Incluir.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="images\logo2.png" />
     <Content Include="images\pattern.png" />
@@ -237,11 +239,14 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.fullpage.js" />
     <Content Include="Scripts\jquery.hoverdir.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
+    <Content Include="Scripts\js\locais.js" />
+    <Content Include="Scripts\js\alunos.js" />
     <Content Include="Scripts\js\site.js" />
     <Content Include="Scripts\js\instrutores.js" />
     <Content Include="Scripts\js\painel.js" />

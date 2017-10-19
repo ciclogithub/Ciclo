@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Biblioteca.Entidades.Locais>
+
+@{
     ViewBag.Title = "Locais";
 }
 
@@ -19,12 +21,78 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
+
             <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" id="local" name="local" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_local">LOCALIZAR</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <button class="tg-btn" type="button" onclick="Locais(0);">NOVO</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="LocalAlterar()">ALTERAR</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="LocalExcluir()">EXCLUIR</button>
+                </div>
+            </div>
+            <div class="row pt">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>LOCAL</th>
+                                <th>LOGRADOURO</th>
+                                <th>CIDADE/ESTADO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idlocal" /></th>
+                                    <td>@p.txlocal</td>
+                                    <td>@p.txlogradouro</td>
+                                    <td>@p.txcidade / @p.txestado</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
+            @*<div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>*@
         </div>
     </div>
 </main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/locais")
+}
+
+
