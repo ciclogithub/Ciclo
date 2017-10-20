@@ -24,14 +24,14 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="aluno" name="aluno" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">LOCALIZAR</button>
+                    <input type="text" id="aluno" name="aluno" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">Localizar</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button" onclick="Alunos(0);">NOVO</button>
+                    <button class="tg-btn" type="button" onclick="Alunos(0);">Novo</button>
                     &nbsp;
-                    <button class="tg-btn" type="button" onclick="AlunoAlterar()">ALTERAR</button>
+                    <button class="tg-btn" type="button" onclick="AlunoAlterar()">Alterar</button>
                     &nbsp;
-                    <button class="tg-btn" type="button" onclick="AlunoExcluir()">EXCLUIR</button>
+                    <button class="tg-btn" type="button" onclick="AlunoExcluir()">Excluir</button>
                 </div>
             </div>
             <div class="row pt">
@@ -54,8 +54,18 @@
                                     <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idaluno" /></th>
                                     <td>@p.txaluno</td>
                                     <td>@p.txcpf</td>
-                                    <td>@*@p.txemail*@</td>
-                                    <td>@*@p.txtelefone*@</td>
+                                    <td>
+                                    @foreach (var e in p.txemail)
+                                    {
+                                        @e.txemail<br />
+                                    }
+                                    </td>
+                                    <td>
+                                    @foreach (var t in p.txtelefone)
+                                    {
+                                        @t.txtelefone<br />
+                                    }
+                                    </td>
                                 </tr>
                             }
                         </tbody>

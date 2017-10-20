@@ -15,23 +15,79 @@
         </h4>
     </div>
 
-    <div class="panel-body">
-        <form method="post" action="" id="form-modal">
-            <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
-            <div class="form-group">
-                <label class="control-label" for="txinstrutor">Nome *</label>
-                <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="txemail">CPF</label>
-                <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
-            </div>
-            <div class="text-center">
-                <button id="incluir_btn" class="tg-btn text-center" type="button">ENVIAR</button>
-            </div>
-        </form>
-    </div>
+    @{
+        string emails = "";
+        string list_emails = "";
+        string telefones = "";
+        string list_telefones = "";
 
+        int i = 0;
+        foreach (var item in Model.txemail)
+        {
+            emails = emails + "," + item.txemail;
+            list_emails = list_emails + "<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + i + ")'></i><span>" + item.txemail + "</span></li>";
+            i++;
+        }
+
+        i = 0;
+        foreach (var item in Model.txtelefone)
+        {
+            telefones = telefones + "," + item.txtelefone;
+            list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone + "</span></li>";
+            i++;
+        }
+    } 
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form method="post" action="" id="form-modal">
+                    <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
+                    <input type="hidden" id="txemail" name="txemail" value="@emails.Substring(1)" />
+                    <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones.Substring(1)" />
+                    <div class="form-group">
+                        <label class="control-label" for="txinstrutor">Nome *</label>
+                        <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txemail">CPF</label>
+                        <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <form id="form-modal-email">
+                    <div class="form-group">
+                        <label class="control-label" for="tempemail">E-mail *</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[100],email]" id="tempemail" name="tempemail" value="" maxlength="100" />
+                            <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <ul class="list-itens" id="listemail">@*@list_emails*@</ul>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <form id="form-modal-telefone">
+                    <div class="form-group">
+                        <label class="control-label" for="temptelefone">Telefone *</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
+                            <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <ul class="list-itens" id="listtelefone">@*@list_telefones*@</ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <button id="incluir_btn" class="tg-btn text-center" type="button">Enviar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @Scripts.Render("~/bundles/alunos")

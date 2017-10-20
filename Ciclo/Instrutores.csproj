@@ -147,9 +147,11 @@
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ConfiguracoesController.cs" />
     <Compile Include="Areas\Painel\Controllers\CursosController.cs" />
+    <Compile Include="Areas\Painel\Controllers\TemasController.cs" />
     <Compile Include="Areas\Painel\Controllers\LocaisController.cs" />
     <Compile Include="Areas\Painel\Controllers\PainelController.cs" />
     <Compile Include="Areas\Painel\Controllers\InstrutoresController.cs" />
+    <Compile Include="Areas\Painel\Models\FileUpload.cs" />
     <Compile Include="Areas\Painel\PainelAreaRegistration.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,6 +218,8 @@
     <Content Include="Areas\Painel\Views\Instrutores\Incluir.cshtml" />
     <Content Include="Areas\Painel\Views\Alunos\Incluir.cshtml" />
     <Content Include="Areas\Painel\Views\Locais\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Temas\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Temas\Index.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="images\logo2.png" />
     <Content Include="images\pattern.png" />
@@ -245,6 +249,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
+    <Content Include="Scripts\js\temas.js" />
     <Content Include="Scripts\js\locais.js" />
     <Content Include="Scripts\js\alunos.js" />
     <Content Include="Scripts\js\site.js" />
@@ -277,7 +282,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Painel\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

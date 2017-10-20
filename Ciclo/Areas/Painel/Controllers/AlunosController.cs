@@ -50,13 +50,13 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "")
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "")
         {
             AlunosDB db = new AlunosDB();
 
             if (id == 0)
             {
-                db.Salvar(new Alunos(id, nome, cpf));
+                id = db.Salvar(new Alunos(id, nome, cpf));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -65,8 +65,22 @@ namespace Ciclo.Areas.Painel.Controllers
                 aluno.txaluno = nome;
                 aluno.txcpf = cpf;
 
-
                 db.Alterar(aluno);
+
+                db.RemoverEmails(id);
+                db.RemoverTelefones(id);
+            }
+ 
+            var arrE = email.Split(',');
+            foreach (var i in arrE)
+            {
+                new AlunosDB().SalvarEmail(id, i);
+            }
+
+            var arrT = telefone.Split(',');
+            foreach (var i in arrT)
+            {
+                new AlunosDB().SalvarTelefone(id, i);
             }
 
             return Json(new Retorno());

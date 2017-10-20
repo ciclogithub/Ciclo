@@ -332,7 +332,6 @@ address { font-style: italic; }
 	background: #444349;
 	display: inline-block;
 	vertical-align: middle;
-	text-transform: capitalize;
 	font:500 14px/40px 'Poppins', Arial, Helvetica, sans-serif;
 }
     .tg-btn:hover {

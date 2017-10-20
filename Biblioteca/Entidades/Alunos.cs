@@ -12,7 +12,9 @@ namespace Biblioteca.Entidades
         public int idaluno { get; set; }
         public string txaluno { get; set; }
         public string txcpf { get; set; }
-        
+        public List<Emails> txemail { get; set; }
+        public List<Telefones> txtelefone { get; set; }
+
         public Alunos()
         {
             this.idaluno = 0;
@@ -25,6 +27,8 @@ namespace Biblioteca.Entidades
             this.idaluno = id;
             this.txaluno = aluno;
             this.txcpf = cpf;
+            this.txemail = new AlunosDB().ListarEmails(id); ;
+            this.txtelefone = new AlunosDB().ListarTelefones(id); ;
         }
 
         public void Salvar()
@@ -40,6 +44,50 @@ namespace Biblioteca.Entidades
         public void Excluir(int ident)
         {
             new AlunosDB().Excluir(ident);
+        }
+
+        public void RemoverEmails(int id = 0)
+        {
+            new AlunosDB().RemoverEmails(id);
+        }
+
+        public void RemoverTelefones(int id = 0)
+        {
+            new AlunosDB().RemoverTelefones(id);
+        }
+
+        public void SalvarEmail(int id = 0, string email = "")
+        {
+            new AlunosDB().SalvarEmail(id, email);
+        }
+
+        public void SalvarTelefone(int id = 0, string telefone = "")
+        {
+            new AlunosDB().SalvarTelefone(id, telefone);
+        }
+    }
+
+    public class Telefones
+    {
+        public int idaluno { get; set; }
+        public string txtelefone { get; set; }
+
+        public Telefones(int id, string telefone)
+        {
+            this.idaluno = id;
+            this.txtelefone = telefone;
+        }
+    }
+
+    public class Emails
+    {
+        public int idaluno { get; set; }
+        public string txemail { get; set; }
+
+        public Emails(int id, string email)
+        {
+            this.idaluno = id;
+            this.txemail = email;
         }
     }
 }

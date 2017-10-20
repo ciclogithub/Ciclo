@@ -1,7 +1,7 @@
-﻿@model List<Biblioteca.Entidades.Instrutores>
+﻿@model List<Biblioteca.Entidades.Temas>
 
 @{
-    ViewBag.Title = "Instrutores";
+    ViewBag.Title = "Temas";
 }
 
 <div class="tg-bgparallax">
@@ -12,7 +12,7 @@
             </div>
             <ol class="tg-breadcrumb">
                 <li><a href="~/Painel">Dashboard</a></li>
-                <li class="tg-active">Instrutores</li>
+                <li class="tg-active">Temas</li>
             </ol>
         </div>
     </div>
@@ -24,14 +24,14 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="instrutor" name="instrutor" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_instrutor">Localizar</button>
+                    <input type="text" id="tema" name="tema" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_tema">Localizar</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button" onclick="Instrutores(0);">Novo</button>
+                    <button class="tg-btn" type="button" onclick="Temas(0);">Novo</button>
                     &nbsp;
-                    <button class="tg-btn" type="button" onclick="InstrutorAlterar()">Alterar</button>
+                    <button class="tg-btn" type="button" onclick="TemaAlterar()">Alterar</button>
                     &nbsp;
-                    <button class="tg-btn" type="button" onclick="InstrutorExcluir()">Excluir</button>
+                    <button class="tg-btn" type="button" onclick="TemaExcluir()">Excluir</button>
                 </div>
             </div>
             <div class="row pt">
@@ -41,19 +41,19 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>INSTRUTOR</th>
-                                <th>E-MAIL</th>
-                                <th>TELEFONE</th>
+                                <th>TEMA</th>
+                                <th>SUBTITULO</th>
+                                <th>DESCRIÇÃO</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var p in Model)
                             {
                                 <tr>
-                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinstrutor" /></th>
-                                    <td>@p.txinstrutor</td>
-                                    <td>@p.txemail</td>
-                                    <td>@p.txtelefone</td>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idtema" /></th>
+                                    <td>@p.txtema</td>
+                                    <td>@p.txsubtitulo</td>
+                                    <td>@p.txdescritivo</td>
                                 </tr>
                             }
                         </tbody>
@@ -92,7 +92,7 @@
 
 
 @section scripts {
-    @Scripts.Render("~/bundles/instrutores")
+    @Scripts.Render("~/bundles/temas")
 }
 
 

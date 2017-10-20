@@ -1,8 +1,10 @@
 ﻿using Biblioteca.DB;
 using Biblioteca.Entidades;
 using Biblioteca.Filters;
+using Ciclo.Areas.Painel.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,7 +52,7 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string email = "", string telefone = "", string descricao = "")
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string email = "", string telefone = "", string descricao = "", string txfoto = "")
         {
             InstrutoresDB db = new InstrutoresDB();
 
@@ -69,6 +71,13 @@ namespace Ciclo.Areas.Painel.Controllers
 
                 db.Alterar(instrutor);
             }
+
+            //if (txfoto.File.ContentLength > 0)
+            //{
+            //    var fileName = Path.GetExtension(txfoto.File.FileName);
+            //    var path = Path.Combine(Server.MapPath("~/Images/Instrutores"), id + "." + fileName);
+            //    txfoto.File.SaveAs(path);
+            //}
 
             return Json(new Retorno());
         }

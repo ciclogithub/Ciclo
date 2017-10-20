@@ -12,7 +12,7 @@ namespace Biblioteca.DB
 {
     public class AlunosDB
     {
-        public void Salvar(Alunos variavel)
+        public int Salvar(Alunos variavel)
         {
             try
             {
@@ -31,6 +31,8 @@ namespace Biblioteca.DB
                 queryi.SetParameter("aluno", ident);
                 queryi.ExecuteUpdate();
                 sessioni.Close();
+
+                return ident;
 
             }
             catch (Exception erro)
@@ -161,5 +163,126 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public void RemoverEmails(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Alunos_Emails WHERE idaluno = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void RemoverTelefones(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Alunos_Telefones WHERE idaluno = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarEmail(int id, string email)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Alunos_Emails (idaluno, txemail) VALUES (@aluno, @email)");
+                query.SetParameter("aluno", id);
+                query.SetParameter("email", email);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarTelefone(int id, string telefone)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Alunos_Telefones (idaluno, txtelefone) VALUES (@aluno, @telefone)");
+                query.SetParameter("aluno", id);
+                query.SetParameter("telefone", telefone);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public List<Emails> ListarEmails(int id = 0)
+        {
+            try
+            {
+                List<Emails> list_email = new List<Emails>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Alunos_Emails where idaluno = @id order by txemail");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_email.Add(new Emails(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txemail"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_email;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Telefones> ListarTelefones(int id = 0)
+        {
+            try
+            {
+                List<Telefones> list_telefone = new List<Telefones>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Alunos_Telefones where idaluno = @id order by txtelefone");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_telefone.Add(new Telefones(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txtelefone"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_telefone;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }
+

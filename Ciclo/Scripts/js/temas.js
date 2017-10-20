@@ -1,27 +1,27 @@
 ﻿$(document).ready(function () {
 
-    $("#pesquisa_instrutor").click(function () {
-        InstrutorPesquisar();
+    $("#pesquisa_tema").click(function () {
+        TemaPesquisar();
     });
 
     $("#incluir_btn").click(function () {
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
-            IncluirInstrutor();
+            IncluirTema();
         };
     });
 
 });
 
-function InstrutorPesquisar() {
-    window.location = "/Painel/Instrutores/?instrutor=" + $("#instrutor").val();
+function TemaPesquisar() {
+    window.location = "/Painel/Temas/?tema=" + $("#tema").val();
 }
 
-function Instrutores(id) {
-    Modal("/Painel/Instrutores/Incluir", id, "Instrutores");
+function Temas(id) {
+    Modal("/Painel/Temas/Incluir", id, "Temas");
 }
 
-function InstrutorAlterar() {
+function TemaAlterar() {
 
     cont = 0;
     val = 0;
@@ -38,13 +38,13 @@ function InstrutorAlterar() {
         if (cont > 1) {
             alert("Selecione somente 1 registro para alterar")
         } else {
-            Instrutores(val);
+            Temas(val);
         }
     }
 
 }
 
-function InstrutorExcluir() {
+function TemaExcluir() {
 
     ids = "";
     $("input[name='ident']").each(function () {
@@ -59,13 +59,13 @@ function InstrutorExcluir() {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
-                url: "/Painel/Instrutores/Excluir",
+                url: "/Painel/Temas/Excluir",
                 data: { ident: ids },
                 dataType: "json",
                 traditional: true,
                 success: function () {
-                    $("#instrutor").val("");
-                    InstrutorPesquisar();
+                    $("#tema").val("");
+                    TemaPesquisar();
                 }
             });
         }
@@ -74,30 +74,17 @@ function InstrutorExcluir() {
     }
 }
 
-function IncluirInstrutor() {
+function IncluirTema() {
 
-    var idinstrutor = $("#idinstrutor").val();
-    var txinstrutor = $("#txinstrutor").val();
-    var txemail = $("#txemail").val();
-    var txtelefone = $("#txtelefone").val();
+    var idtema = $("#idtema").val();
+    var txtema = $("#txtema").val();
+    var txsubtitulo = $("#txsubtitulo").val();
     var txdescritivo = $("#txdescritivo").val();
-
-    var form = $('#form-modal')[0];
-    var data = new FormData(form);
-    data.append("id", idinstrutor);
-    data.append("nome", txinstrutor);
-    data.append("email", txemail);
-    data.append("telefone", txtelefone);
-    data.append("descricao", txdescritivo);
 
     $.ajax({
         type: "POST",
-        url: '/Painel/Instrutores/IncluirConcluir',
-        data: data,
-        processData: false,
-        contentType: false,
-        cache: false,
-//        data: { id: idinstrutor, nome: txinstrutor, email: txemail, telefone: txtelefone, descricao: txdescritivo },
+        url: '/Painel/Temas/IncluirConcluir',
+        data: { id: idtema, nome: txtema, subtitulo: txsubtitulo, descricao: txdescritivo },
         dataType: "json",
         traditional: true,
         success: function (json) {
@@ -108,22 +95,9 @@ function IncluirInstrutor() {
                 $('.modal').modal('hide');
             }, 1000);
 
-            InstrutorPesquisar();
+            TemaPesquisar();
 
         }
     });
 
-}
-
-function readURL(input) {
-
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#prev_img').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
 }
