@@ -5,9 +5,22 @@
     });
 
     $("#incluir_btn").click(function () {
+        var err = false;
+        if ($("#txemail").val() == "") {
+            $("#error_email").css("display", "block");
+            err = true;
+        } else {
+            $("#error_email").css("display", "none");
+        }
+        if ($("#txtelefone").val() == "") {
+            $("#error_telefone").css("display", "block");
+            err = true;
+        } else {
+            $("#error_telefone").css("display", "none");
+        }   
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
-            IncluirAluno();
+            if (!err) { IncluirAluno(); }
         };
     });
 

@@ -63,6 +63,23 @@ namespace Biblioteca.DB
             }
         }
 
+        public void AlterarFoto(Instrutores variavel)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("UPDATE Instrutores SET txfoto = @foto WHERE idinstrutor = @id");
+                query.SetParameter("id", variavel.idinstrutor);
+                query.SetParameter("foto", variavel.txfoto);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         public void Excluir(int id)
         {
             try
@@ -100,7 +117,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"])));
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"])));
                 }
                 reader.Close();
                 session.Close();
@@ -129,7 +146,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"])));
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"])));
                 }
                 reader.Close();
                 session.Close();
@@ -155,7 +172,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    instrutores = new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]));
+                    instrutores = new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"]));
                 }
                 reader.Close();
                 session.Close();

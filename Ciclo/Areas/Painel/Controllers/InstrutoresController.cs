@@ -52,17 +52,20 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string email = "", string telefone = "", string descricao = "", string txfoto = "")
+        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome = "", string email = "", string telefone = "", string descricao = "")
         {
             InstrutoresDB db = new InstrutoresDB();
+            int ident = 0;
+            string fileName = "";
 
             if (id == 0)
             {
-                db.Salvar(new Instrutores(id, nome, email, telefone, descricao));
-                Instrutores instrutor = db.Buscar(id);
+                ident = db.Salvar(new Instrutores(id, nome, email, telefone, descricao, ""));
+                Instrutores instrutor = db.Buscar(ident);
             }
             else
             {
+                ident = id;
                 Instrutores instrutor = db.Buscar(id);
                 instrutor.txinstrutor = nome;
                 instrutor.txemail = email;
@@ -72,14 +75,36 @@ namespace Ciclo.Areas.Painel.Controllers
                 db.Alterar(instrutor);
             }
 
-            //if (txfoto.File.ContentLength > 0)
-            //{
-            //    var fileName = Path.GetExtension(txfoto.File.FileName);
-            //    var path = Path.Combine(Server.MapPath("~/Images/Instrutores"), id + "." + fileName);
-            //    txfoto.File.SaveAs(path);
-            //}
+            if (txfoto != null)
+            {
+                if (txfoto.ContentLength > 0)
+                {
+                    if (IsImage(txfoto))
+                    {
+                        fileName = Path.GetExtension(txfoto.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Images/Instrutores"), ident + fileName);
+                        txfoto.SaveAs(path);
+
+                        Instrutores instrutor_foto = db.Buscar(ident);
+                        instrutor_foto.txfoto = ident + fileName;
+                        db.AlterarFoto(instrutor_foto);
+                    }
+                }
+            }
 
             return Json(new Retorno());
+        }
+
+        private bool IsImage(HttpPostedFileBase file)
+        {
+            if (file.ContentType.Contains("image"))
+            {
+                return true;
+            }
+
+            string[] formats = new string[] { ".jpg", ".png", ".gif", ".jpeg" };
+
+            return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

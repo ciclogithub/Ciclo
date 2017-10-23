@@ -22,29 +22,37 @@
         string list_telefones = "";
 
         int i = 0;
-        foreach (var item in Model.txemail)
+        if (Model.txemail != null)
         {
-            emails = emails + "," + item.txemail;
-            list_emails = list_emails + "<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + i + ")'></i><span>" + item.txemail + "</span></li>";
-            i++;
+            foreach (var item in Model.txemail)
+            {
+                emails = emails + "," + item.txemail;
+                list_emails = list_emails + "<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + i + ")'></i><span>" + item.txemail + "</span></li>";
+                i++;
+            }
+            emails = emails.Substring(1);
         }
 
         i = 0;
-        foreach (var item in Model.txtelefone)
+        if (Model.txtelefone != null)
         {
-            telefones = telefones + "," + item.txtelefone;
-            list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone + "</span></li>";
-            i++;
+            foreach (var item in Model.txtelefone)
+            {
+                telefones = telefones + "," + item.txtelefone;
+                list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone + "</span></li>";
+                i++;
+            }
+            telefones = telefones.Substring(1);
         }
-    } 
+    }
 
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <form method="post" action="" id="form-modal">
                     <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
-                    <input type="hidden" id="txemail" name="txemail" value="@emails.Substring(1)" />
-                    <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones.Substring(1)" />
+                    <input type="hidden" id="txemail" name="txemail" value="@emails" />
+                    <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
                     <div class="form-group">
                         <label class="control-label" for="txinstrutor">Nome *</label>
                         <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
@@ -65,7 +73,8 @@
                             <input type="text" class="form-control validate[required,minSize[3],maxSize[100],email]" id="tempemail" name="tempemail" value="" maxlength="100" />
                             <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
-                        <ul class="list-itens" id="listemail">@*@list_emails*@</ul>
+                        <ul class="list-itens" id="listemail">@Html.Raw(list_emails)</ul>
+                        <div id="error_email" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
                     </div>
                 </form>
             </div>
@@ -77,7 +86,8 @@
                             <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
                             <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
-                        <ul class="list-itens" id="listtelefone">@*@list_telefones*@</ul>
+                        <ul class="list-itens" id="listtelefone">@Html.Raw(list_telefones)</ul>
+                        <div id="error_telefone" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
                     </div>
                 </form>
             </div>

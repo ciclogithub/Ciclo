@@ -1,0 +1,138 @@
+﻿@model Biblioteca.Entidades.Cursos
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idcurso == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Curso
+        </h4>
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form method="post" action="" id="form-modal">
+                    <input type="hidden" id="idcurso" name="idcurso" value="@Model.idcurso" />
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="txinstrutor">Nome do Curso *</label>
+                                <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txcurso" name="txcurso" value="@Model.txcurso" maxlength="300" />
+                            </div>
+                        </div>
+                    </div>                            
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="control-label" for="txfoto">Foto</label>
+                                <input type="file" class="form-control" id="txfoto" name="txfoto" value="" onchange="readURL(this);" />
+                                <div class="prev_img">
+                                    @if (@Model.txfoto == "")
+                                    {
+                                        <img id="prev_img" src="#" alt="visualizar" />
+                                    }
+                                    else
+                                    {
+                                        <img id="prev_img" src="~/images/Instrutores/@Model.txfoto" alt="visualizar" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="idtema">Tema *</label>
+                                <select id="idtema" name="idtema" class="form-control validate[required]">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var t in ViewBag.temas)
+                                    {
+                                        <option value="@t.idtema" @(Model.idtema == t.idtema ? "selected" : "")>@t.txtema</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="idcategoria">Categoria *</label>
+                                <select id="idcategoria" name="idcategoria" class="form-control validate[required]">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in ViewBag.categorias)
+                                    {
+                                        <option value="@c.idcategoria" @(Model.idcategoria == c.idcategoria ? "selected" : "")>@c.txcategoria</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="idlocal">Local *</label>
+                                <select id="idlocal" name="idlocal" class="form-control validate[required]">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var l in ViewBag.locais)
+                                    {
+                                        <option value="@l.idlocal"@(Model.idlocal == l.idlocal ? "selected" : "")>@l.txlocal</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="txlocal">Descrição do Local</label>
+                                <input type="text" class="form-control validate[minSize[3],maxSize[100]]" id="txlocal" name="txlocal" value="@Model.txlocal" maxlength="100" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="nrminimo">Mínimo Alunos</label>
+                                <input type="text" class="form-control validate[min[0],max[999]]" id="nrminimo" name="nrminimo" data-mask="000" value="@Model.nrminimo" maxlength="3" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="nrmaximo">Máximo Alunos</label>
+                                <input type="text" class="form-control validate[min[0],max[999]]" id="nrmaximo" name="nrmaximo" data-mask="000" value="@Model.nrmaximo" maxlength="3" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="txcargahoraria">Carga Horária</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control validate[min[0],max[999]]" id="txcargahoraria" name="txcargahoraria" data-mask="000" value="@Model.txcargahoraria" maxlength="3" />
+                                    <span class="input-group-addon">h</spanclass="input-group-addon">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                <label class="control-label" for="txdescritivo">Descrição</label>
+                <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição">@Model.txdescritivo</textarea>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <button id="incluir_btn" class="tg-btn" type="button">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/cursos")
+@Scripts.Render("~/bundles/mask")

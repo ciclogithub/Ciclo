@@ -40,10 +40,11 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>INSTRUTOR</th>
-                                <th>E-MAIL</th>
-                                <th>TELEFONE</th>
+                                <th width="4%">#</th>
+                                <th width="28%">INSTRUTOR</th>
+                                <th width="28%">E-MAIL</th>
+                                <th width="28%">TELEFONE</th>
+                                <th width="12%">FOTO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,12 @@
                                     <td>@p.txinstrutor</td>
                                     <td>@p.txemail</td>
                                     <td>@p.txtelefone</td>
+                                    <td>
+                                    @if (@p.txfoto != "")
+                                    {
+                                        <img id="prev_img" src="~/images/Instrutores/@p.txfoto" />
+                                    }
+                                    </td>
                                 </tr>
                             }
                         </tbody>

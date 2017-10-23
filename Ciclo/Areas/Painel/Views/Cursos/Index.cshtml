@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Biblioteca.Entidades.Cursos>
+
+@{
     ViewBag.Title = "Cursos";
 }
 
@@ -19,12 +21,83 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
+
             <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" id="curso" name="curso" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_curso">Localizar</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <button class="tg-btn" type="button" onclick="Cursos(0);">Novo</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="CursoAlterar()">Alterar</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="CursoExcluir()">Excluir</button>
+                </div>
+            </div>
+            <div class="row pt">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="4%">#</th>
+                                <th width="30%">CURSO</th>
+                                <th width="25%">TEMA</th>
+                                <th width="25%">CATEGORIA</th>
+                                <th width="16%" colspan="4">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcurso" /></th>
+                                    <td>@p.txcurso</td>
+                                    <td>@p.nome_tema.txtema</td>
+                                    <td>@p.nome_categoria.txcategoria</td>
+                                    <td width="4%" title="Alunos" class="td"><i class="glyphicon glyphicon-user border-icon"></i></td>
+                                    <td width="4%" title="Datas" class="td"><i class="glyphicon glyphicon-calendar border-icon"></i></td>
+                                    <td width="4%" title="Valores" class="td"><i class="glyphicon glyphicon-usd border-icon"></i></td>
+                                    <td width="4%" title="Folder" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
+            @*<div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>*@
         </div>
     </div>
 </main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/cursos")
+}
+
+

@@ -1,27 +1,27 @@
 ﻿$(document).ready(function () {
 
-    $("#pesquisa_instrutor").click(function () {
-        InstrutorPesquisar();
+    $("#pesquisa_curso").click(function () {
+        CursoPesquisar();
     });
 
     $("#incluir_btn").click(function () {
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
-            IncluirInstrutor();
+            IncluirCurso();
         };
     });
 
 });
 
-function InstrutorPesquisar() {
-    window.location = "/Painel/Instrutores/?instrutor=" + $("#instrutor").val();
+function CursoPesquisar() {
+    window.location = "/Painel/Cursos/?curso=" + $("#curso").val();
 }
 
-function Instrutores(id) {
-    Modal("/Painel/Instrutores/Incluir", id, "Instrutores");
+function Cursos(id) {
+    Modal("/Painel/Cursos/Incluir", id, "Cursos");
 }
 
-function InstrutorAlterar() {
+function CursoAlterar() {
 
     cont = 0;
     val = 0;
@@ -38,13 +38,13 @@ function InstrutorAlterar() {
         if (cont > 1) {
             alert("Selecione somente 1 registro para alterar")
         } else {
-            Instrutores(val);
+            Temas(val);
         }
     }
 
 }
 
-function InstrutorExcluir() {
+function CursoExcluir() {
 
     ids = "";
     $("input[name='ident']").each(function () {
@@ -59,13 +59,13 @@ function InstrutorExcluir() {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
-                url: "/Painel/Instrutores/Excluir",
+                url: "/Painel/Cursos/Excluir",
                 data: { ident: ids },
                 dataType: "json",
                 traditional: true,
                 success: function () {
-                    $("#instrutor").val("");
-                    InstrutorPesquisar();
+                    $("#tema").val("");
+                    TemaPesquisar();
                 }
             });
         }
@@ -74,25 +74,35 @@ function InstrutorExcluir() {
     }
 }
 
-function IncluirInstrutor() {
+function IncluirCurso() {
 
-    var idinstrutor = $("#idinstrutor").val();
-    var txinstrutor = $("#txinstrutor").val();
-    var txemail = $("#txemail").val();
-    var txtelefone = $("#txtelefone").val();
+    var idcurso = $("#idcurso").val();
+    var txcurso = $("#txcurso").val();
+    var idtema = $("#idtema").val();
+    var idcategoria = $("#idcategoria").val();
+    var idlocal = $("#idlocal").val();
+    var txlocal = $("#txlocal").val();
+    var nrminimo = $("#nrminimo").val();
+    var nrmaximo = $("#nrmaximo").val();
+    var txcargahoraria = $("#txcargahoraria").val();
     var txdescritivo = $("#txdescritivo").val();
 
     var form = $('#form-modal')[0];
     var data = new FormData(form);
-    data.append("id", idinstrutor);
-    data.append("nome", txinstrutor);
-    data.append("email", txemail);
-    data.append("telefone", txtelefone);
+    data.append("id", idcurso);
+    data.append("nome_curso", txcurso);
+    data.append("tema", idtema);
+    data.append("categoria", idcategoria);
+    data.append("codlocal", idlocal);
+    data.append("local", txlocal);
+    data.append("minimo", nrminimo);
+    data.append("maximo", nrmaximo);
+    data.append("cargahoraria", txcargahoraria);
     data.append("descricao", txdescritivo);
 
     $.ajax({
         type: "POST",
-        url: '/Painel/Instrutores/IncluirConcluir',
+        url: '/Painel/Cursos/IncluirConcluir',
         data: data,
         processData: false,
         contentType: false,
@@ -107,7 +117,7 @@ function IncluirInstrutor() {
                 $('.modal').modal('hide');
             }, 1000);
 
-            InstrutorPesquisar();
+            CursoPesquisar();
 
         }
     });
