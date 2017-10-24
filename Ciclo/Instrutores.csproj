@@ -151,7 +151,6 @@
     <Compile Include="Areas\Painel\Controllers\LocaisController.cs" />
     <Compile Include="Areas\Painel\Controllers\PainelController.cs" />
     <Compile Include="Areas\Painel\Controllers\InstrutoresController.cs" />
-    <Compile Include="Areas\Painel\Models\FileUpload.cs" />
     <Compile Include="Areas\Painel\PainelAreaRegistration.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -286,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Painel\Models\" />
     <Folder Include="images\Instrutores\" />
   </ItemGroup>
   <ItemGroup>
