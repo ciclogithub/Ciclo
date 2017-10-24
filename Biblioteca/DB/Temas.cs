@@ -12,29 +12,20 @@ namespace Biblioteca.DB
 {
     public class TemasDB
     {
-        public int Salvar(Temas variavel)
+        public void Salvar(Temas variavel)
         {
             try
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Temas (txtema, txsubtitulo, txdescritivo) output INSERTED.idtema VALUES (@tema, @subtitulo, @descritivo)");
+                Query query = session.CreateQuery("INSERT INTO Temas (idorganizador, txtema, txsubtitulo, txdescritivo) VALUES (@organizador, @tema, @subtitulo, @descritivo)");
+                query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("tema", variavel.txtema);
                 query.SetParameter("subtitulo", variavel.txsubtitulo);
                 query.SetParameter("descritivo", variavel.txdescritivo);
-                int ident = query.ExecuteScalar();
-                session.Close();
-
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("INSERT INTO Organizadores_Temas (idorganizador, idtema) VALUES (@organizador, @tema)");
-                queryi.SetParameter("organizador", Convert.ToInt32(cookie.Value));
-                queryi.SetParameter("tema", ident);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
-
-                return ident;
-          
+                query.ExecuteUpdate();
+                session.Close();          
             }
             catch (Exception erro)
             {
@@ -65,12 +56,6 @@ namespace Biblioteca.DB
         {
             try
             {
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("DELETE FROM Organizadores_Temas WHERE idtema = @id");
-                queryi.SetParameter("id", id);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
-
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Temas WHERE idtema = @id");
                 query.SetParameter("id", id);
@@ -92,7 +77,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select t.* from Temas t inner join Organizadores_Temas ot on ot.idtema = t.idtema WHERE ot.idorganizador = @idorganizador ORDER by t.txtema");
+                Query query = session.CreateQuery("select * from Temas WHERE idorganizador = @idorganizador ORDER by txtema");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
@@ -120,7 +105,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select t.* from Temas t inner join Organizadores_Temas ot on ot.idtema = t.idtema WHERE ot.idorganizador = @idorganizador and t.txtema LIKE @tema ORDER by t.txtema");
+                Query query = session.CreateQuery("select * from Temas WHERE idorganizador = @idorganizador and txtema LIKE @tema ORDER by txtema");
                 query.SetParameter("tema", "%" + tema.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();

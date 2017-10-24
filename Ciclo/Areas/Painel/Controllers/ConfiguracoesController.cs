@@ -1,4 +1,6 @@
-﻿using Biblioteca.Filters;
+﻿using Biblioteca.DB;
+using Biblioteca.Entidades;
+using Biblioteca.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,12 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public ActionResult Index()
         {
-            return View();
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+            Organizadores organizador = new Organizadores();
+            organizador = new OrganizadoresDB().Buscar(Convert.ToInt32(cookie.Value));
+            
+            return View(organizador);
         }
     }
 }

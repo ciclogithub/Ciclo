@@ -11,7 +11,65 @@
         };
     });
 
+    $("#incluir_instrutores_btn").click(function () {
+        $('#lstinstrutor option').prop('selected', true);
+        $('#form-modal').validationEngine('attach');
+        if ($('#form-modal').validationEngine('validate')) {
+            IncluirInstrutores();
+        };
+    });
+
+    $("#incluir_alunos_btn").click(function () {
+        $('#lstaluno option').prop('selected', true);
+        $('#form-modal').validationEngine('attach');
+        if ($('#form-modal').validationEngine('validate')) {
+            IncluirAlunos();
+        };
+    });
+    
+    $("#cmbinstrutor").click(function () { addItem($(this), "lstinstrutor") })
+    $("#lstinstrutor").click(function () { RemoveItem($(this), "cmbinstrutor") })
+    $("#cmbaluno").click(function () { addItem($(this), "lstaluno") })
+    $("#lstaluno").click(function () { RemoveItem($(this), "cmbaluno") })
+
 });
+
+function addItem(o, field) {
+    $(o).find('option:selected').each(function () {
+        $('#' + field).append(new Option($(this).prop("text"), $(this).val(), false, false));
+        $(this).remove();
+    });
+    sortSelectOptions('#' + field, false);
+}
+
+function RemoveItem(o, field) {
+    $(o).find('option:selected').each(function () {
+        $('#' + field).append(new Option($(this).prop("text"), $(this).val(), false, false));
+        $(this).remove();
+    });
+    sortSelectOptions('#' + field, false);
+}
+
+function sortSelectOptions(selector, skip_first) {
+    var options = (skip_first) ? $(selector + ' option:not(:first)') : $(selector + ' option');
+    var arr = options.map(function (_, o) { return { t: $(o).text(), v: o.value, s: $(o).prop('selected') }; }).get();
+    arr.sort(function (o1, o2) {
+        var t1 = o1.t.toLowerCase(), t2 = o2.t.toLowerCase();
+        return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
+    });
+    options.each(function (i, o) {
+        o.value = arr[i].v;
+        $(o).text(arr[i].t);
+        if (arr[i].s) {
+            $(o).attr('selected', 'selected').prop('selected', true);
+        } else {
+            $(o).removeAttr('selected');
+            $(o).prop('selected', false);
+        }
+    });
+}
+
+/* CURSOS */
 
 function CursoPesquisar() {
     window.location = "/Painel/Cursos/?curso=" + $("#curso").val();
@@ -38,7 +96,7 @@ function CursoAlterar() {
         if (cont > 1) {
             alert("Selecione somente 1 registro para alterar")
         } else {
-            Temas(val);
+            Cursos(val);
         }
     }
 
@@ -65,7 +123,7 @@ function CursoExcluir() {
                 traditional: true,
                 success: function () {
                     $("#tema").val("");
-                    TemaPesquisar();
+                    CursoPesquisar();
                 }
             });
         }
@@ -86,6 +144,7 @@ function IncluirCurso() {
     var nrmaximo = $("#nrmaximo").val();
     var txcargahoraria = $("#txcargahoraria").val();
     var txdescritivo = $("#txdescritivo").val();
+    var flgratuito = $("#flgratuito").prop('checked');
 
     var form = $('#form-modal')[0];
     var data = new FormData(form);
@@ -99,6 +158,7 @@ function IncluirCurso() {
     data.append("maximo", nrmaximo);
     data.append("cargahoraria", txcargahoraria);
     data.append("descricao", txdescritivo);
+    data.append("gratuito", flgratuito);
 
     $.ajax({
         type: "POST",
@@ -123,6 +183,85 @@ function IncluirCurso() {
     });
 
 }
+
+/* INSTRUTORES */
+
+function CursoInstrutor(id) {
+    Modal("/Painel/Cursos/Instrutores", id, "Cursos - Instrutores");
+}
+
+function IncluirInstrutores() {
+
+    var idcurso = $("#idcurso").val();    
+    var lstinstrutor = $("#lstinstrutor").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/Painel/Cursos/IncluirInstrutores',
+        data: { id: idcurso, instrutores: lstinstrutor.toString() },
+        dataType: "json",
+        traditional: true,
+        success: function (json) {
+
+            alert("Operação realizada com sucesso!");
+
+            window.setTimeout(function () {
+                $('.modal').modal('hide');
+            }, 1000);
+
+        }
+    });
+
+}
+
+/* ALUNOS */
+
+function CursoAluno(id) {
+    Modal("/Painel/Cursos/Alunos", id, "Cursos - Alunos");
+}
+
+function IncluirAlunos() {
+
+    var idcurso = $("#idcurso").val();
+    var lstaluno = $("#lstaluno").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/Painel/Cursos/IncluirAlunos',
+        data: { id: idcurso, alunos: lstaluno.toString() },
+        dataType: "json",
+        traditional: true,
+        success: function (json) {
+
+            alert("Operação realizada com sucesso!");
+
+            window.setTimeout(function () {
+                $('.modal').modal('hide');
+            }, 1000);
+
+        }
+    });
+
+}
+
+/* DATAS */
+
+function CursoData(id) {
+
+}
+
+/* VALORES */
+
+function CursoValor(id) {
+
+}
+
+/* FOLDER */
+
+function CursoFolder(id) {
+
+}
+
 
 function readURL(input) {
 

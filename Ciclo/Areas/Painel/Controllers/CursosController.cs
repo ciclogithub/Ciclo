@@ -55,7 +55,7 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", int minimo = 0, int maximo = 0, int cargahoraria = 0, string descricao = "")
+        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = true)
         {
             CursosDB db = new CursosDB();
             int ident = 0;
@@ -63,11 +63,12 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao));
+                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, ""));
                 Cursos curso = db.Buscar(id);
             }
             else
             {
+                ident = id;
                 Cursos curso = db.Buscar(id);
                 curso.txcurso = nome_curso;
                 curso.idtema = tema;
@@ -112,6 +113,64 @@ namespace Ciclo.Areas.Painel.Controllers
             string[] formats = new string[] { ".jpg", ".png", ".gif", ".jpeg" };
 
             return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
+        }
+
+        [Autenticacao]
+        public ActionResult Instrutores(int id = 0)
+        {
+            Cursos curso = new Cursos();
+            if (id != 0)
+            {
+                curso = new CursosDB().Buscar(id);
+            }
+
+            ViewBag.instrutores = new InstrutoresDB().ListarTodos(id);
+
+            return PartialView(curso);
+        }
+
+        [Autenticacao]
+        public JsonResult IncluirInstrutores(int id = 0, string instrutores = "")
+        {
+            CursosDB db = new CursosDB();
+            db.RemoverInstrutores(id);
+
+            var arrI = instrutores.Split(',');
+            foreach (var i in arrI)
+            {
+                new CursosDB().SalvarInstrutor(id, Convert.ToInt32(i));
+            }
+
+            return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        public ActionResult Alunos(int id = 0)
+        {
+            Cursos curso = new Cursos();
+            if (id != 0)
+            {
+                curso = new CursosDB().Buscar(id);
+            }
+
+            ViewBag.alunos = new AlunosDB().ListarTodos(id);
+
+            return PartialView(curso);
+        }
+
+        [Autenticacao]
+        public JsonResult IncluirAlunos(int id = 0, string alunos = "")
+        {
+            CursosDB db = new CursosDB();
+            db.RemoverAlunos(id);
+
+            var arrI = alunos.Split(',');
+            foreach (var i in arrI)
+            {
+                new CursosDB().SalvarAlunos(id, Convert.ToInt32(i));
+            }
+
+            return Json(new Retorno());
         }
     }
 }

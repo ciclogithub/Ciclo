@@ -24,7 +24,9 @@ namespace Ciclo
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                      "~/Scripts/js/site.js"));
+                    "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
+                    "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
+                    "~/Scripts/js/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/painel").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",

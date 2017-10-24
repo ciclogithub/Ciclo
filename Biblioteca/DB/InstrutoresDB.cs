@@ -16,23 +16,15 @@ namespace Biblioteca.DB
         {
             try
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Instrutores (txinstrutor, txemail, txtelefone, txdescritivo) output INSERTED.idinstrutor VALUES (@instrutor, @email, @telefone, @descritivo)");
+                Query query = session.CreateQuery("INSERT INTO Instrutores (idorganizador, txinstrutor, txemail, txtelefone, txdescritivo) output INSERTED.idinstrutor VALUES (@organizador, @instrutor, @email, @telefone, @descritivo)");
+                query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("instrutor", variavel.txinstrutor);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("telefone", variavel.txtelefone);
                 query.SetParameter("descritivo", variavel.txdescritivo);
                 int ident = query.ExecuteScalar();
                 session.Close();
-
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("INSERT INTO Organizadores_Instrutores (idorganizador, idinstrutor) VALUES (@organizador, @instrutor)");
-                queryi.SetParameter("organizador", Convert.ToInt32(cookie.Value));
-                queryi.SetParameter("instrutor", ident);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
 
                 return ident;
           
@@ -84,12 +76,6 @@ namespace Biblioteca.DB
         {
             try
             {
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("DELETE FROM Organizadores_Instrutores WHERE idinstrutor = @id");
-                queryi.SetParameter("id", id);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
-
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Instrutores WHERE idinstrutor = @id");
                 query.SetParameter("id", id);
@@ -111,7 +97,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select i.* from Instrutores i inner join Organizadores_Instrutores oi on oi.idinstrutor = i.idinstrutor WHERE oi.idorganizador = @idorganizador ORDER by i.txinstrutor");
+                Query query = session.CreateQuery("select * from Instrutores WHERE idorganizador = @idorganizador ORDER by txinstrutor");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
@@ -139,9 +125,67 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select i.* from Instrutores i inner join Organizadores_Instrutores oi on oi.idinstrutor = i.idinstrutor WHERE oi.idorganizador = @idorganizador and i.txinstrutor LIKE @instrutor ORDER by i.txinstrutor");
+                Query query = session.CreateQuery("select * from Instrutores WHERE idorganizador = @idorganizador and txinstrutor LIKE @instrutor ORDER by txinstrutor");
                 query.SetParameter("instrutor", "%" + instrutor.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Instrutores> ListarTodos(int id = 0)
+        {
+            try
+            {
+                List<Instrutores> list_instrutor = new List<Instrutores>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and idinstrutor not in (select idinstrutor from Cursos_Instrutores where idcurso = @id) order by txinstrutor");
+                query.SetParameter("id", id);
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Instrutores> ListarDoCurso(int id = 0)
+        {
+            try
+            {
+                List<Instrutores> list_instrutor = new List<Instrutores>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and idinstrutor in (select idinstrutor from Cursos_Instrutores where idcurso = @id) order by txinstrutor");
+                query.SetParameter("id", id);
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())

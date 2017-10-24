@@ -16,23 +16,14 @@ namespace Biblioteca.DB
         {
             try
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Locais (idcidade, txlocal, txlogradouro) output INSERTED.idlocal VALUES (@cidade, @local, @logradouro)");
+                Query query = session.CreateQuery("INSERT INTO Locais (idorganizador, idcidade, txlocal, txlogradouro) VALUES (@organizador, @cidade, @local, @logradouro)");
+                query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("cidade", variavel.idcidade);
                 query.SetParameter("local", variavel.txlocal);
                 query.SetParameter("logradouro", variavel.txlogradouro);
-                int ident = query.ExecuteScalar();
+                query.ExecuteUpdate();
                 session.Close();
-
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("INSERT INTO Organizadores_Locais (idorganizador, idlocal) VALUES (@organizador, @local)");
-                queryi.SetParameter("organizador", Convert.ToInt32(cookie.Value));
-                queryi.SetParameter("local", ident);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
-
             }
             catch (Exception erro)
             {
@@ -63,12 +54,6 @@ namespace Biblioteca.DB
         {
             try
             {
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("DELETE FROM Organizadores_Locais WHERE idlocal = @id");
-                queryi.SetParameter("id", id);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
-
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Locais WHERE idlocal = @id");
                 query.SetParameter("id", id);
@@ -90,7 +75,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select l.*, c.txcidade, e.txestado from Locais l inner join Organizadores_Locais ol on ol.idlocal = l.idlocal inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE ol.idorganizador = @idorganizador ORDER by l.txlocal");
+                Query query = session.CreateQuery("select l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE l.idorganizador = @idorganizador ORDER by l.txlocal");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
@@ -118,7 +103,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select l.*, c.txcidade, e.txestado from Locais l inner join Organizadores_Locais ol on ol.idlocal = l.idlocal inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND ol.idorganizador = @idorganizador ORDER by l.txlocal");
+                Query query = session.CreateQuery("select l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal");
                 query.SetParameter("local", "%" + local.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();

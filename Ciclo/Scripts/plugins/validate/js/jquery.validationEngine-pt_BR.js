@@ -77,7 +77,7 @@
                     "alertText": "Número de cartão de crédito inválido"
                 },
 				"time": {
-                    "regex": /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+                    "regex": /^[0-9][0-9]:[0-5][0-9]$/,
                     "alertText": "Horário inválido"
                 },
                 "phone": {

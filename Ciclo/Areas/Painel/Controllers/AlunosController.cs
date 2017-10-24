@@ -53,34 +53,36 @@ namespace Ciclo.Areas.Painel.Controllers
         public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "")
         {
             AlunosDB db = new AlunosDB();
+            int ident = 0;
 
             if (id == 0)
             {
-                id = db.Salvar(new Alunos(id, nome, cpf));
+                ident = db.Salvar(new Alunos(id, nome, cpf));
                 Alunos aluno = db.Buscar(id);
             }
             else
             {
+                ident = id;
                 Alunos aluno = db.Buscar(id);
                 aluno.txaluno = nome;
                 aluno.txcpf = cpf;
 
                 db.Alterar(aluno);
 
-                db.RemoverEmails(id);
-                db.RemoverTelefones(id);
+                db.RemoverEmails(ident);
+                db.RemoverTelefones(ident);
             }
  
             var arrE = email.Split(',');
             foreach (var i in arrE)
             {
-                new AlunosDB().SalvarEmail(id, i);
+                new AlunosDB().SalvarEmail(ident, i);
             }
 
             var arrT = telefone.Split(',');
             foreach (var i in arrT)
             {
-                new AlunosDB().SalvarTelefone(id, i);
+                new AlunosDB().SalvarTelefone(ident, i);
             }
 
             return Json(new Retorno());

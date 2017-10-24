@@ -1,0 +1,39 @@
+﻿@model Biblioteca.Entidades.Cursos
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal">
+        <input type="hidden" id="idcurso" name="idcurso" value="@Model.idcurso" />
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+                    <label class="control-label" for="cmbinstrutor">Lista de Instrutores</label>
+                    <select id="cmbinstrutor" name="cmbinstrutor" class="form-control combo" multiple>
+                        @foreach (var i in ViewBag.instrutores)
+                        {
+                            <option value="@i.idinstrutor">@i.txinstrutor</option>
+                        }
+                    </select>
+                    <span class="small">Clique no nome para adicionar o instrutor ao curso</span>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+                    <label class="control-label" for="lstinstrutor">Instrutores do Curso</label>
+                    <select id="lstinstrutor" name="lstinstrutor" class="form-control combo validate[required]" multiple>
+                        @foreach (var p in Model.instrutores)
+                        {
+                            <option value="@p.idinstrutor">@p.txinstrutor</option>
+                        }
+                    </select>
+                    <span class="small">Clique no nome para remover o instrutor do curso</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <button id="incluir_instrutores_btn" class="tg-btn" type="button">Enviar</button>
+                </div>
+            </div>
+        </</form>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/cursos")
+@Scripts.Render("~/bundles/mask")

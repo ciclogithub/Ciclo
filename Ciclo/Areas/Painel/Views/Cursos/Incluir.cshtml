@@ -40,7 +40,7 @@
                                     }
                                     else
                                     {
-                                        <img id="prev_img" src="~/images/Instrutores/@Model.txfoto" alt="visualizar" />
+                                        <img id="prev_img" src="~/images/Cursos/@Model.txfoto" alt="visualizar" />
                                     }
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                     <option value="">-- Selecione --</option>
                                     @foreach (var l in ViewBag.locais)
                                     {
-                                        <option value="@l.idlocal"@(Model.idlocal == l.idlocal ? "selected" : "")>@l.txlocal</option>
+                                        <option value="@l.idlocal" @(Model.idlocal == l.idlocal ? "selected" : "")>@l.txlocal</option>
                                     }
                                 </select>
 
@@ -112,8 +112,8 @@
                             <div class="form-group">
                                 <label class="control-label" for="txcargahoraria">Carga Horária</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control validate[min[0],max[999]]" id="txcargahoraria" name="txcargahoraria" data-mask="000" value="@Model.txcargahoraria" maxlength="3" />
-                                    <span class="input-group-addon">h</spanclass="input-group-addon">
+                                    <input type="text" class="form-control validate[minSize[5],maxSize[5],time]" id="txcargahoraria" name="txcargahoraria" data-mask="00:00" value="@Model.txcargahoraria" maxlength="5" />
+                                    <span class="input-group-addon">h</span>
                                 </div>
                             </div>
                         </div>
@@ -121,12 +121,18 @@
                 </form>
             </div>
         </div>
-        
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
                 <label class="control-label" for="txdescritivo">Descrição</label>
                 <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição">@Model.txdescritivo</textarea>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <input type="checkbox" name="flgratuito" id="flgratuito" value="1" @(Model.flgratuito ? "checked" : "")>&nbsp;&nbsp;Curso Gratuito
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                 <button id="incluir_btn" class="tg-btn" type="button">Enviar</button>
             </div>

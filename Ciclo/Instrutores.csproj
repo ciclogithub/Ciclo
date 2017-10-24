@@ -221,6 +221,8 @@
     <Content Include="Areas\Painel\Views\Temas\Incluir.cshtml" />
     <Content Include="Areas\Painel\Views\Temas\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Cursos\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Cursos\Instrutores.cshtml" />
+    <Content Include="Areas\Painel\Views\Cursos\Alunos.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="images\logo2.png" />
     <Content Include="images\pattern.png" />

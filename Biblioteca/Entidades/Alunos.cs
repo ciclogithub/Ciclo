@@ -4,20 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Biblioteca.Entidades
 {
     public class Alunos
     {
         public int idaluno { get; set; }
+        public int idorganizador { get; set; }
         public string txaluno { get; set; }
         public string txcpf { get; set; }
         public List<Emails> txemail { get; set; }
         public List<Telefones> txtelefone { get; set; }
 
+        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
         public Alunos()
         {
             this.idaluno = 0;
+            this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txaluno = "";
             this.txcpf = "";
         }
@@ -25,15 +30,17 @@ namespace Biblioteca.Entidades
         public Alunos(int id, string aluno, string cpf)
         {
             this.idaluno = id;
+            this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txaluno = aluno;
             this.txcpf = cpf;
             this.txemail = new AlunosDB().ListarEmails(id); ;
             this.txtelefone = new AlunosDB().ListarTelefones(id); ;
         }
 
-        public void Salvar()
+        public int Salvar()
         {
-            new AlunosDB().Salvar(this);
+            int ident = new AlunosDB().Salvar(this);
+            return ident;
         }
 
         public void Alterar()

@@ -1,11 +1,17 @@
 ﻿$(document).ready(function () {
 
     $("#btn_cadastro_organizador").click(function () {
-        CadastroOrganizador();
+        $('#form_cadastro_organizador').validationEngine('attach');
+        if ($('#form_cadastro_organizador').validationEngine('validate')) {
+            CadastroOrganizador();
+        }
     });
 
     $("#btn_login_organizador").click(function () {
-        LoginOrganizador();
+        $('#form_login_organizador').validationEngine('attach');
+        if ($('#form_login_organizador').validationEngine('validate')) {
+            LoginOrganizador();
+        }
     });
 });
 
