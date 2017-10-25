@@ -225,8 +225,8 @@
     <Content Include="Areas\Painel\Views\Cursos\Datas.cshtml" />
     <Content Include="Areas\Painel\Views\Cursos\Valores.cshtml" />
     <Content Include="Areas\Painel\Views\Cursos\Folder.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
-    <Content Include="images\logo2.png" />
     <Content Include="images\pattern.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
