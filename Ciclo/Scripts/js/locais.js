@@ -56,7 +56,7 @@ function LocalPesquisar() {
 }
 
 function Locais(id) {
-    Modal("/Painel/Locais/Incluir", id, "Locais");
+    Modal("/Painel/Locais/Incluir", id, "Locais", "");
 }
 
 function LocalAlterar() {

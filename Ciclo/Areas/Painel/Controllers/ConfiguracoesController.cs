@@ -14,10 +14,9 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public ActionResult Index()
         {
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
             Organizadores organizador = new Organizadores();
-            organizador = new OrganizadoresDB().Buscar(Convert.ToInt32(cookie.Value));
+            organizador = new OrganizadoresDB().Buscar(0);
             
             return View(organizador);
         }

@@ -26,12 +26,27 @@
             IncluirAlunos();
         };
     });
+
+    $("#incluir_datas_btn").click(function () {
+        $('#form-modal').validationEngine('attach');
+        if ($('#form-modal').validationEngine('validate')) {
+            IncluirDatas();
+        };
+    });
+
+    $("#incluir_valores_btn").click(function () {
+        $('#form-modal').validationEngine('attach');
+        if ($('#form-modal').validationEngine('validate')) {
+            IncluirValores();
+        };
+    });
     
     $("#cmbinstrutor").click(function () { addItem($(this), "lstinstrutor") })
     $("#lstinstrutor").click(function () { RemoveItem($(this), "cmbinstrutor") })
     $("#cmbaluno").click(function () { addItem($(this), "lstaluno") })
     $("#lstaluno").click(function () { RemoveItem($(this), "cmbaluno") })
-
+    $("#novo_datas_btn").click(function () { NovaData(); })
+    $("#novo_valores_btn").click(function () { NovoValor(); })
 });
 
 function addItem(o, field) {
@@ -76,7 +91,7 @@ function CursoPesquisar() {
 }
 
 function Cursos(id) {
-    Modal("/Painel/Cursos/Incluir", id, "Cursos");
+    Modal("/Painel/Cursos/Incluir", id, "Cursos", "");
 }
 
 function CursoAlterar() {
@@ -90,7 +105,7 @@ function CursoAlterar() {
         }
     });
 
-    if (cont == 0) {
+    if (cont === 0) {
         alert("Selecione pelo menos 1 registro")
     } else {
         if (cont > 1) {
@@ -113,7 +128,7 @@ function CursoExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids != "") {
+    if (ids !== "") {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
@@ -187,7 +202,7 @@ function IncluirCurso() {
 /* INSTRUTORES */
 
 function CursoInstrutor(id) {
-    Modal("/Painel/Cursos/Instrutores", id, "Cursos - Instrutores");
+    Modal("/Painel/Cursos/Instrutores", id, "Cursos - Instrutores", "");
 }
 
 function IncluirInstrutores() {
@@ -217,7 +232,7 @@ function IncluirInstrutores() {
 /* ALUNOS */
 
 function CursoAluno(id) {
-    Modal("/Painel/Cursos/Alunos", id, "Cursos - Alunos");
+    Modal("/Painel/Cursos/Alunos", id, "Cursos - Alunos", "");
 }
 
 function IncluirAlunos() {
@@ -247,13 +262,193 @@ function IncluirAlunos() {
 /* DATAS */
 
 function CursoData(id) {
+    Modal("/Painel/Cursos/Datas", id, "Cursos - Datas", "ListaDatas");
+}
 
+function NovaData() {
+    var temp = $("#idcurso").val();
+    $("#iddatacurso").val("");
+    $("#form-modal")[0].reset();
+    $("#idcurso").val(temp);
+}
+
+function IncluirDatas() {
+
+    var iddatacurso = $("#iddatacurso").val();
+    var idcurso = $("#idcurso").val();
+    var dtcurso = $("#dtcurso").val();
+    var hrinicio = $("#hrinicio").val();
+    var hrfim = $("#hrfim").val();
+    var txdescritivo = $("#txdescritivo").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/Painel/Cursos/IncluirDatas',
+        data: { iddata: iddatacurso, idcurso: idcurso, data: dtcurso, horaini: hrinicio, horafim: hrfim, descricao: txdescritivo },
+        dataType: "json",
+        traditional: true,
+        success: function (json) {
+            alert("Operação realizada com sucesso!");
+            NovaData();
+            ListaDatas(idcurso);
+        }
+    });
+
+}
+
+function ListaDatas(id) {
+    $.ajax({
+        url: "/Painel/Cursos/ListaDatas",
+        data: { id: id },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            var temp = "";
+            for (var x = 0; x < data.length; x++) {
+                temp += "<div class='row list'>";
+                temp += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>" + data[x].dtcurso + " - " + data[x].hrinicial + " às " + data[x].hrfinal + "</div>";
+                temp += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right'>";
+                temp += "<i onClick='AlterarData(" + data[x].iddatacurso  + ")' class='glyphicon glyphicon-pencil' title= 'Alterar' ></i >";
+                temp += "<i onClick='ExcluirData(" + data[x].iddatacurso + ")' class='glyphicon glyphicon-trash' title='Excluir'></i></div>";
+                temp += "</div>";
+            }
+            $("#list_datas").html(temp);
+        },
+        error: function (reponse) {
+            $("#list_datas").html("Não foi possível carregar a lista de datas");
+        }
+    });
+}
+
+function AlterarData(id) {
+    if (id !== "") {
+        $.ajax({
+            type: "POST",
+            url: "/Painel/Cursos/AlterarData",
+            data: { ident: id },
+            dataType: "json",
+            traditional: true,
+            success: function (data) {
+                $("#iddatacurso").val(data.iddatacurso);
+                $("#dtcurso").val(data.dtcurso);
+                $("#hrinicio").val(data.hrinicial);
+                $("#hrfim").val(data.hrfinal);
+                $("#txdescritivo").val(data.txobs);
+            }
+        });
+    }
+}
+
+function ExcluirData(id) {
+
+    if (id !== "") {
+        if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
+            $.ajax({
+                type: "POST",
+                url: "/Painel/Cursos/ExcluirData",
+                data: { ident: id },
+                dataType: "json",
+                traditional: true,
+                success: function () {
+                    ListaDatas($("#idcurso").val());
+                }
+            });
+        }
+    }
 }
 
 /* VALORES */
 
 function CursoValor(id) {
+    Modal("/Painel/Cursos/Valores", id, "Cursos - Valores", "ListaValores");
+}
 
+function NovoValor() {
+    var temp = $("#idcurso").val();
+    $("#idvalorcurso").val("");
+    $("#form-modal")[0].reset();
+    $("#idcurso").val(temp);
+}
+
+function IncluirValores() {
+
+    var idvalorcurso = $("#idvalorcurso").val();
+    var idcurso = $("#idcurso").val();
+    var nrvalor = $("#nrvalor").val();
+    var dtvalor = $("#dtvalor").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/Painel/Cursos/IncluirValores',
+        data: { idvalor: idvalorcurso, idcurso: idcurso, valor: nrvalor, data: dtvalor },
+        dataType: "json",
+        traditional: true,
+        success: function (json) {
+            alert("Operação realizada com sucesso!");
+            NovoValor();
+            ListaValores(idcurso);
+        }
+    });
+
+}
+
+function ListaValores(id) {
+    $.ajax({
+        url: "/Painel/Cursos/ListaValores",
+        data: { id: id },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            var temp = "";
+            for (var x = 0; x < data.length; x++) {
+                temp += "<div class='row list'>";
+                temp += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>" + data[x].dtvalor + "</div>";
+                temp += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right'>";
+                temp += "<i onClick='AlterarValor(" + data[x].idvalorcurso + ")' class='glyphicon glyphicon-pencil' title= 'Alterar' ></i >";
+                temp += "<i onClick='ExcluirValor(" + data[x].idvalorcurso + ")' class='glyphicon glyphicon-trash' title='Excluir'></i></div>";
+                temp += "</div>";
+            }
+            $("#list_valores").html(temp);
+        },
+        error: function (reponse) {
+            $("#list_valores").html("Não foi possível carregar a lista de valores");
+        }
+    });
+}
+
+function AlterarValor(id) {
+    if (id !== "") {
+        $.ajax({
+            type: "POST",
+            url: "/Painel/Cursos/AlterarValor",
+            data: { ident: id },
+            dataType: "json",
+            traditional: true,
+            success: function (data) {
+                $("#idvalorcurso").val(data.idvalorcurso);
+                $("#nrvalor").val(data.nrvalor);
+                $("#dtvalor").val(data.dtvalor);
+            }
+        });
+    }
+}
+
+function ExcluirValor(id) {
+
+    if (id != "") {
+        if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
+            $.ajax({
+                type: "POST",
+                url: "/Painel/Cursos/ExcluirValor",
+                data: { ident: id },
+                dataType: "json",
+                traditional: true,
+                success: function () {
+                    ListaValores($("#idcurso").val());
+                }
+            });
+        }
+    }
 }
 
 /* FOLDER */

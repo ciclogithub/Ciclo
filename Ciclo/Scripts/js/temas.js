@@ -18,7 +18,7 @@ function TemaPesquisar() {
 }
 
 function Temas(id) {
-    Modal("/Painel/Temas/Incluir", id, "Temas");
+    Modal("/Painel/Temas/Incluir", id, "Temas", "");
 }
 
 function TemaAlterar() {

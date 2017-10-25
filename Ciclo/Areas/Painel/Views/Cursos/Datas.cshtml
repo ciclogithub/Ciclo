@@ -1,0 +1,54 @@
+﻿@model Biblioteca.Entidades.Cursos
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal">
+            <input type="hidden" id="idcurso" name="idcurso" value="@Model.idcurso" />
+            <input type="hidden" id="iddatacurso" name="iddatacurso" value="" />
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                            <label class="control-label" for="dtcurso">Data *</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control validate[required,minSize[10],maxSize[10],date]" id="dtcurso" name="dtcurso" value="" maxlength="10" data-mask="00/00/0000" />
+                                <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+                            <label class="control-label" for="hrinicio">Hora Início *</label>
+                            <input type="text" class="form-control validate[required,minSize[5],maxSize[5],time]" id="hrinicio" name="hrinicio" value="" maxlength="5" data-mask="00:00" />
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+                            <label class="control-label" for="hrfim">Hora Término *</label>
+                            <input type="text" class="form-control validate[required,minSize[5],maxSize[5],time]" id="hrfim" name="hrfim" value="" maxlength="5" data-mask="00:00" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                            <label class="control-label" for="txdescritivo">Descrição</label>
+                            <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">                        
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                            <button id="incluir_datas_btn" class="tg-btn" type="button">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label class="control-label" for="dtcurso">Datas do Curso</label>
+                    <div class="row">
+                        <div id="list_datas" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-control" style="height:360px;">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center pt15">
+                            <button id="novo_datas_btn" class="tg-btn" type="button">Novo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/cursos")
+@Scripts.Render("~/bundles/mask")

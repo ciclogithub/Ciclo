@@ -1,7 +1,6 @@
 ﻿using Biblioteca.DB;
 using Biblioteca.Entidades;
 using Biblioteca.Filters;
-using Ciclo.Areas.Painel.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;

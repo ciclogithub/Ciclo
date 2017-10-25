@@ -18,7 +18,7 @@ namespace Biblioteca.DB
                 Contadores contador = null;
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select (select count(*) from Organizadores_Instrutores where idorganizador = @organizador) instrutor, (select count(*) from cursos) cursos, (select count(*) from alunos) alunos, (0) avaliacaoes");
+                Query query = session.CreateQuery("select (select count(*) from Organizadores where idorganizador = @organizador) instrutor, (select count(*) from cursos where idorganizador = @organizador) cursos, (select count(*) from alunos where idorganizador = @organizador) alunos, (0) avaliacaoes");
                 query.SetParameter("organizador", organizador);
                 IDataReader reader = query.ExecuteQuery();
 

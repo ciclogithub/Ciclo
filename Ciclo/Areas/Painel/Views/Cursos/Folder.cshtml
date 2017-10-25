@@ -7,10 +7,6 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
                     <label class="control-label" for="cmbaluno">Lista de Alunos</label>
-                    <div class="input-group mb10">
-                        <input type="text" class="form-control" id="txinstrutor" name="txinstrutor" value="" maxlength="300" />
-                        <span class="input-group-addon" onclick="" style="cursor:pointer"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
                     <select id="cmbaluno" name="cmbaluno" class="form-control combo" multiple>
                         @foreach (var i in ViewBag.alunos)
                         {
@@ -21,10 +17,6 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
                     <label class="control-label" for="lstaluno">Alunos do Curso</label>
-                    <div class="input-group mb10">
-                        <input type="text" class="form-control" id="txinstrutor" name="txinstrutor" value="" maxlength="300" />
-                        <span class="input-group-addon" onclick="" style="cursor:pointer"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
                     <select id="lstaluno" name="lstaluno" class="form-control combo validate[required]" multiple>
                         @foreach (var p in Model.alunos)
                         {

@@ -18,7 +18,7 @@ function InstrutorPesquisar() {
 }
 
 function Instrutores(id) {
-    Modal("/Painel/Instrutores/Incluir", id, "Instrutores");
+    Modal("/Painel/Instrutores/Incluir", id, "Instrutores", "");
 }
 
 function InstrutorAlterar() {

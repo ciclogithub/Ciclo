@@ -31,7 +31,7 @@ function AlunoPesquisar() {
 }
 
 function Alunos(id) {
-    Modal("/Painel/Alunos/Incluir", id, "Alunos");
+    Modal("/Painel/Alunos/Incluir", id, "Alunos", "");
 }
 
 function AlunoAlterar() {

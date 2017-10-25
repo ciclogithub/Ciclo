@@ -37,6 +37,14 @@ textarea {
     padding:10px;
 }
 
+.pt15 {
+    padding-top:15px;
+}
+
+.mb10 {
+    margin-bottom:10px;
+}
+
 .counter {
     text-align: center;
 }
@@ -155,5 +163,21 @@ table input {
 }
 
 .combo {
-    height: 340px !important;
+    height: 320px !important;
+}
+
+.list {
+    border-bottom:1px solid #ececec;
+    line-height:30px;
+}
+
+.list:hover {
+    background-color:#88e55b;
+}
+
+.list i {
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    margin-bottom:5px;
 }

@@ -80,7 +80,7 @@ function ConteudoPaginacao(url, pagina) {
     });
 }
 
-function Modal(url, id, titulo) {
+function Modal(url, id, titulo, func) {
     if (ajax_conteudo && ajax_conteudo.readyState != 4) {
         ajax_conteudo.abort();
     }
@@ -96,6 +96,15 @@ function Modal(url, id, titulo) {
         success: function (msg) {
             $(".modal .modal-body").html(msg);
             $('.modal').modal('show');
+
+            if (func != "") {
+                $(".modal").on("shown.bs.modal", function () {
+                    var funcao = func + "(" + id + ")"
+                    eval(funcao);
+                });
+
+            }
+
         }
     });
 

@@ -115,6 +115,8 @@ namespace Ciclo.Areas.Painel.Controllers
             return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
 
+        // INSTRUTORES
+
         [Autenticacao]
         public ActionResult Instrutores(int id = 0)
         {
@@ -144,6 +146,8 @@ namespace Ciclo.Areas.Painel.Controllers
             return Json(new Retorno());
         }
 
+        // ALUNOS
+        
         [Autenticacao]
         public ActionResult Alunos(int id = 0)
         {
@@ -171,6 +175,126 @@ namespace Ciclo.Areas.Painel.Controllers
             }
 
             return Json(new Retorno());
+        }
+
+        // DATAS
+
+        [Autenticacao]
+        public ActionResult Datas(int id = 0)
+        {
+            Cursos curso = new Cursos();
+            if (id != 0)
+            {
+                curso = new CursosDB().Buscar(id);
+            }
+
+            return PartialView(curso);
+        }
+
+        [Autenticacao]
+        public JsonResult IncluirDatas(int iddata = 0, int idcurso = 0, string data = "", string horaini = "", string horafim = "", string descricao = "")
+        {
+            Cursos_DatasDB db = new Cursos_DatasDB();
+
+            if (iddata == 0)
+            {
+                db.Salvar(new Cursos_Datas(iddata, idcurso, data, horaini, horafim, descricao));
+                Cursos_Datas cursodata = db.Buscar(iddata);
+            }
+            else
+            {
+                Cursos_Datas cursodata = db.Buscar(iddata);
+                cursodata.iddatacurso = iddata;
+                cursodata.idcurso = idcurso;
+                cursodata.dtcurso = data;
+                cursodata.hrinicial = horaini;
+                cursodata.hrfinal = horafim;
+                cursodata.txobs = descricao;
+                
+                db.Alterar(cursodata);
+            }
+
+            return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaDatas(int id = 0)
+        {
+            List<Cursos_Datas> cursodata = new Cursos_DatasDB().Listar(id);
+            return Json(cursodata);
+        }
+
+        [Autenticacao]
+        public JsonResult ExcluirData(int ident)
+        {
+            new Cursos_DatasDB().Excluir(ident);
+            return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        public JsonResult AlterarData(int ident)
+        {            
+            return Json(new Cursos_DatasDB().Buscar(ident));
+        }
+
+        // VALORES
+
+        [Autenticacao]
+        public ActionResult Valores(int id = 0)
+        {
+            Cursos curso = new Cursos();
+            if (id != 0)
+            {
+                curso = new CursosDB().Buscar(id);
+            }
+
+            return PartialView(curso);
+        }
+
+        [Autenticacao]
+        public JsonResult IncluirValores(int idvalor = 0, int idcurso = 0, decimal valor = 0, string data = "")
+        {
+            Cursos_ValoresDB db = new Cursos_ValoresDB();
+
+            if (idvalor == 0)
+            {
+                db.Salvar(new Cursos_Valores(idvalor, idcurso, valor, data));
+                Cursos_Valores cursovalor = db.Buscar(idvalor);
+            }
+            else
+            {
+                Cursos_Valores cursovalor = db.Buscar(idvalor);
+                cursovalor.idvalorcurso = idvalor;
+                cursovalor.idcurso = idcurso;
+                cursovalor.nrvalor = valor;
+                cursovalor.dtvalor = data;
+
+                db.Alterar(cursovalor);
+            }
+
+            return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaValores(int id = 0)
+        {
+            List<Cursos_Valores> cursovalor = new Cursos_ValoresDB().Listar(id);
+            return Json(cursovalor);
+        }
+
+        [Autenticacao]
+        public JsonResult ExcluirValor(int ident)
+        {
+            new Cursos_ValoresDB().Excluir(ident);
+            return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        public JsonResult AlterarValor(int ident)
+        {
+            return Json(new Cursos_ValoresDB().Buscar(ident));
         }
     }
 }
