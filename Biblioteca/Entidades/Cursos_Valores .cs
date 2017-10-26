@@ -12,8 +12,9 @@ namespace Biblioteca.Entidades
     {
         public int idvalorcurso { get; set; }
         public int idcurso { get; set; }
-        public decimal nrvalor { get; set; }
+        public double nrvalor { get; set; }
         public string dtvalor { get; set; }
+        public string valor { get; set; }
 
         public Cursos_Valores()
         {
@@ -23,12 +24,13 @@ namespace Biblioteca.Entidades
             this.dtvalor = "";
         }
 
-        public Cursos_Valores(int idvalor, int idcurso, decimal valor, string data)
+        public Cursos_Valores(int idvalor, int idcurso, double valor, string data)
         {
             this.idvalorcurso = idvalor;
             this.idcurso = idcurso;
             this.nrvalor = valor;
             this.dtvalor = data;
+            this.valor = valor.ToString("N2");
         }
 
         public void Salvar()

@@ -174,6 +174,35 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Instrutores> ListarTodos(string instrutor = "", string lista = "")
+        {
+            try
+            {
+                List<Instrutores> list_instrutor = new List<Instrutores>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and txinstrutor like @instrutor and idinstrutor not in (" + lista + ") order by txinstrutor");
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("instrutor", "%" + instrutor.Replace(" ", "%") + "%");
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Instrutores> ListarDoCurso(int id = 0)
         {
             try

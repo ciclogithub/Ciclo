@@ -16,8 +16,6 @@ namespace Biblioteca.DB
         {
             try
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
-
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("INSERT INTO Alunos (idorganizador, txaluno, txcpf) output INSERTED.idaluno VALUES (@organizador, @aluno, @cpf)");
                 query.SetParameter("organizador", variavel.idorganizador);
@@ -284,6 +282,35 @@ namespace Biblioteca.DB
                 Query query = session.CreateQuery("select * from Alunos where idorganizador = @organizador and idaluno not in (select idaluno from Cursos_Alunos where idcurso = @id) order by txaluno");
                 query.SetParameter("id", id);
                 query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_aluno;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Alunos> ListarTodos(string aluno = "", string lista = "")
+        {
+            try
+            {
+                List<Alunos> list_aluno = new List<Alunos>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Alunos where idorganizador = @organizador and txaluno like @aluno and idaluno not in (" + lista + ") order by txaluno");
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("aluno", "%" + aluno.Replace(" ", "%") + "%");
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())

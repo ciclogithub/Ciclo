@@ -92,7 +92,7 @@ function IncluirTema() {
             alert("Operação realizada com sucesso!");
 
             window.setTimeout(function () {
-                $('.modal').modal('hide');
+                $('#modal1.modal').modal('hide');
             }, 1000);
 
             TemaPesquisar();

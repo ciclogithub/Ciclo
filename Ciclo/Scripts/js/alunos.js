@@ -6,13 +6,13 @@
 
     $("#incluir_btn").click(function () {
         var err = false;
-        if ($("#txemail").val() == "") {
+        if ($("#txemail").val() === "") {
             $("#error_email").css("display", "block");
             err = true;
         } else {
             $("#error_email").css("display", "none");
         }
-        if ($("#txtelefone").val() == "") {
+        if ($("#txtelefone").val() === "") {
             $("#error_telefone").css("display", "block");
             err = true;
         } else {
@@ -45,7 +45,7 @@ function AlunoAlterar() {
         }
     });
 
-    if (cont == 0) {
+    if (cont === 0) {
         alert("Selecione pelo menos 1 registro")
     } else {
         if (cont > 1) {
@@ -68,7 +68,7 @@ function AlunoExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids != "") {
+    if (ids !== "") {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
@@ -106,7 +106,7 @@ function IncluirAluno() {
             alert("Operação realizada com sucesso!");
 
             window.setTimeout(function () {
-                $('.modal').modal('hide');
+                $('#modal1.modal').modal('hide');
             }, 1000);
 
             AlunoPesquisar();
@@ -124,7 +124,7 @@ function addEmail() {
         var txt = "";
         $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + cont + ")'></i><span>" + temp + "</span></li>");
         $("#tempemail").val("");
-        if ($("#txemail").val() == "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp }
+        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp }
         $("#txemail").val(txt);
     };
 }
@@ -132,7 +132,7 @@ function addEmail() {
 function removeEmail(i) {
     var arr = $("#txemail").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
     $("#txemail").val(txt.slice(1));
     $("#listemail").empty()
     if ($("#txemail").val() != "") {

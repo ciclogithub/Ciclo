@@ -132,6 +132,13 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaInstrutores(string instrutor = "", string lista = "")
+        {
+            return Json(new InstrutoresDB().ListarTodos(instrutor, lista));
+        }
+
+        [Autenticacao]
         public JsonResult IncluirInstrutores(int id = 0, string instrutores = "")
         {
             CursosDB db = new CursosDB();
@@ -160,6 +167,13 @@ namespace Ciclo.Areas.Painel.Controllers
             ViewBag.alunos = new AlunosDB().ListarTodos(id);
 
             return PartialView(curso);
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaAlunos(string aluno = "", string lista = "")
+        {
+            return Json(new AlunosDB().ListarTodos(aluno, lista));
         }
 
         [Autenticacao]
@@ -253,7 +267,7 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirValores(int idvalor = 0, int idcurso = 0, decimal valor = 0, string data = "")
+        public JsonResult IncluirValores(int idvalor = 0, int idcurso = 0, double valor = 0, string data = "")
         {
             Cursos_ValoresDB db = new Cursos_ValoresDB();
 

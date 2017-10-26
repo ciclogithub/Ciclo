@@ -8,7 +8,7 @@
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             IncluirCurso();
-        };
+        }
     });
 
     $("#incluir_instrutores_btn").click(function () {
@@ -16,7 +16,7 @@
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             IncluirInstrutores();
-        };
+        }
     });
 
     $("#incluir_alunos_btn").click(function () {
@@ -24,29 +24,29 @@
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             IncluirAlunos();
-        };
+        }
     });
 
     $("#incluir_datas_btn").click(function () {
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             IncluirDatas();
-        };
+        }
     });
 
     $("#incluir_valores_btn").click(function () {
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             IncluirValores();
-        };
+        }
     });
     
-    $("#cmbinstrutor").click(function () { addItem($(this), "lstinstrutor") })
-    $("#lstinstrutor").click(function () { RemoveItem($(this), "cmbinstrutor") })
-    $("#cmbaluno").click(function () { addItem($(this), "lstaluno") })
-    $("#lstaluno").click(function () { RemoveItem($(this), "cmbaluno") })
-    $("#novo_datas_btn").click(function () { NovaData(); })
-    $("#novo_valores_btn").click(function () { NovoValor(); })
+    $("#cmbinstrutor").click(function () { addItem($(this), "lstinstrutor"); });
+    $("#lstinstrutor").click(function () { RemoveItem($(this), "cmbinstrutor"); BuscarInstrutores(); });
+    $("#cmbaluno").click(function () { addItem($(this), "lstaluno"); });
+    $("#lstaluno").click(function () { RemoveItem($(this), "cmbaluno"); BuscarAlunos(); });
+    $("#novo_datas_btn").click(function () { NovaData(); });
+    $("#novo_valores_btn").click(function () { NovoValor(); });
 });
 
 function addItem(o, field) {
@@ -66,7 +66,7 @@ function RemoveItem(o, field) {
 }
 
 function sortSelectOptions(selector, skip_first) {
-    var options = (skip_first) ? $(selector + ' option:not(:first)') : $(selector + ' option');
+    var options = skip_first ? $(selector + ' option:not(:first)') : $(selector + ' option');
     var arr = options.map(function (_, o) { return { t: $(o).text(), v: o.value, s: $(o).prop('selected') }; }).get();
     arr.sort(function (o1, o2) {
         var t1 = o1.t.toLowerCase(), t2 = o2.t.toLowerCase();
@@ -106,10 +106,10 @@ function CursoAlterar() {
     });
 
     if (cont === 0) {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            alert("Selecione somente 1 registro para alterar");
         } else {
             Cursos(val);
         }
@@ -122,7 +122,7 @@ function CursoExcluir() {
     ids = "";
     $("input[name='ident']").each(function () {
         if ($(this).is(":checked")) {
-            ids = ids + "," + $(this).val()
+            ids = ids + "," + $(this).val();
         }
     });
 
@@ -143,7 +143,7 @@ function CursoExcluir() {
             });
         }
     } else {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     }
 }
 
@@ -189,7 +189,7 @@ function IncluirCurso() {
             alert("Operação realizada com sucesso!");
 
             window.setTimeout(function () {
-                $('.modal').modal('hide');
+                $('#modal1.modal').modal('hide');
             }, 1000);
 
             CursoPesquisar();
@@ -221,12 +221,50 @@ function IncluirInstrutores() {
             alert("Operação realizada com sucesso!");
 
             window.setTimeout(function () {
-                $('.modal').modal('hide');
+                $('#modal1.modal').modal('hide');
             }, 1000);
 
         }
     });
 
+}
+
+function BuscarInstrutores() {
+
+    var str = "";
+    $("#lstinstrutor > option").each(function () {
+        str += "," + $(this).val();
+    });
+    if (str === "") { str = 0; } else { str = str.slice(1); }
+
+    $("#cmbinstrutor").empty();
+    $("#cmbinstrutor").append($('<option>', {
+        value: 0,
+        text: "Carregando lista ..."
+    }));
+    $.ajax({
+        url: "/Painel/Cursos/ListaInstrutores",
+        data: { instrutor: $("#txinstrutor").val(), lista: str.toString() },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            $("#cmbinstrutor").empty();
+            for (var x = 0; x < data.length; x++) {
+                $('#cmbinstrutor').append($('<option>', {
+                    value: data[x].idinstrutor,
+                    text: data[x].txinstrutor
+                }));
+            }
+        },
+        error: function (reponse) {
+            $("#cmbinstrutor").empty();
+            $("#cmbinstrutor").append($('<option>', {
+                value: 0,
+                text: "Não foi possível carregar a lista de instrutores"
+            }));
+        }
+    });
+    $("#txinstrutor").val("");
 }
 
 /* ALUNOS */
@@ -251,12 +289,50 @@ function IncluirAlunos() {
             alert("Operação realizada com sucesso!");
 
             window.setTimeout(function () {
-                $('.modal').modal('hide');
+                $('#modal1.modal').modal('hide');
             }, 1000);
 
         }
     });
 
+}
+
+function BuscarAlunos() {
+
+    var str = "";
+    $("#lstaluno > option").each(function () {
+        str += "," + $(this).val();
+    });
+    if (str === "") { str = 0; } else { str = str.slice(1); }
+
+    $("#cmbaluno").empty();
+    $("#cmbaluno").append($('<option>', {
+        value: 0,
+        text: "Carregando lista ..."
+    }));
+    $.ajax({
+        url: "/Painel/Cursos/ListaAlunos",
+        data: { aluno: $("#txaluno").val(), lista: str.toString() },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            $("#cmbaluno").empty();
+            for (var x = 0; x < data.length; x++) {
+                $('#cmbaluno').append($('<option>', {
+                    value: data[x].idaluno,
+                    text: data[x].txaluno
+                }));
+            }
+        },
+        error: function (reponse) {
+            $("#cmbaluno").empty();
+            $("#cmbaluno").append($('<option>', {
+                value: 0,
+                text: "Não foi possível carregar a lista de alunos"
+            }));
+        }
+    });
+    $("#txaluno").val("");
 }
 
 /* DATAS */
@@ -374,7 +450,7 @@ function IncluirValores() {
 
     var idvalorcurso = $("#idvalorcurso").val();
     var idcurso = $("#idcurso").val();
-    var nrvalor = $("#nrvalor").val();
+    var nrvalor = $("#nrvalor").val().replace(".", "");
     var dtvalor = $("#dtvalor").val();
 
     $.ajax({
@@ -402,7 +478,7 @@ function ListaValores(id) {
             var temp = "";
             for (var x = 0; x < data.length; x++) {
                 temp += "<div class='row list'>";
-                temp += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>" + data[x].dtvalor + "</div>";
+                temp += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>Até " + data[x].dtvalor + " - Valor: R$ " + data[x].valor + "</div>";
                 temp += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right'>";
                 temp += "<i onClick='AlterarValor(" + data[x].idvalorcurso + ")' class='glyphicon glyphicon-pencil' title= 'Alterar' ></i >";
                 temp += "<i onClick='ExcluirValor(" + data[x].idvalorcurso + ")' class='glyphicon glyphicon-trash' title='Excluir'></i></div>";
@@ -426,7 +502,7 @@ function AlterarValor(id) {
             traditional: true,
             success: function (data) {
                 $("#idvalorcurso").val(data.idvalorcurso);
-                $("#nrvalor").val(data.nrvalor);
+                $("#nrvalor").val(data.valor);
                 $("#dtvalor").val(data.dtvalor);
             }
         });
@@ -435,7 +511,7 @@ function AlterarValor(id) {
 
 function ExcluirValor(id) {
 
-    if (id != "") {
+    if (id !== "") {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
@@ -454,7 +530,7 @@ function ExcluirValor(id) {
 /* FOLDER */
 
 function CursoFolder(id) {
-
+    alert("Em desenvolvimento")
 }
 
 
@@ -465,7 +541,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#prev_img').attr('src', e.target.result);
-        }
+        };
 
         reader.readAsDataURL(input.files[0]);
     }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\CidadesDB.cs" />
+    <Compile Include="DB\Cursos_ListaDB.cs" />
     <Compile Include="DB\Cursos_ValoresDB.cs" />
     <Compile Include="DB\EstadosDB.cs" />
     <Compile Include="DB\CursosDB.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
     <Compile Include="Entidades\Cidades.cs" />
+    <Compile Include="Entidades\Cursos_Lista.cs" />
     <Compile Include="Entidades\Cursos_Valores .cs" />
     <Compile Include="Entidades\Estados.cs" />
     <Compile Include="Entidades\Cursos.cs" />

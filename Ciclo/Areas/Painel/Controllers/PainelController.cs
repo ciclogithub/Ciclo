@@ -15,6 +15,7 @@ namespace Ciclo.Areas.Painel.Controllers
         {
             HttpCookie cookie = Request.Cookies["ciclo_instrutores"];
             ViewBag.contadores = new Biblioteca.DB.ContadoresDB().Listar(Convert.ToInt32(cookie.Value));
+            ViewBag.cursos = new Biblioteca.DB.Cursos_ListaDB().Listar(Convert.ToInt32(cookie.Value));
             return View();
         }
 

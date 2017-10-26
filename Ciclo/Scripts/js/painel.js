@@ -12,7 +12,7 @@
 
 function confirmaSair() {
     if (confirm("Confirma a saída do sistema?")) {
-        location.href = "/Sair"
+        location.href = "Sair"
     }
 }
 
@@ -85,7 +85,8 @@ function Modal(url, id, titulo, func) {
         ajax_conteudo.abort();
     }
 
-    $(".modal .modal-title").text(titulo);
+    $("#modal1.modal .modal-title").text(titulo);
+    $("#modal1.modal .modal-body").empty();
 
     ajax_conteudo = $.ajax({
         type: "POST",
@@ -93,12 +94,12 @@ function Modal(url, id, titulo, func) {
         data: { id: id },
         dataType: "html",
         traditional: true,
-        success: function (msg) {
-            $(".modal .modal-body").html(msg);
-            $('.modal').modal('show');
+        success: function (msg) {           
+            $("#modal1.modal .modal-body").html(msg);
+            $('#modal1.modal').modal('show');
 
             if (func != "") {
-                $(".modal").on("shown.bs.modal", function () {
+                $("#modal1.modal").on("shown.bs.modal", function () {
                     var funcao = func + "(" + id + ")"
                     eval(funcao);
                 });

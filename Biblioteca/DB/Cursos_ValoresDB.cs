@@ -77,7 +77,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_valores.Add(new Cursos_Valores(Convert.ToInt32(reader["idvalorcurso"]), Convert.ToInt32(reader["idcurso"]), Convert.ToDecimal(reader["nrvalor"]), Convert.ToString(reader["data"])));
+                    list_valores.Add(new Cursos_Valores(Convert.ToInt32(reader["idvalorcurso"]), Convert.ToInt32(reader["idcurso"]), Convert.ToDouble(reader["nrvalor"]), Convert.ToString(reader["data"])));
                 }
                 reader.Close();
                 session.Close();
@@ -103,7 +103,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    datas = new Cursos_Valores(Convert.ToInt32(reader["idvalorcurso"]), Convert.ToInt32(reader["idcurso"]), Convert.ToDecimal(reader["nrvalor"]), Convert.ToString(reader["data"]));
+                    datas = new Cursos_Valores(Convert.ToInt32(reader["idvalorcurso"]), Convert.ToInt32(reader["idcurso"]), Convert.ToDouble(reader["nrvalor"]), Convert.ToString(reader["data"]));
                 }
                 reader.Close();
                 session.Close();

@@ -54,6 +54,40 @@
 
                 </div>
             </div>
+            <div class="row pt">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>CURSOS ATIVOS</h3>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="52%">CURSO</th>
+                                <th width="12%">INSTRUTORES</th>
+                                <th width="12%">ALUNOS</th>
+                                <th width="12%">VAGAS</th>
+                                <th width="12%">DATAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in ViewBag.cursos)
+                            {
+                                <tr>
+                                    <td>@p.curso</td>
+                                    <td>@p.instrutor</td>
+                                    <td>@p.aluno</td>
+                                    <td>@(p.maximo == 0 ? "-" : (p.maximo - p.aluno))</td>
+                                    <td>
+                                        @foreach (var d in p.datas)
+                                        {
+                                            @d.dtcurso<br />
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </div>
     </div>
 </main>
