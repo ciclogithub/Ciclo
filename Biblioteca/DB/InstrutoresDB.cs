@@ -76,6 +76,12 @@ namespace Biblioteca.DB
         {
             try
             {
+                DBSession session2 = new DBSession();
+                Query query2 = session2.CreateQuery("DELETE FROM Cursos_Instrutores WHERE idinstrutor = @id");
+                query2.SetParameter("id", id);
+                query2.ExecuteUpdate();
+                session2.Close();
+
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Instrutores WHERE idinstrutor = @id");
                 query.SetParameter("id", id);
