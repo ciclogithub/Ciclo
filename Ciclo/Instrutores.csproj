@@ -245,7 +245,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
-    <Content Include="Scripts\js\cursos.incluir.js" />
     <Content Include="Scripts\js\cursos.js" />
     <Content Include="Scripts\js\temas.js" />
     <Content Include="Scripts\js\locais.js" />
@@ -256,6 +255,8 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\packery.pkgd.min.js" />
+    <Content Include="Scripts\plugins\calendar\css\datepicker.css" />
+    <Content Include="Scripts\plugins\calendar\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\plugins\validate\css\validationEngine.jquery.css" />
     <Content Include="Scripts\plugins\validate\js\jquery.validationEngine-pt_BR.js" />
     <Content Include="Scripts\plugins\validate\js\jquery.validationEngine.js" />

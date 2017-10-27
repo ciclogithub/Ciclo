@@ -4,9 +4,9 @@
         TemaPesquisar();
     });
 
-    $("#incluir_btn").click(function () {
-        $('#form-modal').validationEngine('attach');
-        if ($('#form-modal').validationEngine('validate')) {
+    $("#incluir_btn_tema").click(function () {
+        $('#form-modal_tema').validationEngine('attach');
+        if ($('#form-modal_tema').validationEngine('validate')) {
             IncluirTema();
         };
     });
@@ -76,10 +76,10 @@ function TemaExcluir() {
 
 function IncluirTema() {
 
-    var idtema = $("#idtema").val();
-    var txtema = $("#txtema").val();
-    var txsubtitulo = $("#txsubtitulo").val();
-    var txdescritivo = $("#txdescritivo").val();
+    var idtema = $("#form-modal_tema #idtema").val();
+    var txtema = $("#form-modal_tema #txtema").val();
+    var txsubtitulo = $("#form-modal_tema #txsubtitulo").val();
+    var txdescritivo = $("#form-modal_tema #txdescritivo").val();
 
     $.ajax({
         type: "POST",
@@ -91,11 +91,19 @@ function IncluirTema() {
 
             alert("Operação realizada com sucesso!");
 
-            window.setTimeout(function () {
-                $('#modal1.modal').modal('hide');
-            }, 1000);
 
-            TemaPesquisar();
+            if ($("#modal2").is(":visible")) {
+                window.setTimeout(function () {
+                    $('#modal2.modal').modal('hide');
+                }, 1000);
+            } else {
+
+                window.setTimeout(function () {
+                    $('#modal1.modal').modal('hide');
+                }, 1000);
+
+                TemaPesquisar();
+            }
 
         }
     });

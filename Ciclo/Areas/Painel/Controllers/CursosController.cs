@@ -116,6 +116,22 @@ namespace Ciclo.Areas.Painel.Controllers
             return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
 
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaTemas()
+        {
+            List<Temas> temas = new TemasDB().Listar();
+            return Json(temas);
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaLocais()
+        {
+            List<Locais> locais = new LocaisDB().Listar();
+            return Json(locais);
+        }
+
         // INSTRUTORES
 
         [Autenticacao]

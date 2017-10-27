@@ -373,7 +373,6 @@ function IncluirDatas() {
 }
 
 function ListaDatas(id) {
-    alert(id)
     $.ajax({
         url: "/Painel/Cursos/ListaDatas",
         data: { id: id },
@@ -546,4 +545,67 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+
+function addTema() {
+    Modal2("/Painel/Temas/Incluir", 0, "Temas", "ListaTemas");
+}
+
+function ListaTemas() {    
+    $("#idtema").empty();
+    $.ajax({
+        url: "/Painel/Cursos/ListaTemas",
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            $('#idtema').append($('<option>', {
+                value: "",
+                text: "-- Selecione --"
+            }));
+            for (var x = 0; x < data.length; x++) {
+                $('#idtema').append($('<option>', {
+                    value: data[x].idtema,
+                    text: data[x].txtema
+                }));
+            }
+        },
+        error: function (reponse) {
+            $('#idtema').append($('<option>', {
+                value: 0,
+                text: "Não foi possível carregar a lista de temas"
+            }));
+        }
+    });
+}
+
+function addLocal(field) {
+    Modal2("/Painel/Locais/Incluir", 0, "Locais", "ListaLocais");
+}
+
+function ListaLocais() {
+    $("#idlocal").empty();
+    $.ajax({
+        url: "/Painel/Cursos/ListaLocais",
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            $('#idlocal').append($('<option>', {
+                value: "",
+                text: "-- Selecione --"
+            }));
+            for (var x = 0; x < data.length; x++) {
+                $('#idlocal').append($('<option>', {
+                    value: data[x].idlocal,
+                    text: data[x].txlocal
+                }));
+            }
+        },
+        error: function (reponse) {
+            $('#idlocal').append($('<option>', {
+                value: 0,
+                text: "Não foi possível carregar a lista de locais"
+            }));
+        }
+    });
 }

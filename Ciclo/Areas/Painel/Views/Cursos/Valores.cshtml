@@ -13,7 +13,7 @@
                             <label class="control-label" for="dtvalor">Até a Data *</label>
                             <div class="input-group">
                                 <input type="text" class="form-control validate[required,minSize[10],maxSize[10],date]" id="dtvalor" name="dtvalor" value="" maxlength="10" data-mask="00/00/0000" />
-                                <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <span class="input-group-addon" onclick="$('#dtvalor').datepicker('show');" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">

@@ -4,9 +4,9 @@
         LocalPesquisar();
     });
 
-    $("#incluir_btn").click(function () {
-        $('#form-modal').validationEngine('attach');
-        if ($('#form-modal').validationEngine('validate')) {
+    $("#incluir_btn_local").click(function () {
+        $('#form-modal_local').validationEngine('attach');
+        if ($('#form-modal_local').validationEngine('validate')) {
             IncluirLocal();
         };
     });
@@ -114,10 +114,10 @@ function LocalExcluir() {
 
 function IncluirLocal() {
 
-    var idlocal = $("#idlocal").val();
-    var idcidade = $("#idcidade").val();
-    var txlocal = $("#txlocal").val();
-    var txlogradouro = $("#txlogradouro").val();
+    var idlocal = $("#form-modal_local #idlocal").val();
+    var idcidade = $("#form-modal_local #idcidade").val();
+    var txlocal = $("#form-modal_local #txlocal").val();
+    var txlogradouro = $("#form-modal_local #txlogradouro").val();
 
     $.ajax({
         type: "POST",
@@ -129,11 +129,18 @@ function IncluirLocal() {
 
             alert("Operação realizada com sucesso!");
 
-            window.setTimeout(function () {
-                $('#modal1.modal').modal('hide');
-            }, 1000);
+            if ($("#modal2").is(":visible")) {
+                window.setTimeout(function () {
+                    $('#modal2.modal').modal('hide');
+                }, 1000);
+            } else {
 
-            LocalPesquisar();
+                window.setTimeout(function () {
+                    $('#modal1.modal').modal('hide');
+                }, 1000);
+
+                LocalPesquisar();
+            }
 
         }
     });

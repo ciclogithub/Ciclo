@@ -13,7 +13,7 @@
                             <label class="control-label" for="dtcurso">Data *</label>
                             <div class="input-group">
                                 <input type="text" class="form-control validate[required,minSize[10],maxSize[10],date]" id="dtcurso" name="dtcurso" value="" maxlength="10" data-mask="00/00/0000" />
-                                <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <span class="input-group-addon" onclick="$('#dtcurso').datepicker('show');" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">

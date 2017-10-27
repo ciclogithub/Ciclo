@@ -97,14 +97,47 @@ function Modal(url, id, titulo, func) {
         success: function (msg) {           
             $("#modal1.modal .modal-body").html(msg);
             $('#modal1.modal').modal('show');
+            
+            if (func != "") {
+                $("#modal1.modal").on("shown.bs.modal", function () {
+                    var funcao = func + "(" + id + ")"
+                    eval(funcao);
+                    $(this).off('shown.bs.modal');
+                });
 
-            //if (func != "") {
-            //    $("#modal1.modal").on("shown.bs.modal", function () {
-            //        var funcao = func + "(" + id + ")"
-            //        eval(funcao);
-            //    });
+            }
 
-            //}
+        }
+    });
+
+}
+
+function Modal2(url, id, titulo, func) {
+    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
+        ajax_conteudo.abort();
+    }
+
+    $("#modal2.modal .modal-title").text(titulo);
+    $("#modal2.modal .modal-body").empty();
+
+    ajax_conteudo = $.ajax({
+        type: "POST",
+        url: url,
+        data: { id: id },
+        dataType: "html",
+        traditional: true,
+        success: function (msg) {
+            $("#modal2.modal .modal-body").html(msg);
+            $('#modal2.modal').modal('show');
+
+            if (func != "") {
+                $("#modal2.modal").on("hidden.bs.modal", function () {
+                    var funcao = func + "(" + id + ")"
+                    eval(funcao);
+                    $(this).off('hidden.bs.modal');
+                });
+
+            }
 
         }
     });

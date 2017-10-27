@@ -31,6 +31,7 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/painel").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
+                    "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/js/painel.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/mask").Include(
@@ -78,6 +79,7 @@ namespace Ciclo
                     "~/Content/main.css",
                     "~/Content/color.css",
                     "~/Scripts/plugins/validate/css/validationEngine.jquery.css",
+                    "~/Scripts/plugins/calendar/css/datepicker.css",
                     "~/Content/responsive.css"));
         }
     }

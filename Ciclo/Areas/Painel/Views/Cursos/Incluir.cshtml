@@ -58,23 +58,20 @@
                                             <option value="@t.idtema" @(Model.idtema == t.idtema ? "selected" : "")>@t.txtema</option>
                                         }
                                     </select>
-                                    <span class="input-group-addon" onclick="" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                    <span class="input-group-addon" onclick="addTema()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="control-label" for="idcategoria">Categoria *</label>
-                                <div class="input-group">
-                                    <select id="idcategoria" name="idcategoria" class="form-control validate[required]">
-                                        <option value="">-- Selecione --</option>
-                                        @foreach (var c in ViewBag.categorias)
-                                        {
-                                            <option value="@c.idcategoria" @(Model.idcategoria == c.idcategoria ? "selected" : "")>@c.txcategoria</option>
-                                        }
-                                    </select>
-                                    <span class="input-group-addon" onclick="" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                                </div>
+                                <select id="idcategoria" name="idcategoria" class="form-control validate[required]">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in ViewBag.categorias)
+                                    {
+                                        <option value="@c.idcategoria" @(Model.idcategoria == c.idcategoria ? "selected" : "")>@c.txcategoria</option>
+                                    }
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -90,7 +87,7 @@
                                             <option value="@l.idlocal" @(Model.idlocal == l.idlocal ? "selected" : "")>@l.txlocal</option>
                                         }
                                     </select>
-                                    <span class="input-group-addon" onclick="" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                    <span class="input-group-addon" onclick="addLocal()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                 </div>
                             </div>
                         </div>
