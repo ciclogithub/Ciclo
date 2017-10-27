@@ -42,7 +42,7 @@ namespace Biblioteca.Entidades
             this.nrminimo = "";
             this.nrmaximo = "";
             this.txcargahoraria = "";
-            this.flgratuito = true;
+            this.flgratuito = false;
             this.txlocal = "";
             this.txdescritivo = "";
             this.txfoto = "";

@@ -30,6 +30,7 @@ namespace Biblioteca.Funcoes
                 else
                 {
                     Organizadores organizadores = new Organizadores();
+                    organizadoresview.txsenha = MD5Hash.CalculaHash(organizadoresview.txsenha);
                     if (organizadoresview.idorganizador == 0)
                     {
                         organizadores = organizadoresview.Retornar();
@@ -38,10 +39,8 @@ namespace Biblioteca.Funcoes
                         if (Convert.ToBoolean(organizadoresview.flinstrutor))
                         {
                             Instrutores instrutor = new Instrutores(organizadoresview);
+                            instrutor.idorganizador = idorganizador;
                             int idinstrutor = instrutor.Salvar();
-
-                            Organizadores_Instrutor organizadores_instrutor = new Organizadores_Instrutor(idorganizador, idinstrutor);
-                            organizadores_instrutor.Salvar();
                         }
                     }
                     else

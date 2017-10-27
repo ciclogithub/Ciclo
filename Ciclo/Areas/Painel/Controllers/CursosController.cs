@@ -55,7 +55,7 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = true)
+        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = false)
         {
             CursosDB db = new CursosDB();
             int ident = 0;
@@ -79,6 +79,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 curso.nrmaximo = maximo;
                 curso.txcargahoraria = cargahoraria;
                 curso.txdescritivo = descricao;
+                curso.flgratuito = gratuito;
 
                 db.Alterar(curso);
             }

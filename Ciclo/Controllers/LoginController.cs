@@ -25,6 +25,7 @@ namespace Ciclo.Controllers
             string retorno = "";
 
             PainelDB db = new PainelDB();
+            organizadoresview.txsenha = MD5Hash.CalculaHash(organizadoresview.txsenha);
             Painel painel = db.Buscar(organizadoresview.txemail, organizadoresview.txsenha);
 
             if (painel == null)

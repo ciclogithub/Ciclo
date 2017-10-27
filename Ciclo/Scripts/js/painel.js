@@ -98,13 +98,13 @@ function Modal(url, id, titulo, func) {
             $("#modal1.modal .modal-body").html(msg);
             $('#modal1.modal').modal('show');
 
-            if (func != "") {
-                $("#modal1.modal").on("shown.bs.modal", function () {
-                    var funcao = func + "(" + id + ")"
-                    eval(funcao);
-                });
+            //if (func != "") {
+            //    $("#modal1.modal").on("shown.bs.modal", function () {
+            //        var funcao = func + "(" + id + ")"
+            //        eval(funcao);
+            //    });
 
-            }
+            //}
 
         }
     });

@@ -29,7 +29,7 @@ namespace Biblioteca.DB
         {
             var parametro = comando.CreateParameter();
             parametro.ParameterName = nome;
-            parametro.Value = valor;
+            parametro.Value = (valor == null ? "" : valor);
             comando.Parameters.Add(parametro);
             return this;
         }

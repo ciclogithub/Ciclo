@@ -1,4 +1,5 @@
 ﻿using Biblioteca.DB;
+using Biblioteca.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Biblioteca.Entidades
             this.idorganizador = id;
             this.txorganizador = organizador;
             this.txemail = email;
-            this.txsenha = senha;
+            this.txsenha = MD5Hash.CalculaHash(senha);
             this.txtelefone = telefone;
             this.txdescritivo = descritivo;
         }

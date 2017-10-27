@@ -56,7 +56,6 @@
     <Compile Include="DB\ContadoresDB.cs" />
     <Compile Include="DB\DBSession.cs" />
     <Compile Include="DB\AlunosDB.cs" />
-    <Compile Include="DB\Organizadores_InstrutorDB.cs" />
     <Compile Include="DB\OrganizadoresDB.cs" />
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
@@ -71,13 +70,13 @@
     <Compile Include="Entidades\Locais.cs" />
     <Compile Include="Entidades\Contadores.cs" />
     <Compile Include="Entidades\Alunos.cs" />
-    <Compile Include="Entidades\Organizadores_Instrutor .cs" />
     <Compile Include="Entidades\Organizadores.cs" />
     <Compile Include="Entidades\Instrutores.cs" />
     <Compile Include="Entidades\Painel.cs" />
     <Compile Include="Entidades\Retorno.cs" />
     <Compile Include="Filters\AutenticacaoAttribute.cs" />
     <Compile Include="Funcoes\Inclusao.cs" />
+    <Compile Include="Funcoes\Md5Hash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
