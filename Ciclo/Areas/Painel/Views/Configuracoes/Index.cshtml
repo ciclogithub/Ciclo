@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Biblioteca.Entidades.Organizadores
+
+@{
     ViewBag.Title = "Configurações";
 }
 
@@ -22,22 +24,22 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <form method="post" action="" id="form-modal">
-                        <input type="hidden" id="idtema" name="idtema" value="" />
+                        <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
+                        <div class="form-group">
+                            <label class="control-label" for="txemail">E-Mail *</label>
+                            <h4 style="text-transform:lowercase">@Model.txemail</h4>
+                        </div>
                         <div class="form-group">
                             <label class="control-label" for="txtema">Organizador *</label>
-                            <input type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" maxlength="200">
+                            <input value="@Model.txorganizador" type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" maxlength="200">
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="txdescritivo">E-Mail *</label>
-                            <input type="text" name="txemail" id="txemail" class="form-control validate[required,minSize[3],maxSize[200],email]" maxlength="200">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="txdescritivo">Telefone *</label>
-                            <input type="text" name="txtelefone" id="txtelefone" class="form-control validate[required,minSize[3],maxSize[100]]" maxlength="100">
+                            <label class="control-label" for="txtelefone">Telefone *</label>
+                            <input value="@Model.txtelefone" type="text" name="txtelefone" id="txtelefone" class="form-control validate[required,minSize[3],maxSize[100]]" maxlength="100">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="txdescritivo">Descrição</label>
-                            <textarea name="txdescritivo" class="form-control" id="txdescritivo"></textarea>
+                            <textarea name="txdescritivo" class="form-control" id="txdescritivo">@Model.txdescritivo</textarea>
                         </div>
                         <div class="text-center">
                             <button id="incluir_btn" class="tg-btn text-center" type="button">Enviar</button>
@@ -45,22 +47,22 @@
                     </form>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <form method="post" action="" id="form-modal">
-                        <input type="hidden" id="idtema" name="idtema" value="" />
+                    <form method="post" action="" id="form-modal_alterar">
+                        <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
                         <div class="form-group">
-                            <label class="control-label" for="txtema">Senha Atual *</label>
-                            <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
+                            <label class="control-label" for="txsenhaatual">Senha Atual *</label>
+                            <input type="password" name="txsenhaatual" id="txsenhaatual" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="txdescritivo">Nova Senha *</label>
-                            <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
+                            <label class="control-label" for="txnovasenha">Nova Senha *</label>
+                            <input type="password" name="txnovasenha" id="txnovasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfirmasenha],notEquals[txsenhaatual]]" placeholder="Nova Senha *" maxlength="20">
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="txdescritivo">Confirmar Senha *</label>
-                            <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
+                            <label class="control-label" for="txconfirmasenha">Confirmar Senha *</label>
+                            <input type="password" name="txconfirmasenha" id="txconfirmasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txnovasenha]]" placeholder="Confirmar Senha *" maxlength="20">
                         </div>
                         <div class="text-center">
-                            <button id="incluir_btn" class="tg-btn text-center" type="button">Alterar Senha</button>
+                            <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Alterar Senha</button>
                         </div>
                     </form>
                 </div>
@@ -68,3 +70,7 @@
         </div>
     </div>
 </main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/configuracoes")
+}

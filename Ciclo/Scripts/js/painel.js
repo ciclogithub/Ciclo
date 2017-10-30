@@ -12,7 +12,7 @@
 
 function confirmaSair() {
     if (confirm("Confirma a saída do sistema?")) {
-        location.href = "Sair"
+        location.href = "/Painel/Painel/Sair"
     }
 }
 

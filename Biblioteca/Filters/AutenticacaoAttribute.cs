@@ -36,14 +36,14 @@ namespace Biblioteca.Filters
                 else
                 {
                     //se não existe, redireciona para o index.
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index" }));
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "../Login", action = "Index" }));
                 }
 
             }
             else
             {
                 //se os cookeis não existem, redireciona para o index
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index" }));
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "../Login", action = "Index" }));
             }
 
         }

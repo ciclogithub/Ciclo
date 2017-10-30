@@ -32,7 +32,7 @@ namespace Ciclo.Areas.Painel.Controllers
             cookie.Expires = DateTime.Now.AddDays(-1d);
             Response.Cookies.Add(cookie);
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "../Login");
         }
     }
 }

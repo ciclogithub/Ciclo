@@ -246,6 +246,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
     <Content Include="Scripts\js\cursos.js" />
+    <Content Include="Scripts\js\configuracoes.js" />
     <Content Include="Scripts\js\temas.js" />
     <Content Include="Scripts\js\locais.js" />
     <Content Include="Scripts\js\alunos.js" />

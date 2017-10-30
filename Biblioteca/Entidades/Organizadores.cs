@@ -18,6 +18,7 @@ namespace Biblioteca.Entidades
         public string txtelefone { get; set; }
         public string txdescritivo { get; set; }
         public Byte flinstrutor { get; set; }
+        public string txnovasenha { get; set; }
 
         public Organizadores()
         {
@@ -28,6 +29,7 @@ namespace Biblioteca.Entidades
             this.txtelefone = "";
             this.txdescritivo = "";
             this.flinstrutor = 0;
+            this.txnovasenha = "";
         }
 
         public Organizadores(int id, string organizador, string email, string senha, string telefone, string descritivo)
@@ -55,6 +57,16 @@ namespace Biblioteca.Entidades
         {
             new OrganizadoresDB().Alterar(this);
         }
+
+        public void Atualizar()
+        {
+            new OrganizadoresDB().Atualizar(this);
+        }
+
+        public void AlteraSenha()
+        {
+            new OrganizadoresDB().AlteraSenha(this);
+        }        
 
         public void Excluir()
         {

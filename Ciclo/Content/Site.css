@@ -181,3 +181,7 @@ table input {
     margin-left: 10px;
     margin-bottom:5px;
 }
+
+#tg-main {
+    min-height:422px !important;
+}

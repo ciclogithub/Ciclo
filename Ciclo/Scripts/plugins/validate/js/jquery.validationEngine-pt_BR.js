@@ -70,7 +70,7 @@
                 },
                 "equals": {
                     "regex": "none",
-                    "alertText": "Os campos devem ser iguais" 
+                    "alertText": "Senha e confirmação devem ser iguais" 
                 },
                 "creditCard": {
                     "regex": "none",
@@ -136,7 +136,7 @@
 				},
 				"notEquals": {
                     "regex": "none",
-                    "alertText": "Os campos não podem ser iguais"
+                    "alertText": "Nova senha não pode ser igual a anterior"
                 },
 				"cpf": {
                     "regex": "none",

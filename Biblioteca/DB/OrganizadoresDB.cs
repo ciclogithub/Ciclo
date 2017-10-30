@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Biblioteca.Entidades;
 using System.Data;
+using System.Web;
 
 namespace Biblioteca.DB
 {
@@ -37,7 +38,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public Organizadores Buscar(int codigo)
+        public Organizadores Buscar(int codigo = 0)
         {
             try
             {
@@ -124,6 +125,42 @@ namespace Biblioteca.DB
                 query.SetParameter("senha", variavel.txsenha);
                 query.SetParameter("telefone", variavel.txtelefone);
                 query.SetParameter("descritivo", variavel.txdescritivo);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void Atualizar(Organizadores variavel)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("UPDATE Organizadores SET txorganizador = @organizador, txtelefone = @telefone, txdescritivo = @descritivo WHERE idorganizador = @id");
+                query.SetParameter("id", variavel.idorganizador);
+                query.SetParameter("organizador", variavel.txorganizador);
+                query.SetParameter("telefone", variavel.txtelefone);
+                query.SetParameter("descritivo", variavel.txdescritivo);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void AlteraSenha(Organizadores variavel)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("UPDATE Organizadores SET txsenha = @senha WHERE idorganizador = @id");
+                query.SetParameter("id", variavel.idorganizador);
+                query.SetParameter("senha", variavel.txnovasenha);
                 query.ExecuteUpdate();
                 session.Close();
             }

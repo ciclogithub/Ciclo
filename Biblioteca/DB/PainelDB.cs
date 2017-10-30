@@ -36,6 +36,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public bool Buscar(int codigo, string senha)
+        {
+            try
+            {
+                bool retorno = false;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idorganizador FROM Organizadores WHERE idorganizador = @codigo AND txsenha = @senha");
+                query.SetParameter("codigo", codigo);
+                query.SetParameter("senha", senha);
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    retorno = true;
+                }
+                reader.Close();
+                session.Close();
+
+                return retorno;
+
+                return retorno;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public Painel Buscar(string email, string senha)
         {
             try

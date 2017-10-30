@@ -28,7 +28,7 @@
                                 <input type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" placeholder="Organizador *" maxlength="200">
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
+                                    <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfsenha]]" placeholder="Senha *" maxlength="20">
                             </div>
                         </div>
                         <div class="row">
@@ -36,7 +36,7 @@
                                 <input type="text" name="txemail" id="txemail" class="form-control validate[required,minSize[3],maxSize[200],email]" placeholder="E-mail *" maxlength="200">
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="password" name="txconfsenha" id="txconfsenha" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Confirmar Senha *" maxlength="200">
+                                <input type="password" name="txconfsenha" id="txconfsenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txsenha]]" placeholder="Confirmar Senha *" maxlength="200">
                             </div>
                         </div>
                         <div class="row">
