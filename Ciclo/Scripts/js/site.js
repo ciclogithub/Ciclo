@@ -13,6 +13,7 @@
             LoginOrganizador();
         }
     });
+
 });
 
 function CadastroOrganizador() {
