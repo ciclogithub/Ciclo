@@ -4,7 +4,7 @@
         AlunoPesquisar();
     });
 
-    $("#incluir_btn").click(function () {
+    $("#incluir_btn_aluno").click(function () {
         var err = false;
         if ($("#txemail").val() === "") {
             $("#error_email").css("display", "block");
@@ -18,8 +18,8 @@
         } else {
             $("#error_telefone").css("display", "none");
         }   
-        $('#form-modal').validationEngine('attach');
-        if ($('#form-modal').validationEngine('validate')) {
+        $('#form-modal_aluno').validationEngine('attach');
+        if ($('#form-modal_aluno').validationEngine('validate')) {
             if (!err) { IncluirAluno(); }
         };
     });
@@ -89,11 +89,11 @@ function AlunoExcluir() {
 
 function IncluirAluno() {
 
-    var idaluno = $("#idaluno").val();
-    var txaluno = $("#txaluno").val();
-    var txcpf = $("#txcpf").val();
-    var txemail = $("#txemail").val();
-    var txtelefone = $("#txtelefone").val();
+    var idaluno = $("#form-modal_aluno #idaluno").val();
+    var txaluno = $("#form-modal_aluno #txaluno").val();
+    var txcpf = $("#form-modal_aluno #txcpf").val();
+    var txemail = $("#form-modal_aluno #txemail").val();
+    var txtelefone = $("#form-modal_aluno #txtelefone").val();
 
     $.ajax({
         type: "POST",
@@ -105,11 +105,18 @@ function IncluirAluno() {
 
             alert("Operação realizada com sucesso!");
 
-            window.setTimeout(function () {
-                $('#modal1.modal').modal('hide');
-            }, 1000);
+            if ($("#modal2").is(":visible")) {
+                window.setTimeout(function () {
+                    $('#modal2.modal').modal('hide');
+                }, 1000);
+            } else {
 
-            AlunoPesquisar();
+                window.setTimeout(function () {
+                    $('#modal1.modal').modal('hide');
+                }, 1000);
+
+                AlunoPesquisar();
+            }
 
         }
     });

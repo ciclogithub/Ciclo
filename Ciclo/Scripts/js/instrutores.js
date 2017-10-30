@@ -4,9 +4,9 @@
         InstrutorPesquisar();
     });
 
-    $("#incluir_btn").click(function () {
-        $('#form-modal').validationEngine('attach');
-        if ($('#form-modal').validationEngine('validate')) {
+    $("#incluir_btn_instrutor").click(function () {
+        $('#form-modal_instrutor').validationEngine('attach');
+        if ($('#form-modal_instrutor').validationEngine('validate')) {
             IncluirInstrutor();
         };
     });
@@ -76,13 +76,13 @@ function InstrutorExcluir() {
 
 function IncluirInstrutor() {
 
-    var idinstrutor = $("#idinstrutor").val();
-    var txinstrutor = $("#txinstrutor").val();
-    var txemail = $("#txemail").val();
-    var txtelefone = $("#txtelefone").val();
-    var txdescritivo = $("#txdescritivo").val();
+    var idinstrutor = $("#form-modal_instrutor #idinstrutor").val();
+    var txinstrutor = $("#form-modal_instrutor #txinstrutor").val();
+    var txemail = $("#form-modal_instrutor #txemail").val();
+    var txtelefone = $("#form-modal_instrutor #txtelefone").val();
+    var txdescritivo = $("#form-modal_instrutor #txdescritivo").val();
 
-    var form = $('#form-modal')[0];
+    var form = $('#form-modal_instrutor #form-modal')[0];
     var data = new FormData(form);
     data.append("id", idinstrutor);
     data.append("nome", txinstrutor);
@@ -103,11 +103,18 @@ function IncluirInstrutor() {
 
             alert("Operação realizada com sucesso!");
 
-            window.setTimeout(function () {
-                $('#modal1.modal').modal('hide');
-            }, 1000);
+            if ($("#modal2").is(":visible")) {
+                window.setTimeout(function () {
+                    $('#modal2.modal').modal('hide');
+                }, 1000);
+            } else {
 
-            InstrutorPesquisar();
+                window.setTimeout(function () {
+                    $('#modal1.modal').modal('hide');
+                }, 1000);
+
+                InstrutorPesquisar();
+            }
 
         }
     });

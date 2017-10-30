@@ -267,6 +267,10 @@ function BuscarInstrutores() {
     $("#txinstrutor").val("");
 }
 
+function addInstrutor() {
+    Modal2("/Painel/Instrutores/Incluir", 0, "Instrutores", "BuscarInstrutores");
+}
+
 /* ALUNOS */
 
 function CursoAluno(id) {
@@ -333,6 +337,10 @@ function BuscarAlunos() {
         }
     });
     $("#txaluno").val("");
+}
+
+function addAluno() {
+    Modal2("/Painel/Alunos/Incluir", 0, "Alunos", "BuscarAlunos");
 }
 
 /* DATAS */
@@ -579,7 +587,7 @@ function ListaTemas() {
     });
 }
 
-function addLocal(field) {
+function addLocal() {
     Modal2("/Painel/Locais/Incluir", 0, "Locais", "ListaLocais");
 }
 
