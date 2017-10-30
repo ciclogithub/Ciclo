@@ -56,7 +56,6 @@ namespace Biblioteca.DB
 
                 return retorno;
 
-                return retorno;
             }
             catch (Exception error)
             {
