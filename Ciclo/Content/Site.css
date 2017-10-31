@@ -154,6 +154,10 @@ table input {
     color:#444349 !important;
 }
 
+.td {
+    cursor:pointer;
+}
+
 .td:hover {
     background-color: #88e55b;
 }

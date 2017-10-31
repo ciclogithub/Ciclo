@@ -238,12 +238,29 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Cursos_Alunos (idcurso, idaluno) VALUES (@curso, @aluno)");
+                Query query = session.CreateQuery("INSERT INTO Cursos_Alunos (idcurso, idaluno, txavaliacao) VALUES (@curso, @aluno, '')");
                 query.SetParameter("curso", id);
                 query.SetParameter("aluno", aluno);
                 query.ExecuteUpdate();
                 session.Close();
 
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void InserirAvaliacao(int id = 0, string avaliacao = "")
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("UPDATE Cursos_Alunos SET txavaliacao = @avaliacao WHERE idcursoaluno = @id");
+                query.SetParameter("id", id);
+                query.SetParameter("avaliacao", avaliacao);
+                query.ExecuteUpdate();
+                session.Close();
             }
             catch (Exception erro)
             {

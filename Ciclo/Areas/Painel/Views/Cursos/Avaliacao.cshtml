@@ -1,0 +1,93 @@
+﻿@model Biblioteca.Entidades.Cursos
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>@Model.txcurso</h3>
+        <form method="post" action="" id="form-modal_avaliacoes">
+        <input type="hidden" id="idcurso" name="idcurso" value="@Model.idcurso" />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="4%">#</th>
+                                <th width="48%">ALUNO</th>
+                                <th width="25%">DATA</th>
+                                <th width="20%">MÉDIA AVALIAÇÃO</th>
+                                <th width="3%">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in ViewBag.avaliacoes)
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        @if (p.avaliacao == "")
+                                        {
+                                            <input type="checkbox" id="ident" name="ident" value="@p.idcursoaluno" />
+                                        }
+                                    </th>
+                                    <td>@p.aluno</td>
+                                    <td>
+                                    @if (p.avaliacao == "") {
+                                        @Html.Raw("Não enviado");
+                                    } else {
+                                        @(p.data == "" ? "Não avaliado" : p.data)
+                                    }
+
+                                    </td>
+                                    <td>
+                                        @if (p.avaliacao == "")
+                                        {
+                                            @Html.Raw("Não enviado");
+                                        }
+                                        else
+                                        {
+                                            @(p.data == "" ? "Não avaliado" : (Convert.ToDouble(p.nota1 + p.nota2 + p.nota3 + p.nota4 + p.nota5) / 5).ToString("N1"))
+                                        }
+                                    </td>
+                                    @if (p.data != "") {
+                                        <td onclick="ShowHide(@p.idcursoaluno)" title="Visualizar avaliação" class="td"><i class="glyphicon glyphicon-search border-icon"></i></td>
+                                    } else {
+                                        <td>&nbsp;</td>
+                                    }
+                                </tr>
+                                if (p.data != "")
+                                {
+                                <tr id="cel_@p.idcursoaluno" class="hide">
+                                    <td colspan="5">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th width="90%">PERGUNTA</th>
+                                                    <th width="10%">NOTA</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>PERGUNTA 1</td><td>@p.nota1</td></tr>
+                                                <tr><td>PERGUNTA 2</td><td>@p.nota2</td></tr>
+                                                <tr><td>PERGUNTA 3</td><td>@p.nota3</td></tr>
+                                                <tr><td>PERGUNTA 4</td><td>@p.nota4</td></tr>
+                                                <tr><td>PERGUNTA 5</td><td>@p.nota5</td></tr>
+                                                <tr><td colspan="2">@p.obs</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <button id="incluir_avaliacoes_btn" class="tg-btn" type="button">Enviar Avaliações</button>
+                </div>
+            </div>
+        </</form>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/cursos")
+@Scripts.Render("~/bundles/mask")

@@ -18,7 +18,7 @@ namespace Biblioteca.DB
                 Contadores contador = null;
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select (select count(*) from Instrutores where idorganizador = @organizador) instrutor, (select count(*) from cursos where idorganizador = @organizador) cursos, (select count(*) from alunos where idorganizador = @organizador) alunos, (0) avaliacaoes");
+                Query query = session.CreateQuery("select (select count(*) from Instrutores where idorganizador = @organizador) instrutor, (select count(*) from cursos where idorganizador = @organizador) cursos, (select count(*) from alunos where idorganizador = @organizador) alunos, ISNULL((select (SUM((cast(cv.nrnota1 + cv.nrnota2 + cv.nrnota3 + cv.nrnota4 + cv.nrnota5 as float) / 5)) / count(*)) from cursos c inner join cursos_alunos ca on ca.idcurso = c.idcurso inner join cursos_avaliacoes cv on cv.idcursoaluno = ca.idcursoaluno where c.idorganizador = @organizador),0) avaliacaoes");
                 query.SetParameter("organizador", organizador);
                 IDataReader reader = query.ExecuteQuery();
 

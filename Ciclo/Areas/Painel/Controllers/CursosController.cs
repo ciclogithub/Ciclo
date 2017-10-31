@@ -161,10 +161,13 @@ namespace Ciclo.Areas.Painel.Controllers
             CursosDB db = new CursosDB();
             db.RemoverInstrutores(id);
 
-            var arrI = instrutores.Split(',');
-            foreach (var i in arrI)
+            if (instrutores != "")
             {
-                new CursosDB().SalvarInstrutor(id, Convert.ToInt32(i));
+                var arrI = instrutores.Split(',');
+                foreach (var i in arrI)
+                {
+                    new CursosDB().SalvarInstrutor(id, Convert.ToInt32(i));
+                }
             }
 
             return Json(new Retorno());
@@ -199,10 +202,13 @@ namespace Ciclo.Areas.Painel.Controllers
             CursosDB db = new CursosDB();
             db.RemoverAlunos(id);
 
-            var arrI = alunos.Split(',');
-            foreach (var i in arrI)
+            if (alunos != "")
             {
-                new CursosDB().SalvarAlunos(id, Convert.ToInt32(i));
+                var arrI = alunos.Split(',');
+                foreach (var i in arrI)
+                {
+                    new CursosDB().SalvarAlunos(id, Convert.ToInt32(i));
+                }
             }
 
             return Json(new Retorno());
@@ -326,6 +332,42 @@ namespace Ciclo.Areas.Painel.Controllers
         public JsonResult AlterarValor(int ident)
         {
             return Json(new Cursos_ValoresDB().Buscar(ident));
+        }
+
+        // AVALIAÇÕES
+
+        [Autenticacao]
+        public ActionResult Avaliacao(int id = 0)
+        {
+            Cursos curso = new Cursos();
+            if (id != 0)
+            {
+                curso = new CursosDB().Buscar(id);
+            }
+
+            ViewBag.avaliacoes = new AvaliacoesDB().Listar(id);
+
+            return PartialView(curso);
+        }
+
+        [Autenticacao]
+        public JsonResult AvaliacaoConcluir(string ident)
+        {
+            var arr = ident.Split(',');
+            foreach (var i in arr)
+            {
+                new CursosDB().InserirAvaliacao(Convert.ToInt32(i), RandomString(15) + i);
+            }
+
+            return Json(new Retorno());
+        }
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

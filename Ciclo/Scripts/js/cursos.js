@@ -40,6 +40,27 @@
             IncluirValores();
         }
     });
+
+    $("#incluir_avaliacoes_btn").click(function () {       
+        cont = 0;
+        val = 0;
+        if ($("#form-modal_avaliacoes input[name='ident']").length == 0) {
+            alert("Todos os alunos já receberam o formulário de avaliação");
+        } else {
+            $("#form-modal_avaliacoes input[name='ident']").each(function () {
+                if ($(this).is(":checked")) {
+                    cont++;
+                    val = $(this).val();
+                }
+            });
+
+            if (cont === 0) {
+                alert("Selecione pelo menos 1 registro");
+            } else {
+                IncluirAvaliacao()
+            }
+        }
+    });
     
     $("#cmbinstrutor").click(function () { addItem($(this), "lstinstrutor"); });
     $("#lstinstrutor").click(function () { RemoveItem($(this), "cmbinstrutor"); BuscarInstrutores(); });
@@ -532,6 +553,48 @@ function ExcluirValor(id) {
                 }
             });
         }
+    }
+}
+
+/* AVALIAÇÃO */
+
+function CursoAvaliacao(id) {
+    Modal("/Painel/Cursos/Avaliacao", id, "Cursos - Avaliações", "");
+}
+
+function IncluirAvaliacao() {
+    ids = "";
+    $("#form-modal_avaliacoes input[name='ident']").each(function () {
+        if ($(this).is(":checked")) {
+            ids = ids + "," + $(this).val();
+        }
+    });
+
+    var ids = ids.substring(1);
+
+    if (confirm("Certeza que deseja enviar o formulário de avaliação para o(s) registro(s) selecionado(s)?")) {
+        $.ajax({
+            type: "POST",
+            url: "/Painel/Cursos/AvaliacaoConcluir",
+            data: { ident: ids },
+            dataType: "json",
+            traditional: true,
+            success: function () {
+                alert("Operação realizada com sucesso!");
+
+                window.setTimeout(function () {
+                    $('#modal1.modal').modal('hide');
+                }, 1000);
+            }
+        });
+    }
+}
+
+function ShowHide(id) {
+    if ($("#cel_" + id).hasClass("hide")) {
+        $("#cel_" + id).removeClass("hide");
+    } else {
+        $("#cel_" + id).addClass("hide")
     }
 }
 
