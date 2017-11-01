@@ -60,7 +60,8 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th width="52%">CURSO</th>
+                                <th width="2%">&nbsp;</th>
+                                <th width="50%">CURSO</th>
                                 <th width="12%">INSTRUTORES</th>
                                 <th width="12%">ALUNOS</th>
                                 <th width="12%">VAGAS</th>
@@ -71,6 +72,7 @@
                             @foreach (var p in ViewBag.cursos)
                             {
                                 <tr>
+                                    <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
                                     <td>@p.curso</td>
                                     <td>@p.instrutor</td>
                                     <td>@p.aluno</td>

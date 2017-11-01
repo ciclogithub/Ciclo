@@ -10,26 +10,26 @@ using System.Web;
 
 namespace Biblioteca.DB
 {
-    public class EstadosDB
+    public class CoresDB
     {
-        public List<Estados> Listar()
+        public List<Cores> Listar()
         {
             try
             {
-                List<Estados> list_estado = new List<Estados>();
+                List<Cores> list_cores = new List<Cores>();
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from Estados ORDER by txestado");
+                Query query = session.CreateQuery("select * from Cores ORDER by txcor");
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_estado.Add(new Estados(Convert.ToInt32(reader["idestado"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txsigla"])));
+                    list_cores.Add(new Cores(Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txcor"])));
                 }
                 reader.Close();
                 session.Close();
 
-                return list_estado;
+                return list_cores;
             }
             catch (Exception error)
             {
@@ -37,24 +37,24 @@ namespace Biblioteca.DB
             }
         }
 
-        public int Buscar(int id)
+        public string Buscar(int id)
         {
             try
             {
-                int ident = 0;
+                string cor = "";
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("SELECT idestado from Cidades where idcidade = @id");
+                Query query = session.CreateQuery("SELECT txcor from Cores where idcor = @id");
                 query.SetParameter("id", id);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    ident = Convert.ToInt32(reader["idestado"]);
+                    cor = Convert.ToString(reader["txcor"]);
                 }
                 reader.Close();
                 session.Close();
 
-                return ident;
+                return cor;
             }
             catch (Exception error)
             {

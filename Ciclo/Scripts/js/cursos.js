@@ -41,6 +41,13 @@
         }
     });
 
+    $("#idcor").on("change", function () {
+        $("#bgcor").removeClass()
+        $("#bgcor").addClass("input-group-addon")
+        $("#bgcor").addClass($(this).find(":selected").text().replace(" ", "_"));
+
+    })
+
     $("#incluir_avaliacoes_btn").click(function () {       
         cont = 0;
         val = 0;
@@ -181,6 +188,8 @@ function IncluirCurso() {
     var txcargahoraria = $("#txcargahoraria").val();
     var txdescritivo = $("#txdescritivo").val();
     var flgratuito = $("#flgratuito").prop('checked');
+    var idcor = $("#idcor").val();
+    var txidentificador = $("#txidentificador").val();
 
     var form = $('#form-modal')[0];
     var data = new FormData(form);
@@ -195,6 +204,8 @@ function IncluirCurso() {
     data.append("cargahoraria", txcargahoraria);
     data.append("descricao", txdescritivo);
     data.append("gratuito", flgratuito);
+    data.append("cor", idcor);
+    data.append("identificador", txidentificador);
     
     $.ajax({
         type: "POST",

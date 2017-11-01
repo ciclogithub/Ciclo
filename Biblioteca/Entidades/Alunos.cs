@@ -14,8 +14,13 @@ namespace Biblioteca.Entidades
         public int idorganizador { get; set; }
         public string txaluno { get; set; }
         public string txcpf { get; set; }
+        public int idespecialidade { get; set; }
+        public int idcidade { get; set; }
+        public int idcor { get; set; }
         public List<Emails> txemail { get; set; }
         public List<Telefones> txtelefone { get; set; }
+        public int idestado { get; set; }
+        public string txcor { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -25,16 +30,26 @@ namespace Biblioteca.Entidades
             this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txaluno = "";
             this.txcpf = "";
+            this.idespecialidade = 0;
+            this.idcidade = 0;
+            this.idcor = 0;
+            this.idestado = 0;
+            this.txcor = "";
         }
 
-        public Alunos(int id, string aluno, string cpf)
+        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor)
         {
             this.idaluno = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txaluno = aluno;
             this.txcpf = cpf;
             this.txemail = new AlunosDB().ListarEmails(id); ;
-            this.txtelefone = new AlunosDB().ListarTelefones(id); ;
+            this.txtelefone = new AlunosDB().ListarTelefones(id);
+            this.idespecialidade = especialidade;
+            this.idcidade = cidade;
+            this.idcor = cor;
+            this.idestado = new EstadosDB().Buscar(cidade);
+            this.txcor = new CoresDB().Buscar(cor);
         }
 
         public int Salvar()

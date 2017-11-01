@@ -41,9 +41,10 @@
                         <thead>
                             <tr>
                                 <th width="4%">#</th>
+                                <th width="2%">&nbsp;</th>
                                 <th width="33%">ALUNO</th>
                                 <th width="15%">CPF</th>
-                                <th width="33%">E-MAIL</th>
+                                <th width="31%">E-MAIL</th>
                                 <th width="15%">TELEFONE</th>
                             </tr>
                         </thead>
@@ -52,6 +53,7 @@
                             {
                                 <tr>
                                     <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idaluno" /></th>
+                                    <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
                                     <td>@p.txaluno</td>
                                     <td>@p.txcpf</td>
                                     <td>

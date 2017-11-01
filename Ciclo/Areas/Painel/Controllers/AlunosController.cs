@@ -46,18 +46,22 @@ namespace Ciclo.Areas.Painel.Controllers
                 aluno = new AlunosDB().Buscar(id);
             }
 
+            ViewBag.estados = new EstadosDB().Listar();
+            ViewBag.especialidades = new EspecialidadesDB().Listar();
+            ViewBag.cores = new CoresDB().Listar();
+
             return PartialView(aluno);
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "")
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0)
         {
             AlunosDB db = new AlunosDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf));
+                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -66,6 +70,9 @@ namespace Ciclo.Areas.Painel.Controllers
                 Alunos aluno = db.Buscar(id);
                 aluno.txaluno = nome;
                 aluno.txcpf = cpf;
+                aluno.idespecialidade = especialidade;
+                aluno.idcidade = cidade;
+                aluno.idcor = cor;
 
                 db.Alterar(aluno);
 

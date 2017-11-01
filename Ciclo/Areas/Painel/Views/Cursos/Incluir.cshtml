@@ -27,7 +27,26 @@
                                 <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txcurso" name="txcurso" value="@Model.txcurso" maxlength="300" />
                             </div>
                         </div>
-                    </div>                            
+                    </div>        
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label class="control-label" for="txidentificador">Identificador *</label>
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[20]]" id="txidentificador" name="txidentificador" value="@Model.txidentificador" maxlength="20" />
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label class="control-label" for="idcor">Classificacao</label>
+                            <div class="input-group">
+                                <select id="idcor" name="idcor" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in ViewBag.cores)
+                                    {
+                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">

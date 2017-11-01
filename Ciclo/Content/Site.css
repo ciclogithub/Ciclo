@@ -189,3 +189,60 @@ table input {
 #tg-main {
     min-height:422px !important;
 }
+
+.branco {
+    background-color:#FFFFFF;
+    color:#000000;
+}
+.preto {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.azul {
+    background-color: #0026ff;
+    color: #FFFFFF;
+}
+.vermelho {
+    background-color: #ff0000;
+    color: #FFFFFF;
+}
+.verde {
+    background-color: #00ff21;
+    color: #FFFFFF;
+}
+.amarelo {
+    background-color: #ffd800;
+    color: #000000;
+}
+.magenta {
+    background-color: #ff00dc;
+    color: #FFFFFF;
+}
+.verde_claro {
+    background-color: #88e55b;
+    color: #000000;
+}
+.laranja {
+    background-color: #ff6a00;
+    color: #FFFFFF;
+}
+.azul_claro {
+    background-color: #00ffff;
+    color: #000000;
+}
+.bege {
+    background-color: #EEE8AA;
+    color: #000000;
+}
+.roxo {
+    background-color: #341c3e;
+    color: #FFFFFF;
+}
+.vinho{
+    background-color:#65000b;
+    color:#ffffff;
+}
+
+.table th, .table td {
+    text-align:left !important;
+}

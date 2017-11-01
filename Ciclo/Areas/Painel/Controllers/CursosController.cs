@@ -50,12 +50,13 @@ namespace Ciclo.Areas.Painel.Controllers
             ViewBag.temas = new TemasDB().Listar();
             ViewBag.categorias = new CategoriasDB().Listar();
             ViewBag.locais = new LocaisDB().Listar();
+            ViewBag.cores = new CoresDB().Listar();
 
             return PartialView(curso);
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = false)
+        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = false, int cor = 0, string identificador = "")
         {
             CursosDB db = new CursosDB();
             int ident = 0;
@@ -63,7 +64,7 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, ""));
+                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, "", cor, identificador));
                 Cursos curso = db.Buscar(id);
             }
             else
@@ -80,6 +81,8 @@ namespace Ciclo.Areas.Painel.Controllers
                 curso.txcargahoraria = cargahoraria;
                 curso.txdescritivo = descricao;
                 curso.flgratuito = gratuito;
+                curso.idcor = cor;
+                curso.txidentificador = identificador;
 
                 db.Alterar(curso);
             }

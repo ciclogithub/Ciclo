@@ -34,7 +34,7 @@ namespace Biblioteca.Entidades
         public Instrutores(Organizadores organizadoresview)
         {
             this.idinstrutor = 0;
-            this.idorganizador = Convert.ToInt32(cookie.Value);
+            this.idorganizador = 0;
             this.txinstrutor = organizadoresview.txorganizador;
             this.txemail = organizadoresview.txemail;
             this.txtelefone = organizadoresview.txtelefone;

@@ -15,6 +15,7 @@ namespace Biblioteca.Entidades
         public int aluno { get; set; }
         public int maximo { get; set; }
         public List<Cursos_Datas> datas { get; set; }
+        public string txcor { get; set; }
 
         public Cursos_Lista()
         {
@@ -22,15 +23,17 @@ namespace Biblioteca.Entidades
             this.instrutor = 0;
             this.aluno = 0;
             this.maximo = 0;
+            this.txcor = "";
         }
 
-        public Cursos_Lista(string curso, int instrutor, int aluno, int maximo, int idcurso)
+        public Cursos_Lista(string curso, int instrutor, int aluno, int maximo, int idcurso, int cor)
         {
             this.curso = curso;
             this.instrutor = instrutor;
             this.aluno = aluno;
             this.maximo = maximo;
             this.datas = new Cursos_DatasDB().Listar(idcurso);
+            this.txcor = new CoresDB().Buscar(cor);
         }
     }
 }

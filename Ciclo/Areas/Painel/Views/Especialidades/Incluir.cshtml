@@ -1,0 +1,37 @@
+﻿@model Biblioteca.Entidades.Especialidades
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idespecialidade == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Especialidades
+        </h4>
+    </div>
+
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal_especialidade">
+            <input type="hidden" id="idespecialidade" name="idespecialidade" value="@Model.idespecialidade" />
+            <div class="form-group">
+                <label class="control-label" for="txsigla">Sigla *</label>
+                <input type="text" class="form-control validate[required,minSize[3],maxSize[20]]" id="txsigla" name="txsigla" value="@Model.txsigla" maxlength="20" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="txespecialidade">Especialidade *</label>
+                <input type="text" class="form-control validate[required,minSize[3],maxSize[100]]" id="txespecialidade" name="txespecialidade" value="@Model.txespecialidade" maxlength="100" />
+            </div>
+            <div class="text-center">
+                <button id="incluir_btn_especialidade" class="tg-btn text-center" type="button">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/especialidades")

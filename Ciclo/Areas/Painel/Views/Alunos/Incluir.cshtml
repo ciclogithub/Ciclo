@@ -53,6 +53,7 @@
                     <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
                     <input type="hidden" id="txemail" name="txemail" value="@emails" />
                     <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
+                    <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
                     <div class="form-group">
                         <label class="control-label" for="txinstrutor">Nome *</label>
                         <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
@@ -60,6 +61,52 @@
                     <div class="form-group">
                         <label class="control-label" for="txemail">CPF</label>
                         <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txinstrutor">Cidade / Estado</label>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <select id="idestado" name="idestado" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var t in ViewBag.estados)
+                                    {
+                                        <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12" id="dv_cidade">
+                                <select id="idcidade" name="idcidade" class="form-control">
+                                    <option value="">-- Selecione o estado --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label class="control-label" for="idespecialidade">Especialidade</label>
+                                <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var e in ViewBag.especialidades)
+                                    {
+                                        <option value="@e.idespecialidade" @(Model.idespecialidade == e.idespecialidade ? "selected" : "")>@e.txespecialidade</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label class="control-label" for="idcor">Classificacao</label>
+                                <div class="input-group">
+                                    <select id="idcor" name="idcor" class="form-control">
+                                        <option value="">-- Selecione --</option>
+                                        @foreach (var c in ViewBag.cores)
+                                        {
+                                            <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
+                                        }
+                                    </select>
+                                    <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

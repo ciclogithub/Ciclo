@@ -6,25 +6,71 @@
 
     $("#incluir_btn_aluno").click(function () {
         var err = false;
-        if ($("#txemail").val() === "") {
-            $("#error_email").css("display", "block");
-            err = true;
-        } else {
-            $("#error_email").css("display", "none");
-        }
-        if ($("#txtelefone").val() === "") {
-            $("#error_telefone").css("display", "block");
-            err = true;
-        } else {
-            $("#error_telefone").css("display", "none");
-        }   
+        //if ($("#txemail").val() === "") {
+        //    $("#error_email").css("display", "block");
+        //    err = true;
+        //} else {
+        //    $("#error_email").css("display", "none");
+        //}
+        //if ($("#txtelefone").val() === "") {
+        //    $("#error_telefone").css("display", "block");
+        //    err = true;
+        //} else {
+        //    $("#error_telefone").css("display", "none");
+        //}   
         $('#form-modal_aluno').validationEngine('attach');
         if ($('#form-modal_aluno').validationEngine('validate')) {
             if (!err) { IncluirAluno(); }
         };
     });
 
+    $("#idestado").on("change", function () {
+        if ($(this).val() == "") {
+            $("#dv_cidade").html("<select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
+        } else {
+            $("#dv_cidade").html("Carregando lista ...");
+            ListaCidades($(this).val(), 0)
+        }
+    })
+
+    $("#idcor").on("change", function () {
+        $("#bgcor").removeClass()
+        $("#bgcor").addClass("input-group-addon")
+        $("#bgcor").addClass($(this).find(":selected").text().replace(" ","_"));
+        
+    })
+    
+
+    if ($("#idestado")) {
+        if ($("#idestado").val() != "") {
+            ListaCidades($("#idestado").val(), $("#tempcidade").val());
+        }
+    }
+
 });
+
+function ListaCidades(estado, cidade) {
+    $.ajax({
+        url: "/Painel/Locais/ListaCidades",
+        data: { id: estado },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            var temp = "";
+            temp += "<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione --</option>";
+            for (var x = 0; x < data.length; x++) {
+                temp += "<option value=" + data[x].idcidade;
+                if (data[x].idcidade == cidade) { temp += " selected " }
+                temp += ">" + data[x].txcidade + "</option>";
+            }
+            temp += "</select>";
+            $("#dv_cidade").html(temp);
+        },
+        error: function (reponse) {
+            $("#dv_cidade").html("Não foi possível carregar a lista de cidades");
+        }
+    });
+}
 
 function AlunoPesquisar() {
     window.location = "/Painel/Alunos/?aluno=" + $("#aluno").val();
@@ -94,11 +140,14 @@ function IncluirAluno() {
     var txcpf = $("#form-modal_aluno #txcpf").val();
     var txemail = $("#form-modal_aluno #txemail").val();
     var txtelefone = $("#form-modal_aluno #txtelefone").val();
+    var idespecialidade = $("#form-modal_aluno #idespecialidade").val();
+    var idcor = $("#form-modal_aluno #idcor").val();
+    var idcidade = $("#form-modal_aluno #idcidade").val();
 
     $.ajax({
         type: "POST",
         url: '/Painel/Alunos/IncluirConcluir',
-        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString() },
+        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor },
         dataType: "json",
         traditional: true,
         success: function (json) {
