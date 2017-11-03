@@ -31,6 +31,10 @@ function pagination(c) {
     }
 }
 
+function EspecialidadesTodos() {
+    window.location = "/Painel/Especialidades/?pagina=1&especialidade=";
+}
+
 function EspecialidadePesquisar() {
     window.location = "/Painel/Especialidades/?especialidade=" + $("#especialidade").val();
 }

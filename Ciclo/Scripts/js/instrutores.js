@@ -31,6 +31,10 @@ function pagination(c) {
     }
 }
 
+function InstrutoresTodos() {
+    window.location = "/Painel/Instrutores/?pagina=1&instrutor=";
+}
+
 function InstrutorPesquisar() {
     window.location = "/Painel/Instrutores/?instrutor=" + $("#instrutor").val();
 }

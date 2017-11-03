@@ -91,6 +91,10 @@ function pagination(c) {
     }
 }
 
+function AlunosTodos() {
+    window.location = "/Painel/Alunos/?pagina=1&aluno=";
+}
+
 function AlunoPesquisar() {
     window.location = "/Painel/Alunos/?aluno=" + $("#aluno").val();
 }

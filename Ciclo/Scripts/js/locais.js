@@ -69,6 +69,10 @@ function pagination(c) {
     }
 }
 
+function LocaisTodos() {
+    window.location = "/Painel/Locais/?pagina=1&local=";
+}
+
 function LocalPesquisar() {
     window.location = "/Painel/Locais/?local=" + $("#local").val();
 }

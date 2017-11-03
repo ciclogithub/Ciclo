@@ -133,6 +133,10 @@ function pagination(c) {
 
 }
 
+function CursosTodos() {
+    window.location = "/Painel/Cursos/?pagina=1&curso=";
+}
+
 function CursoPesquisar() {
     window.location = "/Painel/Cursos/?pagina=1&curso=" + $("#curso").val();
 }

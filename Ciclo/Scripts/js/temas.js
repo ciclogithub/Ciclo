@@ -31,6 +31,10 @@ function pagination(c) {
     }
 }
 
+function TemasTodos() {
+    window.location = "/Painel/Temas/?pagina=1&tema=";
+}
+
 function TemaPesquisar() {
     window.location = "/Painel/Temas/?tema=" + $("#tema").val();
 }

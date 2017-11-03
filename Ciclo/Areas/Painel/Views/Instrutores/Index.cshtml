@@ -24,7 +24,8 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="instrutor" name="instrutor" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_instrutor">Localizar</button>
+                    <input type="text" id="instrutor" name="instrutor" value="@ViewBag.instrutor" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_instrutor">Localizar</button>
+                    &nbsp;<button class="tg-btn" type="button" onclick="InstrutoresTodos();">Todos</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
                     <button class="tg-btn" type="button" onclick="Instrutores(0);">Novo</button>
