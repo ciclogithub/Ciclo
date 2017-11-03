@@ -68,7 +68,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Temas> Listar()
+        public List<Temas> Listar(int page = 1, int regs = 10)
         {
             try
             {
@@ -77,13 +77,15 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from Temas WHERE idorganizador = @idorganizador ORDER by txtema");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Temas WHERE idorganizador = @idorganizador ORDER by txtema OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("regs", regs);
+                query.SetParameter("page", page);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_temas.Add(new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"])));
+                    list_temas.Add(new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"]), Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -96,7 +98,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Temas> Listar(string tema)
+        public List<Temas> Listar(string tema, int page = 1, int regs = 10)
         {
             try
             {
@@ -105,14 +107,16 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from Temas WHERE idorganizador = @idorganizador and txtema LIKE @tema ORDER by txtema");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Temas WHERE idorganizador = @idorganizador and txtema LIKE @tema ORDER by txtema OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("tema", "%" + tema.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("regs", regs);
+                query.SetParameter("page", page);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_temas.Add(new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"])));
+                    list_temas.Add(new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"]), Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -138,7 +142,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    Temas = new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"]));
+                    Temas = new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"]), 0);
                 }
                 reader.Close();
                 session.Close();

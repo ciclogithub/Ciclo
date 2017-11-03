@@ -13,15 +13,27 @@ namespace Ciclo.Areas.Painel.Controllers
     public class CursosController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string curso = "")
+        public ActionResult Index(string curso = "", int pagina = 1)
         {
             List<Cursos> list = new List<Cursos>();
             ViewBag.curso = curso;
 
             if (curso == "")
-                list = new CursosDB().Listar();
+                list = new CursosDB().Listar(pagina, 10);
             else
-                list = new CursosDB().Listar(curso);
+                list = new CursosDB().Listar(curso, pagina, 10);
+
+            if (list.Count > 0)
+            {
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
+            }
+            else
+            {
+                ViewBag.total = 0;
+                ViewBag.pagina = 0;
+            }
+
 
             return View(list);
         }
@@ -64,7 +76,7 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, "", cor, identificador));
+                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, "", cor, identificador, 0));
                 Cursos curso = db.Buscar(id);
             }
             else

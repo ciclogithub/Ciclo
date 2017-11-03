@@ -12,15 +12,26 @@ namespace Ciclo.Areas.Painel.Controllers
     public class EspecialidadesController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string especialidade = "")
+        public ActionResult Index(string especialidade = "", int pagina = 1)
         {
             List<Especialidades> list = new List<Especialidades>();
             ViewBag.especialidade = especialidade;
 
             if (especialidade == "")
-                list = new EspecialidadesDB().Listar();
+                list = new EspecialidadesDB().Listar(pagina, 10);
             else
-                list = new EspecialidadesDB().Listar(especialidade);
+                list = new EspecialidadesDB().Listar(especialidade, pagina, 10);
+
+            if (list.Count > 0)
+            {
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
+            }
+            else
+            {
+                ViewBag.total = 0;
+                ViewBag.pagina = 0;
+            }
 
             return View(list);
         }
@@ -56,7 +67,7 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                db.Salvar(new Especialidades(id, nome, sigla));
+                db.Salvar(new Especialidades(id, nome, sigla, 0));
                 Especialidades especialidade = db.Buscar(id);
             }
             else

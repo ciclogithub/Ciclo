@@ -13,15 +13,26 @@ namespace Ciclo.Areas.Painel.Controllers
     public class InstrutoresController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string instrutor = "")
+        public ActionResult Index(string instrutor = "", int pagina = 1)
         {
             List<Instrutores> list = new List<Instrutores>();
             ViewBag.instrutor = instrutor;
 
             if (instrutor == "")
-                list = new InstrutoresDB().Listar();
+                list = new InstrutoresDB().Listar(pagina, 10);
             else
-                list = new InstrutoresDB().Listar(instrutor);
+                list = new InstrutoresDB().Listar(instrutor, pagina, 10);
+
+            if (list.Count > 0)
+            {
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
+            }
+            else
+            {
+                ViewBag.total = 0;
+                ViewBag.pagina = 0;
+            }
 
             return View(list);
         }
@@ -59,7 +70,7 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                ident = db.Salvar(new Instrutores(id, nome, email, telefone, descricao, ""));
+                ident = db.Salvar(new Instrutores(id, nome, email, telefone, descricao, "", 0));
                 Instrutores instrutor = db.Buscar(ident);
             }
             else

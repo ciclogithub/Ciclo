@@ -66,7 +66,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Locais> Listar()
+        public List<Locais> Listar(int page = 1, int regs = 10)
         {
             try
             {
@@ -75,13 +75,15 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE l.idorganizador = @idorganizador ORDER by l.txlocal");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("regs", regs);
+                query.SetParameter("page", page);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"])));
+                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -94,7 +96,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Locais> Listar(string local)
+        public List<Locais> Listar(string local, int page = 1, int regs = 10)
         {
             try
             {
@@ -103,14 +105,16 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("local", "%" + local.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("regs", regs);
+                query.SetParameter("page", page);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"])));
+                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -136,7 +140,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    alunos = new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]));
+                    alunos = new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]),0);
                 }
                 reader.Close();
                 session.Close();

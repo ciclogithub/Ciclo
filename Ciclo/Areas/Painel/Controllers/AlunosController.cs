@@ -12,15 +12,26 @@ namespace Ciclo.Areas.Painel.Controllers
     public class AlunosController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string aluno = "")
+        public ActionResult Index(string aluno = "", int pagina = 1)
         {
             List<Alunos> list = new List<Alunos>();
             ViewBag.aluno = aluno;
 
             if (aluno == "")
-                list = new AlunosDB().Listar();
+                list = new AlunosDB().Listar(pagina, 10);
             else
-                list = new AlunosDB().Listar(aluno);
+                list = new AlunosDB().Listar(aluno, pagina, 10);
+
+            if (list.Count > 0)
+            {
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
+            }
+            else
+            {
+                ViewBag.total = 0;
+                ViewBag.pagina = 0;
+            }
 
             return View(list);
         }
@@ -54,14 +65,14 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0)
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "")
         {
             AlunosDB db = new AlunosDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor));
+                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -73,6 +84,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 aluno.idespecialidade = especialidade;
                 aluno.idcidade = cidade;
                 aluno.idcor = cor;
+                aluno.txempresa = empresa;
 
                 db.Alterar(aluno);
 

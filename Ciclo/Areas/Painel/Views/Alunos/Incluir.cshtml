@@ -54,57 +54,62 @@
                     <input type="hidden" id="txemail" name="txemail" value="@emails" />
                     <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
                     <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
-                    <div class="form-group">
-                        <label class="control-label" for="txinstrutor">Nome *</label>
-                        <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="txemail">CPF</label>
-                        <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="txinstrutor">Cidade / Estado</label>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <select id="idestado" name="idestado" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    @foreach (var t in ViewBag.estados)
-                                    {
-                                        <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12" id="dv_cidade">
-                                <select id="idcidade" name="idcidade" class="form-control">
-                                    <option value="">-- Selecione o estado --</option>
-                                </select>
-                            </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 form-group">
+                            <label class="control-label" for="txinstrutor">Nome *</label>
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 form-group">
+                            <label class="control-label" for="txemail">CPF</label>
+                            <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <label class="control-label" for="idespecialidade">Especialidade</label>
-                                <select id="idespecialidade" name="idespecialidade" class="form-control">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <label class="control-label" for="txempresa">Empresa</label>
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.txempresa" maxlength="300" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="txinstrutor">Estado</label>
+                            <select id="idestado" name="idestado" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var t in ViewBag.estados)
+                                {
+                                    <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group" id="dv_cidade">
+                            <label class="control-label" for="idcidade">Cidade</label>
+                            <select id="idcidade" name="idcidade" class="form-control">
+                                <option value="">-- Selecione o estado --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="idespecialidade">Especialidade</label>
+                            <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var e in ViewBag.especialidades)
+                                {
+                                    <option value="@e.idespecialidade" @(Model.idespecialidade == e.idespecialidade ? "selected" : "")>@e.txespecialidade</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="idcor">Classificacao</label>
+                            <div class="input-group">
+                                <select id="idcor" name="idcor" class="form-control">
                                     <option value="">-- Selecione --</option>
-                                    @foreach (var e in ViewBag.especialidades)
+                                    @foreach (var c in ViewBag.cores)
                                     {
-                                        <option value="@e.idespecialidade" @(Model.idespecialidade == e.idespecialidade ? "selected" : "")>@e.txespecialidade</option>
+                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
                                     }
                                 </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <label class="control-label" for="idcor">Classificacao</label>
-                                <div class="input-group">
-                                    <select id="idcor" name="idcor" class="form-control">
-                                        <option value="">-- Selecione --</option>
-                                        @foreach (var c in ViewBag.cores)
-                                        {
-                                            <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
-                                        }
-                                    </select>
-                                    <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
-                                </div>
+                                <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
                             </div>
                         </div>
                     </div>
@@ -115,7 +120,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <form id="form-modal-email">
                     <div class="form-group">
-                        <label class="control-label" for="tempemail">E-mail *</label>
+                        <label class="control-label" for="tempemail">E-mail</label>
                         <div class="input-group">
                             <input type="text" class="form-control validate[required,minSize[3],maxSize[100],email]" id="tempemail" name="tempemail" value="" maxlength="100" />
                             <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
@@ -128,7 +133,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <form id="form-modal-telefone">
                     <div class="form-group">
-                        <label class="control-label" for="temptelefone">Telefone *</label>
+                        <label class="control-label" for="temptelefone">Telefone</label>
                         <div class="input-group">
                             <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
                             <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>

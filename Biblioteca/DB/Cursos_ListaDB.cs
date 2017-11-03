@@ -16,21 +16,21 @@ namespace Biblioteca.DB
         {
             try
             {
-                List<Cursos_Lista> list_cursoss = new List<Cursos_Lista>();
+                List<Cursos_Lista> list_cursos = new List<Cursos_Lista>();
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select c.txcurso, (select count(ci.idinstrutor) from Cursos_Instrutores ci where ci.idcurso = c.idcurso) as instrutores, (select count(ca.idaluno) from Cursos_Alunos ca where ca.idcurso = c.idcurso) as Alunos, c.nrmaximo, c.idcurso, c.idcor from cursos c where c.idorganizador = @organizador order by c.txcurso");
+                Query query = session.CreateQuery("select top 10 c.txcurso, (select count(ci.idinstrutor) from Cursos_Instrutores ci where ci.idcurso = c.idcurso) as instrutores, (select count(ca.idaluno) from Cursos_Alunos ca where ca.idcurso = c.idcurso) as Alunos, isnull(c.nrmaximo,0) as nrmaximo, c.idcurso, isnull(c.idcor,0) as idcor from cursos c where c.idorganizador = @organizador order by c.txcurso");
                 query.SetParameter("organizador", id);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_cursoss.Add(new Cursos_Lista(Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["instrutores"]), Convert.ToInt32(reader["Alunos"]), Convert.ToInt32(reader["nrmaximo"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idcor"])));
+                    list_cursos.Add(new Cursos_Lista(Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["instrutores"]), Convert.ToInt32(reader["Alunos"]), Convert.ToInt32(reader["nrmaximo"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idcor"])));
                 }
                 reader.Close();
                 session.Close();
 
-                return list_cursoss;
+                return list_cursos;
             }
             catch (Exception error)
             {

@@ -17,6 +17,7 @@ namespace Biblioteca.Entidades
         public string txtelefone { get; set; }
         public string txdescritivo { get; set; }
         public string txfoto { get; set; }
+        public int total { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -29,6 +30,7 @@ namespace Biblioteca.Entidades
             this.txtelefone = "";
             this.txdescritivo = "";
             this.txfoto = "";
+            this.total = 0;
         }
 
         public Instrutores(Organizadores organizadoresview)
@@ -42,7 +44,7 @@ namespace Biblioteca.Entidades
             this.txfoto = "";
         }
 
-        public Instrutores(int id, string instrutor, string email, string telefone, string descritivo, string foto)
+        public Instrutores(int id, string instrutor, string email, string telefone, string descritivo, string foto, int total)
         {
             this.idinstrutor = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -51,6 +53,7 @@ namespace Biblioteca.Entidades
             this.txtelefone = telefone;
             this.txdescritivo = descritivo;
             this.txfoto = foto;
+            this.total = total;
         }
 
         public int Salvar()

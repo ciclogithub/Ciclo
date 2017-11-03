@@ -17,6 +17,7 @@ namespace Biblioteca.Entidades
         public string txlogradouro { get; set; }
         public string txcidade { get; set; }
         public string txestado { get; set; }
+        public int total { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -29,6 +30,7 @@ namespace Biblioteca.Entidades
             this.txlogradouro = "";
             this.txcidade = "";
             this.txestado = "";
+            this.total = 0;
         }
 
         public Locais(int id, int cidade, string local, string logradouro)
@@ -40,7 +42,7 @@ namespace Biblioteca.Entidades
             this.txlogradouro = logradouro;
         }
 
-        public Locais(int id, int cidade, string local, string logradouro, string nome_cidade, string nome_estado)
+        public Locais(int id, int cidade, string local, string logradouro, string nome_cidade, string nome_estado, int total)
         {
             this.idlocal = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -49,6 +51,7 @@ namespace Biblioteca.Entidades
             this.txlogradouro = logradouro;
             this.txcidade = nome_cidade;
             this.txestado = nome_estado;
+            this.total = total;
         }
 
         public void Salvar()

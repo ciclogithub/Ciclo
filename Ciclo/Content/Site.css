@@ -246,3 +246,13 @@ table input {
 .table th, .table td {
     text-align:left !important;
 }
+
+.pagination {
+    padding:0px !important;
+    margin:0px !important;
+}
+
+.pagesel {
+    background-color:#5fb536 !important;
+    Color:#ffffff !important;
+}

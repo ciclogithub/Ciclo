@@ -26,7 +26,7 @@
 
     $("#idestado").on("change", function () {
         if ($(this).val() == "") {
-            $("#dv_cidade").html("<select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
+            $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
         } else {
             $("#dv_cidade").html("Carregando lista ...");
             ListaCidades($(this).val(), 0)
@@ -57,6 +57,7 @@ function ListaCidades(estado, cidade) {
         type: "POST",
         success: function (data) {
             var temp = "";
+            temp += "<label class='control-label' for='idcidade'>Cidade</label>";
             temp += "<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idcidade;
@@ -70,6 +71,24 @@ function ListaCidades(estado, cidade) {
             $("#dv_cidade").html("Não foi possível carregar a lista de cidades");
         }
     });
+}
+
+function pagination(c) {
+    var p = $("#page").val();
+    var t = $("#totalpage").val();
+    if (c == -1) {
+        c = parseInt(p) - 1;
+        if (c <= 0) { c = 1 }
+        window.location = "/Painel/Alunos/?pagina=" + c + "&aluno=" + $("#aluno").val();
+    } else {
+        if (c == 0) {
+            c = parseInt(p) + 1;
+            if (c > t) { c = t }
+            window.location = "/Painel/Alunos/?pagina=" + c + "&aluno=" + $("#aluno").val();
+        } else {
+            window.location = "/Painel/Alunos/?pagina=" + c + "&aluno=" + $("#aluno").val();
+        }
+    }
 }
 
 function AlunoPesquisar() {
@@ -143,11 +162,12 @@ function IncluirAluno() {
     var idespecialidade = $("#form-modal_aluno #idespecialidade").val();
     var idcor = $("#form-modal_aluno #idcor").val();
     var idcidade = $("#form-modal_aluno #idcidade").val();
+    var txempresa = $("#form-modal_aluno #txempresa").val();
 
     $.ajax({
         type: "POST",
         url: '/Painel/Alunos/IncluirConcluir',
-        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor },
+        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa },
         dataType: "json",
         traditional: true,
         success: function (json) {

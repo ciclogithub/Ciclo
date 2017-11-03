@@ -12,15 +12,26 @@ namespace Ciclo.Areas.Painel.Controllers
     public class TemasController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string tema = "")
+        public ActionResult Index(string tema = "", int pagina = 1)
         {
             List<Temas> list = new List<Temas>();
             ViewBag.tema = tema;
 
             if (tema == "")
-                list = new TemasDB().Listar();
+                list = new TemasDB().Listar(pagina, 10);
             else
-                list = new TemasDB().Listar(tema);
+                list = new TemasDB().Listar(tema, pagina, 10);
+
+            if (list.Count > 0)
+            {
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
+            }
+            else
+            {
+                ViewBag.total = 0;
+                ViewBag.pagina = 0;
+            }
 
             return View(list);
         }
@@ -56,7 +67,7 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                db.Salvar(new Temas(id, nome, subtitulo, descricao));
+                db.Salvar(new Temas(id, nome, subtitulo, descricao, 0));
                 Temas tema = db.Buscar(id);
             }
             else

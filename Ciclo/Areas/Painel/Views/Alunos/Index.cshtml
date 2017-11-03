@@ -57,16 +57,16 @@
                                     <td>@p.txaluno</td>
                                     <td>@p.txcpf</td>
                                     <td>
-                                    @foreach (var e in p.txemail)
-                                    {
-                                        @e.txemail<br />
-                                    }
+                                        @foreach (var e in p.txemail)
+                                        {
+                                            @e.txemail<br />
+                                        }
                                     </td>
                                     <td>
-                                    @foreach (var t in p.txtelefone)
-                                    {
-                                        @t.txtelefone<br />
-                                    }
+                                        @foreach (var t in p.txtelefone)
+                                        {
+                                            @t.txtelefone<br />
+                                        }
                                     </td>
                                 </tr>
                             }
@@ -75,31 +75,65 @@
 
                 </div>
             </div>
-            @*<div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
+            @{
+                int min = 0;
+                int max = 0;
+                min = ((ViewBag.pagina - 1) * 10) + 1;
+                max = ViewBag.pagina * 10;
+                if (max > ViewBag.total) { max = ViewBag.total; }
+
+                int pages = 0;
+                pages = ViewBag.total / 10;
+                if ((ViewBag.total % 10) > 0) { pages = (pages + 1); }
+
+            }
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-left">
+                    @if (ViewBag.total > 0)
+                    {
+                        @Html.Raw("Exibindo " + @min + " a " + @max + " de " + @ViewBag.total);
+                    }
+                    else
+                    {
+                        @Html.Raw("Nenhum registro encontrado");
+                    }
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    Página @ViewBag.pagina de @pages
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @if (ViewBag.pagina > 1)
+                            {
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
+                                    <a class="page-link" href="#" aria-label="Previous" onclick="pagination(-1)">
                                         <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
+                                        <span class="sr-only">Anterior</span>
                                     </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            }
+                            @for (var x = 1; x <= pages; x++)
+                            {
+                                <li class="page-item"><a class="page-link @(ViewBag.pagina == x ? "pagesel" : "")" href="#" onclick="pagination(@x)">@x</a></li>
+                            }
+                            @if (ViewBag.pagina < pages)
+                            {
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
+                                    <a class="page-link" href="#" aria-label="Next" onclick="pagination(0)">
                                         <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
+                                        <span class="sr-only">Próxima</span>
                                     </a>
                                 </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>*@
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="hidden" id="page" name="page" value="@ViewBag.pagina" />
+            <input type="hidden" id="totalpage" name="totalpage" value="@pages" />
         </div>
     </div>
 </main>

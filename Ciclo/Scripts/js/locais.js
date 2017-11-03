@@ -51,6 +51,24 @@ function ListaCidades(estado, cidade) {
     });
 }
 
+function pagination(c) {
+    var p = $("#page").val();
+    var t = $("#totalpage").val();
+    if (c == -1) {
+        c = parseInt(p) - 1;
+        if (c <= 0) { c = 1 }
+        window.location = "/Painel/Locais/?pagina=" + c + "&local=" + $("#local").val();
+    } else {
+        if (c == 0) {
+            c = parseInt(p) + 1;
+            if (c > t) { c = t }
+            window.location = "/Painel/Locais/?pagina=" + c + "&local=" + $("#local").val();
+        } else {
+            window.location = "/Painel/Locais/?pagina=" + c + "&local=" + $("#local").val();
+        }
+    }
+}
+
 function LocalPesquisar() {
     window.location = "/Painel/Locais/?local=" + $("#local").val();
 }

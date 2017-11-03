@@ -15,6 +15,7 @@ namespace Biblioteca.Entidades
         public string txtema { get; set; }
         public string txsubtitulo { get; set; }
         public string txdescritivo { get; set; }
+        public int total { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -25,15 +26,17 @@ namespace Biblioteca.Entidades
             this.txtema = "";
             this.txsubtitulo = "";
             this.txdescritivo = "";
+            this.total = 0;
         }
 
-        public Temas(int id, string tema, string subtitulo, string descritivo)
+        public Temas(int id, string tema, string subtitulo, string descritivo, int total)
         {
             this.idtema = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txtema = tema;
             this.txsubtitulo = subtitulo;
             this.txdescritivo = descritivo;
+            this.total = total;
         }
 
         public void Salvar()

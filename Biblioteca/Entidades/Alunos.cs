@@ -21,6 +21,8 @@ namespace Biblioteca.Entidades
         public List<Telefones> txtelefone { get; set; }
         public int idestado { get; set; }
         public string txcor { get; set; }
+        public string txempresa { get; set; }
+        public int total { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -35,9 +37,11 @@ namespace Biblioteca.Entidades
             this.idcor = 0;
             this.idestado = 0;
             this.txcor = "";
+            this.txempresa = "";
+            this.total = 0;
         }
 
-        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor)
+        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, string empresa, int total)
         {
             this.idaluno = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -50,6 +54,8 @@ namespace Biblioteca.Entidades
             this.idcor = cor;
             this.idestado = new EstadosDB().Buscar(cidade);
             this.txcor = new CoresDB().Buscar(cor);
+            this.txempresa = empresa;
+            this.total = total;
         }
 
         public int Salvar()

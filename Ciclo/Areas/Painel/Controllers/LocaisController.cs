@@ -12,16 +12,26 @@ namespace Ciclo.Areas.Painel.Controllers
     public class LocaisController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string local = "")
+        public ActionResult Index(string local = "", int pagina = 1)
         {
             List<Locais> list = new List<Locais>();
             ViewBag.local = local;
 
             if (local == "")
-                list = new LocaisDB().Listar();
+                list = new LocaisDB().Listar(pagina, 10);
             else
-                list = new LocaisDB().Listar(local);
+                list = new LocaisDB().Listar(local, pagina, 10);
 
+            if (list.Count > 0)
+            {
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
+            }
+            else
+            {
+                ViewBag.total = 0;
+                ViewBag.pagina = 0;
+            }
             return View(list);
         }
 
