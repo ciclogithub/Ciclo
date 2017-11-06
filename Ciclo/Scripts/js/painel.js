@@ -1,4 +1,22 @@
-﻿$('.counter-count').each(function () {
+﻿$(function () {
+    $('.table tr th[scope=row]').click(function (event) {
+        if (!$(event.target).is('input')) {
+            var obj = $(this).find('input');
+            obj.prop('checked', !obj.is(':checked'));
+        }
+    });
+
+    $('#selectall').click(function () {
+        val = $(this).prop('checked')
+        $('.table tr th[scope=row]').find('input').each(function (index) {
+            $(this).prop('checked', val);
+        });
+    })
+});
+
+
+
+$('.counter-count').each(function () {
     $(this).prop('Counter',0).animate({
         Counter: $(this).text()
     }, {

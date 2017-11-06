@@ -41,11 +41,11 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th width="4%">#</th>
+                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
                                 <th width="28%">INSTRUTOR</th>
                                 <th width="28%">E-MAIL</th>
                                 <th width="28%">TELEFONE</th>
-                                <th width="12%">FOTO</th>
+                                <th width="13%">FOTO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +72,8 @@
             @{
                 int min = 0;
                 int max = 0;
+                int pmin = 0;
+                int pmax = 0;
                 min = ((ViewBag.pagina - 1) * 10) + 1;
                 max = ViewBag.pagina * 10;
                 if (max > ViewBag.total) { max = ViewBag.total; }
@@ -79,8 +81,42 @@
                 int pages = 0;
                 pages = ViewBag.total / 10;
                 if ((ViewBag.total % 10) > 0) { pages = (pages + 1); }
+                pmin = (ViewBag.pagina - 9);
+                pmax = (ViewBag.pagina + 9);
+                if (pmin < 0) { pmin = 1; }
+                if (pmax > pages) { pmax = pages; }
 
             }
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @if (ViewBag.pagina > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:pagination(-1)" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Anterior</span>
+                                    </a>
+                                </li>
+                            }
+                            @for (var x = pmin; x <= pmax; x++)
+                            {
+                                <li class="page-item"><a href="javascript:pagination(@x)" class="page-link @(ViewBag.pagina == x ? "pagesel" : "")" href="#">@x</a></li>
+                            }
+                            @if (ViewBag.pagina < pages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:pagination(0)" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Próxima</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-left">
                     @if (ViewBag.total > 0)
@@ -94,36 +130,6 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
                     Página @ViewBag.pagina de @pages
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            @if (ViewBag.pagina > 1)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous" onclick="pagination(-1)">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Anterior</span>
-                                    </a>
-                                </li>
-                            }
-                            @for (var x = 1; x <= pages; x++)
-                            {
-                                <li class="page-item"><a class="page-link @(ViewBag.pagina == x ? "pagesel" : "")" href="#" onclick="pagination(@x)">@x</a></li>
-                            }
-                            @if (ViewBag.pagina < pages)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next" onclick="pagination(0)">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Próxima</span>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </nav>
                 </div>
             </div>
             <input type="hidden" id="page" name="page" value="@ViewBag.pagina" />

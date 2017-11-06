@@ -17,7 +17,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Alunos (idorganizador, txaluno, txcpf, idespecialidade, idcidade, idcor, txempresa) output INSERTED.idaluno VALUES (@organizador, @aluno, @cpf, @especialidade, @cidade, @cor, @empresa)");
+                Query query = session.CreateQuery("INSERT INTO Alunos (idorganizador, txaluno, txcpf, idespecialidade, idcidade, idcor, txempresa, txobs) output INSERTED.idaluno VALUES (@organizador, @aluno, @cpf, @especialidade, @cidade, @cor, @empresa, @obs)");
                 query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("aluno", variavel.txaluno);
                 query.SetParameter("cpf", variavel.txcpf);
@@ -25,6 +25,7 @@ namespace Biblioteca.DB
                 query.SetParameter("cidade", variavel.idcidade);
                 query.SetParameter("cor", variavel.idcor);
                 query.SetParameter("empresa", variavel.txempresa);
+                query.SetParameter("obs", variavel.txobs);
                 int ident = query.ExecuteScalar();
                 session.Close();
 
@@ -42,7 +43,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Alunos SET txaluno = @aluno, txcpf = @cpf, idespecialidade = @especialidade, idcidade = @cidade, idcor = @cor, txempresa = @empresa WHERE idaluno = @id");
+                Query query = session.CreateQuery("UPDATE Alunos SET txaluno = @aluno, txcpf = @cpf, idespecialidade = @especialidade, idcidade = @cidade, idcor = @cor, txempresa = @empresa, txobs = @obs WHERE idaluno = @id");
                 query.SetParameter("id", variavel.idaluno);
                 query.SetParameter("aluno", variavel.txaluno);
                 query.SetParameter("cpf", variavel.txcpf);
@@ -50,6 +51,7 @@ namespace Biblioteca.DB
                 query.SetParameter("cidade", variavel.idcidade);
                 query.SetParameter("cor", variavel.idcor);
                 query.SetParameter("empresa", variavel.txempresa);
+                query.SetParameter("obs", variavel.txobs);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -92,7 +94,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["total"])));
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txobs"])));
                 }
                 reader.Close();
                 session.Close();
@@ -123,7 +125,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["total"])));
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txobs"])));
                 }
                 reader.Close();
                 session.Close();
@@ -149,7 +151,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    alunos = new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0);
+                    alunos = new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0, Convert.ToString(reader["txobs"]));
                 }
                 reader.Close();
                 session.Close();
@@ -298,7 +300,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0));
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0, Convert.ToString(reader["txobs"])));
                 }
                 reader.Close();
                 session.Close();
@@ -327,7 +329,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0));
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0, Convert.ToString(reader["txobs"])));
                 }
                 reader.Close();
                 session.Close();
@@ -356,7 +358,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0));
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]),0, Convert.ToString(reader["txobs"])));
                 }
                 reader.Close();
                 session.Close();

@@ -167,11 +167,12 @@ function IncluirAluno() {
     var idcor = $("#form-modal_aluno #idcor").val();
     var idcidade = $("#form-modal_aluno #idcidade").val();
     var txempresa = $("#form-modal_aluno #txempresa").val();
+    var txobs = $("#form-modal_aluno #txobs").val();
 
     $.ajax({
         type: "POST",
         url: '/Painel/Alunos/IncluirConcluir',
-        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa },
+        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa, obs: txobs },
         dataType: "json",
         traditional: true,
         success: function (json) {

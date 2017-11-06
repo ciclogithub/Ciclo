@@ -65,14 +65,14 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "")
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "", string obs = "")
         {
             AlunosDB db = new AlunosDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0));
+                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -85,6 +85,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 aluno.idcidade = cidade;
                 aluno.idcor = cor;
                 aluno.txempresa = empresa;
+                aluno.txobs = obs;
 
                 db.Alterar(aluno);
 
@@ -95,13 +96,20 @@ namespace Ciclo.Areas.Painel.Controllers
             var arrE = email.Split(',');
             foreach (var i in arrE)
             {
-                new AlunosDB().SalvarEmail(ident, i);
+                if (i != "")
+                {
+                    new AlunosDB().SalvarEmail(ident, i);
+                }
             }
 
             var arrT = telefone.Split(',');
             foreach (var i in arrT)
             {
-                new AlunosDB().SalvarTelefone(ident, i);
+                if (i != "")
+                {
+                    new AlunosDB().SalvarTelefone(ident, i);
+                }
+
             }
 
             return Json(new Retorno());

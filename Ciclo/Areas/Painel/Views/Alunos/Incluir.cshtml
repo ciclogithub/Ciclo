@@ -22,7 +22,7 @@
         string list_telefones = "";
 
         int i = 0;
-        if (Model.txemail != null)
+        if (Model.txemail.Count > 0)
         {
             foreach (var item in Model.txemail)
             {
@@ -34,7 +34,7 @@
         }
 
         i = 0;
-        if (Model.txtelefone != null)
+        if (Model.txtelefone.Count > 0)
         {
             foreach (var item in Model.txtelefone)
             {
@@ -111,6 +111,12 @@
                                 </select>
                                 <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                            <label class="control-label" for="txobs">Observações</label>
+                            <textarea name="txobs" class="form-control" id="txobs" placeholder="Observações" rows="3">@Model.txobs</textarea>
                         </div>
                     </div>
                 </form>

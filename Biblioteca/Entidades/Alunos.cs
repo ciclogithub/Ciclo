@@ -23,6 +23,7 @@ namespace Biblioteca.Entidades
         public string txcor { get; set; }
         public string txempresa { get; set; }
         public int total { get; set; }
+        public string txobs { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -39,9 +40,10 @@ namespace Biblioteca.Entidades
             this.txcor = "";
             this.txempresa = "";
             this.total = 0;
+            this.txobs = "";
         }
 
-        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, string empresa, int total)
+        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, string empresa, int total, string obs)
         {
             this.idaluno = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -56,6 +58,7 @@ namespace Biblioteca.Entidades
             this.txcor = new CoresDB().Buscar(cor);
             this.txempresa = empresa;
             this.total = total;
+            this.txobs = obs;
         }
 
         public int Salvar()

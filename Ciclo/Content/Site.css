@@ -256,3 +256,15 @@ table input {
     background-color:#5fb536 !important;
     Color:#ffffff !important;
 }
+
+textarea {
+    overflow-x:hidden !important;
+}
+
+.dashlink {
+    color:#000;
+}
+
+    .dashlink:hover {
+        text-decoration: none;
+    }
