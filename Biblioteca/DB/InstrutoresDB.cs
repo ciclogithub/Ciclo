@@ -94,6 +94,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Instrutores> Listar()
+        {
+            try
+            {
+                List<Instrutores> list_instrutor = new List<Instrutores>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Instrutores WHERE idorganizador = @idorganizador ORDER by txinstrutor");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_instrutor.Add(new Instrutores(Convert.ToInt32(reader["idinstrutor"]), Convert.ToString(reader["txinstrutor"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txtelefone"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"]), 0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_instrutor;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Instrutores> Listar(int page = 1, int regs = 10)
         {
             try

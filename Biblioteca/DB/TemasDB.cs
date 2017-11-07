@@ -68,6 +68,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Temas> Listar()
+        {
+            try
+            {
+                List<Temas> list_temas = new List<Temas>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Temas WHERE idorganizador = @idorganizador ORDER by txtema");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_temas.Add(new Temas(Convert.ToInt32(reader["idtema"]), Convert.ToString(reader["txtema"]), Convert.ToString(reader["txsubtitulo"]), Convert.ToString(reader["txdescritivo"]), 0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_temas;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Temas> Listar(int page = 1, int regs = 10)
         {
             try

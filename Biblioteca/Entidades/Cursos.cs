@@ -80,7 +80,7 @@ namespace Biblioteca.Entidades
             this.instrutores = new InstrutoresDB().ListarDoCurso(id);
             this.alunos = new AlunosDB().ListarDoCurso(id);
             this.idcor = cor;
-            this.txidentificador = "";
+            this.txidentificador = identificador;
             this.txcor = new CoresDB().Buscar(cor);
             this.total = total;
         }

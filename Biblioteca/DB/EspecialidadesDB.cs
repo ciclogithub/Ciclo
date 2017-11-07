@@ -66,6 +66,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Especialidades> Listar()
+        {
+            try
+            {
+                List<Especialidades> list_especialidades = new List<Especialidades>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select  * from Especialidades WHERE idorganizador = @idorganizador ORDER by txespecialidade");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]), Convert.ToString(reader["txsigla"]), 0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_especialidades;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Especialidades> Listar(int page = 1, int regs = 10)
         {
             try

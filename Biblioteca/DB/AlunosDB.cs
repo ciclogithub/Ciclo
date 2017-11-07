@@ -77,6 +77,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Alunos> Listar()
+        {
+            try
+            {
+                List<Alunos> list_aluno = new List<Alunos>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Alunos WHERE idorganizador = @idorganizador ORDER by txaluno");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), 0, Convert.ToString(reader["txobs"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_aluno;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Alunos> Listar(int page = 1, int regs = 10)
         {
             try

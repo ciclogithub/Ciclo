@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
+    <Compile Include="Areas\Painel\Controllers\RelatoriosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ConfiguracoesController.cs" />
     <Compile Include="Areas\Painel\Controllers\CursosController.cs" />
     <Compile Include="Areas\Painel\Controllers\EspecialidadesController.cs" />
@@ -229,6 +230,7 @@
     <Content Include="Areas\Painel\Views\Cursos\Avaliacao.cshtml" />
     <Content Include="Areas\Painel\Views\Especialidades\Incluir.cshtml" />
     <Content Include="Areas\Painel\Views\Especialidades\Index.cshtml" />
+    <Content Include="Areas\Painel\Views\Relatorios\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="images\pattern.png" />
@@ -252,6 +254,7 @@
     <Content Include="Scripts\js\cursos.js" />
     <Content Include="Scripts\js\configuracoes.js" />
     <Content Include="Scripts\js\especialidades.js" />
+    <Content Include="Scripts\js\relatorios.js" />
     <Content Include="Scripts\js\temas.js" />
     <Content Include="Scripts\js\locais.js" />
     <Content Include="Scripts\js\alunos.js" />

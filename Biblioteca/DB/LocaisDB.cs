@@ -66,6 +66,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Locais> Listar()
+        {
+            try
+            {
+                List<Locais> list_local = new List<Locais>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select *, c.txcidade, e.txestado from Locais l left join cidades c on c.idcidade = l.idcidade left join  estados e on e.idestado = c.idestado WHERE l.idorganizador = @idorganizador ORDER by l.txlocal");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), 0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_local;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Locais> Listar(int page = 1, int regs = 10)
         {
             try
@@ -75,7 +103,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l left join cidades c on c.idcidade = l.idcidade left join  estados e on e.idestado = c.idestado WHERE l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
                 query.SetParameter("page", page);
@@ -105,7 +133,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l left join cidades c on c.idcidade = l.idcidade left join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("local", "%" + local.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
@@ -134,7 +162,7 @@ namespace Biblioteca.DB
                 Locais alunos = null;
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("SELECT l.*, c.txcidade, e.txestado FROM Locais l inner join cidades c on c.idcidade = l.idcidade inner join  estados e on e.idestado = c.idestado WHERE l.idlocal = @id");
+                Query quey = session.CreateQuery("SELECT l.*, c.txcidade, e.txestado FROM Locais l left join cidades c on c.idcidade = l.idcidade left join  estados e on e.idestado = c.idestado WHERE l.idlocal = @id");
                 quey.SetParameter("id", id);
                 IDataReader reader = quey.ExecuteQuery();
 

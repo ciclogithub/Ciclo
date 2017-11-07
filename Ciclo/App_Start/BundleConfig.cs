@@ -52,6 +52,9 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/cursos").Include(
                       "~/Scripts/js/cursos.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/relatorios").Include(
+                      "~/Scripts/js/relatorios.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/especialidades").Include(
                       "~/Scripts/js/especialidades.js"));
 
