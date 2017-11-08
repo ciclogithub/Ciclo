@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Ciclo.Areas.Painel.Models.RelatoriosView
+
+@{
     ViewBag.Title = "Relatórios";
 }
 
@@ -19,153 +21,37 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
-            <form method="post" action="" id="form-modal">
-                <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
+            <form method="post" action="Relatorios/Relatorio" id="form-modal">
                 <input type="hidden" id="tempinstrutor" name="tempinstrutor" value="" />
                 <input type="hidden" id="temptema" name="temptema" value="" />
                 <input type="hidden" id="tempcurso" name="tempcurso" value="" />
                 <input type="hidden" id="tempcategoria" name="tempcategoria" value="" />
                 <input type="hidden" id="tempaluno" name="tempaluno" value="" />
-                <input type="hidden" id="tempcor" name="tempcor" value="" />
+                <input type="hidden" id="tempcorcurso" name="tempcorcurso" value="" />
+                <input type="hidden" id="tempcoraluno" name="tempcoraluno" value="" />
                 <input type="hidden" id="templocal" name="templocal" value="" />
                 <input type="hidden" id="tempespecialidade" name="tempespecialidade" value="" />
                 <div class="row">                
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label class="control-label" for="tprelatorio">Tipo de Relatório</label>
-                        <select id="tprelatorio" name="tprelatorio" class="form-control">
+                        <select id="tprelatorio" name="tprelatorio" class="form-control validate[required]">
                             <option value="">-- Selecione --</option>
                             <option value="1">Por Alunos</option>
                             <option value="2">Por Categorias</option>
-                            <option value="3">Por Cores</option>
-                            <option value="4">Por Cursos</option>
-                            <option value="5">Por Especialiadades</option>
-                            <option value="6">Por Locais</option>
-                            <option value="7">Por Instrutores</option>
-                            <option value="8">Por Temas</option>
+                            <option value="3">Por Classificação (Aluno)</option>
+                            <option value="4">Por Classificação (Curso)</option>
+                            <option value="5">Por Cursos</option>
+                            <option value="6">Por Especialiadades</option>
+                            <option value="7">Por Locais</option>
+                            <option value="8">Por Instrutores</option>
+                            <option value="9">Por Temas</option>
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right"><br />
                         <button id="incluir_btn" class="tg-btn" type="button">Gerar Relatório</button>
                     </div>
                 </div>
-                <div class="row pt15">
-                    <Center><h2>Filtros</h2></Center>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idinstrutor">Instrutores</label>
-                        <div class="input-group">
-                            <select id="idinstrutor" name="idinstrutor" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var i in ViewBag.instrutores)
-                                {
-                                    <option value="@i.idinstrutor">@i.txinstrutor</option>
-                                }
-                            </select>
-                            <span class="input-group-addon" onclick="add('instrutor')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listinstrutor"></ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idtema">Temas</label>
-                        <div class="input-group">
-                            <select id="idtema" name="idtema" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var t in ViewBag.temas)
-                                {
-                                    <option value="@t.idtema">@t.txtema</option>
-                                }
-                            </select>
-                            <span class="input-group-addon" onclick="add('tema')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listtema"></ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idespecialidade">Especialidades</label>
-                        <div class="input-group">
-                            <select id="idespecialidade" name="idespecialidade" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var e in ViewBag.especialidades)
-                                {
-                                    <option value="@e.idespecialidade">@e.txespecialidade</option>
-                                }
-                            </select>
-                            <span class="input-group-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listespecialidade"></ul>
-                    </div>
-                </div>
-                <div class="row pt15">
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idlocal">Locais</label>
-                        <div class="input-group">
-                            <select id="idlocal" name="idlocal" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var l in ViewBag.locais)
-                                {
-                                    <option value="@l.idlocal">@l.txlocal</option>
-                                }
-                            </select>
-                            <span class="input-group-addon" onclick="add('local')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listlocal"></ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idcor">Cores</label>
-                        <div class="input-group">
-                            <select id="idcor" name="idcor" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var c in ViewBag.cores)
-                                {
-                                    <option class="@c.txcor.Replace(" ","_")" value="@c.idcor">@c.txcor</option>
-                                }
-                            </select>
-                            <span class="input-group-addon" onclick="add('cor')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listcor"></ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idcategoria">Categorias</label>
-                        <div class="input-group">
-                            <select id="idcategoria" name="idcategoria" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var c in ViewBag.categorias)
-                                {
-                                    <option value="@c.idcategoria">@c.txcategoria</option>
-                                }
-                            </select>
-                            <span class="input-group-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listcategoria"></ul>
-                    </div>
-                </div>
-                <div class="row pt15">
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idcurso">Cursos</label>
-                        <div class="input-group">
-                            <select id="idcurso" name="idcurso" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @*@foreach (var c in ViewBag.cursos)
-                                {
-                                    <option value="@c.idcurso">@c.txcurso</option>
-                                }*@
-                            </select>
-                            <span class="input-group-addon" onclick="add('curso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listcurso"></ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <label class="control-label" for="idaluno">Alunos</label>
-                        <div class="input-group">
-                            <select id="idaluno" name="idaluno" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @*@foreach (var a in ViewBag.alunos)
-                                {
-                                    <option value="@a.idaluno">@a.txaluno</option>
-                                }*@
-                            </select>
-                            <span class="input-group-addon" onclick="add('aluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listaluno"></ul>
-                    </div>
+                <div class="row pt15">  
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                         <label class="control-label" for="dtini">Período</label>
                         <div class="row">
@@ -182,27 +68,178 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row pt15">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label class="control-label" for="dtmes">Somente o mês</label>
-                                <select id="dtmes" name="dtmes" class="form-control">
-                                    <option value="">-- Todos --</option>
-                                    <option value="1">Janeiro</option>
-                                    <option value="2">Feveriro</option>
-                                    <option value="3">Março</option>
-                                    <option value="4">Abril</option>
-                                    <option value="5">Maio</option>
-                                    <option value="6">Junho</option>
-                                    <option value="7">Julho</option>
-                                    <option value="8">Agosto</option>
-                                    <option value="9">Setembro</option>
-                                    <option value="10">Outubro</option>
-                                    <option value="11">Novembro</option>
-                                    <option value="12">Dezembro</option>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <label class="control-label" for="dtmes">Somente o mês</label>
+                        <select id="dtmes" name="dtmes" class="form-control">
+                            <option value="">-- Todos --</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Feveriro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt15 text-center"> 
+                    <a href="javascript:buscaAvancada()">busca avançada</a>
+                </div>
+                <div id="busca_avancada" class="hide">
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idinstrutor">Instrutores</label>
+                            <div class="input-group">
+                                <select id="idinstrutor" name="idinstrutor" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var p in Model.instrutores)
+                                    {
+                                        <option value="@p.idinstrutor">@p.txinstrutor</option>
+                                    }
                                 </select>
+                                <span class="input-group-addon" onclick="add('instrutor')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
+                            <ul class="list-itens" id="listinstrutor"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idtema">Temas</label>
+                            <div class="input-group">
+                                <select id="idtema" name="idtema" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var t in Model.temas)
+                                    {
+                                        <option value="@t.idtema">@t.txtema</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('tema')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listtema"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idespecialidade">Especialidades</label>
+                            <div class="input-group">
+                                <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var e in Model.especialidades)
+                                    {
+                                        <option value="@e.idespecialidade">@e.txespecialidade</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listespecialidade"></ul>
                         </div>
                     </div>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idlocal">Locais</label>
+                            <div class="input-group">
+                                <select id="idlocal" name="idlocal" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var l in Model.locais)
+                                    {
+                                        <option value="@l.idlocal">@l.txlocal</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('local')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listlocal"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idcorcurso">Classificação (Curso)</label>
+                            <div class="input-group">
+                                <select id="idcorcurso" name="idcorcurso" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in Model.cores)
+                                    {
+                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor">@c.txcor</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('corcurso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listcorcurso"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idcoraluno">Classificação (Aluno)</label>
+                            <div class="input-group">
+                                <select id="idcoraluno" name="idcoraluno" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in Model.cores)
+                                    {
+                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor">@c.txcor</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('coraluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listcoraluno"></ul>
+                        </div>
+                    </div>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idcategoria">Categorias</label>
+                            <div class="input-group">
+                                <select id="idcategoria" name="idcategoria" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in Model.categorias)
+                                    {
+                                        <option value="@c.idcategoria">@c.txcategoria</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listcategoria"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idcurso">Cursos</label>
+                            <div class="input-group">
+                                <select id="idcurso" name="idcurso" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in Model.cursos)
+                                    {
+                                        <option value="@c.idcurso">@c.txcurso</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('curso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listcurso"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idaluno">Alunos</label>
+                            <div class="input-group">
+                                <select id="idaluno" name="idaluno" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var a in Model.alunos)
+                                    {
+                                        <option value="@a.idaluno">@a.txaluno</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('aluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listaluno"></ul>
+                        </div>
+                    </div>
+                    @*<div class="row pt15">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <label class="control-label" for="idcategoria">Cidade / Estado (Aluno)</label>
+                            <div class="input-group">
+                                <select id="idestado" name="idestado" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var t in Model.estados)
+                                    {
+                                        <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listcategoria"></ul>
+                        </div>
+                    </div>*@
                 </div>
             </form>
         </div>

@@ -61,6 +61,13 @@ namespace Biblioteca.Entidades
             this.txobs = obs;
         }
 
+        public Alunos(int id, string aluno)
+        {
+            this.idaluno = id;
+            this.idorganizador = Convert.ToInt32(cookie.Value);
+            this.txaluno = aluno;
+        }
+
         public int Salvar()
         {
             int ident = new AlunosDB().Salvar(this);

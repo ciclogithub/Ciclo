@@ -1,4 +1,15 @@
-﻿function add(campo) {
+﻿$(document).ready(function () {
+
+    $("#incluir_btn").click(function () {
+        $('#form-modal').validationEngine('attach');
+        if ($('#form-modal').validationEngine('validate')) {
+            $('#form-modal').submit();
+        };
+    });
+
+});
+
+function add(campo) {
     var val = $("#id" + campo + " option:selected").val();
     var text = $("#id" + campo + " option:selected").text();
     if (val != "") {
@@ -22,4 +33,12 @@ function remove(campo, i) {
 function inArray(campo, val) {
     arr = $("#temp" + campo).val().split(",");
     if ($.inArray(val, arr) < 0) { return false; } else { return true; }
+}
+
+function buscaAvancada() {
+    if ($("#busca_avancada").hasClass("hide")) {
+        $("#busca_avancada").removeClass("hide");
+    } else {
+        $("#busca_avancada").addClass("hide");
+    }
 }

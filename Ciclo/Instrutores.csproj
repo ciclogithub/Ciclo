@@ -153,6 +153,7 @@
     <Compile Include="Areas\Painel\Controllers\LocaisController.cs" />
     <Compile Include="Areas\Painel\Controllers\PainelController.cs" />
     <Compile Include="Areas\Painel\Controllers\InstrutoresController.cs" />
+    <Compile Include="Areas\Painel\Models\RelatoriosView.cs" />
     <Compile Include="Areas\Painel\PainelAreaRegistration.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,6 +232,7 @@
     <Content Include="Areas\Painel\Views\Especialidades\Incluir.cshtml" />
     <Content Include="Areas\Painel\Views\Especialidades\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Relatorios\Index.cshtml" />
+    <Content Include="Areas\Painel\Views\Relatorios\Relatorio.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="images\pattern.png" />
@@ -290,7 +292,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Painel\Models\" />
     <Folder Include="images\Instrutores\" />
   </ItemGroup>
   <ItemGroup>

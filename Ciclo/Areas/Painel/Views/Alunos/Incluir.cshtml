@@ -22,27 +22,33 @@
         string list_telefones = "";
 
         int i = 0;
-        if (Model.txemail.Count > 0)
+        if (Model.txemail != null)
         {
-            foreach (var item in Model.txemail)
+            if (Model.txemail.Count > 0)
             {
-                emails = emails + "," + item.txemail;
-                list_emails = list_emails + "<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + i + ")'></i><span>" + item.txemail + "</span></li>";
-                i++;
+                foreach (var item in Model.txemail)
+                {
+                    emails = emails + "," + item.txemail;
+                    list_emails = list_emails + "<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + i + ")'></i><span>" + item.txemail + "</span></li>";
+                    i++;
+                }
+                emails = emails.Substring(1);
             }
-            emails = emails.Substring(1);
         }
 
         i = 0;
-        if (Model.txtelefone.Count > 0)
+        if (Model.txtelefone != null)
         {
-            foreach (var item in Model.txtelefone)
+            if (Model.txtelefone.Count > 0)
             {
-                telefones = telefones + "," + item.txtelefone;
-                list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone + "</span></li>";
-                i++;
+                foreach (var item in Model.txtelefone)
+                {
+                    telefones = telefones + "," + item.txtelefone;
+                    list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone + "</span></li>";
+                    i++;
+                }
+                telefones = telefones.Substring(1);
             }
-            telefones = telefones.Substring(1);
         }
     }
 

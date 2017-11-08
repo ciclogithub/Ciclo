@@ -132,6 +132,34 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Cursos> ListarRel()
+        {
+            try
+            {
+                List<Cursos> list_cursos = new List<Cursos>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select idcurso, txcurso from cursos where idorganizador = @organizador ORDER by txcurso");
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_cursos;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Cursos> Listar(int page = 1, int regs = 10)
         {
             try
@@ -141,7 +169,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador ORDER by txcurso OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, idcurso, txcurso, isnull(idcategoria,0) as idcategoria, isnull(flgratuito,0) as flgratuito, isnull(idcor,0) as idcor from cursos where idorganizador = @organizador ORDER by txcurso OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
                 query.SetParameter("page", page);
@@ -149,7 +177,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), Convert.ToInt32(reader["total"])));
+                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToInt32(reader["idcor"])));
                 }
                 reader.Close();
                 session.Close();

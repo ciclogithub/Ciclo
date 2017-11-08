@@ -85,6 +85,23 @@ namespace Biblioteca.Entidades
             this.total = total;
         }
 
+        public Cursos(int id, string curso)
+        {
+            this.idcurso = id;
+            this.idorganizador = Convert.ToInt32(cookie.Value);
+            this.txcurso = curso;
+        }
+
+        public Cursos(int id, string curso, int categoria, bool gratuito, int cor)
+        {
+            this.idcurso = id;
+            this.idorganizador = Convert.ToInt32(cookie.Value);
+            this.txcurso = curso;
+            this.flgratuito = gratuito;
+            this.txcor = new CoresDB().Buscar(cor);
+            this.nome_categoria = new CategoriasDB().Buscar(categoria);
+        }
+
         public int Salvar()
         {
             int ident = new CursosDB().Salvar(this);
