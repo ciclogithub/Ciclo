@@ -10,8 +10,36 @@
             </div>
             <ol class="tg-breadcrumb">
                 <li><a href="~/Painel">Dashboard</a></li>
-                <li><a href="~/Relatorios">Relatórios</a></li>
-                <li class="tg-active">Relatórios</li>
+                <li><a href="~/Painel/Relatorios">Relatórios</a></li>
+                @switch (ViewBag.ident)
+                {
+                    case 1: <li class="tg-active">Por Alunos</li>
+                        break;
+
+                    case 2: <li class="tg-active">Por Categorias</li>
+                        break;
+
+                    case 3: <li class="tg-active">Por Classificação (Aluno)</li>
+                        break;
+
+                    case 4: <li class="tg-active">Por Classificação (Curso)</li>
+                        break;
+
+                    case 5: <li class="tg-active">Por Cursos</li>
+                        break;
+
+                    case 6: <li class="tg-active">Por Especialiadades</li>
+                        break;
+
+                    case 7: <li class="tg-active">Por Locais</li>
+                        break;
+
+                    case 8: <li class="tg-active">Por Instrutores</li>
+                        break;
+
+                    case 9: <li class="tg-active">Por Temas</li>
+                        break;
+                }
             </ol>
         </div>
     </div>
@@ -21,26 +49,373 @@
     <div class="tg-sectionspace">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button">Voltar</button>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                    <a href="~/Painel/Relatorios"><button class="tg-btn" type="button">Voltar</button></a>
                 </div>
             </div>
             <div class="row pt">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="33%">TEMA</th>
-                                <th width="32%">SUBTÍTULO</th>
-                                <th width="32%">DESCRIÇÃO</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                        </tbody>
-                    </table>
 
+                    @{
+                        string temp = "";
+                        int cont = 0;
+                        switch (ViewBag.ident)
+                        {
+                            case 1:
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                            <th width="33%">TEMA</th>
+                                            <th width="32%">SUBTÍTULO</th>
+                                            <th width="32%">DESCRIÇÃO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var p in Model)
+                                        {
+                                            <tr>
+                                                <td>@p.curso</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                break;
+
+                            // Categorias
+                            case 2:
+
+                                @: <table class="table table-bordered table-hover">
+                                foreach (var p in Model)
+                                {
+                                    if (p.categoria != temp)
+                                    {
+                                        temp = p.categoria;
+
+                                        if (cont > 0)
+                                        {
+                                            @:  <tr>
+                                            @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                            @:  </tr>
+                                            @: </tbody>
+                                            @: </table>
+                                            @: <table class="table table-bordered table-hover">
+                                            cont = 0;
+                                        }
+
+                                        @: <thead>
+                                        @:     <tr>
+                                        @:         <th bgcolor="#ececec" colspan="6">CATEGORIA: @p.categoria</th>
+                                        @:     </tr>
+                                        @:     <tr>
+                                        @:         <th width='1%'>&nbsp;</th>
+                                        @:         <th width='34%'>CURSO</th>
+                                        @:         <th width='15%'>IDENTIFICADOR</th>
+                                        @:         <th width='20%'>LOCAL</th>        
+                                        @:         <th width='20%'>TEMA</th>
+                                        @:         <th width='10%'>Nº ALUNOS</th>
+                                        @:     </tr>
+                                        @: </thead>
+                                        @: <tbody>
+                                    }
+                                    
+                                    @: <tr>
+                                    @:     <td class="@p.corcurso">&nbsp;</td>                                        
+                                    @:     <td>@p.curso</td>
+                                    @:     <td>@p.identificador</td>
+                                    @:     <td>@p.local</td>
+                                    @:     <td>@p.tema</td>
+                                    @:     <td>@p.qtaluno</td>
+                                    @: </tr>
+                                    
+                                    cont = cont + 1;
+                                }
+                                @:  <tr>
+                                @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                @:  </tr>
+                                @: </tbody>
+                                @: </table>
+
+                            break;
+
+                            case 3:
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                            <th width="33%">TEMA</th>
+                                            <th width="32%">SUBTÍTULO</th>
+                                            <th width="32%">DESCRIÇÃO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var p in Model)
+                                        {
+                                            <tr>
+                                                <td>@p.curso</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                break;
+
+                            // Classificação do Curso
+                            case 4:
+
+                                @: <table class="table table-bordered table-hover">
+                                foreach (var p in Model)
+                                {
+                                    if (p.corcurso != temp)
+                                    {
+                                        temp = p.corcurso;
+
+                                        if (cont > 0)
+                                        {
+                                            @:  <tr>
+                                            @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                            @:  </tr>
+                                            @: </tbody>
+                                            @: </table>
+                                            @: <table class="table table-bordered table-hover">
+                                            cont = 0;
+                                        }
+
+                                        @: <thead>
+                                        @:     <tr>
+                                        @:         <th class="@p.corcurso.Replace(" ","_")" colspan="6">CLASSIFICAÇÃO: @p.corcurso</th>
+                                        @:     </tr>
+                                        @:     <tr>
+                                        @:         <th width='29%'>CURSO</th>
+                                        @:         <th width='15%'>IDENTIFICADOR</th>
+                                        @:         <th width='15%'>TEMA</th>
+                                        @:         <th width='15%'>LOCAL</th>        
+                                        @:         <th width='15%'>CATEGORIA</th>
+                                        @:         <th width='10%'>Nº ALUNOS</th>
+                                        @:     </tr>
+                                        @: </thead>
+                                        @: <tbody>
+                                    }
+                                    
+                                    @: <tr>
+                                    @:     <td>@p.curso</td>
+                                    @:     <td>@p.identificador</td>
+                                    @:     <td>@p.tema</td>
+                                    @:     <td>@p.local</td>
+                                    @:     <td>@p.categoria</td>
+                                    @:     <td>@p.qtaluno</td>
+                                    @: </tr>
+                                    
+                                    cont = cont + 1;
+                                }
+                                @:  <tr>
+                                @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                @:  </tr>
+                                @: </tbody>
+                                @: </table>
+
+                                break;
+
+                            case 5:
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                            <th width="33%">TEMA</th>
+                                            <th width="32%">SUBTÍTULO</th>
+                                            <th width="32%">DESCRIÇÃO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var p in Model)
+                                        {
+                                            <tr>
+                                                <td>@p.curso</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                break;
+
+                            case 6:
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                            <th width="33%">TEMA</th>
+                                            <th width="32%">SUBTÍTULO</th>
+                                            <th width="32%">DESCRIÇÃO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var p in Model)
+                                        {
+                                            <tr>
+                                                <td>@p.curso</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                break;
+
+                            // Locais
+                            case 7:
+
+                                @: <table class="table table-bordered table-hover">
+                                foreach (var p in Model)
+                                {
+                                    if (p.local != temp)
+                                    {
+                                        temp = p.local;
+
+                                        if (cont > 0)
+                                        {
+                                            @:  <tr>
+                                            @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                            @:  </tr>
+                                            @: </tbody>
+                                            @: </table>
+                                            @: <table class="table table-bordered table-hover">
+                                            cont = 0;
+                                        }
+
+                                        @: <thead>
+                                        @:     <tr>
+                                        @:         <th bgcolor="#ececec" colspan="6">LOCAL: @p.local</th>
+                                        @:     </tr>
+                                        @:     <tr>
+                                        @:         <th width='1%'>&nbsp;</th>
+                                        @:         <th width='34%'>CURSO</th>
+                                        @:         <th width='15%'>IDENTIFICADOR</th>
+                                        @:         <th width='20%'>TEMA</th>        
+                                        @:         <th width='20%'>CATEGORIA</th>
+                                        @:         <th width='10%'>Nº ALUNOS</th>
+                                        @:     </tr>
+                                        @: </thead>
+                                        @: <tbody>
+                                    }
+                                    
+                                    @: <tr>
+                                    @:     <td class="@p.corcurso">&nbsp;</td>                                        
+                                    @:     <td>@p.curso</td>
+                                    @:     <td>@p.identificador</td>
+                                    @:     <td>@p.tema</td>
+                                    @:     <td>@p.categoria</td>
+                                    @:     <td>@p.qtaluno</td>
+                                    @: </tr>
+                                    
+                                    cont = cont + 1;
+                                }
+                                @:  <tr>
+                                @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                @:  </tr>
+                                @: </tbody>
+                                @: </table>
+
+                            break;
+
+                            case 8:
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                            <th width="33%">TEMA</th>
+                                            <th width="32%">SUBTÍTULO</th>
+                                            <th width="32%">DESCRIÇÃO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var p in Model)
+                                        {
+                                            <tr>
+                                                <td>@p.curso</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                break;
+
+                            // Tema
+                            case 9:
+
+                                @: <table class="table table-bordered table-hover">
+                                foreach (var p in Model)
+                                {
+                                    if (p.tema != temp)
+                                    {
+                                        temp = p.tema;
+
+                                        if (cont > 0)
+                                        {
+                                            @:  <tr>
+                                            @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                            @:  </tr>
+                                            @: </tbody>
+                                            @: </table>
+                                            @: <table class="table table-bordered table-hover">
+                                            cont = 0;
+                                        }
+
+                                        @: <thead>
+                                        @:     <tr>
+                                        @:         <th bgcolor="#ececec" colspan="6">TEMA: @p.tema</th>
+                                        @:     </tr>
+                                        @:     <tr>
+                                        @:         <th width='1%'>&nbsp;</th>
+                                        @:         <th width='34%'>CURSO</th>
+                                        @:         <th width='15%'>IDENTIFICADOR</th>
+                                        @:         <th width='20%'>LOCAL</th>        
+                                        @:         <th width='20%'>CATEGORIA</th>
+                                        @:         <th width='10%'>Nº ALUNOS</th>
+                                        @:     </tr>
+                                        @: </thead>
+                                        @: <tbody>
+                                    }
+                                    
+                                    @: <tr>
+                                    @:     <td class="@p.corcurso">&nbsp;</td>                                        
+                                    @:     <td>@p.curso</td>
+                                    @:     <td>@p.identificador</td>
+                                    @:     <td>@p.local</td>
+                                    @:     <td>@p.categoria</td>
+                                    @:     <td>@p.qtaluno</td>
+                                    @: </tr>
+                                    
+                                    cont = cont + 1;
+                                }
+                                @:  <tr>
+                                @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                @:  </tr>
+                                @: </tbody>
+                                @: </table>
+
+                            break;
+                            }
+                        }
                 </div>
             </div>
         </div>

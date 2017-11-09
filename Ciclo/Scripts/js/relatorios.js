@@ -15,7 +15,11 @@ function add(campo) {
     if (val != "") {
         if (!inArray(campo, val)) {
             $("#list" + campo).append("<li id=" + val + "><i class='glyphicon glyphicon-trash' onclick=remove('" + campo + "'," + val + ")></i><span>" + text + "</span></li>");
-            $("#temp" + campo).val($("#temp" + campo).val() + "," + val);
+            if ($("#temp" + campo).val() == "") {
+                $("#temp" + campo).val(val);
+            } else {
+                $("#temp" + campo).val($("#temp" + campo).val() + "," + val);
+            }
         } else {
             alert("Já selecionado")
         }
@@ -23,10 +27,10 @@ function add(campo) {
 }
 
 function remove(campo, i) {
-    var arr = $("#temp" + campo).val().slice(1).split(",");
+    var arr = $("#temp" + campo).val().split(",");
     var txt = "";
     for (x = 0; x < arr.length; x++) { if (arr[x] != i) { txt = txt + "," + arr[x]; } }
-    $("#temp" + campo).val(txt);    
+    $("#temp" + campo).val(txt.slice(1));    
     $("#list" + campo + " li[id=" + i + "]").remove();
 }
 

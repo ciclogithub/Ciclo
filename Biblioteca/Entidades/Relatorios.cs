@@ -9,6 +9,7 @@ namespace Biblioteca.Entidades
 {
     public class Relatorios
     {
+        public int tipo { get; set; }
         public string curso { get; set; }
         public string data { get; set; }
         public string aluno { get; set; }
@@ -24,9 +25,12 @@ namespace Biblioteca.Entidades
         public string estadoaluno { get; set; }
         public string local { get; set; }
         public string categoria { get; set; }
+        public string identificador { get; set; }
+        public int qtaluno { get; set; }
 
         public Relatorios()
         {
+            this.tipo = 0;
             this.curso = "";
             this.data = "";
             this.aluno = "";
@@ -42,10 +46,13 @@ namespace Biblioteca.Entidades
             this.estadoaluno = "";
             this.local = "";
             this.categoria = "";
+            this.identificador = "";
+            this.qtaluno = 0;
         }
 
-        public Relatorios(string curso, string data, string aluno, string empresa, string corcurso, string coraluno, string tema, string instrutor, string especialidade, string cidadecurso, string estadocurso, string cidadealuno, string estadoaluno, string local, string categoria)
+        public Relatorios(int tipo, string curso, string data, string aluno, string empresa, string corcurso, string coraluno, string tema, string instrutor, string especialidade, string cidadecurso, string estadocurso, string cidadealuno, string estadoaluno, string local, string categoria, string identificador, int qtaluno)
         {
+            this.tipo = tipo;
             this.curso = curso;
             this.data = data;
             this.aluno = aluno;
@@ -61,6 +68,8 @@ namespace Biblioteca.Entidades
             this.estadoaluno = estadoaluno;
             this.local = local;
             this.categoria = categoria;
+            this.identificador = identificador;
+            this.qtaluno = qtaluno;
         }
 
     }

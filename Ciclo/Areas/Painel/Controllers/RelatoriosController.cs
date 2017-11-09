@@ -23,7 +23,42 @@ namespace Ciclo.Areas.Painel.Controllers
         [HttpPost]
         public ActionResult Relatorio(FormCollection collection)
         {
-            return View(new RelatoriosDB().Listar());
+            int tipo = Convert.ToInt32(collection["tprelatorio"]);
+            List<Relatorios> list = new List<Relatorios>();
+            ViewBag.ident = tipo;
+
+            switch (tipo)
+            {
+                case 1:
+                    list = new RelatoriosDB().ListarAluno(collection);
+                    break;
+                case 2:
+                    list = new RelatoriosDB().ListarCategoria(collection);
+                    break;
+                case 3:
+                    list = new RelatoriosDB().ListarClassificacaoAluno(collection);
+                    break;
+                case 4:
+                    list = new RelatoriosDB().ListarClassificacaoCurso(collection);
+                    break;
+                case 5:
+                    list = new RelatoriosDB().ListarCurso(collection);
+                    break;
+                case 6:
+                    list = new RelatoriosDB().ListarEspecialidade(collection);
+                    break;
+                case 7:
+                    list = new RelatoriosDB().ListarLocal(collection);
+                    break;
+                case 8:
+                    list = new RelatoriosDB().ListarInstrutor(collection);
+                    break;
+                case 9:
+                    list = new RelatoriosDB().ListarTema(collection);
+                    break;
+            }
+
+            return View(list);
         }
 
     }
