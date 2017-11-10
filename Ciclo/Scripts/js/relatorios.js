@@ -7,6 +7,15 @@
         };
     });
 
+    $("#exportar").click(function () {
+        $("#table2excel").table2excel({
+        exclude: ".noExl",
+        name: "Relatório",
+        filename: "Relatório - " + $("ol li.tg-active").html()
+        });
+    });
+
+
 });
 
 function add(campo) {

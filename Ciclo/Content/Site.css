@@ -268,3 +268,7 @@ textarea {
     .dashlink:hover {
         text-decoration: none;
     }
+
+.table-relat th, .table-relat td {
+    font-size:12px !important;
+}
