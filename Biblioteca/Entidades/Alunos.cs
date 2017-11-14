@@ -49,7 +49,7 @@ namespace Biblioteca.Entidades
             this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txaluno = aluno;
             this.txcpf = cpf;
-            this.txemail = new AlunosDB().ListarEmails(id); ;
+            this.txemail = new AlunosDB().ListarEmails(id); 
             this.txtelefone = new AlunosDB().ListarTelefones(id);
             this.idespecialidade = especialidade;
             this.idcidade = cidade;

@@ -9,14 +9,53 @@ using System.Web;
 using System.Web.Mvc;
 using Ciclo.Areas.Painel.Models;
 
-namespace Ciclo.Areas.Painel.Controllers
-{
+namespace Ciclo.Areas.Painel.Controllers{
+
     public class RelatoriosController : Controller
     {
         [Autenticacao]
         public ActionResult Index()
         {
             return View(new RelatoriosView());
+        }
+
+        [Autenticacao]
+        public JsonResult Graficos(int ident)
+        {
+            List<Graficos> graf = new List<Graficos>();
+
+            switch (ident)
+            {
+                case 1:
+                    graf = new GraficosDB().ListarAluno(ident);
+                    break;
+                case 2:
+                    graf = new GraficosDB().ListarCategoria(ident);
+                    break;
+                case 3:
+                    graf = new GraficosDB().ListarClassificacaoAluno(ident);
+                    break;
+                case 4:
+                    graf = new GraficosDB().ListarClassificacaoCurso(ident);
+                    break;
+                case 5:
+                    graf = new GraficosDB().ListarCurso(ident);
+                    break;
+                case 6:
+                    graf = new GraficosDB().ListarEspecialidade(ident);
+                    break;
+                case 7:
+                    graf = new GraficosDB().ListarLocal(ident);
+                    break;
+                case 8:
+                    graf = new GraficosDB().ListarInstrutor(ident);
+                    break;
+                case 9:
+                    graf = new GraficosDB().ListarTema(ident);
+                    break;
+            }
+
+            return Json(graf);
         }
 
         [Autenticacao]

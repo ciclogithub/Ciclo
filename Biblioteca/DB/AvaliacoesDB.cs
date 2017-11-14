@@ -1,17 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Biblioteca.Entidades;
 using System.Data;
-using System.Data.SqlClient;
-using System.Web;
 
 namespace Biblioteca.DB
 {
     public class AvaliacoesDB
     {
+        public int Buscar(string codigo)
+        {
+            try
+            {
+                int curso_aluno = 0;
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("select IDCURSOALUNO from cursos_alunos WHERE TXAVALIACAO = @codigo");
+                quey.SetParameter("codigo", codigo);
+                IDataReader reader = quey.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    curso_aluno = Convert.ToInt32(reader["IDCURSOALUNO"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return curso_aluno;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Avaliacoes> Listar(int codigo = 0)
         {
             try
@@ -38,7 +59,27 @@ namespace Biblioteca.DB
             }
         }
 
-        
+        public void Salvar(Avaliacoes variavel)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Cursos_Avaliacoes (idcursoaluno, dtavaliacao, nrnota1, nrnota2, nrnota3, nrnota4, nrnota5, txobservacao) VALUES (@cursoaluno, getdate(), @nrnota1, @nrnota2, @nrnota3, @nrnota4, @nrnota5, @obs)");
+                query.SetParameter("cursoaluno", variavel.idcursoaluno);
+                query.SetParameter("nrnota1", variavel.nota1);
+                query.SetParameter("nrnota2", variavel.nota2);
+                query.SetParameter("nrnota3", variavel.nota3);
+                query.SetParameter("nrnota4", variavel.nota4);
+                query.SetParameter("nrnota5", variavel.nota5);
+                query.SetParameter("obs", variavel.obs);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
     }
 }
 

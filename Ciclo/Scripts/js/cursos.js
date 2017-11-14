@@ -1,5 +1,12 @@
 ﻿$(document).ready(function () {
 
+    $('#selectallav').click(function () {
+        val = $(this).prop('checked')
+        $('#table_avaliacao tr th[scope=row]').find('input').each(function (index) {
+            $(this).prop('checked', val);
+        });
+    })
+
     $("#pesquisa_curso").click(function () {
         CursoPesquisar();
     });

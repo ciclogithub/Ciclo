@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "Avaliação";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>AVALIAÇÃO</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="tg-active">Avaliação</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form id="form_cadastro_avaliacao">
+                        <input type="hidden" id="idcursoaluno" name="idcursoaluno" value="@Model.curso_aluno" />
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                ALUNO: @Model.aluno<br />
+                                CURSO: @Model.curso
+                            </div>
+                        </div>
+                        @if (Model.data != "")
+                        {
+                            <div class="row pt30">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                   A pesquisa já foi respondida em @Model.data
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                Avaliação do conteúdo do curso
+                                <select id="resp_1" name="resp_1">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                Avaliação do instrutor
+                                <select id="resp_2" name="resp_2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                Avaliação do local do curso
+                                <select id="resp_3" name="resp_3">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                Avaliação da duração do curso
+                                <select id="resp_4" name="resp_4">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                Avaliação do material utilizado:
+                                <select id="resp_5" name="resp_5">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <textarea rows="5" name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Observações"></textarea>
+                            </div>
+                        </div>
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                <div id="form-error" class="p10"></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">
+                                <button class="tg-btn" type="button" id="btn_cadastro_avaliacao">Enviar</button>
+                            </div>
+                        </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+@Scripts.Render("~/bundles/barrating")
+@Scripts.Render("~/bundles/avaliacao")
+}

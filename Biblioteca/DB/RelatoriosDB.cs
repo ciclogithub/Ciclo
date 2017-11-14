@@ -64,7 +64,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(1, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), Convert.ToInt32(reader["AVALIACAO"])));
+                    list_relat.Add(new Relatorios(1, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), Convert.ToDouble(reader["AVALIACAO"]),0));
                 }
                 reader.Close();
                 session.Close();
@@ -124,7 +124,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(2, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]),"","",0));
+                    list_relat.Add(new Relatorios(2, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]),"","",0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -184,7 +184,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(3, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0));
+                    list_relat.Add(new Relatorios(3, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -244,7 +244,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(4, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0));
+                    list_relat.Add(new Relatorios(4, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -269,6 +269,7 @@ namespace Biblioteca.DB
                 qry = "SELECT C.TXCURSO, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, L.TXLOCAL, CT.TXCATEGORIA, A.TXALUNO, A.TXEMPRESA, CO2.TXCOR AS CORALUNO, T.TXTEMA, E.TXESPECIALIDADE,  ";
                 qry += "C1.TXCIDADE AS CIDADECURSO, C2.TXCIDADE AS CIDADEALUNO, E1.TXESTADO AS ESTADOCURSO, E2.TXESTADO AS ESTADOALUNO, ";
                 qry += "ISNULL((SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO),0) AS AVALIACAO, ";
+                qry += "ISNULL((SELECT ISNULL(SUM(CAST(ISNULL(CAV.NRNOTA1, 0) + ISNULL(CAV.NRNOTA2, 0) + ISNULL(CAV.NRNOTA3, 0) + ISNULL(CAV.NRNOTA4, 0) + ISNULL(CAV.NRNOTA5, 0) AS FLOAT) / 5) / COUNT(CAV.IDCURSOALUNO),0) FROM CURSOS_AVALIACOES CAV WHERE CAV.IDCURSOALUNO IN(SELECT IDCURSOALUNO FROM Cursos_Alunos CA WHERE CA.IDCURSO = C.IDCURSO)),0) AS AVALIACAOGERAL, ";
                 qry += "SUBSTRING((SELECT ', ' + I.TXINSTRUTOR FROM CURSOS_INSTRUTORES CI LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR WHERE CI.IDCURSO = C.IDCURSO FOR XML PATH('')),3,999) AS INSTRUTORES ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
@@ -304,7 +305,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(5, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["TXESPECIALIDADE"]), Convert.ToString(reader["CIDADECURSO"]), Convert.ToString(reader["ESTADOCURSO"]), Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, "", "", Convert.ToInt32(reader["AVALIACAO"])));
+                    list_relat.Add(new Relatorios(5, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["TXESPECIALIDADE"]), Convert.ToString(reader["CIDADECURSO"]), Convert.ToString(reader["ESTADOCURSO"]), Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, "", "", Convert.ToDouble(reader["AVALIACAO"]), Convert.ToDouble(reader["AVALIACAOGERAL"])));
                 }
                 reader.Close();
                 session.Close();
@@ -364,7 +365,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(6, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0));
+                    list_relat.Add(new Relatorios(6, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -424,7 +425,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(7, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0));
+                    list_relat.Add(new Relatorios(7, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -448,6 +449,7 @@ namespace Biblioteca.DB
                 DBSession session = new DBSession();
 
                 qry = "select DISTINCT I.TXINSTRUTOR, I.TXEMAIL, I.TXTELEFONE, CO1.TXCOR AS CORCURSO, C.TXCURSO, T.TXTEMA, L.TXLOCAL, CT.TXCATEGORIA, C.TXIDENTIFICADOR, ";
+                qry += "ISNULL((SELECT SUM(CAST(ISNULL(CAV.nrnota2,0) AS float)) / COUNT(CAV.idcursoaluno) FROM Cursos_Avaliacoes CAV WHERE CAV.idcursoaluno IN (SELECT idcursoaluno FROM Cursos_Alunos WHERE idcurso IN (SELECT CIN.IDCURSO FROM Cursos_Instrutores CIN WHERE CIN.idinstrutor = CI.idinstrutor AND CIN.idcurso = C.IDCURSO ))),0) AS AVALIACAO, ";
                 qry += "(SELECT COUNT(IDALUNO) FROM CURSOS_ALUNOS WHERE IDCURSO = C.IDCURSO) AS ALUNOS ";
                 qry += "FROM CURSOS C  ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
@@ -483,7 +485,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(8, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["TXINSTRUTOR"]), "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), Convert.ToString(reader["TXEMAIL"]), Convert.ToString(reader["TXTELEFONE"]), 0));
+                    list_relat.Add(new Relatorios(8, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["TXINSTRUTOR"]), "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), Convert.ToString(reader["TXEMAIL"]), Convert.ToString(reader["TXTELEFONE"]), Convert.ToDouble(reader["AVALIACAO"]), 0));
                 }
                 reader.Close();
                 session.Close();
@@ -543,7 +545,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(9, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0));
+                    list_relat.Add(new Relatorios(9, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0,0));
                 }
                 reader.Close();
                 session.Close();

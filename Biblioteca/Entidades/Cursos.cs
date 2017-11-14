@@ -92,7 +92,7 @@ namespace Biblioteca.Entidades
             this.txcurso = curso;
         }
 
-        public Cursos(int id, string curso, int categoria, bool gratuito, int cor)
+        public Cursos(int id, string curso, int categoria, bool gratuito, int cor, int total)
         {
             this.idcurso = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -100,6 +100,7 @@ namespace Biblioteca.Entidades
             this.flgratuito = gratuito;
             this.txcor = new CoresDB().Buscar(cor);
             this.nome_categoria = new CategoriasDB().Buscar(categoria);
+            this.total = total;
         }
 
         public int Salvar()

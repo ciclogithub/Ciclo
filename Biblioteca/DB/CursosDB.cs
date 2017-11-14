@@ -177,7 +177,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToInt32(reader["idcor"])));
+                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToInt32(reader["idcor"]), Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -325,6 +325,22 @@ namespace Biblioteca.DB
                 query.SetParameter("avaliacao", avaliacao);
                 query.ExecuteUpdate();
                 session.Close();
+
+                Cursos_Alunos curso_aluno = new CursosAlunosDB().Buscar(id);
+                String msg = "Prezado(a) " + curso_aluno.aluno + ", clique no link abaixo, ou copie e cole no seu navegador para responder a pesquisa de avaliação do curso " + curso_aluno.curso + ".<br><br><a href='http://www.treinaauto.com.br/avaliacao?c=" + avaliacao + "'>http://www.treinaauto.com.br/avaliacao?c=" + avaliacao + "</a>";
+                String assunto = "Pesquisa de avaliação do curso " + curso_aluno.curso;
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+
+                DBSession session2 = new DBSession();
+                Query query2 = session2.CreateQuery("INSERT INTO Emails (idorganizador, txassunto, txpara, txresposta, txmensagem) VALUES (@organizador, @assunto, @para, @resposta, @mensagem)");
+                query2.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                query2.SetParameter("assunto", assunto);
+                query2.SetParameter("para", curso_aluno.emails);
+                query2.SetParameter("resposta", curso_aluno.emails);
+                query2.SetParameter("mensagem", msg);
+                query2.ExecuteUpdate();
+                session2.Close();
             }
             catch (Exception erro)
             {

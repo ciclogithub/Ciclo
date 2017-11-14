@@ -34,8 +34,19 @@ namespace Ciclo
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/js/painel.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
+                    "~/Scripts/highcharts/5.0.14/js/highcharts.js",
+                    "~/Scripts/highcharts/5.0.14/js/modules/serial-label.js",
+                    "~/Scripts/highcharts/5.0.14/js/modules/exporting.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/mask").Include(
-                    "~/Scripts/jquery.mask.min.js"));
+                   "~/Scripts/jquery.mask.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/barrating").Include(
+                    "~/Scripts/plugins/barrating/jquery.barrating.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/avaliacao").Include(
+                      "~/Scripts/js/avaliacao.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/instrutores").Include(
                       "~/Scripts/js/instrutores.js"));
@@ -87,6 +98,8 @@ namespace Ciclo
                     "~/Content/transitions.css",
                     "~/Content/main.css",
                     "~/Content/color.css",
+                    "~/Scripts/highcharts/5.0.14/css/highcharts.css",
+                    "~/Scripts/plugins/barrating/themes/fontawesome-stars.css",
                     "~/Scripts/plugins/validate/css/validationEngine.jquery.css",
                     "~/Scripts/plugins/calendar/css/datepicker.css",
                     "~/Content/responsive.css"));
