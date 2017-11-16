@@ -13,7 +13,7 @@ namespace Biblioteca.DB
 {
     public class GraficosDB
     {
-        public List<Graficos> ListarAluno(int id)
+        public List<Graficos> ListarAluno(FormCollection collection)
         {
             try
             {
@@ -39,6 +39,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -58,7 +71,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarCategoria(int id)
+        public List<Graficos> ListarCategoria(FormCollection collection)
         {
             try
             {
@@ -84,6 +97,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -103,7 +129,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarClassificacaoAluno(int id)
+        public List<Graficos> ListarClassificacaoAluno(FormCollection collection)
         {
             try
             {
@@ -129,6 +155,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -148,7 +187,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarClassificacaoCurso(int id)
+        public List<Graficos> ListarClassificacaoCurso(FormCollection collection)
         {
             try
             {
@@ -158,7 +197,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT DISTINCT (SELECT COUNT(IDALUNO) FROM CURSOS_ALUNOS WHERE IDCURSO = C.IDCURSO) AS valor, YEAR(CD.dtcurso) as categoria, CO1.TXCOR AS serie ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -174,13 +213,27 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                qry += "GROUP BY CO1.TXCOR, YEAR(CD.dtcurso), C.IDCURSO ";
+                qry += "ORDER BY YEAR(CD.dtcurso), CO1.TXCOR";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();
@@ -193,7 +246,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarCurso(int id)
+        public List<Graficos> ListarCurso(FormCollection collection)
         {
             try
             {
@@ -219,6 +272,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "GROUP BY L.txlocal, YEAR(CD.dtcurso) ";
                 qry += "ORDER BY YEAR(CD.dtcurso), L.TXLOCAL";
                 Query query = session.CreateQuery(qry);
@@ -239,7 +305,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarEspecialidade(int id)
+        public List<Graficos> ListarEspecialidade(FormCollection collection)
         {
             try
             {
@@ -265,6 +331,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -284,7 +363,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarLocal(int id)
+        public List<Graficos> ListarLocal(FormCollection collection)
         {
             try
             {
@@ -310,6 +389,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "GROUP BY L.txlocal, YEAR(CD.dtcurso) ";
                 qry += "ORDER BY YEAR(CD.dtcurso), L.TXLOCAL ";
                 Query query = session.CreateQuery(qry);
@@ -330,7 +422,7 @@ namespace Biblioteca.DB
             }
 }
 
-        public List<Graficos> ListarInstrutor(int id)
+        public List<Graficos> ListarInstrutor(FormCollection collection)
         {
             try
             {
@@ -356,6 +448,19 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
                 qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -375,7 +480,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Graficos> ListarTema(int id)
+        public List<Graficos> ListarTema(FormCollection collection)
         {
             try
             {
@@ -385,7 +490,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT DISTINCT T.TXTEMA as serie, YEAR(CD.dtcurso) as categoria, COUNT(L.idlocal) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -401,13 +506,27 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                qry += "GROUP BY T.TXTEMA, YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso), T.TXTEMA";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();

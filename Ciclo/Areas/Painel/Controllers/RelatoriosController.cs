@@ -20,38 +20,39 @@ namespace Ciclo.Areas.Painel.Controllers{
         }
 
         [Autenticacao]
-        public JsonResult Graficos(int ident)
+        public JsonResult Graficos(FormCollection collection)
         {
+            int ident = Convert.ToInt32(collection["tprelatorio"]);
             List<Graficos> graf = new List<Graficos>();
 
             switch (ident)
             {
                 case 1:
-                    graf = new GraficosDB().ListarAluno(ident);
+                    graf = new GraficosDB().ListarAluno(collection);
                     break;
                 case 2:
-                    graf = new GraficosDB().ListarCategoria(ident);
+                    graf = new GraficosDB().ListarCategoria(collection);
                     break;
                 case 3:
-                    graf = new GraficosDB().ListarClassificacaoAluno(ident);
+                    graf = new GraficosDB().ListarClassificacaoAluno(collection);
                     break;
                 case 4:
-                    graf = new GraficosDB().ListarClassificacaoCurso(ident);
+                    graf = new GraficosDB().ListarClassificacaoCurso(collection);
                     break;
                 case 5:
-                    graf = new GraficosDB().ListarCurso(ident);
+                    graf = new GraficosDB().ListarCurso(collection);
                     break;
                 case 6:
-                    graf = new GraficosDB().ListarEspecialidade(ident);
+                    graf = new GraficosDB().ListarEspecialidade(collection);
                     break;
                 case 7:
-                    graf = new GraficosDB().ListarLocal(ident);
+                    graf = new GraficosDB().ListarLocal(collection);
                     break;
                 case 8:
-                    graf = new GraficosDB().ListarInstrutor(ident);
+                    graf = new GraficosDB().ListarInstrutor(collection);
                     break;
                 case 9:
-                    graf = new GraficosDB().ListarTema(ident);
+                    graf = new GraficosDB().ListarTema(collection);
                     break;
             }
 
@@ -64,7 +65,7 @@ namespace Ciclo.Areas.Painel.Controllers{
         {
             int tipo = Convert.ToInt32(collection["tprelatorio"]);
             List<Relatorios> list = new List<Relatorios>();
-            ViewBag.ident = tipo;
+            ViewBag.form = collection;
 
             switch (tipo)
             {

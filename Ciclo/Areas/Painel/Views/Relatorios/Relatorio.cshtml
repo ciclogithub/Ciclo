@@ -11,7 +11,7 @@
             <ol class="tg-breadcrumb">
                 <li><a href="~/Painel">Dashboard</a></li>
                 <li><a href="~/Painel/Relatorios">Relatórios</a></li>
-                @switch (ViewBag.ident)
+                @switch (ViewBag.form["tprelatorio"])
                 {
                     case 1: <li class="tg-active">Por Alunos</li>
                         break;
@@ -45,6 +45,22 @@
     </div>
 </div>
 
+<form method="post" action="" id="form-filtro">
+    <input type="hidden" id="tempinstrutor" name="tempinstrutor" value="@ViewBag.form["tempinstrutor"]" />
+    <input type="hidden" id="temptema" name="temptema" value="@ViewBag.form["temptema"]" />
+    <input type="hidden" id="tempcurso" name="tempcurso" value="@ViewBag.form["tempcurso"]" />
+    <input type="hidden" id="tempcategoria" name="tempcategoria" value="@ViewBag.form["tempcategoria"]" />
+    <input type="hidden" id="tempaluno" name="tempaluno" value="@ViewBag.form["tempaluno"]" />
+    <input type="hidden" id="tempcorcurso" name="tempcorcurso" value="@ViewBag.form["tempcorcurso"]" />
+    <input type="hidden" id="tempcoraluno" name="tempcoraluno" value="@ViewBag.form["tempcoraluno"]" />
+    <input type="hidden" id="templocal" name="templocal" value="@ViewBag.form["templocal"]" />
+    <input type="hidden" id="tempespecialidade" name="tempespecialidade" value="@ViewBag.form["tempespecialidade"]" />
+    <input type="hidden" id="tprelatorio" name="tprelatorio" value="@ViewBag.form["tprelatorio"]" />
+    <input type="hidden" id="dtini" name="dtini" value="@ViewBag.form["dtini"]" />
+    <input type="hidden" id="dtfim" name="dtfim" value="@ViewBag.form["dtfim"]" />
+    <input type="hidden" id="dtmes" name="dtmes" value="@ViewBag.form["dtmes"]" />
+</form>
+
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
@@ -53,7 +69,7 @@
                     <i class="fa fa-file-excel-o fa-3x" aria-hidden="true" id="exportar" style="color:#5fb536; cursor:pointer" title="Exportar para Excel"></i>
                 </div>
                 <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1 text-left">
-                    <i class="fa fa-bar-chart fa-3x" aria-hidden="true" id="grafico" style="color:#5fb536; cursor:pointer" title="Gráficos" onclick="abreGrafico(@ViewBag.ident)"></i>
+                    <i class="fa fa-bar-chart fa-3x" aria-hidden="true" id="grafico" style="color:#5fb536; cursor:pointer" title="Gráficos" onclick="abreGrafico(@ViewBag.form["tprelatorio"])"></i>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-md-8 col-lg-10 text-right">
                     <a href="~/Painel/Relatorios"><button class="tg-btn" type="button">Voltar</button></a>
@@ -66,7 +82,7 @@
                     @{
                         string temp = "";
                         int cont = 0;
-                        switch (ViewBag.ident)
+                        switch (Convert.ToInt32(ViewBag.form["tprelatorio"]))
                         {
                             // Alunos
                             case 1:
