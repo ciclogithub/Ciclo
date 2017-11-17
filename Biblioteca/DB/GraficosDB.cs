@@ -23,7 +23,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT 'Alunos' as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -52,13 +52,14 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                qry += "GROUP BY YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso)";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();
@@ -81,7 +82,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT DISTINCT CT.TXCATEGORIA as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -110,13 +111,14 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                qry += "GROUP BY CT.TXCATEGORIA, YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso), CT.TXCATEGORIA";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();
@@ -139,7 +141,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT DISTINCT co2.txcor as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -168,13 +170,14 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                qry += "GROUP BY co2.txcor, YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso), co2.txcor";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();
@@ -197,7 +200,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT (SELECT COUNT(IDALUNO) FROM CURSOS_ALUNOS WHERE IDCURSO = C.IDCURSO) AS valor, YEAR(CD.dtcurso) as categoria, CO1.TXCOR AS serie ";
+                qry = "SELECT DISTINCT co1.txcor as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -226,7 +229,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "GROUP BY CO1.TXCOR, YEAR(CD.dtcurso), C.IDCURSO ";
+                qry += "GROUP BY CO1.TXCOR, YEAR(CD.dtcurso) ";
                 qry += "ORDER BY YEAR(CD.dtcurso), CO1.TXCOR";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -256,7 +259,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT 'CURSOS' as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -285,14 +288,14 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "GROUP BY L.txlocal, YEAR(CD.dtcurso) ";
-                qry += "ORDER BY YEAR(CD.dtcurso), L.TXLOCAL";
+                qry += "GROUP BY YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso)";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();
@@ -315,7 +318,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT E.TXESPECIALIDADE as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -344,13 +347,14 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                qry += "GROUP BY E.TXESPECIALIDADE, YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso), E.TXESPECIALIDADE";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();
@@ -432,7 +436,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT L.TXLOCAL, YEAR(CD.dtcurso) as ANOS, COUNT(L.idlocal) as VALOR ";
+                qry = "SELECT DISTINCT I.TXINSTRUTOR as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -461,13 +465,14 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
+                qry += "GROUP BY I.TXINSTRUTOR, YEAR(CD.dtcurso) ";
+                qry += "ORDER BY YEAR(CD.dtcurso), I.TXINSTRUTOR ";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["ANOS"]), Convert.ToString(reader["TXLOCAL"])));
+                    grafico.Add(new Graficos(Convert.ToInt32(reader["VALOR"]), Convert.ToString(reader["categoria"]), Convert.ToString(reader["serie"])));
                 }
                 reader.Close();
                 session.Close();

@@ -1,0 +1,9 @@
+﻿@if (Model == null)
+{
+    <a class="btn btn-info" href="@Url.Action("Entrar", "Home")">Entrar</a>
+    <a class="btn btn-primary" href="@Url.Action("Assinar", "Home")">Assinar</a>
+}
+else
+{
+    <a class="btn btn-info" href="@Url.Action("Busca", "Painel")">Acessar Vídeos</a>
+}

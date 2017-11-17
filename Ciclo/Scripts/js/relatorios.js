@@ -60,14 +60,14 @@ function abreGrafico(id) {
     var titulo2 = "";
 
     switch (id) {
-        case 1: titulo = "Por Alunos"; titulo2 = "Por Alunos"; break;
-        case 2: titulo = "Por Categorias"; titulo2 = "Por Alunos";  break;
-        case 3: titulo = "Por Classificação (Aluno)"; titulo2 = "Por Alunos";  break;
-        case 4: titulo = "Por Classificação (Curso)"; titulo2 = "Por Alunos";  break;
-        case 5: titulo = "Por Cursos"; titulo2 = "Por Alunos";  break;
-        case 6: titulo = "Por Especialiadades"; titulo2 = "Por Alunos";  break;
+        case 1: titulo = "Total de alunos por período"; titulo2 = "Alunos"; break;
+        case 2: titulo = "Total de alunos por categoria"; titulo2 = "Alunos";  break;
+        case 3: titulo = "Total de alunos por Classificação"; titulo2 = "Alunos";  break;
+        case 4: titulo = "Total de alunos por Classificação"; titulo2 = "Alunos";  break;
+        case 5: titulo = "Por Cursos"; titulo2 = "Alunos";  break;
+        case 6: titulo = "Total de alunos por Especialiadades"; titulo2 = "Alunos";  break;
         case 7: titulo = "Total de alunos por local"; titulo2 = "Alunos";  break;
-        case 8: titulo = "Por Instrutores"; titulo2 = "Por Alunos";  break;
+        case 8: titulo = "Total de alunos por Instrutores"; titulo2 = "Alunos";  break;
         case 9: titulo = "Total de alunos por tema"; titulo2 = "Alunos";  break;            
     }
 
