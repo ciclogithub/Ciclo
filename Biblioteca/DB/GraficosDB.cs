@@ -259,7 +259,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT 'CURSOS' as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
+                qry = "SELECT 'ALUNOS' as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";

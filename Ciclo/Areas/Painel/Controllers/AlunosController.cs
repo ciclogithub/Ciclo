@@ -60,6 +60,7 @@ namespace Ciclo.Areas.Painel.Controllers
             ViewBag.estados = new EstadosDB().Listar();
             ViewBag.especialidades = new EspecialidadesDB().Listar();
             ViewBag.cores = new CoresDB().Listar();
+            ViewBag.redes = new RedesSociaisDB().Listar();
 
             return PartialView(aluno);
         }

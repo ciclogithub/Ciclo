@@ -147,6 +147,15 @@ table input {
     display: none;
 }
 
+#error_redes {
+    opacity: 1;
+    position: absolute;
+    top: 202px;
+    left: 330px;
+    margin-top: 0px;
+    display: none;
+}
+
 .border-icon {
     padding: 3px 3px;
     cursor: pointer;
@@ -276,3 +285,4 @@ textarea {
 .table-relat th, .table-relat td {
     font-size:12px !important;
 }
+

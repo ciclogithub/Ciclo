@@ -250,3 +250,16 @@ function removeTelefone(i) {
         }
     }
 }
+
+function addRedes() {
+    $('#form-modal-redes').validationEngine('attach');
+    if ($('#form-modal-redes').validationEngine('validate')) {
+        var temp = $("#tempredes").val();
+        var cont = $("#listredes li").length;
+        var txt = "";
+        $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + cont + ")'></i><span>" + temp + "</span></li>");
+        $("#tempredes").val("");
+        if ($("#txredes").val() === "") { txt = temp; } else { txt = $("#txredes").val() + "," + temp }
+        $("#txredes").val(txt);
+    };
+}
