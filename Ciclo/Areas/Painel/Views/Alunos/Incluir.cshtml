@@ -45,11 +45,31 @@
             {
                 foreach (var item in Model.txtelefone)
                 {
-                    telefones = telefones + "," + item.txtelefone;
-                    list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone + "</span></li>";
+                    telefones = telefones + "," + item.flwhatsapp + "|" + item.txtelefone;
+                    list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone;
+                    if (item.flwhatsapp == 1)
+                    {
+                        list_telefones = list_telefones + " <i class='fa fa-whatsapp'></i>";
+                    }
+                    list_telefones = list_telefones + "</span></li>";
                     i++;
                 }
                 telefones = telefones.Substring(1);
+            }
+        }
+
+        i = 0;
+        if (Model.txredes != null)
+        {
+            if (Model.txredes.Count > 0)
+            {
+                foreach (var item in Model.txredes)
+                {
+                    redes = redes + "," + item.idredesocial + "|" + item.txredesocial + "|" + item.txicone;
+                    listredes = listredes + "<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + i + ")'></i><span><i class='fa " + item.txicone + "'></i>" + item.txredesocial + "</span></li>";
+                    i++;
+                }
+                redes = redes.Substring(1);
             }
         }
     }
@@ -150,7 +170,7 @@
                     <div class="form-group">
                         <label class="control-label" for="temptelefone">Telefone</label>
                         <div class="input-group">
-                            <span class="input-group-addon" style="cursor:pointer"><i class="fa fa-whatsapp"></i></span>
+                            <span onclick="whatsapp()" class="input-group-addon" style="cursor:pointer" id="whatsapp_label"><i class="fa fa-whatsapp"></i><input type="checkbox" id="flwhatsapp" name="flwhatsapp" value="1" class="hide" /></span>
                             <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
                             <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
@@ -166,14 +186,13 @@
                     <div class="form-group">
                         <label class="control-label" for="tempredes">Redes Sociais</label>
                         <div class="input-group">
-                            <select id="idredesocial" name="idredesocial" class="form-control" style="width:10% !important;">
-                                <option value="">Sel.</option>
+                            <select id="idredesocial" name="idredesocial" class="form-control" style="width:20% !important; font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
                                 @foreach (var r in ViewBag.redes)
                                 {
-                                    <option value="@r.idredesocial">@r.txredesocial</option>
+                                    <option value="@r.idredesocial" name="@r.txicone">@Html.Raw("&#xf" + r.idcodigo + ";")</option>
                                 }
                             </select>
-                            <input style="width:88% !important;" type="text" class="form-control validate[required,minSize[2],maxSize[50]]" id="tempredes" name="tempredes" value="" maxlength="50" />
+                            <input type="text" class="form-control validate[required,minSize[2],maxSize[50]]" id="tempredes" name="tempredes" value="" maxlength="50" style="width:80% !important;" />
                             <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
                         <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>

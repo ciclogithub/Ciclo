@@ -252,6 +252,22 @@ namespace Biblioteca.DB
             }
         }
 
+        public void RemoverRedesSociais(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Alunos_RedesSociais WHERE idaluno = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         public void SalvarEmail(int id, string email)
         {
             try
@@ -270,14 +286,34 @@ namespace Biblioteca.DB
             }
         }
 
-        public void SalvarTelefone(int id, string telefone)
+        public void SalvarTelefone(int id, string telefone, int whatsapp)
         {
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Alunos_Telefones (idaluno, txtelefone) VALUES (@aluno, @telefone)");
+                Query query = session.CreateQuery("INSERT INTO Alunos_Telefones (idaluno, txtelefone, flwhatsapp) VALUES (@aluno, @telefone, @whatsapp)");
                 query.SetParameter("aluno", id);
                 query.SetParameter("telefone", telefone);
+                query.SetParameter("whatsapp", whatsapp);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarRedeSocial(int id, string rede, int codigo)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Alunos_RedesSociais (idaluno, idredesocial, txredesocial) VALUES (@aluno, @codigo, @rede)");
+                query.SetParameter("aluno", id);
+                query.SetParameter("codigo", codigo);
+                query.SetParameter("rede", rede);
                 query.ExecuteUpdate();
                 session.Close();
 
@@ -327,12 +363,38 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_telefone.Add(new Telefones(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txtelefone"])));
+                    list_telefone.Add(new Telefones(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txtelefone"]), Convert.ToInt32(reader["flwhatsapp"])));
                 }
                 reader.Close();
                 session.Close();
 
                 return list_telefone;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Redes> ListarRedesSociais(int id = 0)
+        {
+            try
+            {
+                List<Redes> list_redes = new List<Redes>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select AR.*, RS.txicone from Alunos_RedesSociais AR Inner Join RedesSociais RS on RS.idredesocial = AR.idredesocial where AR.idaluno = @id order by RS.txredesocial");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_redes.Add(new Redes(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txredesocial"]), Convert.ToString(reader["txicone"]), Convert.ToInt32(reader["idredesocial"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_redes;
             }
             catch (Exception error)
             {

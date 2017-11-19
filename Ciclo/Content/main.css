@@ -323,19 +323,19 @@ address { font-style: italic; }
 	padding: 0 20px;
 	line-height: 30px;
 }
-.tg-btn{
-	color: #fff;
-	padding: 0 40px;
-	position:relative;
-	text-align:center;
-	border-radius:5px;
-	background: #444349;
-	display: inline-block;
-	vertical-align: middle;
-	font:500 14px/40px 'Poppins', Arial, Helvetica, sans-serif;
+.tg-btn {
+    color: #fff;
+    padding: 0 40px;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    background: #706D78;
+    display: inline-block;
+    vertical-align: middle;
+    font: 500 14px/40px 'Poppins', Arial, Helvetica, sans-serif;
 }
     .tg-btn:hover {
-        background: #5fb536;
+        background: #E12325;
         color: #fff !important;
         -webkit-box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
         box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
@@ -862,7 +862,7 @@ li.tg-rss a{background:#ff6600;}
 .tg-messagestatus time:before{
 	top: 0;
 	right: 0;
-	color: #5fb536;
+	color: #E12325;
 	content: '\ea6c';
 	font-size: 12px;
 	line-height: 12px;
@@ -2624,11 +2624,11 @@ body.tg-homeone .tg-themescrollbar{height:265px;}
 	font-weight:bold;
 	font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
-.tg-foorterbar{
-	width:100%;
-	float:left;
-	padding:33px 0;
-	background:#444349;
+.tg-foorterbar {
+    width: 100%;
+    float: left;
+    padding: 33px 0;
+    background: #706D78;
 }
 .tg-copyrights{
 	margin:0;

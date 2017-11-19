@@ -47,7 +47,7 @@
                                 <th width="15%">CPF</th>
                                 <th width="31%">E-MAIL</th>
                                 <th width="15%">TELEFONE</th>
-                                <th width="4%"><img src="~/images/diagweb-32x32.png" title="Possui cadastro no Diagweb" /></th>
+                                @*<th width="4%"><img src="~/images/diagweb-32x32.png" title="Possui cadastro no Diagweb" /></th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -67,10 +67,15 @@
                                     <td>
                                         @foreach (var t in p.txtelefone)
                                         {
-                                            @t.txtelefone<br />
+                                            @t.txtelefone
+                                            if (t.flwhatsapp == 1)
+                                            {
+                                                @Html.Raw("<a style='color:#88e55b !important' href='https://api.whatsapp.com/send?phone=55" + t.txtelefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "") + "' target='_blank'> <i class='fa fa-whatsapp'></i></a>");
+                                            }
+                                            <br />
                                         }
                                     </td>
-                                    <td></td>
+                                    @*<td></td>*@
                                 </tr>
                             }
                         </tbody>

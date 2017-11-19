@@ -24,6 +24,7 @@ namespace Biblioteca.Entidades
         public string txempresa { get; set; }
         public int total { get; set; }
         public string txobs { get; set; }
+        public List<Redes> txredes { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -59,6 +60,7 @@ namespace Biblioteca.Entidades
             this.txempresa = empresa;
             this.total = total;
             this.txobs = obs;
+            this.txredes = new AlunosDB().ListarRedesSociais(id);
         }
 
         public Alunos(int id, string aluno)
@@ -99,9 +101,25 @@ namespace Biblioteca.Entidades
             new AlunosDB().SalvarEmail(id, email);
         }
 
-        public void SalvarTelefone(int id = 0, string telefone = "")
+        public void SalvarTelefone(int id = 0, string telefone = "", int whatsapp = 0)
         {
-            new AlunosDB().SalvarTelefone(id, telefone);
+            new AlunosDB().SalvarTelefone(id, telefone, whatsapp);
+        }
+    }
+
+    public class Redes
+    {
+        public int idaluno { get; set; }
+        public string txredesocial { get; set; }
+        public string txicone { get; set; }
+        public int idredesocial { get; set; }
+
+        public Redes(int id, string rede, string icone, int idrede)
+        {
+            this.idaluno = id;
+            this.txredesocial = rede;
+            this.txicone = icone;
+            this.idredesocial = idrede;
         }
     }
 
@@ -109,11 +127,13 @@ namespace Biblioteca.Entidades
     {
         public int idaluno { get; set; }
         public string txtelefone { get; set; }
+        public int flwhatsapp { get; set; }
 
-        public Telefones(int id, string telefone)
+        public Telefones(int id, string telefone, int whatsapp)
         {
             this.idaluno = id;
             this.txtelefone = telefone;
+            this.flwhatsapp = whatsapp;
         }
     }
 

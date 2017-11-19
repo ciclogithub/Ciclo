@@ -168,11 +168,12 @@ function IncluirAluno() {
     var idcidade = $("#form-modal_aluno #idcidade").val();
     var txempresa = $("#form-modal_aluno #txempresa").val();
     var txobs = $("#form-modal_aluno #txobs").val();
+    var txredes = $("#form-modal_aluno #txredes").val();
 
     $.ajax({
         type: "POST",
         url: '/Painel/Alunos/IncluirConcluir',
-        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa, obs: txobs },
+        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa, obs: txobs, redes: txredes.toString() },
         dataType: "json",
         traditional: true,
         success: function (json) {
@@ -227,13 +228,16 @@ function removeEmail(i) {
 function addTelefone() {
     $('#form-modal-telefone').validationEngine('attach');
     if ($('#form-modal-telefone').validationEngine('validate')) {
+        var whatsapp = ($("#flwhatsapp").is(":checked") ? 1 : 0);
         var temp = $("#temptelefone").val();
         var cont = $("#listtelefone li").length;
         var txt = "";
-        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + "</span></li>");
+        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         $("#temptelefone").val("");
-        if ($("#txtelefone").val() == "") { txt = temp; } else { txt = $("#txtelefone").val() + "," + temp }
+        if ($("#txtelefone").val() == "") { txt = whatsapp + "|" +  temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp }
         $("#txtelefone").val(txt);
+        $('#flwhatsapp').prop('checked', false);
+        $('#whatsapp_label').removeClass("verde_escuro")
     };
 }
 
@@ -246,7 +250,8 @@ function removeTelefone(i) {
     if ($("#txtelefone").val() != "") {
         var arr = $("#txtelefone").val().split(",");
         for (x = 0; x < arr.length; x++) {
-            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arr[x] + "</span></li>");
+            arrT = arr[x].split("|");
+            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         }
     }
 }
@@ -255,11 +260,40 @@ function addRedes() {
     $('#form-modal-redes').validationEngine('attach');
     if ($('#form-modal-redes').validationEngine('validate')) {
         var temp = $("#tempredes").val();
+        var idrede = $("#idredesocial").val();
+        var rede = $("#idredesocial option:selected").attr("name");
         var cont = $("#listredes li").length;
         var txt = "";
-        $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + cont + ")'></i><span>" + temp + "</span></li>");
+        $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + cont + ")'></i><span><i class='fa " + rede + "'></i> " + temp + "</span></li>");
         $("#tempredes").val("");
-        if ($("#txredes").val() === "") { txt = temp; } else { txt = $("#txredes").val() + "," + temp }
+        if ($("#txredes").val() === "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede }
         $("#txredes").val(txt);
     };
+}
+
+function removeRedes(i) {
+    var arr = $("#txredes").val().split(",");
+    var txt = "";
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
+    $("#txredes").val(txt.slice(1));
+    $("#listredes").empty()
+    if ($("#txredes").val() != "") {
+        var arr = $("#txredes").val().split(",");
+        for (x = 0; x < arr.length; x++) {
+            arrT = arr[x].split("|");
+            $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + x + ")'></i><span><i class='fa " + arrT[2] + "'></i>" + arrT[1] + "</span></li>");
+        }
+    }
+}
+
+function whatsapp(o) {
+    i = $("#flwhatsapp").is(":checked");
+    if (i) {
+        $('#flwhatsapp').prop('checked', false);
+        $('#whatsapp_label').removeClass("verde_escuro")
+    } else {
+        $('#flwhatsapp').prop('checked', true);
+        $('#whatsapp_label').addClass("verde_escuro")
+    }
+
 }

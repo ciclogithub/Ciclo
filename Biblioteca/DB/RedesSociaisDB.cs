@@ -24,7 +24,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_redes.Add(new RedesSociais(Convert.ToInt32(reader["idredesocial"]), Convert.ToString(reader["txredesocial"]), Convert.ToString(reader["txicone"])));
+                    list_redes.Add(new RedesSociais(Convert.ToInt32(reader["idredesocial"]), Convert.ToString(reader["txredesocial"]), Convert.ToString(reader["txicone"]), Convert.ToString(reader["idcodigo"])));
                 }
                 reader.Close();
                 session.Close();

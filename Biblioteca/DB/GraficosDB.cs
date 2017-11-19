@@ -141,7 +141,9 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT co2.txcor as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
+                //qry = "SELECT DISTINCT co2.txcor as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
+                qry += "SELECT TBL.txcor as serie,TBL.ano as categoria, COUNT(TBL.idaluno) as VALOR FROM( ";
+                qry += "SELECT DISTINCT co2.txcor, YEAR(CD.dtcurso) as ano, A.IDALUNO ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -170,8 +172,11 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "GROUP BY co2.txcor, YEAR(CD.dtcurso) ";
-                qry += "ORDER BY YEAR(CD.dtcurso), co2.txcor";
+                //qry += "GROUP BY co2.txcor, YEAR(CD.dtcurso) ";
+                //qry += "ORDER BY YEAR(CD.dtcurso), co2.txcor";
+                qry += ") AS TBL ";
+                qry += "GROUP BY TBL.txcor, TBL.ano ";
+                qry += "ORDER BY TBL.ano, TBL.txcor ";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
@@ -318,7 +323,9 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT E.TXESPECIALIDADE as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
+                //qry = "SELECT E.TXESPECIALIDADE as serie,  YEAR(CD.dtcurso) as categoria, COUNT(A.IDALUNO) as VALOR ";
+                qry += "SELECT TBL.TXESPECIALIDADE as serie,TBL.ano as categoria, COUNT(TBL.idaluno) as VALOR FROM( ";
+                qry += "SELECT DISTINCT E.TXESPECIALIDADE, YEAR(CD.dtcurso) as ano, A.IDALUNO ";
                 qry += "FROM CURSOS C ";
                 qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
@@ -347,8 +354,11 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "GROUP BY E.TXESPECIALIDADE, YEAR(CD.dtcurso) ";
-                qry += "ORDER BY YEAR(CD.dtcurso), E.TXESPECIALIDADE";
+                //qry += "GROUP BY E.TXESPECIALIDADE, YEAR(CD.dtcurso) ";
+                //qry += "ORDER BY YEAR(CD.dtcurso), E.TXESPECIALIDADE";
+                qry += ") AS TBL ";
+                qry += "GROUP BY TBL.TXESPECIALIDADE, TBL.ano ";
+                qry += "ORDER BY TBL.ano, TBL.TXESPECIALIDADE ";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 

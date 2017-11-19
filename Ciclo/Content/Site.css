@@ -256,6 +256,11 @@ table input {
     color:#ffffff;
 }
 
+.verde_escuro {
+    background-color: #31653f;
+    color: #ffffff;
+}
+
 .table th, .table td {
     text-align:left !important;
 }
@@ -266,8 +271,8 @@ table input {
 }
 
 .pagesel {
-    background-color:#5fb536 !important;
-    Color:#ffffff !important;
+    background-color: #E12325 !important;
+    Color: #ffffff !important;
 }
 
 textarea {
