@@ -1,9 +1,44 @@
 ﻿@if (Model == null)
 {
-    <a class="btn btn-info" href="@Url.Action("Entrar", "Home")">Entrar</a>
-    <a class="btn btn-primary" href="@Url.Action("Assinar", "Home")">Assinar</a>
+    <div class="tg-navigationarea">
+        <nav id="tg-nav" class="tg-nav hidden-md hidden-lg hidden-sm">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                <ul>
+                    <li><a href="Login">Entrar</a></li>
+                    <li><a href="Cadastro">Cadastrar</a></li>
+                </ul>
+            </div>
+        </nav>
+        <a class="tg-btn tg-btnbookseat hidden-xs" href="Login">Entrar</a>
+        <a class="tg-btn tg-btnbookseat hidden-xs" href="Cadastro">Cadastrar</a>
+    </div>
 }
 else
 {
-    <a class="btn btn-info" href="@Url.Action("Busca", "Painel")">Acessar Vídeos</a>
+    <div class="tg-navigationarea">
+        <nav id="tg-nav" class="tg-nav hidden-md hidden-lg hidden-sm">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                <ul>
+                    <li><a href="~/Painel">Painel</a></li>
+                </ul>
+            </div>
+        </nav>
+        <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Painel">Painel</a>
+    </div>
 }
