@@ -146,6 +146,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Painel\Controllers\EmpresasController.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
     <Compile Include="Areas\Painel\Controllers\RelatoriosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ConfiguracoesController.cs" />
@@ -236,6 +237,8 @@
     <Content Include="Areas\Painel\Views\Especialidades\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Relatorios\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Relatorios\Relatorio.cshtml" />
+    <Content Include="Areas\Painel\Views\Empresas\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Empresas\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\diagweb-16x16.png" />
     <Content Include="images\diagweb-32x32.png" />
@@ -490,6 +493,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
+    <Content Include="Scripts\js\empresas.js" />
     <Content Include="Scripts\js\cursos.js" />
     <Content Include="Scripts\js\configuracoes.js" />
     <Content Include="Scripts\js\especialidades.js" />

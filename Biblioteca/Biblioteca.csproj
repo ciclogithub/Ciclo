@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\EmpresasDB.cs" />
     <Compile Include="DB\RedesSociaisDB.cs" />
     <Compile Include="DB\GraficosDB.cs" />
     <Compile Include="DB\AvaliacoesDB.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="DB\OrganizadoresDB.cs" />
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
+    <Compile Include="Entidades\Empresas.cs" />
     <Compile Include="Entidades\Avaliacoes.cs" />
     <Compile Include="Entidades\Cidades.cs" />
     <Compile Include="Entidades\RedesSociais.cs" />

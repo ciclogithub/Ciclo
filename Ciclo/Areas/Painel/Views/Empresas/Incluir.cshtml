@@ -1,0 +1,213 @@
+﻿@model Biblioteca.Entidades.Alunos
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idaluno == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Aluno
+        </h4>
+    </div>
+
+    @{
+        string emails = "";
+        string list_emails = "";
+        string telefones = "";
+        string list_telefones = "";
+        string redes = "";
+        string listredes = "";
+
+        int i = 0;
+        if (Model.txemail != null)
+        {
+            if (Model.txemail.Count > 0)
+            {
+                foreach (var item in Model.txemail)
+                {
+                    emails = emails + "," + item.txemail;
+                    list_emails = list_emails + "<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + i + ")'></i><span>" + item.txemail + "</span></li>";
+                    i++;
+                }
+                emails = emails.Substring(1);
+            }
+        }
+
+        i = 0;
+        if (Model.txtelefone != null)
+        {
+            if (Model.txtelefone.Count > 0)
+            {
+                foreach (var item in Model.txtelefone)
+                {
+                    telefones = telefones + "," + item.flwhatsapp + "|" + item.txtelefone;
+                    list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone;
+                    if (item.flwhatsapp == 1)
+                    {
+                        list_telefones = list_telefones + " <i class='fa fa-whatsapp'></i>";
+                    }
+                    list_telefones = list_telefones + "</span></li>";
+                    i++;
+                }
+                telefones = telefones.Substring(1);
+            }
+        }
+
+        i = 0;
+        if (Model.txredes != null)
+        {
+            if (Model.txredes.Count > 0)
+            {
+                foreach (var item in Model.txredes)
+                {
+                    redes = redes + "," + item.idredesocial + "|" + item.txredesocial + "|" + item.txicone;
+                    listredes = listredes + "<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + i + ")'></i><span><i class='fa " + item.txicone + "'></i>" + item.txredesocial + "</span></li>";
+                    i++;
+                }
+                redes = redes.Substring(1);
+            }
+        }
+    }
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form method="post" action="" id="form-modal_aluno">
+                    <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
+                    <input type="hidden" id="txemail" name="txemail" value="@emails" />
+                    <input type="hidden" id="txredes" name="txredes" value="@redes" />
+                    <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
+                    <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 form-group">
+                            <label class="control-label" for="txinstrutor">Nome *</label>
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 form-group">
+                            <label class="control-label" for="txemail">CPF</label>
+                            <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <label class="control-label" for="txempresa">Empresa</label>
+                            <input type="text" class="form-control validate[minSize[3],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.txempresa" maxlength="300" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="txinstrutor">Estado</label>
+                            <select id="idestado" name="idestado" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var t in ViewBag.estados)
+                                {
+                                    <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group" id="dv_cidade">
+                            <label class="control-label" for="idcidade">Cidade</label>
+                            <select id="idcidade" name="idcidade" class="form-control">
+                                <option value="">-- Selecione o estado --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="idespecialidade">Especialidade</label>
+                            <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var e in ViewBag.especialidades)
+                                {
+                                    <option value="@e.idespecialidade" @(Model.idespecialidade == e.idespecialidade ? "selected" : "")>@e.txespecialidade</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="idcor">Classificacao</label>
+                            <div class="input-group">
+                                <select id="idcor" name="idcor" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in ViewBag.cores)
+                                    {
+                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                            <label class="control-label" for="txobs">Observações</label>
+                            <textarea name="txobs" class="form-control" id="txobs" placeholder="Observações" rows="3">@Model.txobs</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <form id="form-modal-email">
+                    <div class="form-group">
+                        <label class="control-label" for="tempemail">E-mail</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[100],email]" id="tempemail" name="tempemail" value="" maxlength="100" />
+                            <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <ul class="list-itens" id="listemail">@Html.Raw(list_emails)</ul>
+                        <div id="error_email" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <form id="form-modal-telefone">
+                    <div class="form-group">
+                        <label class="control-label" for="temptelefone">Telefone</label>
+                        <div class="input-group">
+                            <span onclick="whatsapp()" class="input-group-addon" style="cursor:pointer" id="whatsapp_label"><i class="fa fa-whatsapp"></i><input type="checkbox" id="flwhatsapp" name="flwhatsapp" value="1" class="hide" /></span>
+                            <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
+                            <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <ul class="list-itens" id="listtelefone">@Html.Raw(list_telefones)</ul>
+                        <div id="error_telefone" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <form id="form-modal-redes">
+                    <div class="form-group">
+                        <label class="control-label" for="tempredes">Redes Sociais</label>
+                        <div class="input-group">
+                            <select id="idredesocial" name="idredesocial" class="form-control" style="width:20% !important; font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
+                                @foreach (var r in ViewBag.redes)
+                                {
+                                    <option value="@r.idredesocial" name="@r.txicone">@Html.Raw("&#xf" + r.idcodigo + ";")</option>
+                                }
+                            </select>
+                            <input type="text" class="form-control validate[required,minSize[2],maxSize[50]]" id="tempredes" name="tempredes" value="" maxlength="50" style="width:80% !important;" />
+                            <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>
+                        <div id="error_redes" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <button id="incluir_btn_aluno" class="tg-btn text-center" type="button">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/alunos")
+@Scripts.Render("~/bundles/mask")

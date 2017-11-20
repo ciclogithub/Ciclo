@@ -9,18 +9,18 @@ using System.Web.Mvc;
 
 namespace Ciclo.Areas.Painel.Controllers
 {
-    public class AlunosController : Controller
+    public class EmpresasController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string aluno = "", int pagina = 1)
+        public ActionResult Index(string empresa = "", int pagina = 1)
         {
-            List<Alunos> list = new List<Alunos>();
-            ViewBag.aluno = aluno;
+            List<Empresas> list = new List<Empresas>();
+            ViewBag.aluno = empresa;
 
-            if (aluno == "")
-                list = new AlunosDB().Listar(pagina, 10);
+            if (empresa == "")
+                list = new EmpresasDB().Listar(pagina, 10);
             else
-                list = new AlunosDB().Listar(aluno, pagina, 10);
+                list = new EmpresasDB().Listar(empresa, pagina, 10);
 
             if (list.Count > 0)
             {
@@ -42,7 +42,7 @@ namespace Ciclo.Areas.Painel.Controllers
             var arr = ident.Split(',');
             foreach (var i in arr)
             {
-                new AlunosDB().Excluir(Convert.ToInt32(i));
+                new EmpresasDB().Excluir(Convert.ToInt32(i));
             }
 
             return Json(new Retorno());
@@ -51,18 +51,13 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public ActionResult Incluir(int id = 0)
         {
-            Alunos aluno = new Alunos();
+            Empresas empresa = new Empresas();
             if (id != 0)
             {
-                aluno = new AlunosDB().Buscar(id);
+                empresa = new EmpresasDB().Buscar(id);
             }
 
-            ViewBag.estados = new EstadosDB().Listar();
-            ViewBag.especialidades = new EspecialidadesDB().Listar();
-            ViewBag.cores = new CoresDB().Listar();
-            ViewBag.redes = new RedesSociaisDB().Listar();
-
-            return PartialView(aluno);
+            return PartialView(empresa);
         }
 
         [Autenticacao]

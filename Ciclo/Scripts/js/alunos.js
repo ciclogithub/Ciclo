@@ -21,28 +21,28 @@
         $('#form-modal_aluno').validationEngine('attach');
         if ($('#form-modal_aluno').validationEngine('validate')) {
             if (!err) { IncluirAluno(); }
-        };
+        }
     });
 
     $("#idestado").on("change", function () {
-        if ($(this).val() == "") {
+        if ($(this).val() === "") {
             $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
         } else {
             $("#dv_cidade").html("Carregando lista ...");
-            ListaCidades($(this).val(), 0)
+            ListaCidades($(this).val(), 0);
         }
-    })
+    });
 
     $("#idcor").on("change", function () {
-        $("#bgcor").removeClass()
-        $("#bgcor").addClass("input-group-addon")
-        $("#bgcor").addClass($(this).find(":selected").text().replace(" ","_"));
-        
-    })
+        $("#bgcor").removeClass();
+        $("#bgcor").addClass("input-group-addon");
+        $("#bgcor").addClass($(this).find(":selected").text().replace(" ", "_"));
+
+    });
     
 
     if ($("#idestado")) {
-        if ($("#idestado").val() != "") {
+        if ($("#idestado").val() !== "") {
             ListaCidades($("#idestado").val(), $("#tempcidade").val());
         }
     }
@@ -61,7 +61,7 @@ function ListaCidades(estado, cidade) {
             temp += "<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idcidade;
-                if (data[x].idcidade == cidade) { temp += " selected " }
+                if (data[x].idcidade === cidade) { temp += " selected "; }
                 temp += ">" + data[x].txcidade + "</option>";
             }
             temp += "</select>";
@@ -76,14 +76,14 @@ function ListaCidades(estado, cidade) {
 function pagination(c) {
     var p = $("#page").val();
     var t = $("#totalpage").val();
-    if (c == -1) {
+    if (c === -1) {
         c = parseInt(p) - 1;
-        if (c <= 0) { c = 1 }
+        if (c <= 0) { c = 1; }
         window.location = "/Painel/Alunos/?pagina=" + c + "&aluno=" + $("#aluno").val();
     } else {
-        if (c == 0) {
+        if (c === 0) {
             c = parseInt(p) + 1;
-            if (c > t) { c = t }
+            if (c > t) { c = t; }
             window.location = "/Painel/Alunos/?pagina=" + c + "&aluno=" + $("#aluno").val();
         } else {
             window.location = "/Painel/Alunos/?pagina=" + c + "&aluno=" + $("#aluno").val();
@@ -115,10 +115,10 @@ function AlunoAlterar() {
     });
 
     if (cont === 0) {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            alert("Selecione somente 1 registro para alterar");
         } else {
             Alunos(val);
         }
@@ -131,7 +131,7 @@ function AlunoExcluir() {
     ids = "";
     $("input[name='ident']").each(function () {
         if ($(this).is(":checked")) {
-            ids = ids + "," + $(this).val()
+            ids = ids + "," + $(this).val();
         }
     });
 
@@ -152,7 +152,7 @@ function AlunoExcluir() {
             });
         }
     } else {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     }
 }
 
@@ -206,9 +206,9 @@ function addEmail() {
         var txt = "";
         $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + cont + ")'></i><span>" + temp + "</span></li>");
         $("#tempemail").val("");
-        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp }
+        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp; }
         $("#txemail").val(txt);
-    };
+    }
 }
 
 function removeEmail(i) {
@@ -216,9 +216,9 @@ function removeEmail(i) {
     var txt = "";
     for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
     $("#txemail").val(txt.slice(1));
-    $("#listemail").empty()
-    if ($("#txemail").val() != "") {
-        var arr = $("#txemail").val().split(",");
+    $("#listemail").empty();
+    if ($("#txemail").val() !== "") {
+        arr = $("#txemail").val().split(",");
         for (x = 0; x < arr.length; x++) {
             $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + x + ")'></i><span>" + arr[x] + "</span></li>");
         }
@@ -232,26 +232,26 @@ function addTelefone() {
         var temp = $("#temptelefone").val();
         var cont = $("#listtelefone li").length;
         var txt = "";
-        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         $("#temptelefone").val("");
-        if ($("#txtelefone").val() == "") { txt = whatsapp + "|" +  temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp }
+        if ($("#txtelefone").val() === "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
         $("#txtelefone").val(txt);
         $('#flwhatsapp').prop('checked', false);
-        $('#whatsapp_label').removeClass("verde_escuro")
-    };
+        $('#whatsapp_label').removeClass("verde_escuro");
+    }
 }
 
 function removeTelefone(i) {
     var arr = $("#txtelefone").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
     $("#txtelefone").val(txt.slice(1));
-    $("#listtelefone").empty()
-    if ($("#txtelefone").val() != "") {
-        var arr = $("#txtelefone").val().split(",");
+    $("#listtelefone").empty();
+    if ($("#txtelefone").val() !== "") {
+        arr = $("#txtelefone").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
-            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         }
     }
 }
@@ -266,19 +266,19 @@ function addRedes() {
         var txt = "";
         $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + cont + ")'></i><span><i class='fa " + rede + "'></i> " + temp + "</span></li>");
         $("#tempredes").val("");
-        if ($("#txredes").val() === "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede }
+        if ($("#txredes").val() === "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede; }
         $("#txredes").val(txt);
-    };
+    }
 }
 
 function removeRedes(i) {
     var arr = $("#txredes").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
     $("#txredes").val(txt.slice(1));
-    $("#listredes").empty()
-    if ($("#txredes").val() != "") {
-        var arr = $("#txredes").val().split(",");
+    $("#listredes").empty();
+    if ($("#txredes").val() !== "") {
+        arr = $("#txredes").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
             $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + x + ")'></i><span><i class='fa " + arrT[2] + "'></i>" + arrT[1] + "</span></li>");
@@ -290,10 +290,10 @@ function whatsapp(o) {
     i = $("#flwhatsapp").is(":checked");
     if (i) {
         $('#flwhatsapp').prop('checked', false);
-        $('#whatsapp_label').removeClass("verde_escuro")
+        $('#whatsapp_label').removeClass("verde_escuro");
     } else {
         $('#flwhatsapp').prop('checked', true);
-        $('#whatsapp_label').addClass("verde_escuro")
+        $('#whatsapp_label').addClass("verde_escuro");
     }
 
 }

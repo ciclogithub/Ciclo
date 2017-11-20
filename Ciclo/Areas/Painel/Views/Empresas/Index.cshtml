@@ -1,7 +1,7 @@
-﻿@model List<Biblioteca.Entidades.Alunos>
+﻿@model List<Biblioteca.Entidades.Empresas>
 
 @{
-    ViewBag.Title = "Alunos";
+    ViewBag.Title = "Empresas";
 }
 
 <div class="tg-bgparallax">
@@ -12,7 +12,7 @@
             </div>
             <ol class="tg-breadcrumb">
                 <li><a href="~/Painel">Dashboard</a></li>
-                <li class="tg-active">Alunos</li>
+                <li class="tg-active">Empresas</li>
             </ol>
         </div>
     </div>
@@ -24,15 +24,15 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="aluno" name="aluno" value="@ViewBag.aluno" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">Localizar</button>
-                    &nbsp;<button class="tg-btn" type="button" onclick="AlunosTodos();">Todos</button>
+                    <input type="text" id="empresa" name="empresa" value="@ViewBag.empresa" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_empresa">Localizar</button>
+                    &nbsp;<button class="tg-btn" type="button" onclick="EmpresasTodos();">Todos</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button" onclick="Alunos(0);">Novo</button>
+                    <button class="tg-btn" type="button" onclick="Empresas(0);">Novo</button>
                     &nbsp;
-                    <button class="tg-btn" type="button" onclick="AlunoAlterar()">Alterar</button>
+                    <button class="tg-btn" type="button" onclick="EmpresaAlterar()">Alterar</button>
                     &nbsp;
-                    <button class="tg-btn" type="button" onclick="AlunoExcluir()">Excluir</button>
+                    <button class="tg-btn" type="button" onclick="EmpresaExcluir()">Excluir</button>
                 </div>
             </div>
             <div class="row pt">
@@ -42,30 +42,27 @@
                         <thead>
                             <tr>
                                 <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="2%">&nbsp;</th>
-                                <th width="29%">ALUNO</th>
-                                <th width="15%">CPF</th>
+                                <th width="36%">EMPRESA</th>
+                                <th width="15%">CNPJ</th>
                                 <th width="31%">E-MAIL</th>
                                 <th width="15%">TELEFONE</th>
-                                <th width="5%"><img src="~/images/diagweb-32x32.png" title="Possui cadastro no Diagweb" /></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var p in Model)
                             {
                                 <tr>
-                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idaluno" /></th>
-                                    <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
-                                    <td>@p.txaluno</td>
-                                    <td>@p.txcpf</td>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idempresa" /></th>
+                                    <td>@p.txempresa</td>
+                                    <td>@p.txcnpj</td>
                                     <td>
-                                        @foreach (var e in p.txemail)
+                                        @*@foreach (var e in p.txemail)
                                         {
                                             @e.txemail<br />
-                                        }
+                                        }*@
                                     </td>
                                     <td>
-                                        @foreach (var t in p.txtelefone)
+                                        @*@foreach (var t in p.txtelefone)
                                         {
                                             @t.txtelefone
                                             if (t.flwhatsapp == 1)
@@ -73,12 +70,7 @@
                                                 @Html.Raw("<a style='color:#006400 !important' href='https://api.whatsapp.com/send?phone=55" + t.txtelefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "") + "' target='_blank'> <i class='fa fa-whatsapp'></i></a>");
                                             }
                                             <br />
-                                        }
-                                    </td>
-                                    <td style="text-align:center">
-                                    @if (p.diagweb == 0) { <span title="Não é cliente Diagweb"><i class="fa fa-circle-thin" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle-thin" aria-hidden="true"></i></span> }
-                                    @if (p.diagweb == 1) { <span title="Cliente Diagweb"><i class="fa fa-circle aria-hidden="true"></i>&nbsp;<i class="fa fa-circle-thin" aria-hidden="true"></i></span> }
-                                    @if (p.diagweb == 2) { <span title="Cliente Diagweb com produtos"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle" aria-hidden="true"></i></span>  }
+                                        }*@
                                     </td>
                                 </tr>
                             }
@@ -120,7 +112,7 @@
                             }
                             @for (var x = pmin; x <= pmax; x++)
                             {
-                                <li class="page-item"><a href="javascript:pagination(@x)" class="page-link @(ViewBag.pagina == x ? "pagesel" : "")">@x</a></li>
+                                <li class="page-item"><a href="javascript:pagination(@x)" class="page-link @(ViewBag.pagina == x ? "pagesel" : "")" href="#">@x</a></li>
                             }
                             @if (ViewBag.pagina < pages)
                             {
@@ -158,7 +150,7 @@
 
 
 @section scripts {
-    @Scripts.Render("~/bundles/alunos")
+    @Scripts.Render("~/bundles/empresas")
 }
 
 
