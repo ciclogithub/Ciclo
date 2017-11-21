@@ -24,25 +24,34 @@
                     <div class="counter">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_instrutor</p>
                                         <p><a href="~/Painel/Instrutores" class="dashlink">Instrutores</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_curso</p>
                                         <p><a href="~/Painel/Cursos" class="dashlink">Cursos</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_aluno</p>
                                         <p><a href="~/Painel/Alunos" class="dashlink">Alunos</a></p>
+                                        <p><strong>@ViewBag.contadores.cont_alunos_ciclo</strong> - Clientes Diagweb <a href="#">(ver)</a></p>
+                                        <p><strong>@ViewBag.contadores.cont_alunos_compra</strong> - Clientes Diagweb com produtos <a href="#">(ver)</a></p>
+                                        <p><strong>@((ViewBag.contadores.cont_aluno - ViewBag.contadores.cont_alunos_ciclo) - ViewBag.contadores.cont_alunos_compra)</strong> - Não são clientes <a href="#">(ver)</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div>
+                                        <p class="counter-count">@ViewBag.contadores.cont_empresas</p>
+                                        <p><a href="~/Painel/Empresas" class="dashlink">Empresas</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.avaliacao</p>
                                         <p>Avaliação Média</p>

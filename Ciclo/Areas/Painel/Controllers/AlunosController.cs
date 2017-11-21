@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ciclo.Areas.Painel.Models;
 
 namespace Ciclo.Areas.Painel.Controllers
 {
@@ -51,29 +52,18 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public ActionResult Incluir(int id = 0)
         {
-            Alunos aluno = new Alunos();
-            if (id != 0)
-            {
-                aluno = new AlunosDB().Buscar(id);
-            }
-
-            ViewBag.estados = new EstadosDB().Listar();
-            ViewBag.especialidades = new EspecialidadesDB().Listar();
-            ViewBag.cores = new CoresDB().Listar();
-            ViewBag.redes = new RedesSociaisDB().Listar();
-
-            return PartialView(aluno);
+            return PartialView(new AlunosView(id));
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "", string obs = "", string redes = "")
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "", string obs = "", string redes = "", int idempresa = 0)
         {
             AlunosDB db = new AlunosDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs,0));
+                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs, 0, idempresa));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -87,6 +77,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 aluno.idcor = cor;
                 aluno.txempresa = empresa;
                 aluno.txobs = obs;
+                aluno.idempresa = idempresa;
 
                 db.Alterar(aluno);
 
@@ -128,5 +119,14 @@ namespace Ciclo.Areas.Painel.Controllers
 
             return Json(new Retorno());
         }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaEspecialidades()
+        {
+            List<Especialidades> especialidades = new EspecialidadesDB().Listar();
+            return Json(especialidades);
+        }
+       
     }
 }

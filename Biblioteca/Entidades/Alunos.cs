@@ -26,6 +26,7 @@ namespace Biblioteca.Entidades
         public string txobs { get; set; }
         public List<Redes> txredes { get; set; }
         public int diagweb { get; set; }
+        public int idempresa { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -44,9 +45,10 @@ namespace Biblioteca.Entidades
             this.total = 0;
             this.txobs = "";
             this.diagweb = 0;
+            this.idempresa = 0;
         }
 
-        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, string empresa, int total, string obs, int diagweb)
+        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, string empresa, int total, string obs, int diagweb, int idempresa)
         {
             this.idaluno = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -64,6 +66,7 @@ namespace Biblioteca.Entidades
             this.txobs = obs;
             this.txredes = new AlunosDB().ListarRedesSociais(id);
             this.diagweb = diagweb;
+            this.idempresa = idempresa;
         }
 
         public Alunos(int id, string aluno)

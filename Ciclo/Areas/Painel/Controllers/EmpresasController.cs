@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ciclo.Areas.Painel.Models;
 
 namespace Ciclo.Areas.Painel.Controllers
 {
@@ -15,7 +16,7 @@ namespace Ciclo.Areas.Painel.Controllers
         public ActionResult Index(string empresa = "", int pagina = 1)
         {
             List<Empresas> list = new List<Empresas>();
-            ViewBag.aluno = empresa;
+            ViewBag.empresa = empresa;
 
             if (empresa == "")
                 list = new EmpresasDB().Listar(pagina, 10);
@@ -57,37 +58,41 @@ namespace Ciclo.Areas.Painel.Controllers
                 empresa = new EmpresasDB().Buscar(id);
             }
 
+            ViewBag.estados = new EstadosDB().Listar();
+
             return PartialView(empresa);
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "", string obs = "", string redes = "")
+        public JsonResult IncluirConcluir(int id = 0, string codigo = "", string empresa = "", string email = "", string telefone = "", string cnpj = "", string cep = "", int cidade = 0, string bairro = "", string logradouro = "", string numero = "", string complemento = "")
         {
-            AlunosDB db = new AlunosDB();
+            EmpresasDB db = new EmpresasDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs,0));
-                Alunos aluno = db.Buscar(id);
+                ident = db.Salvar(new Empresas(id, empresa, cnpj, codigo, cep, cidade, numero, logradouro, complemento, 0, bairro));
+                Empresas emp = db.Buscar(id);
             }
             else
             {
                 ident = id;
-                Alunos aluno = db.Buscar(id);
-                aluno.txaluno = nome;
-                aluno.txcpf = cpf;
-                aluno.idespecialidade = especialidade;
-                aluno.idcidade = cidade;
-                aluno.idcor = cor;
-                aluno.txempresa = empresa;
-                aluno.txobs = obs;
+                Empresas emp = db.Buscar(id);
+                emp.idempresa = id;
+                emp.txempresa = empresa;
+                emp.txcnpj = cnpj;
+                emp.txcodigo = codigo;
+                emp.nrcep = cep;
+                emp.idcidade = cidade;
+                emp.txnumero = numero;
+                emp.txlogradouro = logradouro;
+                emp.txcomplemento = complemento;
+                emp.txbairro = bairro;
 
-                db.Alterar(aluno);
+                db.Alterar(emp);
 
                 db.RemoverEmails(ident);
                 db.RemoverTelefones(ident);
-                db.RemoverRedesSociais(ident);
             }
  
             var arrE = email.Split(',');
@@ -95,7 +100,7 @@ namespace Ciclo.Areas.Painel.Controllers
             {
                 if (i != "")
                 {
-                    new AlunosDB().SalvarEmail(ident, i);
+                    new EmpresasDB().SalvarEmail(ident, i);
                 }
             }
 
@@ -105,23 +110,19 @@ namespace Ciclo.Areas.Painel.Controllers
                 if (i != "")
                 {
                     var arrTemp = i.Split('|');
-                    new AlunosDB().SalvarTelefone(ident, arrTemp[1], Convert.ToInt32(arrTemp[0]));
-                }
-
-            }
-
-            var arrR = redes.Split(',');
-            foreach (var i in arrR)
-            {
-                if (i != "")
-                {
-                    var arrTemp = i.Split('|');
-                    new AlunosDB().SalvarRedeSocial(ident, arrTemp[1], Convert.ToInt32(arrTemp[0]));
+                    new EmpresasDB().SalvarTelefone(ident, arrTemp[1], Convert.ToInt32(arrTemp[0]));
                 }
 
             }
 
             return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult Cep(string cep)
+        {
+            return Json(new CepView(cep));
         }
     }
 }

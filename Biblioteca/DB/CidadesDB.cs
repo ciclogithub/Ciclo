@@ -37,6 +37,32 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
-        
+
+        public int Buscar(int estado, string cidade)
+        {
+            try
+            {
+                int ident = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idcidade from Cidades where idestado = @estado and txcidade = @cidade");
+                query.SetParameter("estado", estado);
+                query.SetParameter("cidade", cidade);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    ident = Convert.ToInt32(reader["idcidade"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return ident;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
     }
 }

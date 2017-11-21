@@ -19,10 +19,12 @@ namespace Biblioteca.Entidades
         public int idcidade { get; set; }
         public string txnumero { get; set; }
         public string txlogradouro { get; set; }
+        public string txbairro { get; set; }
         public string txcomplemento { get; set; }
         public List<EmailsEmpresas> txemail { get; set; }
         public List<TelefonesEmpresas> txtelefone { get; set; }
         public int total { get; set; }
+        public int idestado { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
 
@@ -38,10 +40,12 @@ namespace Biblioteca.Entidades
             this.txnumero = "";
             this.txlogradouro = "";
             this.txcomplemento = "";
+            this.txbairro = "";
             this.total = 0;
+            this.idestado = 0;
         }
 
-        public Empresas(int id, string empresa, string cnpj, string codigo, string cep, int cidade, string numero, string logradouro, string complemento, int total)
+        public Empresas(int id, string empresa, string cnpj, string codigo, string cep, int cidade, string numero, string logradouro, string complemento, int total, string bairro)
         {
             this.idempresa = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -55,7 +59,9 @@ namespace Biblioteca.Entidades
             this.txnumero = numero;
             this.txlogradouro = logradouro;
             this.txcomplemento = complemento;
+            this.txbairro = bairro;
             this.total = total;
+            this.idestado = new EstadosDB().Buscar(cidade);
         }
 
         public Empresas(int id, string empresa)

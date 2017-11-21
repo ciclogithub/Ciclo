@@ -297,3 +297,34 @@ function whatsapp(o) {
     }
 
 }
+
+function addEspecialidade() {
+    Modal2("/Painel/Especialidades/Incluir", 0, "Especialidades", "ListaEspecialidades");
+}
+
+function ListaEspecialidades() {
+    $("#idespecialidade").empty();
+    $.ajax({
+        url: "/Painel/Alunos/ListaEspecialidades",
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            $('#idespecialidade').append($('<option>', {
+                value: "",
+                text: "-- Selecione --"
+            }));
+            for (var x = 0; x < data.length; x++) {
+                $('#idespecialidade').append($('<option>', {
+                    value: data[x].idespecialidade,
+                    text: data[x].txespecialidade
+                }));
+            }
+        },
+        error: function (reponse) {
+            $('#idespecialidade').append($('<option>', {
+                value: 0,
+                text: "Não foi possível carregar a lista de especialidades"
+            }));
+        }
+    });
+}

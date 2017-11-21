@@ -17,7 +17,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Empresas (idorganizador, txempresa, txcnpj, txcodigo, nrcep, idcidade, txnumero, txlogradouro, txcomplemento ) output INSERTED.idempresa VALUES (@organizador, @empresa, @cnpj, @codigo, @cep, @cidade, @numero, @logradouro, @complemento)");
+                Query query = session.CreateQuery("INSERT INTO Empresas (idorganizador, txempresa, txcnpj, txcodigo, nrcep, idcidade, txnumero, txlogradouro, txcomplemento, txbairro) output INSERTED.idempresa VALUES (@organizador, @empresa, @cnpj, @codigo, @cep, @cidade, @numero, @logradouro, @complemento, @bairro)");
                 query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("empresa", variavel.txempresa);
                 query.SetParameter("cnpj", variavel.txcnpj);
@@ -27,6 +27,7 @@ namespace Biblioteca.DB
                 query.SetParameter("numero", variavel.txnumero);
                 query.SetParameter("logradouro", variavel.txlogradouro);
                 query.SetParameter("complemento", variavel.txcomplemento);
+                query.SetParameter("bairro", variavel.txbairro);
                 int ident = query.ExecuteScalar();
                 session.Close();
 
@@ -44,7 +45,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Empresas SET txempresa = @empresa, txcnpj = @cnpj, txcodigo = @codigo, nrcep = @cep, idcidade = @cidade, txnumero = @numero, txlogradouro = @logradouro, txcomplemento = @complemento WHERE idempresa = @id");
+                Query query = session.CreateQuery("UPDATE Empresas SET txempresa = @empresa, txcnpj = @cnpj, txcodigo = @codigo, nrcep = @cep, idcidade = @cidade, txnumero = @numero, txlogradouro = @logradouro, txcomplemento = @complemento, txbairro = @bairro WHERE idempresa = @id");
                 query.SetParameter("id", variavel.idempresa);
                 query.SetParameter("empresa", variavel.txempresa);
                 query.SetParameter("cnpj", variavel.txcnpj);
@@ -54,6 +55,7 @@ namespace Biblioteca.DB
                 query.SetParameter("numero", variavel.txnumero);
                 query.SetParameter("logradouro", variavel.txlogradouro);
                 query.SetParameter("complemento", variavel.txcomplemento);
+                query.SetParameter("bairro", variavel.txbairro);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -94,7 +96,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0));
+                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0, Convert.ToString(reader["txbairro"])));
                 }
                 reader.Close();
                 session.Close();
@@ -152,7 +154,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"])));
+                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txbairro"])));
                 }
                 reader.Close();
                 session.Close();
@@ -183,7 +185,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"])));
+                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txbairro"])));
                 }
                 reader.Close();
                 session.Close();
@@ -209,7 +211,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0);
+                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0, Convert.ToString(reader["txbairro"]));
                 }
                 reader.Close();
                 session.Close();

@@ -62,5 +62,30 @@ namespace Biblioteca.DB
             }
         }
 
+        public int Buscar(string uf)
+        {
+            try
+            {
+                int ident = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idestado from Estados where txsigla = @uf");
+                query.SetParameter("uf", uf);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    ident = Convert.ToInt32(reader["idestado"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return ident;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
     }
 }

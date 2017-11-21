@@ -1,9 +1,9 @@
-﻿@model Biblioteca.Entidades.Alunos
+﻿@model Biblioteca.Entidades.Empresas
 
 <div class="panel panel-default">
     <div class="panel-heading modal-head">
         <h4 class="panel-title nopad">
-            @if (Model.idaluno == 0)
+            @if (Model.idempresa == 0)
             {
                 @: Incluir
             }
@@ -20,8 +20,6 @@
         string list_emails = "";
         string telefones = "";
         string list_telefones = "";
-        string redes = "";
-        string listredes = "";
 
         int i = 0;
         if (Model.txemail != null)
@@ -57,51 +55,42 @@
                 telefones = telefones.Substring(1);
             }
         }
-
-        i = 0;
-        if (Model.txredes != null)
-        {
-            if (Model.txredes.Count > 0)
-            {
-                foreach (var item in Model.txredes)
-                {
-                    redes = redes + "," + item.idredesocial + "|" + item.txredesocial + "|" + item.txicone;
-                    listredes = listredes + "<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + i + ")'></i><span><i class='fa " + item.txicone + "'></i>" + item.txredesocial + "</span></li>";
-                    i++;
-                }
-                redes = redes.Substring(1);
-            }
-        }
+       
     }
 
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <form method="post" action="" id="form-modal_aluno">
-                    <input type="hidden" id="idaluno" name="idaluno" value="@Model.idaluno" />
+                <form method="post" action="" id="form-modal_empresa">
+                    <input type="hidden" id="idempresa" name="idempresa" value="@Model.idempresa" />
                     <input type="hidden" id="txemail" name="txemail" value="@emails" />
-                    <input type="hidden" id="txredes" name="txredes" value="@redes" />
                     <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
                     <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
                     <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-12 form-group">
-                            <label class="control-label" for="txinstrutor">Nome *</label>
-                            <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.txaluno" maxlength="200" />
+                        <div class="col-lg-2 col-md-2 col-sm-12 form-group">
+                            <label class="control-label" for="txcodigo">Código</label>
+                            <input type="text" class="form-control validate[minSize[3],maxSize[10]]" id="txcodigo" name="txcodigo" value="@Model.txcodigo" maxlength="10" />
                         </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 form-group">
+                            <label class="control-label" for="txempresa">Empresa *</label>
+                            <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.txempresa" maxlength="300" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                            <label class="control-label" for="txcnpj">CNPJ</label>
+                            <input type="text" class="form-control validate[minSize[18],maxSize[18],cnpj]" data-mask="00.000.000/0000-00" id="txcnpj" name="txcnpj" value="@Model.txcnpj" maxlength="18" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                            <label class="control-label" for="txcep">CEP</label>
+                            <input type="text" class="form-control validate[minSize[9],maxSize[9]]" id="txcep" name="txcep" data-mask="00000-000" value="@Model.nrcep" maxlength="9" />
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-12 form-group" id="dv_cep">
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-12 form-group">
-                            <label class="control-label" for="txemail">CPF</label>
-                            <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.txcpf" maxlength="14" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                            <label class="control-label" for="txempresa">Empresa</label>
-                            <input type="text" class="form-control validate[minSize[3],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.txempresa" maxlength="300" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <label class="control-label" for="txinstrutor">Estado</label>
+                            <label class="control-label" for="idestado">Estado</label>
                             <select id="idestado" name="idestado" class="form-control">
                                 <option value="">-- Selecione --</option>
                                 @foreach (var t in ViewBag.estados)
@@ -110,42 +99,29 @@
                                 }
                             </select>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group" id="dv_cidade">
+                        <div class="col-lg-4 col-md-4 col-sm-12 form-group" id="dv_cidade">
                             <label class="control-label" for="idcidade">Cidade</label>
                             <select id="idcidade" name="idcidade" class="form-control">
                                 <option value="">-- Selecione o estado --</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <label class="control-label" for="idespecialidade">Especialidade</label>
-                            <select id="idespecialidade" name="idespecialidade" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var e in ViewBag.especialidades)
-                                {
-                                    <option value="@e.idespecialidade" @(Model.idespecialidade == e.idespecialidade ? "selected" : "")>@e.txespecialidade</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <label class="control-label" for="idcor">Classificacao</label>
-                            <div class="input-group">
-                                <select id="idcor" name="idcor" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    @foreach (var c in ViewBag.cores)
-                                    {
-                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
-                                    }
-                                </select>
-                                <span class="input-group-addon @Model.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
-                            </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 form-group">
+                            <label class="control-label" for="txbairro">Bairro</label>
+                            <input type="text" class="form-control validate[minSize[3],maxSize[100]]" id="txbairro" name="txbairro" value="@Model.txbairro" maxlength="100" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-                            <label class="control-label" for="txobs">Observações</label>
-                            <textarea name="txobs" class="form-control" id="txobs" placeholder="Observações" rows="3">@Model.txobs</textarea>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="txlogradouro">Endereço</label>
+                            <input type="text" class="form-control validate[minSize[3],maxSize[300]]" id="txlogradouro" name="txlogradouro" value="@Model.txlogradouro" maxlength="300" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                            <label class="control-label" for="txnumero">Número</label>
+                            <input type="text" class="form-control validate[maxSize[20]]" id="txnumero" name="txnumero" value="@Model.txnumero" maxlength="20" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                            <label class="control-label" for="txcomplemento">Complemento</label>
+                            <input type="text" class="form-control validate[maxSize[100]]" id="txcomplemento" name="txcomplemento" value="@Model.txcomplemento" maxlength="100" />
                         </div>
                     </div>
                 </form>
@@ -181,33 +157,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <form id="form-modal-redes">
-                    <div class="form-group">
-                        <label class="control-label" for="tempredes">Redes Sociais</label>
-                        <div class="input-group">
-                            <select id="idredesocial" name="idredesocial" class="form-control" style="width:20% !important; font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
-                                @foreach (var r in ViewBag.redes)
-                                {
-                                    <option value="@r.idredesocial" name="@r.txicone">@Html.Raw("&#xf" + r.idcodigo + ";")</option>
-                                }
-                            </select>
-                            <input type="text" class="form-control validate[required,minSize[2],maxSize[50]]" id="tempredes" name="tempredes" value="" maxlength="50" style="width:80% !important;" />
-                            <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>
-                        <div id="error_redes" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                <button id="incluir_btn_aluno" class="tg-btn text-center" type="button">Enviar</button>
+                <button id="incluir_btn_empresa" class="tg-btn text-center" type="button">Enviar</button>
             </div>
         </div>
     </div>
 </div>
 
-@Scripts.Render("~/bundles/alunos")
+@Scripts.Render("~/bundles/empresas")
 @Scripts.Render("~/bundles/mask")

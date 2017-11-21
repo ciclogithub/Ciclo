@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $("#pesquisa_empresa").click(function () {
-        AlunoPesquisar();
+        EmpresaPesquisar();
     });
 
     $("#incluir_btn_empresa").click(function () {
@@ -9,21 +9,64 @@
         $('#form-modal_empresa').validationEngine('attach');
         if ($('#form-modal_empresa').validationEngine('validate')) {
             if (!err) { IncluirEmpresa(); }
-        };
+        }
+    });
+
+    $("#idestado").on("change", function () {
+        if ($(this).val() == "") {
+            $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
+        } else {
+            $("#dv_cidade").html("Carregando lista ...");
+            ListaCidades($(this).val(), 0)
+        }
+    })
+
+    if ($("#idestado")) {
+        if ($("#idestado").val() != "") {
+            ListaCidades($("#idestado").val(), $("#tempcidade").val());
+        }
+    }
+
+    $("#txcep").on("blur", function () {
+        if ($(this).val().length === 9) {
+            $("#dv_cep").html("<br>Aguarde, buscando informaçoes ...");
+            $.ajax({
+                type: "POST",
+                url: "/Painel/Empresas/Cep",
+                data: { cep: $(this).val() },
+                dataType: "json",
+                traditional: true,
+                success: function (data) {
+
+                    if (data.idestado === 0) {
+                        $("#dv_cep").html(data.endereco);
+                    } else {
+                        $("#txlogradouro").val((data.endereco));
+                        $("#idestado").val((data.idestado));
+                        ListaCidades($("#idestado").val(), data.idcidade);
+                        $("#txbairro").val(data.bairro);
+                        $("#dv_cep").html("");
+                    }
+                },
+                error: function () {
+                    $("#dv_cep").html("<br>Não foi possível pesquisar o cep");
+                }
+            });
+        }
     });
 });
 
 function pagination(c) {
     var p = $("#page").val();
     var t = $("#totalpage").val();
-    if (c == -1) {
+    if (c === -1) {
         c = parseInt(p) - 1;
-        if (c <= 0) { c = 1 }
+        if (c <= 0) { c = 1; }
         window.location = "/Painel/Empresas/?pagina=" + c + "&empresa=" + $("#empresa").val();
     } else {
-        if (c == 0) {
+        if (c === 0) {
             c = parseInt(p) + 1;
-            if (c > t) { c = t }
+            if (c > t) { c = t; }
             window.location = "/Painel/Empresas/?pagina=" + c + "&empresa=" + $("#empresa").val();
         } else {
             window.location = "/Painel/Empresas/?pagina=" + c + "&empresa=" + $("#empresa").val();
@@ -55,12 +98,12 @@ function EmpresaAlterar() {
     });
 
     if (cont === 0) {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            alert("Selecione somente 1 registro para alterar");
         } else {
-            Alunos(val);
+            Empresas(val);
         }
     }
 
@@ -71,7 +114,7 @@ function EmpresaExcluir() {
     ids = "";
     $("input[name='ident']").each(function () {
         if ($(this).is(":checked")) {
-            ids = ids + "," + $(this).val()
+            ids = ids + "," + $(this).val();
         }
     });
 
@@ -92,28 +135,29 @@ function EmpresaExcluir() {
             });
         }
     } else {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     }
 }
 
 function IncluirEmpresa() {
 
-    var idaluno = $("#form-modal_aluno #idaluno").val();
-    var txaluno = $("#form-modal_aluno #txaluno").val();
-    var txcpf = $("#form-modal_aluno #txcpf").val();
-    var txemail = $("#form-modal_aluno #txemail").val();
-    var txtelefone = $("#form-modal_aluno #txtelefone").val();
-    var idespecialidade = $("#form-modal_aluno #idespecialidade").val();
-    var idcor = $("#form-modal_aluno #idcor").val();
-    var idcidade = $("#form-modal_aluno #idcidade").val();
-    var txempresa = $("#form-modal_aluno #txempresa").val();
-    var txobs = $("#form-modal_aluno #txobs").val();
-    var txredes = $("#form-modal_aluno #txredes").val();
+    var idempresa = $("#form-modal_empresa #idempresa").val();
+    var txcodigo = $("#form-modal_empresa #txcodigo").val();
+    var txempresa = $("#form-modal_empresa #txempresa").val();
+    var txemail = $("#form-modal_empresa #txemail").val();
+    var txtelefone = $("#form-modal_empresa #txtelefone").val();
+    var txcnpj = $("#form-modal_empresa #txcnpj").val();
+    var txcep = $("#form-modal_empresa #txcep").val();
+    var idcidade = $("#form-modal_empresa #idcidade").val();
+    var txbairro = $("#form-modal_empresa #txbairro").val();
+    var txlogradouro = $("#form-modal_empresa #txlogradouro").val();
+    var txnumero = $("#form-modal_empresa #txnumero").val();
+    var txcomplemento = $("#form-modal_empresa #txcomplemento").val();
 
     $.ajax({
         type: "POST",
-        url: '/Painel/Alunos/IncluirConcluir',
-        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa, obs: txobs, redes: txredes.toString() },
+        url: '/Painel/Empresas/IncluirConcluir',
+        data: { id: idempresa, codigo: txcodigo, empresa: txempresa, email: txemail.toString(), telefone: txtelefone.toString(), cnpj: txcnpj, cep: txcep, cidade: idcidade, bairro: txbairro, logradouro: txlogradouro, numero: txnumero, complemento: txcomplemento },
         dataType: "json",
         traditional: true,
         success: function (json) {
@@ -130,7 +174,7 @@ function IncluirEmpresa() {
                     $('#modal1.modal').modal('hide');
                 }, 1000);
 
-                AlunoPesquisar();
+                EmpresaPesquisar();
             }
 
         }
@@ -146,9 +190,9 @@ function addEmail() {
         var txt = "";
         $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + cont + ")'></i><span>" + temp + "</span></li>");
         $("#tempemail").val("");
-        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp }
+        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp; }
         $("#txemail").val(txt);
-    };
+    }
 }
 
 function removeEmail(i) {
@@ -156,9 +200,9 @@ function removeEmail(i) {
     var txt = "";
     for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
     $("#txemail").val(txt.slice(1));
-    $("#listemail").empty()
-    if ($("#txemail").val() != "") {
-        var arr = $("#txemail").val().split(",");
+    $("#listemail").empty();
+    if ($("#txemail").val() !== "") {
+        arr = $("#txemail").val().split(",");
         for (x = 0; x < arr.length; x++) {
             $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + x + ")'></i><span>" + arr[x] + "</span></li>");
         }
@@ -172,26 +216,26 @@ function addTelefone() {
         var temp = $("#temptelefone").val();
         var cont = $("#listtelefone li").length;
         var txt = "";
-        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         $("#temptelefone").val("");
-        if ($("#txtelefone").val() == "") { txt = whatsapp + "|" +  temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp }
+        if ($("#txtelefone").val() === "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
         $("#txtelefone").val(txt);
         $('#flwhatsapp').prop('checked', false);
-        $('#whatsapp_label').removeClass("verde_escuro")
-    };
+        $('#whatsapp_label').removeClass("verde_escuro");
+    }
 }
 
 function removeTelefone(i) {
     var arr = $("#txtelefone").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
     $("#txtelefone").val(txt.slice(1));
-    $("#listtelefone").empty()
-    if ($("#txtelefone").val() != "") {
-        var arr = $("#txtelefone").val().split(",");
+    $("#listtelefone").empty();
+    if ($("#txtelefone").val() !== "") {
+        arr = $("#txtelefone").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
-            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         }
     }
 }
@@ -200,10 +244,34 @@ function whatsapp(o) {
     i = $("#flwhatsapp").is(":checked");
     if (i) {
         $('#flwhatsapp').prop('checked', false);
-        $('#whatsapp_label').removeClass("verde_escuro")
+        $('#whatsapp_label').removeClass("verde_escuro");
     } else {
         $('#flwhatsapp').prop('checked', true);
-        $('#whatsapp_label').addClass("verde_escuro")
+        $('#whatsapp_label').addClass("verde_escuro");
     }
 
+}
+
+function ListaCidades(estado, cidade) {
+    $.ajax({
+        url: "/Painel/Locais/ListaCidades",
+        data: { id: estado },
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            var temp = "";
+            temp += "<label class='control-label' for='idcidade'>Cidade</label>";
+            temp += "<select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione --</option>";
+            for (var x = 0; x < data.length; x++) {
+                temp += "<option value=" + data[x].idcidade;
+                if (parseInt(data[x].idcidade) === parseInt(cidade)) { temp += " selected " }
+                temp += ">" + data[x].txcidade + "</option>";
+            }
+            temp += "</select>";
+            $("#dv_cidade").html(temp);
+        },
+        error: function (reponse) {
+            $("#dv_cidade").html("Não foi possível carregar a lista de cidades");
+        }
+    });
 }
