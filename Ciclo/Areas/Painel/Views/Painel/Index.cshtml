@@ -24,6 +24,32 @@
                     <div class="counter">
                         <div class="container">
                             <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div>
+                                        <p class="counter-count">@ViewBag.contadores.cont_aluno</p>
+                                        <p class="bg_cinza">
+                                            <strong>@ViewBag.contadores.cont_alunos_ciclo</strong> - Cadastrados Diagweb sem produtos <a href="javascript:lista(1)">(ver)</a><br />
+                                            <strong>@ViewBag.contadores.cont_alunos_compra</strong> - Cadastrados Diagweb com produtos <a href="javascript:lista(2)">(ver)</a><br />
+                                            <strong>@(((ViewBag.contadores.cont_aluno - ViewBag.contadores.cont_alunos_ciclo) - ViewBag.contadores.cont_alunos_compra) - ViewBag.contadores.cont_alunos_email)</strong> - Não cadastrados <a href="javascript:lista(4)">(ver)</a><br />
+                                            <strong>@ViewBag.contadores.cont_alunos_email</strong> - Sem e-mails ou CPF cadastrados <a href="javascript:lista(3)">(ver)</a>
+                                        </p>
+                                        <p><a href="~/Painel/Alunos" class="dashlink">Alunos</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div>
+                                        <p class="counter-count">@ViewBag.contadores.cont_empresas</p>
+                                        <p class="bg_cinza">
+                                            <strong>@ViewBag.contadores.cont_empresas_ciclo</strong> - Cadastrados Diagweb sem produtos <a href="javascript:lista(5)">(ver)</a><br />
+                                            <strong>@ViewBag.contadores.cont_empresas_compra</strong> - Cadastrados Diagweb com produtos <a href="javascript:lista(6)">(ver)</a><br />
+                                            <strong>@(((ViewBag.contadores.cont_empresas - ViewBag.contadores.cont_empresas_ciclo) - ViewBag.contadores.cont_empresas_compra) - ViewBag.contadores.cont_empresas_email)</strong> - Não cadastrados <a href="javascript:lista(8)">(ver)</a><br />
+                                            <strong>@ViewBag.contadores.cont_empresas_email</strong> - Sem e-mails ou CNPJ cadastrados <a href="javascript:lista(7)">(ver)</a>
+                                        </p>
+                                        <p><a href="~/Painel/Empresas" class="dashlink">Empresas</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt30">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_instrutor</p>
@@ -36,25 +62,28 @@
                                         <p><a href="~/Painel/Cursos" class="dashlink">Cursos</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
-                                        <p class="counter-count">@ViewBag.contadores.cont_aluno</p>
-                                        <p><a href="~/Painel/Alunos" class="dashlink">Alunos</a></p>
-                                        <p><strong>@ViewBag.contadores.cont_alunos_ciclo</strong> - Clientes Diagweb <a href="#">(ver)</a></p>
-                                        <p><strong>@ViewBag.contadores.cont_alunos_compra</strong> - Clientes Diagweb com produtos <a href="#">(ver)</a></p>
-                                        <p><strong>@((ViewBag.contadores.cont_aluno - ViewBag.contadores.cont_alunos_ciclo) - ViewBag.contadores.cont_alunos_compra)</strong> - Não são clientes <a href="#">(ver)</a></p>
+                                        <p class="counter-count">@ViewBag.contadores.cont_temas</p>
+                                        <p><a href="~/Painel/Temas" class="dashlink">Temas</a></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
-                                        <p class="counter-count">@ViewBag.contadores.cont_empresas</p>
-                                        <p><a href="~/Painel/Empresas" class="dashlink">Empresas</a></p>
+                                        <p class="counter-count">@ViewBag.contadores.cont_locais</p>
+                                        <p><a href="~/Painel/Locais" class="dashlink">Locais</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div>
+                                        <p class="counter-count">@ViewBag.contadores.cont_especialidades</p>
+                                        <p><a href="~/Painel/Especialidades" class="dashlink">Especialidades</a></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.avaliacao</p>
-                                        <p>Avaliação Média</p>
+                                        <p class="dashlink">Avaliação</pclass="dashlink">
                                     </div>
                                 </div>
                             </div>

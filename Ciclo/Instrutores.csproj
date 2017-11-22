@@ -152,6 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Painel\Controllers\EmpresasController.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
+    <Compile Include="Areas\Painel\Controllers\ListasController.cs" />
     <Compile Include="Areas\Painel\Controllers\RelatoriosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ConfiguracoesController.cs" />
     <Compile Include="Areas\Painel\Controllers\CursosController.cs" />
@@ -245,6 +246,8 @@
     <Content Include="Areas\Painel\Views\Relatorios\Relatorio.cshtml" />
     <Content Include="Areas\Painel\Views\Empresas\Incluir.cshtml" />
     <Content Include="Areas\Painel\Views\Empresas\Index.cshtml" />
+    <Content Include="Areas\Painel\Views\Listas\Index.cshtml" />
+    <Content Include="Areas\Painel\Views\Listas\Relatorio.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\diagweb-16x16.png" />
     <Content Include="images\diagweb-32x32.png" />
@@ -503,6 +506,7 @@
     <Content Include="Scripts\js\cursos.js" />
     <Content Include="Scripts\js\configuracoes.js" />
     <Content Include="Scripts\js\especialidades.js" />
+    <Content Include="Scripts\js\lista.js" />
     <Content Include="Scripts\js\relatorios.js" />
     <Content Include="Scripts\js\avaliacao.js" />
     <Content Include="Scripts\js\temas.js" />

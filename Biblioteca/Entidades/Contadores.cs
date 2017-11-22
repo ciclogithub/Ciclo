@@ -16,6 +16,13 @@ namespace Biblioteca.Entidades
         public int avaliacao { get; set; }
         public int cont_alunos_ciclo { get; set; }
         public int cont_alunos_compra { get; set; }
+        public int cont_alunos_email { get; set; }
+        public int cont_empresas_compra { get; set; }
+        public int cont_empresas_ciclo { get; set; }
+        public int cont_empresas_email { get; set; }
+        public int cont_temas { get; set; }
+        public int cont_locais { get; set; }
+        public int cont_especialidades { get; set; }
 
         public Contadores()
         {
@@ -26,9 +33,16 @@ namespace Biblioteca.Entidades
             this.avaliacao = 0;
             this.cont_alunos_ciclo = 0;
             this.cont_alunos_compra = 0;
+            this.cont_alunos_email = 0;
+            this.cont_empresas_compra = 0;
+            this.cont_empresas_ciclo = 0;
+            this.cont_empresas_email = 0;
+            this.cont_temas = 0;
+            this.cont_locais = 0;
+            this.cont_especialidades = 0;
         }
 
-        public Contadores(int instrutor, int cursos, int alunos, int avaliacaoes, int empresas, int ciclo, int compra)
+        public Contadores(int instrutor, int cursos, int alunos, int avaliacaoes, int empresas, int ciclo, int compra, int emails, int empciclo, int empcompra, int empemails, int temas, int locais, int especialidades)
         {
             this.cont_instrutor = instrutor;
             this.cont_curso = cursos;
@@ -37,6 +51,13 @@ namespace Biblioteca.Entidades
             this.avaliacao = avaliacaoes;
             this.cont_alunos_ciclo = ciclo;
             this.cont_alunos_compra = compra;
+            this.cont_alunos_email = emails;
+            this.cont_empresas_compra = empciclo;
+            this.cont_empresas_ciclo = empcompra;
+            this.cont_empresas_email = empemails;
+            this.cont_temas = temas;
+            this.cont_locais = locais;
+            this.cont_especialidades = especialidades;
         }
 
     }

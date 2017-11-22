@@ -62,6 +62,7 @@
     <Compile Include="DB\CategoriasDB.cs" />
     <Compile Include="DB\Cursos_DatasDB.cs" />
     <Compile Include="DB\EspecialidadesDB.cs" />
+    <Compile Include="DB\ListasDB.cs" />
     <Compile Include="DB\RelatoriosDB.cs" />
     <Compile Include="DB\TemasDB.cs" />
     <Compile Include="DB\LocaisDB.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Entidades\Cursos_Datas.cs" />
     <Compile Include="Entidades\Especialidades.cs" />
     <Compile Include="Entidades\Graficos.cs" />
+    <Compile Include="Entidades\Listas.cs" />
     <Compile Include="Entidades\Relatorios.cs" />
     <Compile Include="Entidades\Temas.cs" />
     <Compile Include="Entidades\Locais.cs" />

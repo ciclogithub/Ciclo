@@ -592,7 +592,6 @@ li.tg-rss a{background:#ff6600;}
 	list-style: none;
 	text-align: right;
 	display:inline-block;
-	text-transform: capitalize;
 	font:500 14px/14px 'Poppins', Arial, Helvetica, sans-serif;
 }
 .tg-breadcrumb li{

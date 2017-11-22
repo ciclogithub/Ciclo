@@ -182,3 +182,9 @@ function Alert(texto, alert, tag, timeout) {
 
     $(tag).append(txt);
 }
+
+
+function lista(id) {
+    $('body').html('<form action="Painel/Listas/Relatorio" id="form_red" method="post" style="display:none;"><input type= "hidden" id="tprelatorio" name="tprelatorio" value="' + id + '" /></form >');
+    $("#form_red").submit();
+}

@@ -72,7 +72,7 @@ table input {
     color: #ffffff;
     text-align: center;
     line-height: 92px;
-    width: 90%;
+    width: 100%;
     height: 92px;
     display: inline-block;
 }
@@ -255,6 +255,15 @@ table input {
     background-color:#65000b;
     color:#ffffff;
 }
+.bg_cinza {
+    padding:10px 0px;
+    background-color: #dbdbdb;
+    position: relative;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
 
 .verde_escuro {
     background-color: #31653f;
@@ -280,7 +289,10 @@ textarea {
 }
 
 .dashlink {
-    color:#000;
+    color: #E12325;
+    text-transform:uppercase;
+    font-weight:600;
+    font-size:17px;
 }
 
     .dashlink:hover {
