@@ -78,6 +78,9 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/configuracoes").Include(
                       "~/Scripts/js/configuracoes.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/home").Include(
+                      "~/Scripts/js/home.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/table2excel").Include(
                       "~/Scripts/plugins/table2excel/jquery.table2excel.min.js"));
 

@@ -2,14 +2,18 @@
     ViewBag.Title = "Home Page";
 }
 
+<div id="slideshow">
+    <div>
+        <img src="~/images/slider/img1.jpg">
+    </div>
+    <div>
+        <img src="~/images/slider/img2.jpg">
+    </div>
+</div>
+
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">                    
-                    
-                </div>
-            </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                     conteudo da pagina inicial
@@ -18,3 +22,7 @@
         </div>
     </div>
 </main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/home")
+}
