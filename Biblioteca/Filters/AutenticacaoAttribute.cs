@@ -15,21 +15,34 @@ namespace Biblioteca.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+
+            Logado logado = null;
+
             //pega o cookies painel
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+            HttpCookie cookie2 = HttpContext.Current.Request.Cookies["ciclo_perfil"];
 
             //verifica se o cookie possui valor
-            if (cookie != null)
-            {
+            if ((cookie != null) && (cookie2 != null))
+                {
                 //pega o valor do cookie
                 int codigo = Convert.ToInt32(cookie.Value);
 
-                //abre o painel e pesquisa no db
-                PainelDB DB = new PainelDB();
-                Painel user = DB.Buscar(codigo);
+                //pega o valor do perfil
+                int perfil = Convert.ToInt32(cookie2.Value);
+                
+                LogadoDB DB = new LogadoDB();
+                if (perfil == 1)
+                {
+                    logado = DB.BuscarOrganizador(codigo);
+                }
+                else
+                {
+                    logado = DB.BuscarAluno(codigo);
+                }
 
                 //verifica se o usuário existe
-                if (user != null)
+                if (logado != null)
                 {
                     base.OnActionExecuting(filterContext);
                 }

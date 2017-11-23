@@ -19,7 +19,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -78,7 +78,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -137,7 +137,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -201,7 +201,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -260,7 +260,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -319,7 +319,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -383,7 +383,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -442,7 +442,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -501,7 +501,7 @@ namespace Biblioteca.DB
             {
                 List<Graficos> grafico = new List<Graficos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 

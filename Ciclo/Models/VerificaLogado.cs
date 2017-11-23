@@ -7,13 +7,14 @@ using Biblioteca.Entidades;
 
 namespace Ciclo.Models
 {
-    public class Logado
+    public class VerificaLogado
     {
         public Organizadores Buscar()
         {
-            Organizadores organizadores = null;
+            Organizadores organizador = null;
 
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+            HttpCookie cookie2 = HttpContext.Current.Request.Cookies["ciclo_perfil"];
 
             //verifica se os dois possuem valores
             if (cookie != null)
@@ -23,15 +24,22 @@ namespace Ciclo.Models
 
                 //pesquisa no db
                 OrganizadoresDB db = new OrganizadoresDB();
-                organizadores = db.Buscar(id);
+                if (Convert.ToInt32(cookie2.Value) == 1)
+                {
+                    organizador = db.Buscar(id);
+                }
+                    else
+                {
+                    //organizador = db.BuscarAluno(id);
+                }
 
-                if(organizadores == null)
+                if(organizador == null)
                 {
                     return null;
                 }
             }
-            return organizadores;
-        }
+            return organizador;
+        }        
 
     }
 }

@@ -87,7 +87,7 @@ namespace Biblioteca.DB
             {
                 List<Empresas> list_empresa = new List<Empresas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Empresas WHERE idorganizador = @idorganizador ORDER by txempresa");
@@ -115,7 +115,7 @@ namespace Biblioteca.DB
             {
                 List<Empresas> list_empresa = new List<Empresas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Empresas WHERE idorganizador = @idorganizador ORDER by txempresa");
@@ -143,7 +143,7 @@ namespace Biblioteca.DB
             {
                 List<Empresas> list_empresa = new List<Empresas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Empresas WHERE idorganizador = @idorganizador ORDER by txempresa OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -173,7 +173,7 @@ namespace Biblioteca.DB
             {
                 List<Empresas> list_empresa = new List<Empresas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Empresas WHERE (txempresa LIKE @empresa OR txcnpj LIKE @empresa) AND idorganizador = @idorganizador ORDER by txempresa OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");

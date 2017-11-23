@@ -61,7 +61,7 @@ function ListaCidades(estado, cidade) {
             temp += "<select id='idcidade' name='idcidade' class='form-control validate[required]'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idcidade;
-                if (data[x].idcidade === cidade) { temp += " selected "; }
+                if (parseInt(data[x].idcidade) === parseInt(cidade)) { temp += " selected "; }
                 temp += ">" + data[x].txcidade + "</option>";
             }
             temp += "</select>";

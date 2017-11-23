@@ -83,7 +83,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Alunos WHERE idorganizador = @idorganizador ORDER by txaluno");
@@ -111,7 +111,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Alunos WHERE idorganizador = @idorganizador ORDER by txaluno");
@@ -139,7 +139,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,*, isnull((case when A.txcpf = '' then (select max(e.venda) from diagweb.diagweb.ExisteCliente as e where EXISTS(select ae.idaluno from Alunos_Emails as ae WHERE ae.txemail = e.email and ae.idaluno = a.idaluno)) else (select max(e.venda) from diagweb.diagweb.ExisteCliente as e where e.cpf_cnpj = a.txcpf OR EXISTS(select ae.idaluno from Alunos_Emails as ae WHERE ae.txemail = e.email and ae.idaluno = a.idaluno)) end), 0) as diagweb from Alunos A WHERE A.idorganizador = @idorganizador ORDER by A.txaluno OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -169,7 +169,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,*, isnull((case when A.txcpf = '' then (select max(e.venda) from diagweb.diagweb.ExisteCliente as e where EXISTS(select ae.idaluno from Alunos_Emails as ae WHERE ae.txemail = e.email and ae.idaluno = a.idaluno)) else (select max(e.venda) from diagweb.diagweb.ExisteCliente as e where e.cpf_cnpj = a.txcpf OR EXISTS(select ae.idaluno from Alunos_Emails as ae WHERE ae.txemail = e.email and ae.idaluno = a.idaluno)) end), 0) as diagweb from Alunos A WHERE (A.txaluno LIKE @aluno OR A.txcpf LIKE @aluno) AND A.idorganizador = @idorganizador ORDER by A.txaluno OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -181,7 +181,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txobs"]), Convert.ToInt32(reader["diagweb"]), Convert.ToInt32(reader["idempresa"])));
+                    list_aluno.Add(new Alunos(Convert.ToInt32(reader["idaluno"]), Convert.ToString(reader["txaluno"]), Convert.ToString(reader["txcpf"]), Convert.ToInt32(reader["idespecialidade"]), Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txobs"]), Convert.ToInt32(reader["diagweb"]), 0));
                 }
                 reader.Close();
                 session.Close();
@@ -408,7 +408,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Alunos where idorganizador = @organizador and idaluno not in (select idaluno from Cursos_Alunos where idcurso = @id) order by txaluno");
@@ -437,7 +437,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Alunos where idorganizador = @organizador and txaluno like @aluno and idaluno not in (" + lista + ") order by txaluno");
@@ -466,7 +466,7 @@ namespace Biblioteca.DB
             {
                 List<Alunos> list_aluno = new List<Alunos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Alunos where idorganizador = @organizador and idaluno in (select idaluno from Cursos_Alunos where idcurso = @id) order by txaluno");

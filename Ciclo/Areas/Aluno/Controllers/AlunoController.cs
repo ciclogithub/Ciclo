@@ -6,23 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Ciclo.Areas.Painel.Controllers
+namespace Ciclo.Areas.Aluno.Controllers
 {
-    public class PainelController : Controller
+    public class AlunoController : Controller
     {
         [Autenticacao]
         public ActionResult Index()
         {
-            HttpCookie cookie = Request.Cookies["ciclo_usuario"];
-            ViewBag.contadores = new Biblioteca.DB.ContadoresDB().Listar(Convert.ToInt32(cookie.Value));
-            ViewBag.cursos = new Biblioteca.DB.Cursos_ListaDB().Listar(Convert.ToInt32(cookie.Value));
             return View();
-        }
-
-        [Autenticacao]
-        public ActionResult Usuario()
-        {
-            return PartialView(new VerificaLogado().Buscar());
         }
 
         public ActionResult Sair()
@@ -39,5 +30,6 @@ namespace Ciclo.Areas.Painel.Controllers
 
             return RedirectToAction("Index", "../Login");
         }
+
     }
 }

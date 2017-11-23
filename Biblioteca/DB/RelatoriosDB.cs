@@ -20,7 +20,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -83,7 +83,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -143,7 +143,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -203,7 +203,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -263,7 +263,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
                 qry = "SELECT distinct C.TXCURSO, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, L.TXLOCAL, CT.TXCATEGORIA, A.TXALUNO, A.TXEMPRESA, CO2.TXCOR AS CORALUNO, T.TXTEMA, E.TXESPECIALIDADE,  ";
@@ -324,7 +324,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -384,7 +384,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -444,7 +444,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 
@@ -504,7 +504,7 @@ namespace Biblioteca.DB
             {
                 List<Relatorios> list_relat = new List<Relatorios>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
 

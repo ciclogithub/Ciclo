@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ciclo.Models;
+using Biblioteca.Funcoes;
 
 namespace Ciclo.Controllers
 {
@@ -16,7 +17,13 @@ namespace Ciclo.Controllers
 
         public ActionResult Menu()
         {
-            return PartialView(new Logado().Buscar());
+            return PartialView(new VerificaLogado().Buscar());
+        }
+
+        public JsonResult Esqueceu(string email)
+        {
+            return Json(new Inclusao().EsqueceuSenha(email));
         }
     }
+
 }

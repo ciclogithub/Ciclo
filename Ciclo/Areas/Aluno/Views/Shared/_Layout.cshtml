@@ -4,11 +4,11 @@
 <!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
- <!--<![endif]-->
+<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ciclo - Instrutores</title>
+    <title>Ciclo - Alunos</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -25,8 +25,26 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <strong class="tg-logo"><a href="/"><img src="~/images/logo.jpg" alt="www.treinaauto.com.br"></a></strong>
-                        @Html.Action("Menu", "Home")
+                        <strong class="tg-logo"><a href="~/Home"><img src="~/images/logo.jpg" alt="www.treinaauto.com.br"></a></strong>
+                        <div class="tg-navigationarea">
+                            <nav id="tg-nav" class="tg-nav">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                                    <ul>
+                                        <li><a href="~/Painel">Dashboard</a></li>                                        
+                                        <li><a href="~/Painel/Configuracoes">Configurações</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <a class="tg-btn tg-btnbookseat" href="#" onclick="confirmaSair()">Sair</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,29 +65,20 @@
                                 <li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
                                 <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
                             </ul>
-                            @*<strong class="tg-logo"><a href="index.html"><img src="images/logo.png" alt="www.treinaauto.com.br"></a></strong>*@
+                            @*<strong class="tg-logo"><a href="index.html"><img src="~/images/logo.png" alt="www.treinaauto.com.br"></a></strong>*@
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
 
-    </div>            
-
+    </div>
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/template")
-    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/painelaluno")
     @RenderSection("scripts", required: false)
 
 </body>
 </html>
-
-
-
-
-        
-        
-    
-
-

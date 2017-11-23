@@ -16,7 +16,7 @@ namespace Biblioteca.DB
         {
             try
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("INSERT INTO Temas (idorganizador, txtema, txsubtitulo, txdescritivo) VALUES (@organizador, @tema, @subtitulo, @descritivo)");
@@ -74,7 +74,7 @@ namespace Biblioteca.DB
             {
                 List<Temas> list_temas = new List<Temas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Temas WHERE idorganizador = @idorganizador ORDER by txtema");
@@ -102,7 +102,7 @@ namespace Biblioteca.DB
             {
                 List<Temas> list_temas = new List<Temas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Temas WHERE idorganizador = @idorganizador ORDER by txtema OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -132,7 +132,7 @@ namespace Biblioteca.DB
             {
                 List<Temas> list_temas = new List<Temas>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Temas WHERE idorganizador = @idorganizador and txtema LIKE @tema ORDER by txtema OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");

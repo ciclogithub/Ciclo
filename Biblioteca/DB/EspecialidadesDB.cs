@@ -16,7 +16,7 @@ namespace Biblioteca.DB
         {
             try
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("INSERT INTO Especialidades (idorganizador, txespecialidade, txsigla) VALUES (@organizador, @especialidade, @sigla)");
@@ -72,7 +72,7 @@ namespace Biblioteca.DB
             {
                 List<Especialidades> list_especialidades = new List<Especialidades>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select  * from Especialidades WHERE idorganizador = @idorganizador ORDER by txespecialidade");
@@ -100,7 +100,7 @@ namespace Biblioteca.DB
             {
                 List<Especialidades> list_especialidades = new List<Especialidades>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select  COUNT(*) OVER() as total, * from Especialidades WHERE idorganizador = @idorganizador ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -130,7 +130,7 @@ namespace Biblioteca.DB
             {
                 List<Especialidades> list_especialidades = new List<Especialidades>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total, * from Especialidades WHERE idorganizador = @idorganizador and txespecialidade LIKE @especialidade OR txsigla LIKE @especialidade ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");

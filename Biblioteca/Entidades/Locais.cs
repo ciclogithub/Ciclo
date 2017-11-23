@@ -19,7 +19,7 @@ namespace Biblioteca.Entidades
         public string txestado { get; set; }
         public int total { get; set; }
 
-        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
         public Locais()
         {

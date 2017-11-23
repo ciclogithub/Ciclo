@@ -28,7 +28,7 @@ namespace Biblioteca.Entidades
         public int diagweb { get; set; }
         public int idempresa { get; set; }
 
-        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
         public Alunos()
         {

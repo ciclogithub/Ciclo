@@ -24,5 +24,13 @@ namespace Ciclo.Controllers
         {
             return Json(new Inclusao().Cadastro(organizadoresview));
         }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("Cadastro/FormularioAluno")]
+        public JsonResult FormularioAluno(Usuarios usuariosview)
+        {
+            return Json(new Inclusao().CadastroAluno(usuariosview));
+        }
     }
 }

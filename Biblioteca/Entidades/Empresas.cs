@@ -26,7 +26,7 @@ namespace Biblioteca.Entidades
         public int total { get; set; }
         public int idestado { get; set; }
 
-        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
         public Empresas()
         {

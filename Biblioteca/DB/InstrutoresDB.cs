@@ -100,7 +100,7 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Instrutores WHERE idorganizador = @idorganizador ORDER by txinstrutor");
@@ -128,7 +128,7 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Instrutores WHERE idorganizador = @idorganizador ORDER by txinstrutor OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -158,7 +158,7 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Instrutores WHERE idorganizador = @idorganizador and txinstrutor LIKE @instrutor ORDER by txinstrutor OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -189,7 +189,7 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and idinstrutor not in (select idinstrutor from Cursos_Instrutores where idcurso = @id) order by txinstrutor");
@@ -218,7 +218,7 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and txinstrutor like @instrutor and idinstrutor not in (" + lista + ") order by txinstrutor");
@@ -247,7 +247,7 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and idinstrutor in (select idinstrutor from Cursos_Instrutores where idcurso = @id) order by txinstrutor");

@@ -110,7 +110,7 @@ namespace Biblioteca.DB
             {
                 List<Cursos> list_cursos = new List<Cursos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador ORDER by txcurso");
@@ -138,7 +138,7 @@ namespace Biblioteca.DB
             {
                 List<Cursos> list_cursos = new List<Cursos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select idcurso, txcurso from cursos where idorganizador = @organizador ORDER by txcurso");
@@ -166,7 +166,7 @@ namespace Biblioteca.DB
             {
                 List<Cursos> list_cursos = new List<Cursos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total, idcurso, txcurso, isnull(idcategoria,0) as idcategoria, isnull(flgratuito,0) as flgratuito, isnull(idcor,0) as idcor from cursos where idorganizador = @organizador ORDER by txcurso OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -196,7 +196,7 @@ namespace Biblioteca.DB
             {
                 List<Cursos> list_cursos = new List<Cursos>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("select COUNT(*) OVER() as total, idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador and txcurso LIKE @curso OR txidentificador LIKE @curso ORDER by txcurso OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
@@ -330,7 +330,7 @@ namespace Biblioteca.DB
                 String msg = "Prezado(a) " + curso_aluno.aluno + ", clique no link abaixo, ou copie e cole no seu navegador para responder a pesquisa de avaliação do curso " + curso_aluno.curso + ".<br><br><a href='http://www.treinaauto.com.br/avaliacao?c=" + avaliacao + "'>http://www.treinaauto.com.br/avaliacao?c=" + avaliacao + "</a>";
                 String assunto = "Pesquisa de avaliação do curso " + curso_aluno.curso;
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session2 = new DBSession();
                 Query query2 = session2.CreateQuery("INSERT INTO Emails (idorganizador, txassunto, txpara, txresposta, txmensagem) VALUES (@organizador, @assunto, @para, @resposta, @mensagem)");

@@ -33,7 +33,7 @@ namespace Biblioteca.Entidades
         public string txidentificador { get; set; }
         public int total { get; set; }
 
-        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_instrutores"];
+        HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
         public Cursos()
         {
