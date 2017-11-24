@@ -73,27 +73,27 @@ function CadastroOrganizador() {
         erro = true;
         erroMsg2 += "Senha e confirmação devem ser iguais";
     }
-
+    
     if (!erro) {
-        
-        $("#form_login_organizador #form-error").addClass("bg-info").html('Aguarde...');
+       
+        $("#form_cadastro_organizador #form-error").addClass("bg-info").html('Aguarde...');
         $.ajax({
             type: "POST",
             url: "/Cadastro/Formulario/",
             data: $('#form_cadastro_organizador :input').serialize(),
             dataType: "json",
             traditional: true,
-            success: function (retorno) {              
+            success: function (retorno) {     
                 if (retorno.id == 0) {
-                    $("#form_login_organizador #form-error").addClass("bg-danger").html(retorno.mensagem);
+                    $("#form_cadastro_organizador #form-error").addClass("bg-danger").html(retorno.mensagem);
                 } else {
-                    $("#form_login_organizador #form-error").addClass("bg-success").html(retorno.mensagem);
+                    $("#form_cadastro_organizador #form-error").addClass("bg-success").html(retorno.mensagem);
                     window.location = "/Painel";
                 }
             }
         });
     } else {
-        $("#form_login_organizador #form-error").addClass("bg-danger").html((erroMsg2 == '' ? 'Preencha ' + erroMsg + ' corretamente. ' : erroMsg2));
+        $("#form_cadastro_organizador #form-error").addClass("bg-danger").html((erroMsg2 == '' ? 'Preencha ' + erroMsg + ' corretamente. ' : erroMsg2));
     }
 }
 
@@ -177,8 +177,10 @@ function LoginOrganizador() {
 
     if (perfil == 1) {
         url = "/Login/Formulario/";
+        link = "/Painel";
     } else {
         url = "/Login/FormularioAluno/";
+        link = "/Aluno";
     }
 
 
@@ -195,7 +197,7 @@ function LoginOrganizador() {
 
                 if (json.retorno === "OK") {
                     $("#form-error").addClass("bg-success").html(json.retorno);
-                    window.location = "/Painel";
+                    window.location = link;
                 }
 
                 if (json.retorno === "Dados incorretos") {

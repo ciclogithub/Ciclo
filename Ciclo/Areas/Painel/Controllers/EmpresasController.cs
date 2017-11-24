@@ -13,15 +13,15 @@ namespace Ciclo.Areas.Painel.Controllers
     public class EmpresasController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string empresa = "", int pagina = 1)
+        public ActionResult Index(string filtro = "", int pagina = 1)
         {
             List<Empresas> list = new List<Empresas>();
-            ViewBag.empresa = empresa;
+            ViewBag.filtro = filtro;
 
-            if (empresa == "")
+            if (filtro == "")
                 list = new EmpresasDB().Listar(pagina, 10);
             else
-                list = new EmpresasDB().Listar(empresa, pagina, 10);
+                list = new EmpresasDB().Listar(filtro, pagina, 10);
 
             if (list.Count > 0)
             {

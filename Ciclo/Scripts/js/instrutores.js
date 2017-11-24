@@ -13,30 +13,12 @@
 
 });
 
-function pagination(c) {
-    var p = $("#page").val();
-    var t = $("#totalpage").val();
-    if (c == -1) {
-        c = parseInt(p) - 1;
-        if (c <= 0) { c = 1 }
-        window.location = "/Painel/Instrutores/?pagina=" + c + "&instrutor=" + $("#instrutor").val();
-    } else {
-        if (c == 0) {
-            c = parseInt(p) + 1;
-            if (c > t) { c = t }
-            window.location = "/Painel/Instrutores/?pagina=" + c + "&instrutor=" + $("#instrutor").val();
-        } else {
-            window.location = "/Painel/Instrutores/?pagina=" + c + "&instrutor=" + $("#instrutor").val();
-        }
-    }
-}
-
 function InstrutoresTodos() {
-    window.location = "/Painel/Instrutores/?pagina=1&instrutor=";
+    window.location = "/Painel/Instrutores/?pagina=1&filtro=";
 }
 
 function InstrutorPesquisar() {
-    window.location = "/Painel/Instrutores/?instrutor=" + $("#instrutor").val();
+    window.location = "/Painel/Instrutores/?filtro=" + $("#filtro_pesquisa").val();
 }
 
 function Instrutores(id) {

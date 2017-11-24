@@ -25,7 +25,7 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="aluno" name="aluno" value="@ViewBag.aluno" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">Localizar</button>
+                    <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">Localizar</button>
                     &nbsp;<button class="tg-btn" type="button" onclick="AlunosTodos();">Todos</button>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
@@ -88,71 +88,7 @@
 
                 </div>
             </div>
-            @{
-                int min = 0;
-                int max = 0;
-                int pmin = 0;
-                int pmax = 0;
-                min = ((ViewBag.pagina - 1) * 10) + 1;
-                max = ViewBag.pagina * 10;
-                if (max > ViewBag.total) { max = ViewBag.total; }
-
-                int pages = 0;
-                pages = ViewBag.total / 10;
-                if ((ViewBag.total % 10) > 0) { pages = (pages + 1); }
-                pmin = (ViewBag.pagina - 9);
-                pmax = (ViewBag.pagina + 9);
-                if (pmin < 0) { pmin = 1; }
-                if (pmax > pages) { pmax = pages; }
-
-            }
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            @if (ViewBag.pagina > 1)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:pagination(-1)" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Anterior</span>
-                                    </a>
-                                </li>
-                            }
-                            @for (var x = pmin; x <= pmax; x++)
-                            {
-                                <li class="page-item"><a href="javascript:pagination(@x)" class="page-link @(ViewBag.pagina == x ? "pagesel" : "")">@x</a></li>
-                            }
-                            @if (ViewBag.pagina < pages)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:pagination(0)" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Próxima</span>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-left">
-                    @if (ViewBag.total > 0)
-                    {
-                        @Html.Raw("Exibindo " + @min + " a " + @max + " de " + @ViewBag.total);
-                    }
-                    else
-                    {
-                        @Html.Raw("Nenhum registro encontrado");
-                    }
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    Página @ViewBag.pagina de @pages
-                </div>
-            </div>
-            <input type="hidden" id="page" name="page" value="@ViewBag.pagina" />
-            <input type="hidden" id="totalpage" name="totalpage" value="@pages" />
+            @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
         </div>
     </div>
 </main>

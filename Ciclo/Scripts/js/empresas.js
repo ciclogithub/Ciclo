@@ -56,30 +56,12 @@
     });
 });
 
-function pagination(c) {
-    var p = $("#page").val();
-    var t = $("#totalpage").val();
-    if (c === -1) {
-        c = parseInt(p) - 1;
-        if (c <= 0) { c = 1; }
-        window.location = "/Painel/Empresas/?pagina=" + c + "&empresa=" + $("#empresa").val();
-    } else {
-        if (c === 0) {
-            c = parseInt(p) + 1;
-            if (c > t) { c = t; }
-            window.location = "/Painel/Empresas/?pagina=" + c + "&empresa=" + $("#empresa").val();
-        } else {
-            window.location = "/Painel/Empresas/?pagina=" + c + "&empresa=" + $("#empresa").val();
-        }
-    }
-}
-
 function EmpresasTodos() {
-    window.location = "/Painel/Empresas/?pagina=1&empresa=";
+    window.location = "/Painel/Empresas/?pagina=1&filtro=";
 }
 
 function EmpresaPesquisar() {
-    window.location = "/Painel/Empresas/?empresa=" + $("#empresa").val();
+    window.location = "/Painel/Empresas/?filtro=" + $("#filtro_pesquisa").val();
 }
 
 function Empresas(id) {

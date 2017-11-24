@@ -188,3 +188,22 @@ function lista(id) {
     $('body').html('<form action="Painel/Listas/Relatorio" id="form_red" method="post" style="display:none;"><input type= "hidden" id="tprelatorio" name="tprelatorio" value="' + id + '" /></form >');
     $("#form_red").submit();
 }
+
+function pagination(c) 
+    var n = $("#namepage").val();
+    var p = $("#page").val();
+    var t = $("#totalpage").val();
+    if (c === -1) {
+        c = parseInt(p) - 1;
+        if (c <= 0) { c = 1; }
+        window.location = "/Painel/" + n + "/?pagina=" + c + "&filtro=" + $("#filtro_pesquisa").val();
+    } else {
+        if (c === 0) {
+            c = parseInt(p) + 1;
+            if (c > t) { c = t; }
+            window.location = "/Painel/" + n + "/?pagina=" + c + "&filtro=" + $("#filtro_pesquisa").val();
+        } else {
+            window.location = "/Painel/" + n + "/?pagina=" + c + "&filtro=" + $("#filtro_pesquisa").val();
+        }
+    }
+}

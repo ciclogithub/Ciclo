@@ -16,6 +16,12 @@ namespace Ciclo.Areas.Aluno.Controllers
             return View();
         }
 
+        [Autenticacao]
+        public ActionResult Usuario()
+        {
+            return PartialView(new VerificaLogadoAluno().Buscar());
+        }
+
         public ActionResult Sair()
         {
             HttpCookie cookie = Request.Cookies["ciclo_usuario"];

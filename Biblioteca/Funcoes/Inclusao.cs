@@ -94,40 +94,48 @@ namespace Biblioteca.Funcoes
                 }
                 else
                 {
-                    Usuarios usuarios = new Usuarios();
-                    usuariosview.txsenha = MD5Hash.CalculaHash(usuariosview.txsenha);
-                    if (usuariosview.idaluno == 0)
+                    if (new UsuariosDB().ExisteCPF(usuariosview.txcpf) && usuariosview.idaluno == 0)
                     {
-                        usuarios = usuariosview.Retornar();
-                        int idorganizador = usuarios.Salvar();
+                        retorno.erro = true;
+                        retorno.mensagem = "CPF já cadastrado";
                     }
                     else
                     {
-                        usuarios = usuariosview.Atualizar(new UsuariosDB().Buscar(usuariosview.idaluno));
-                        usuarios.Alterar();
+
+                        Usuarios usuarios = new Usuarios();
+                        usuariosview.txsenha = MD5Hash.CalculaHash(usuariosview.txsenha);
+                        if (usuariosview.idaluno == 0)
+                        {
+                            usuarios = usuariosview.Retornar();
+                            int idorganizador = usuarios.Salvar();
+                        }
+                        else
+                        {
+                            usuarios = usuariosview.Atualizar(new UsuariosDB().Buscar(usuariosview.idaluno));
+                            usuarios.Alterar();
+                        }
+
+                        retorno.erro = false;
+                        retorno.mensagem = "Redirecionando...";
+
+                        var id = new UsuariosDB().Email(usuariosview.txemail).idaluno;
+
+                        retorno.id = id;
+
+                        HttpCookie cookie = new HttpCookie("ciclo_usuario");
+                        cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                        if (cookie == null)
+                            cookie = new HttpCookie("ciclo_usuario");
+                        cookie.Value = Convert.ToString(id);
+                        HttpContext.Current.Response.Cookies.Add(cookie);
+
+                        HttpCookie cookie2 = new HttpCookie("ciclo_perfil");
+                        cookie2 = HttpContext.Current.Request.Cookies["ciclo_perfil"];
+                        if (cookie2 == null)
+                            cookie2 = new HttpCookie("ciclo_perfil");
+                        cookie2.Value = "2";
+                        HttpContext.Current.Response.Cookies.Add(cookie2);
                     }
-
-                    retorno.erro = false;
-                    retorno.mensagem = "Redirecionando...";
-
-                    var id = new UsuariosDB().Email(usuariosview.txemail).idaluno;
-
-                    retorno.id = id;
-
-                    HttpCookie cookie = new HttpCookie("ciclo_usuario");
-                    cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
-                    if (cookie == null)
-                        cookie = new HttpCookie("ciclo_usuario");
-                    cookie.Value = Convert.ToString(id);
-                    HttpContext.Current.Response.Cookies.Add(cookie);
-
-                    HttpCookie cookie2 = new HttpCookie("ciclo_perfil");
-                    cookie2 = HttpContext.Current.Request.Cookies["ciclo_perfil"];
-                    if (cookie2 == null)
-                        cookie2 = new HttpCookie("ciclo_perfil");
-                    cookie2.Value = "2";
-                    HttpContext.Current.Response.Cookies.Add(cookie2);
-
                 }
             }
             else

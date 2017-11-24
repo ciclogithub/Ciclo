@@ -12,15 +12,15 @@ namespace Ciclo.Areas.Painel.Controllers
     public class TemasController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string tema = "", int pagina = 1)
+        public ActionResult Index(string filtro = "", int pagina = 1)
         {
             List<Temas> list = new List<Temas>();
-            ViewBag.tema = tema;
+            ViewBag.filtro = filtro;
 
-            if (tema == "")
+            if (filtro == "")
                 list = new TemasDB().Listar(pagina, 10);
             else
-                list = new TemasDB().Listar(tema, pagina, 10);
+                list = new TemasDB().Listar(filtro, pagina, 10);
 
             if (list.Count > 0)
             {

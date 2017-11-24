@@ -12,15 +12,15 @@ namespace Ciclo.Areas.Painel.Controllers
     public class EspecialidadesController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string especialidade = "", int pagina = 1)
+        public ActionResult Index(string filtro = "", int pagina = 1)
         {
             List<Especialidades> list = new List<Especialidades>();
-            ViewBag.especialidade = especialidade;
+            ViewBag.filtro = filtro;
 
-            if (especialidade == "")
+            if (filtro == "")
                 list = new EspecialidadesDB().Listar(pagina, 10);
             else
-                list = new EspecialidadesDB().Listar(especialidade, pagina, 10);
+                list = new EspecialidadesDB().Listar(filtro, pagina, 10);
 
             if (list.Count > 0)
             {

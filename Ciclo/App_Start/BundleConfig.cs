@@ -34,6 +34,12 @@ namespace Ciclo
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/js/painel.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/painelaluno").Include(
+                    "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
+                    "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
+                    "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
+                    "~/Scripts/js/painelaluno.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
                     "~/Scripts/highcharts/5.0.14/js/highcharts.js",
                     "~/Scripts/highcharts/5.0.14/js/modules/serial-label.js",

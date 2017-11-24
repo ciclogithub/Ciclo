@@ -117,6 +117,32 @@ namespace Biblioteca.DB
             }
         }
 
+        public bool ExisteCPF(string cpf)
+        {
+            try
+            {
+                bool usuario = false;
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idusuario FROM Usuarios WHERE txcpf = @cpf");
+                query.SetParameter("cpf", cpf);
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    usuario = true;
+                }
+                reader.Close();
+                session.Close();
+
+                return usuario;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public int Salvar(Usuarios variavel)
         {
             try

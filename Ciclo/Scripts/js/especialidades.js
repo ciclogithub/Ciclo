@@ -13,30 +13,12 @@
 
 });
 
-function pagination(c) {
-    var p = $("#page").val();
-    var t = $("#totalpage").val();
-    if (c == -1) {
-        c = parseInt(p) - 1;
-        if (c <= 0) { c = 1 }
-        window.location = "/Painel/Especialidades/?pagina=" + c + "&especialidade=" + $("#especialidade").val();
-    } else {
-        if (c == 0) {
-            c = parseInt(p) + 1;
-            if (c > t) { c = t }
-            window.location = "/Painel/Especialidades/?pagina=" + c + "&especialidade=" + $("#especialidade").val();
-        } else {
-            window.location = "/Painel/Especialidades/?pagina=" + c + "&especialidade=" + $("#especialidade").val();
-        }
-    }
-}
-
 function EspecialidadesTodos() {
-    window.location = "/Painel/Especialidades/?pagina=1&especialidade=";
+    window.location = "/Painel/Especialidades/?pagina=1&filtro=";
 }
 
 function EspecialidadePesquisar() {
-    window.location = "/Painel/Especialidades/?especialidade=" + $("#especialidade").val();
+    window.location = "/Painel/Especialidades/?filtro=" + $("#filtro_pesquisa").val();
 }
 
 function Especialidades(id) {

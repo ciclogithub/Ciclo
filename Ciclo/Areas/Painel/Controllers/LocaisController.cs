@@ -12,15 +12,15 @@ namespace Ciclo.Areas.Painel.Controllers
     public class LocaisController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string local = "", int pagina = 1)
+        public ActionResult Index(string filtro = "", int pagina = 1)
         {
             List<Locais> list = new List<Locais>();
-            ViewBag.local = local;
+            ViewBag.filtro = filtro;
 
-            if (local == "")
+            if (filtro == "")
                 list = new LocaisDB().Listar(pagina, 10);
             else
-                list = new LocaisDB().Listar(local, pagina, 10);
+                list = new LocaisDB().Listar(filtro, pagina, 10);
 
             if (list.Count > 0)
             {

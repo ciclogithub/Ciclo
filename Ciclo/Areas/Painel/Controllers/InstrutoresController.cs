@@ -13,15 +13,15 @@ namespace Ciclo.Areas.Painel.Controllers
     public class InstrutoresController : Controller
     {
         [Autenticacao]
-        public ActionResult Index(string instrutor = "", int pagina = 1)
+        public ActionResult Index(string filtro = "", int pagina = 1)
         {
             List<Instrutores> list = new List<Instrutores>();
-            ViewBag.instrutor = instrutor;
+            ViewBag.filtro = filtro;
 
-            if (instrutor == "")
+            if (filtro == "")
                 list = new InstrutoresDB().Listar(pagina, 10);
             else
-                list = new InstrutoresDB().Listar(instrutor, pagina, 10);
+                list = new InstrutoresDB().Listar(filtro, pagina, 10);
 
             if (list.Count > 0)
             {
