@@ -17,7 +17,19 @@ namespace Ciclo.Controllers
 
         public ActionResult Menu()
         {
-            return PartialView(new VerificaLogado().Buscar());
+            ViewBag.view = "";
+
+            //HttpCookie cookie = HttpContext.Request.Cookies["ciclo_perfil"];
+            //if (Convert.ToInt32(cookie.Value) == 1)
+            //{
+                ViewBag.view = new VerificaLogado().Buscar();
+            //}
+
+            //if (Convert.ToInt32(cookie.Value) == 2)
+            //{
+            //    ViewBag.view = new VerificaLogadoAluno().Buscar();
+            //}
+            return PartialView(ViewBag.view);
         }
 
         public JsonResult Esqueceu(string email)

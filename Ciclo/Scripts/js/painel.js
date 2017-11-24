@@ -189,7 +189,7 @@ function lista(id) {
     $("#form_red").submit();
 }
 
-function pagination(c) 
+function pagination(c) {
     var n = $("#namepage").val();
     var p = $("#page").val();
     var t = $("#totalpage").val();

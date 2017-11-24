@@ -23,6 +23,10 @@
 }
 else
 {
+    
+    HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_perfil"];
+    
+
     <div class="tg-navigationarea">
         <nav id="tg-nav" class="tg-nav hidden-md hidden-lg hidden-sm">
             <div class="navbar-header">
@@ -35,10 +39,10 @@ else
             </div>
             <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                 <ul>
-                    <li><a href="~/Painel">Painel @Model.perfil</a></li>
+                    <li><a href="~/Painel">Painel</a></li>
                 </ul>
             </div>
         </nav>
-        <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Painel">Painel</a>
+        <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Painel">Painel @cookie.Value</a>
     </div>
 }
