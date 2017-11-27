@@ -148,14 +148,14 @@ function IncluirAluno() {
     var idespecialidade = $("#form-modal_aluno #idespecialidade").val();
     var idcor = $("#form-modal_aluno #idcor").val();
     var idcidade = $("#form-modal_aluno #idcidade").val();
-    var txempresa = $("#form-modal_aluno #txempresa").val();
+    var idempresa = $("#form-modal_aluno #idempresa").val();
     var txobs = $("#form-modal_aluno #txobs").val();
     var txredes = $("#form-modal_aluno #txredes").val();
 
     $.ajax({
         type: "POST",
         url: '/Painel/Alunos/IncluirConcluir',
-        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: txempresa, obs: txobs, redes: txredes.toString() },
+        data: { id: idaluno, nome: txaluno, cpf: txcpf, email: txemail.toString(), telefone: txtelefone.toString(), especialidade: idespecialidade, cidade: idcidade, cor: idcor, empresa: idempresa, obs: txobs, redes: txredes.toString() },
         dataType: "json",
         traditional: true,
         success: function (json) {
@@ -306,6 +306,37 @@ function ListaEspecialidades() {
             $('#idespecialidade').append($('<option>', {
                 value: 0,
                 text: "Não foi possível carregar a lista de especialidades"
+            }));
+        }
+    });
+}
+
+function addEmpresa() {
+    Modal2("/Painel/Empresas/Incluir", 0, "Empresas", "ListaEmpresas");
+}
+
+function ListaEmpresas() {
+    $("#idempresa").empty();
+    $.ajax({
+        url: "/Painel/Alunos/ListaEmpresas",
+        cache: false,
+        type: "POST",
+        success: function (data) {
+            $('#idempresa').append($('<option>', {
+                value: "",
+                text: "-- Selecione --"
+            }));
+            for (var x = 0; x < data.length; x++) {
+                $('#idempresa').append($('<option>', {
+                    value: data[x].idempresa,
+                    text: data[x].txempresa
+                }));
+            }
+        },
+        error: function (reponse) {
+            $('#idempresa').append($('<option>', {
+                value: 0,
+                text: "Não foi possível carregar a lista de empresas"
             }));
         }
     });

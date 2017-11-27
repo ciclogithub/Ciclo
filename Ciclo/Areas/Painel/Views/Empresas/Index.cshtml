@@ -43,10 +43,11 @@
                         <thead>
                             <tr>
                                 <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="36%">EMPRESA</th>
+                                <th width="31%">EMPRESA</th>
                                 <th width="15%">CNPJ</th>
                                 <th width="31%">E-MAIL</th>
                                 <th width="15%">TELEFONE</th>
+                                <th width="5%"><img src="~/images/diagweb-32x32.png" title="Possui cadastro no Diagweb" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +73,14 @@
                                             }
                                             <br />
                                         }
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (p.diagweb == 0)
+                                        { <span title="Não é cliente Diagweb"><i class="fa fa-circle red-icon" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle red-icon" aria-hidden="true"></i></span> }
+                                        @if (p.diagweb == 1)
+                                        { <span title="Cliente Diagweb"><i class="fa fa-circle green-icon aria-hidden="true"></i>&nbsp;<i class="fa fa-circle red-icon" aria-hidden="true"></i></span> }
+                                        @if (p.diagweb == 2)
+                                        { <span title="Cliente Diagweb com produtos"><i class="fa fa-circle green-icon" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle green-icon" aria-hidden="true"></i></span>  }
                                     </td>
                                 </tr>
                             }

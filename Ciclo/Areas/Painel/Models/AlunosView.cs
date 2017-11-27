@@ -22,7 +22,7 @@ namespace Ciclo.Areas.Painel.Models
             this.cores = new CoresDB().Listar();
             this.especialidades = new EspecialidadesDB().Listar();
             this.redes = new RedesSociaisDB().Listar();
-            //this.empresas = new EmpresasDB().Listar();
+            this.empresas = new EmpresasDB().ListarRel();
             if (id != 0)
             {
                 this.alunos = new AlunosDB().Buscar(id);

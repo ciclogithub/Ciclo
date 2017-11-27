@@ -23,9 +23,9 @@
 }
 else
 {
-    
+
     HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_perfil"];
-    
+
 
     <div class="tg-navigationarea">
         <nav id="tg-nav" class="tg-nav hidden-md hidden-lg hidden-sm">
@@ -43,6 +43,13 @@ else
                 </ul>
             </div>
         </nav>
-        <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Painel">Painel @cookie.Value</a>
+        @if (Convert.ToInt32(cookie.Value) == 1)
+        {
+            <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Painel">Painel</a>
+        }
+        else
+        {
+            <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Aluno">Painel</a>
+        }
     </div>
 }

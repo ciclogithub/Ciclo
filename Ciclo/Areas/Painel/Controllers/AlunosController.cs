@@ -56,14 +56,14 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, string empresa = "", string obs = "", string redes = "", int idempresa = 0)
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, int empresa = 0, string obs = "", string redes = "")
         {
             AlunosDB db = new AlunosDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs, 0, idempresa));
+                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs, 0));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -75,9 +75,8 @@ namespace Ciclo.Areas.Painel.Controllers
                 aluno.idespecialidade = especialidade;
                 aluno.idcidade = cidade;
                 aluno.idcor = cor;
-                aluno.txempresa = empresa;
                 aluno.txobs = obs;
-                aluno.idempresa = idempresa;
+                aluno.idempresa = empresa;
 
                 db.Alterar(aluno);
 
@@ -127,6 +126,14 @@ namespace Ciclo.Areas.Painel.Controllers
             List<Especialidades> especialidades = new EspecialidadesDB().Listar();
             return Json(especialidades);
         }
-       
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaEmpresas()
+        {
+            List<Empresas> empresas = new EmpresasDB().ListarRel();
+            return Json(empresas);
+        }
+
     }
 }

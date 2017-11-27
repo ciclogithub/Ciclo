@@ -15,9 +15,42 @@
     <div class="tg-sectionspace">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                    conteudo da pagina inicial
-                </div>
+                @foreach (var p in Model)
+                {
+                    <div class="col-md-4 col-xs-12 col-sm-6 div-curso">
+                        <a href="Curso/@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
+                        <div class="gray-box">
+                            <h3><a href="Curso/@p.idcurso">@p.txcurso</a></h3>
+                            <p>
+                                <span><strong>Categoria:</strong> @p.txcategoria</span><br />
+                                <span><strong>Tema:</strong> @p.txtema</span><br />
+                                <span><strong>Carga Horária:</strong> 0</span><br />
+                                <span class="instrutores"><strong>Instrutor(es):</strong> 
+                                    @{
+                                        var arrI = p.instrutores.Split(',');
+                                        var arrE = "";
+                                        int cont = 0;
+                                        foreach (var i in arrI)
+                                        {
+                                            var arrTemp = i.Split('|');
+                                            if (cont > 0)
+                                            {
+                                                @Html.Raw(", " + arrTemp[0].Trim());
+                                            }
+                                            else
+                                            {
+                                               @Html.Raw(arrTemp[0].Trim());
+                                            }
+                                            @*<a href="Instrutor/@arrTemp[1]">@arrTemp[0].Trim()</a>*@
+                                        cont = cont + 1;
+                                    }
+                                    }
+                                </span>
+                            </p>
+                            <a href="Curso/@p.idcurso"><button class="btn btn-success btn-rounded waves-effect waves-light m-t-10 center-block">Mais informações</button></a>
+</div>
+                    </div>
+                }                
             </div>
         </div>
     </div>

@@ -96,7 +96,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0, Convert.ToString(reader["txbairro"])));
+                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0, Convert.ToString(reader["txbairro"]),0));
                 }
                 reader.Close();
                 session.Close();
@@ -146,7 +146,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Empresas WHERE idorganizador = @idorganizador ORDER by txempresa OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* ,isnull((case when em.txcnpj = '' then(select max(e.venda) from diagweb.diagweb.ExisteCliente as e where EXISTS(select ee.idempresa from Empresas_Emails as ee WHERE ee.txemail = e.email and ee.idempresa = em.idempresa)) else (select max(e.venda) from diagweb.diagweb.ExisteCliente as e where e.cpf_cnpj = em.txcnpj OR EXISTS(select ee.idempresa from Empresas_Emails as ee WHERE ee.txemail = e.email and ee.idempresa = em.idempresa)) end), 0) as diagweb from Empresas em WHERE em.idorganizador = @idorganizador ORDER by em.txempresa OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
                 query.SetParameter("page", page);
@@ -154,7 +154,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txbairro"])));
+                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txbairro"]), Convert.ToInt32(reader["diagweb"])));
                 }
                 reader.Close();
                 session.Close();
@@ -176,7 +176,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Empresas WHERE (txempresa LIKE @empresa OR txcnpj LIKE @empresa) AND idorganizador = @idorganizador ORDER by txempresa OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* ,isnull((case when em.txcnpj = '' then(select max(e.venda) from diagweb.diagweb.ExisteCliente as e where EXISTS(select ee.idempresa from Empresas_Emails as ee WHERE ee.txemail = e.email and ee.idempresa = em.idempresa)) else (select max(e.venda) from diagweb.diagweb.ExisteCliente as e where e.cpf_cnpj = em.txcnpj OR EXISTS(select ee.idempresa from Empresas_Emails as ee WHERE ee.txemail = e.email and ee.idempresa = em.idempresa)) end), 0) as diagweb from Empresas em WHERE (txempresa LIKE @empresa OR txcnpj LIKE @empresa) AND idorganizador = @idorganizador ORDER by em.txempresa OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("empresa", "%" + empresa.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
@@ -185,7 +185,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txbairro"])));
+                    list_empresa.Add(new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txbairro"]), Convert.ToInt32(reader["diagweb"])));
                 }
                 reader.Close();
                 session.Close();
@@ -211,7 +211,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0, Convert.ToString(reader["txbairro"]));
+                    empresas = new Empresas(Convert.ToInt32(reader["idempresa"]), Convert.ToString(reader["txempresa"]), Convert.ToString(reader["txcnpj"]), Convert.ToString(reader["txcodigo"]), Convert.ToString(reader["nrcep"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txnumero"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcomplemento"]),0, Convert.ToString(reader["txbairro"]),0);
                 }
                 reader.Close();
                 session.Close();

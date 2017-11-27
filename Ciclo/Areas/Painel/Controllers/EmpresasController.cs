@@ -71,7 +71,7 @@ namespace Ciclo.Areas.Painel.Controllers
 
             if (id == 0)
             {
-                ident = db.Salvar(new Empresas(id, empresa, cnpj, codigo, cep, cidade, numero, logradouro, complemento, 0, bairro));
+                ident = db.Salvar(new Empresas(id, empresa, cnpj, codigo, cep, cidade, numero, logradouro, complemento, 0, bairro,0));
                 Empresas emp = db.Buscar(id);
             }
             else

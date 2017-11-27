@@ -21,7 +21,6 @@ namespace Biblioteca.Entidades
         public List<Telefones> txtelefone { get; set; }
         public int idestado { get; set; }
         public string txcor { get; set; }
-        public string txempresa { get; set; }
         public int total { get; set; }
         public string txobs { get; set; }
         public List<Redes> txredes { get; set; }
@@ -41,14 +40,13 @@ namespace Biblioteca.Entidades
             this.idcor = 0;
             this.idestado = 0;
             this.txcor = "";
-            this.txempresa = "";
             this.total = 0;
             this.txobs = "";
             this.diagweb = 0;
             this.idempresa = 0;
         }
 
-        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, string empresa, int total, string obs, int diagweb, int idempresa)
+        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, int idempresa, int total, string obs, int diagweb)
         {
             this.idaluno = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -61,7 +59,6 @@ namespace Biblioteca.Entidades
             this.idcor = cor;
             this.idestado = new EstadosDB().Buscar(cidade);
             this.txcor = new CoresDB().Buscar(cor);
-            this.txempresa = empresa;
             this.total = total;
             this.txobs = obs;
             this.txredes = new AlunosDB().ListarRedesSociais(id);
