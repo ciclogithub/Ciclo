@@ -18,7 +18,7 @@ namespace Biblioteca.Entidades
         public string coraluno { get; set; }
         public string tema { get; set; }
         public string instrutor { get; set; }
-        public string especialidade { get; set; }
+        public string mercados { get; set; }
         public string cidadecurso { get; set; }
         public string estadocurso { get; set; }
         public string cidadealuno { get; set; }
@@ -43,7 +43,7 @@ namespace Biblioteca.Entidades
             this.coraluno = "";
             this.tema = "";
             this.instrutor = "";
-            this.especialidade = "";
+            this.mercados = "";
             this.cidadecurso = "";
             this.estadocurso = "";
             this.cidadealuno = "";
@@ -58,7 +58,7 @@ namespace Biblioteca.Entidades
             this.avaliacaogeral = 0;
         }
 
-        public Relatorios(int tipo, string curso, string data, string aluno, string empresa, string corcurso, string coraluno, string tema, string instrutor, string especialidade, string cidadecurso, string estadocurso, string cidadealuno, string estadoaluno, string local, string categoria, string identificador, int qtaluno, string emails, string telefones, double avaliacao, double avaliacaogeral)
+        public Relatorios(int tipo, string curso, string data, string aluno, string empresa, string corcurso, string coraluno, string tema, string instrutor, string mercados, string cidadecurso, string estadocurso, string cidadealuno, string estadoaluno, string local, string categoria, string identificador, int qtaluno, string emails, string telefones, double avaliacao, double avaliacaogeral)
         {
             this.tipo = tipo;
             this.curso = curso;
@@ -69,7 +69,7 @@ namespace Biblioteca.Entidades
             this.coraluno = coraluno;
             this.tema = tema;
             this.instrutor = instrutor;
-            this.especialidade = especialidade;
+            this.mercados = mercados;
             this.cidadecurso = cidadecurso;
             this.estadocurso = estadocurso;
             this.cidadealuno = cidadealuno;

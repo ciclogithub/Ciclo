@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    $('select').not('.no-js').select2();
+
     $("#pesquisa_instrutor").click(function () {
         InstrutorPesquisar();
     });

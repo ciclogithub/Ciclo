@@ -31,7 +31,8 @@
                 <input type="hidden" id="tempcorcurso" name="tempcorcurso" value="" />
                 <input type="hidden" id="tempcoraluno" name="tempcoraluno" value="" />
                 <input type="hidden" id="templocal" name="templocal" value="" />
-                <input type="hidden" id="tempespecialidade" name="tempespecialidade" value="" />
+                <input type="hidden" id="tempmercado" name="tempmercado" value="" />
+                <input type="hidden" id="tempempresa" name="tempempresa" value="" />
                 <div class="row">                
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label class="control-label" for="tprelatorio">Tipo de Relatório</label>
@@ -42,10 +43,11 @@
                             <option value="3">Por Classificação (Aluno)</option>
                             <option value="4">Por Classificação (Curso)</option>
                             <option value="5">Por Cursos</option>
-                            <option value="6">Por Especialidades</option>
+                            <option value="6">Por Mercados</option>
                             <option value="7">Por Locais</option>
                             <option value="8">Por Instrutores</option>
                             <option value="9">Por Temas</option>
+                            <option value="10">Por Empresas</option>
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right"><br />
@@ -123,18 +125,18 @@
                             <ul class="list-itens" id="listtema"></ul>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                            <label class="control-label" for="idespecialidade">Especialidades</label>
+                            <label class="control-label" for="idmercado">Mercados</label>
                             <div class="input-group">
-                                <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                <select id="idmercado" name="idmercado" class="form-control">
                                     <option value="">-- Selecione --</option>
-                                    @foreach (var e in Model.especialidades)
+                                    @foreach (var e in Model.mercados)
                                     {
-                                        <option value="@e.idespecialidade">@e.txespecialidade</option>
+                                        <option value="@e.idmercado">@e.txmercado</option>
                                     }
                                 </select>
-                                <span class="input-group-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                <span class="input-group-addon" onclick="add('mercado')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
-                            <ul class="list-itens" id="listespecialidade"></ul>
+                            <ul class="list-itens" id="listmercado"></ul>
                         </div>
                     </div>
                     <div class="row pt15">
@@ -225,22 +227,22 @@
                             <ul class="list-itens" id="listaluno"></ul>
                         </div>
                     </div>
-                    @*<div class="row pt15">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label class="control-label" for="idcategoria">Cidade / Estado (Aluno)</label>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label class="control-label" for="idempresa">Empresas</label>
                             <div class="input-group">
-                                <select id="idestado" name="idestado" class="form-control">
+                                <select id="idempresa" name="idempresa" class="form-control">
                                     <option value="">-- Selecione --</option>
-                                    @foreach (var t in Model.estados)
+                                    @foreach (var t in Model.empresas)
                                     {
-                                        <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
+                                        <option value="@t.idempresa">@t.txempresa</option>
                                     }
                                 </select>
-                                <span class="input-group-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                <span class="input-group-addon" onclick="add('empresa')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
-                            <ul class="list-itens" id="listcategoria"></ul>
+                            <ul class="list-itens" id="listempresa"></ul>
                         </div>
-                    </div>*@
+                    </div>
                 </div>
             </form>
         </div>

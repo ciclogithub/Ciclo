@@ -43,7 +43,7 @@ namespace Ciclo.Areas.Painel.Controllers{
                     graf = new GraficosDB().ListarCurso(collection);
                     break;
                 case 6:
-                    graf = new GraficosDB().ListarEspecialidade(collection);
+                    graf = new GraficosDB().ListarMercado(collection);
                     break;
                 case 7:
                     graf = new GraficosDB().ListarLocal(collection);
@@ -53,6 +53,9 @@ namespace Ciclo.Areas.Painel.Controllers{
                     break;
                 case 9:
                     graf = new GraficosDB().ListarTema(collection);
+                    break;
+                case 10:
+                    graf = new GraficosDB().ListarEmpresa(collection);
                     break;
             }
 
@@ -85,7 +88,7 @@ namespace Ciclo.Areas.Painel.Controllers{
                     list = new RelatoriosDB().ListarCurso(collection);
                     break;
                 case 6:
-                    list = new RelatoriosDB().ListarEspecialidade(collection);
+                    list = new RelatoriosDB().ListarMercado(collection);
                     break;
                 case 7:
                     list = new RelatoriosDB().ListarLocal(collection);
@@ -95,6 +98,9 @@ namespace Ciclo.Areas.Painel.Controllers{
                     break;
                 case 9:
                     list = new RelatoriosDB().ListarTema(collection);
+                    break;
+                case 10:
+                    list = new RelatoriosDB().ListarEmpresa(collection);
                     break;
             }
 

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\Cursos_SiteDB.cs" />
+    <Compile Include="DB\MercadosDB.cs" />
     <Compile Include="DB\LogadoDB.cs" />
     <Compile Include="DB\EmpresasDB.cs" />
     <Compile Include="DB\UsuariosDB.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
     <Compile Include="Entidades\Cursos_Site.cs" />
+    <Compile Include="Entidades\Mercados.cs" />
     <Compile Include="Entidades\Logado.cs" />
     <Compile Include="Entidades\Empresas.cs" />
     <Compile Include="Entidades\Avaliacoes.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Entidades\Retorno.cs" />
     <Compile Include="Filters\AutenticacaoAttribute.cs" />
     <Compile Include="Funcoes\Inclusao.cs" />
+    <Compile Include="Funcoes\Nulo.cs" />
     <Compile Include="Funcoes\Md5Hash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

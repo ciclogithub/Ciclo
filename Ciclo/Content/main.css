@@ -18,14 +18,12 @@
  09.	Flexslider
  10.	Grid
 */
-
 /* =============================================
 			Theme Reset Style
 ============================================= */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,500,700|Mr+Dafoe);
-* {
-	margin: 0px;
-	padding: 0px;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,500,700|Mr+Dafoe); * {
+    margin: 0px;
+    padding: 0px;
 }
 html,
 body {
@@ -239,7 +237,7 @@ form p span i {
 option { padding: 5px 15px; }
 li {
 	line-height: 28px;
-	list-style: disc inside none;
+	/*list-style: disc inside none;*/
 }
 ul ul { margin-left: 20px; }
 ol {

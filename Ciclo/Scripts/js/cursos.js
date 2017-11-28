@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+$('select').not('.no-js').select2();
+
     $('#selectallav').click(function () {
         val = $(this).prop('checked')
         $('#table_avaliacao tr th[scope=row]').find('input').each(function (index) {

@@ -15,6 +15,8 @@
         });
     });
 
+    $('select').not('.no-js').select2();
+
 });
 
 function add(campo) {

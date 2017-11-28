@@ -24,9 +24,10 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT distinct CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, E.TXESPECIALIDADE, C2.TXCIDADE AS CIDADEALUNO, ";
+                qry = "SELECT distinct CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, ";
                 qry += "E2.TXESTADO AS ESTADOALUNO, C.TXCURSO, L.TXLOCAL, CT.TXCATEGORIA, T.TXTEMA, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, ";
                 qry += "ISNULL((SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO),0) AS AVALIACAO, ";
+                qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXEMAIL FROM ALUNOS_EMAILS WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS EMAILS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXTELEFONE FROM ALUNOS_TELEFONES WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS TELEFONES, ";
                 qry += "SUBSTRING((SELECT ', ' + I.TXINSTRUTOR FROM CURSOS_INSTRUTORES CI LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR WHERE CI.IDCURSO = C.IDCURSO FOR XML PATH('')),3,999) AS INSTRUTORES ";
@@ -37,7 +38,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -47,7 +48,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -64,7 +65,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(1, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), Convert.ToDouble(reader["AVALIACAO"]),0));
+                    list_relat.Add(new Relatorios(1, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["MERCADOS"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), Convert.ToDouble(reader["AVALIACAO"]),0));
                 }
                 reader.Close();
                 session.Close();
@@ -97,7 +98,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -107,7 +108,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -147,7 +148,8 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, E.TXESPECIALIDADE, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry = "SELECT DISTINCT CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXEMAIL FROM ALUNOS_EMAILS WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS EMAILS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXTELEFONE FROM ALUNOS_TELEFONES WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS TELEFONES ";
                 qry += "FROM CURSOS C ";
@@ -157,7 +159,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -167,7 +169,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -184,7 +186,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(3, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0,0));
+                    list_relat.Add(new Relatorios(3, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["MERCADOS"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -217,7 +219,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -227,7 +229,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -266,7 +268,8 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
-                qry = "SELECT distinct C.TXCURSO, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, L.TXLOCAL, CT.TXCATEGORIA, A.TXALUNO, A.TXEMPRESA, CO2.TXCOR AS CORALUNO, T.TXTEMA, E.TXESPECIALIDADE,  ";
+                qry = "SELECT distinct C.TXCURSO, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, L.TXLOCAL, CT.TXCATEGORIA, A.TXALUNO, A.TXEMPRESA, CO2.TXCOR AS CORALUNO, T.TXTEMA, ";
+                qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
                 qry += "C1.TXCIDADE AS CIDADECURSO, C2.TXCIDADE AS CIDADEALUNO, E1.TXESTADO AS ESTADOCURSO, E2.TXESTADO AS ESTADOALUNO, ";
                 qry += "ISNULL((SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO),0) AS AVALIACAO, ";
                 qry += "ISNULL((SELECT ISNULL(SUM(CAST(ISNULL(CAV.NRNOTA1, 0) + ISNULL(CAV.NRNOTA2, 0) + ISNULL(CAV.NRNOTA3, 0) + ISNULL(CAV.NRNOTA4, 0) + ISNULL(CAV.NRNOTA5, 0) AS FLOAT) / 5) / COUNT(CAV.IDCURSOALUNO),0) FROM CURSOS_AVALIACOES CAV WHERE CAV.IDCURSOALUNO IN(SELECT IDCURSOALUNO FROM Cursos_Alunos CA WHERE CA.IDCURSO = C.IDCURSO)),0) AS AVALIACAOGERAL, ";
@@ -278,7 +281,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -288,7 +291,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -305,7 +308,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(5, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["TXESPECIALIDADE"]), Convert.ToString(reader["CIDADECURSO"]), Convert.ToString(reader["ESTADOCURSO"]), Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, "", "", Convert.ToDouble(reader["AVALIACAO"]), Convert.ToDouble(reader["AVALIACAOGERAL"])));
+                    list_relat.Add(new Relatorios(5, Convert.ToString(reader["TXCURSO"]), "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), Convert.ToString(reader["CORCURSO"]), Convert.ToString(reader["CORALUNO"]), Convert.ToString(reader["TXTEMA"]), Convert.ToString(reader["INSTRUTORES"]), Convert.ToString(reader["MERCADOS"]), Convert.ToString(reader["CIDADECURSO"]), Convert.ToString(reader["ESTADOCURSO"]), Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), 0, "", "", Convert.ToDouble(reader["AVALIACAO"]), Convert.ToDouble(reader["AVALIACAOGERAL"])));
                 }
                 reader.Close();
                 session.Close();
@@ -318,7 +321,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Relatorios> ListarEspecialidade(FormCollection collection)
+        public List<Relatorios> ListarMercado(FormCollection collection)
         {
             try
             {
@@ -328,7 +331,8 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, E.TXESPECIALIDADE, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry = "SELECT DISTINCT CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXEMAIL FROM ALUNOS_EMAILS WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS EMAILS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXTELEFONE FROM ALUNOS_TELEFONES WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS TELEFONES ";
                 qry += "FROM CURSOS C ";
@@ -338,7 +342,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -348,7 +352,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -359,13 +363,13 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
-                qry += "ORDER BY E.TXESPECIALIDADE, A.TXALUNO";
+                qry += "ORDER BY A.TXALUNO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_relat.Add(new Relatorios(6, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["TXESPECIALIDADE"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0,0));
+                    list_relat.Add(new Relatorios(6, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["CORALUNO"]), "", "", Convert.ToString(reader["MERCADOS"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), Convert.ToString(reader["ESTADOALUNO"]), "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0,0));
                 }
                 reader.Close();
                 session.Close();
@@ -398,7 +402,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -408,7 +412,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -458,7 +462,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -468,7 +472,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
@@ -518,7 +522,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
                 qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
                 qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
-                qry += "LEFT JOIN ESPECIALIDADES E ON E.IDESPECIALIDADE = A.IDESPECIALIDADE ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
                 qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
                 qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
                 qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
@@ -528,7 +532,7 @@ namespace Biblioteca.DB
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
-                if (collection["tempespecialidade"] != "") { qry += "AND A.IDESPECIALIDADE IN (" + collection["tempespecialidade"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
                 if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
                 if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
                 if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }

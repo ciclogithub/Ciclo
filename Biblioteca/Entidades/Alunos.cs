@@ -14,7 +14,6 @@ namespace Biblioteca.Entidades
         public int idorganizador { get; set; }
         public string txaluno { get; set; }
         public string txcpf { get; set; }
-        public int idespecialidade { get; set; }
         public int idcidade { get; set; }
         public int idcor { get; set; }
         public List<Emails> txemail { get; set; }
@@ -26,6 +25,7 @@ namespace Biblioteca.Entidades
         public List<Redes> txredes { get; set; }
         public int diagweb { get; set; }
         public int idempresa { get; set; }
+        public List<Mercados> txmercado { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
@@ -35,7 +35,6 @@ namespace Biblioteca.Entidades
             this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txaluno = "";
             this.txcpf = "";
-            this.idespecialidade = 0;
             this.idcidade = 0;
             this.idcor = 0;
             this.idestado = 0;
@@ -46,7 +45,7 @@ namespace Biblioteca.Entidades
             this.idempresa = 0;
         }
 
-        public Alunos(int id, string aluno, string cpf, int especialidade, int cidade, int cor, int idempresa, int total, string obs, int diagweb)
+        public Alunos(int id, string aluno, string cpf, int cidade, int cor, int idempresa, int total, string obs, int diagweb)
         {
             this.idaluno = id;
             this.idorganizador = Convert.ToInt32(cookie.Value);
@@ -54,7 +53,6 @@ namespace Biblioteca.Entidades
             this.txcpf = cpf;
             this.txemail = new AlunosDB().ListarEmails(id); 
             this.txtelefone = new AlunosDB().ListarTelefones(id);
-            this.idespecialidade = especialidade;
             this.idcidade = cidade;
             this.idcor = cor;
             this.idestado = new EstadosDB().Buscar(cidade);
@@ -64,6 +62,7 @@ namespace Biblioteca.Entidades
             this.txredes = new AlunosDB().ListarRedesSociais(id);
             this.diagweb = diagweb;
             this.idempresa = idempresa;
+            this.txmercado = new AlunosDB().ListarMercados(id);
         }
 
         public Alunos(int id, string aluno)
@@ -87,6 +86,11 @@ namespace Biblioteca.Entidades
         public void Excluir(int ident)
         {
             new AlunosDB().Excluir(ident);
+        }
+
+        public void RemoverMercados(int id = 0)
+        {
+            new AlunosDB().RemoverMercados(id);
         }
 
         public void RemoverEmails(int id = 0)

@@ -16,6 +16,8 @@
     </div>
 
     @{
+        string mercados = "";
+        string list_mercados = "";
         string emails = "";
         string list_emails = "";
         string telefones = "";
@@ -24,6 +26,21 @@
         string listredes = "";
 
         int i = 0;
+        if (Model.alunos.txmercado != null)
+        {
+            if (Model.alunos.txmercado.Count > 0)
+            {
+                foreach (var item in Model.alunos.txmercado)
+                {
+                    mercados = mercados + "," + item.idmercado + "|" + item.txmercado;
+                    list_mercados = list_mercados + "<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + i + ")'></i><span>" + item.txmercado + "</span></li>";
+                    i++;
+                }
+                mercados = mercados.Substring(1);
+            }
+        }
+
+        i = 0;
         if (Model.alunos.txemail != null)
         {
             if (Model.alunos.txemail.Count > 0)
@@ -81,6 +98,7 @@
                     <input type="hidden" id="idaluno" name="idaluno" value="@Model.alunos.idaluno" />
                     <input type="hidden" id="txemail" name="txemail" value="@emails" />
                     <input type="hidden" id="txredes" name="txredes" value="@redes" />
+                    <input type="hidden" id="txmercados" name="txmercados" value="@mercados" />
                     <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
                     <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.alunos.idcidade" />
                     <div class="row">
@@ -94,7 +112,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
                             <label class="control-label" for="idempresa">Empresa</label>
                             <div class="input-group">
                                 <select id="idempresa" name="idempresa" class="form-control">
@@ -105,6 +123,19 @@
                                     }
                                 </select>
                                 <span class="input-group-addon" onclick="addEmpresa()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label class="control-label" for="idcor">Classificacao</label>
+                            <div class="input-group">
+                                <select id="idcor" name="idcor" class="form-control no-js">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in Model.cores)
+                                    {
+                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.alunos.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon @Model.alunos.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
                             </div>
                         </div>
                     </div>
@@ -127,34 +158,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <label class="control-label" for="idespecialidade">Especialidade</label>
-                            <div class="input-group">
-                                <select id="idespecialidade" name="idespecialidade" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    @foreach (var e in Model.especialidades)
-                                    {
-                                    <option value="@e.idespecialidade" @(Model.alunos.idespecialidade == e.idespecialidade ? "selected" : "")>@e.txespecialidade</option>
-                                    }
-                                </select>
-                                <span class="input-group-addon" onclick="addEspecialidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <label class="control-label" for="idcor">Classificacao</label>
-                            <div class="input-group">
-                                <select id="idcor" name="idcor" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    @foreach (var c in Model.cores)
-                                    {
-                                        <option class="@c.txcor.Replace(" ","_")" value="@c.idcor" @(Model.alunos.idcor == c.idcor ? "selected" : "")>@c.txcor</option>
-                                    }
-                                </select>
-                                <span class="input-group-addon @Model.alunos.txcor.Replace(" ","_")" id="bgcor">&nbsp;</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
                             <label class="control-label" for="txobs">Observações</label>
                             <textarea name="txobs" class="form-control" id="txobs" placeholder="Observações" rows="3">@Model.alunos.txobs</textarea>
@@ -164,6 +167,25 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <form id="form-modal-mercados">
+                    <div class="form-group">
+                        <label class="control-label" for="tempmercado">Mercados</label>
+                        <div class="input-group">
+                            <select id="idmercado" name="idmercado" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var t in Model.mercados)
+                                {
+                                    <option value="@t.idmercado">@t.txmercado</option>
+                                }
+                            </select>
+                            <span class="input-group-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <ul class="list-itens" id="listmercado">@Html.Raw(list_mercados)</ul>
+                        <div id="error_mercado" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                    </div>
+                </form>
+            </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <form id="form-modal-email">
                     <div class="form-group">
@@ -177,6 +199,8 @@
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <form id="form-modal-telefone">
                     <div class="form-group">
@@ -191,20 +215,18 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <form id="form-modal-redes">
                     <div class="form-group">
                         <label class="control-label" for="tempredes">Redes Sociais</label>
                         <div class="input-group">
-                            <select id="idredesocial" name="idredesocial" class="form-control" style="width:20% !important; font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
+                            <select id="idredesocial" name="idredesocial" class="form-control no-js w20" font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
                                 @foreach (var r in Model.redes)
                                 {
                                     <option value="@r.idredesocial" name="@r.txicone">@Html.Raw("&#xf" + r.idcodigo + ";")</option>
                                 }
                             </select>
-                            <input type="text" class="form-control validate[required,minSize[2],maxSize[50]]" id="tempredes" name="tempredes" value="" maxlength="50" style="width:80% !important;" />
+                            <input type="text" class="form-control validate[required,minSize[2],maxSize[50]] w80" id="tempredes" name="tempredes" value="" maxlength="50" />
                             <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
                         <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>

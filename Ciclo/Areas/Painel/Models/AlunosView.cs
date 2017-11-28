@@ -11,7 +11,7 @@ namespace Ciclo.Areas.Painel.Models
     {
         public List<Estados> estados { get; set; }
         public List<Cores> cores { get; set; }
-        public List<Especialidades> especialidades { get; set; }
+        public List<Mercados> mercados { get; set; }
         public List<RedesSociais> redes { get; set; }
         public List<Empresas> empresas { get; set; }
         public Alunos alunos = new Alunos();
@@ -20,7 +20,7 @@ namespace Ciclo.Areas.Painel.Models
         {
             this.estados = new EstadosDB().Listar();
             this.cores = new CoresDB().Listar();
-            this.especialidades = new EspecialidadesDB().Listar();
+            this.mercados = new MercadosDB().Listar();
             this.redes = new RedesSociaisDB().Listar();
             this.empresas = new EmpresasDB().ListarRel();
             if (id != 0)

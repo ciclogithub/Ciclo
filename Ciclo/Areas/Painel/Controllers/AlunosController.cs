@@ -56,14 +56,14 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int especialidade = 0, int cidade = 0, int cor = 0, int empresa = 0, string obs = "", string redes = "")
+        public JsonResult IncluirConcluir(int id = 0, string nome = "", string cpf = "", string email = "", string telefone = "", int cidade = 0, int cor = 0, int empresa = 0, string obs = "", string redes = "", string mercados = "")
         {
             AlunosDB db = new AlunosDB();
             int ident = 0;
 
             if (id == 0)
             {
-                ident = db.Salvar(new Alunos(id, nome, cpf, especialidade, cidade, cor, empresa, 0, obs, 0));
+                ident = db.Salvar(new Alunos(id, nome, cpf, cidade, cor, empresa, 0, obs, 0));
                 Alunos aluno = db.Buscar(id);
             }
             else
@@ -72,7 +72,6 @@ namespace Ciclo.Areas.Painel.Controllers
                 Alunos aluno = db.Buscar(id);
                 aluno.txaluno = nome;
                 aluno.txcpf = cpf;
-                aluno.idespecialidade = especialidade;
                 aluno.idcidade = cidade;
                 aluno.idcor = cor;
                 aluno.txobs = obs;
@@ -83,8 +82,19 @@ namespace Ciclo.Areas.Painel.Controllers
                 db.RemoverEmails(ident);
                 db.RemoverTelefones(ident);
                 db.RemoverRedesSociais(ident);
+                db.RemoverMercados(ident);
             }
- 
+
+            var arrM = mercados.Split(',');
+            foreach (var i in arrM)
+            {
+                if (i != "")
+                {
+                    var arrTemp = i.Split('|');
+                    new AlunosDB().SalvarMercado(ident, Convert.ToInt32(arrTemp[0]));
+                }
+            }
+
             var arrE = email.Split(',');
             foreach (var i in arrE)
             {

@@ -14,9 +14,10 @@ namespace Ciclo.Areas.Painel.Models
         public List<Cores> cores { get; set; }
         public List<Cursos> cursos { get; set; }
         public List<Alunos> alunos { get; set; }
-        public List<Especialidades> especialidades { get; set; }
+        public List<Mercados> mercados { get; set; }
         public List<Instrutores> instrutores { get; set; }
         public List<Locais> locais { get; set; }
+        public List<Empresas> empresas { get; set; }
 
         public RelatoriosView()
         {
@@ -25,9 +26,10 @@ namespace Ciclo.Areas.Painel.Models
             this.locais = new LocaisDB().Listar();
             this.instrutores = new InstrutoresDB().Listar();
             this.alunos = new AlunosDB().ListarRel();
-            this.especialidades = new EspecialidadesDB().Listar();
+            this.mercados = new MercadosDB().Listar();
             this.cursos = new CursosDB().ListarRel();
             this.cores = new CoresDB().Listar();
+            this.empresas = new EmpresasDB().ListarRel();
         }
         
     }

@@ -32,12 +32,14 @@ namespace Ciclo
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
+                    "~/Scripts/plugins/select2/js/select2.full.min.js",
                     "~/Scripts/js/painel.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/painelaluno").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
+                    "~/Scripts/plugins/select2/js/select2.full.min.js",
                     "~/Scripts/js/painelaluno.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
@@ -117,6 +119,7 @@ namespace Ciclo
                     "~/Scripts/plugins/barrating/themes/fontawesome-stars.css",
                     "~/Scripts/plugins/validate/css/validationEngine.jquery.css",
                     "~/Scripts/plugins/calendar/css/datepicker.css",
+                    "~/Scripts/plugins/select2/css/select2.css",
                     "~/Content/responsive.css"));
         }
     }
