@@ -24,7 +24,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT distinct CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, ";
+                qry = "SELECT distinct CO2.TXCOR AS CORALUNO, A.TXALUNO, E.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, ";
                 qry += "E2.TXESTADO AS ESTADOALUNO, C.TXCURSO, L.TXLOCAL, CT.TXCATEGORIA, T.TXTEMA, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, ";
                 qry += "ISNULL((SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO),0) AS AVALIACAO, ";
                 qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
@@ -45,6 +45,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E1 ON E1.IDESTADO = C1.IDESTADO ";
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
+                qry += "LEFT JOIN EMPRESAS E ON E.IDEMPRESA = A.IDEMPRESA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
@@ -150,7 +151,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry = "SELECT DISTINCT CO2.TXCOR AS CORALUNO, A.TXALUNO, E.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
                 qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXEMAIL FROM ALUNOS_EMAILS WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS EMAILS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXTELEFONE FROM ALUNOS_TELEFONES WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS TELEFONES ";
@@ -168,6 +169,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E1 ON E1.IDESTADO = C1.IDESTADO ";
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
+                qry += "LEFT JOIN EMPRESAS E ON E.IDEMPRESA = A.IDEMPRESA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
@@ -272,7 +274,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 string qry = "";
                 DBSession session = new DBSession();
-                qry = "SELECT distinct C.TXCURSO, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, L.TXLOCAL, CT.TXCATEGORIA, A.TXALUNO, A.TXEMPRESA, CO2.TXCOR AS CORALUNO, T.TXTEMA, ";
+                qry = "SELECT distinct C.TXCURSO, CO1.TXCOR AS CORCURSO, C.TXIDENTIFICADOR, L.TXLOCAL, CT.TXCATEGORIA, A.TXALUNO, E.TXEMPRESA, CO2.TXCOR AS CORALUNO, T.TXTEMA, ";
                 qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
                 qry += "C1.TXCIDADE AS CIDADECURSO, C2.TXCIDADE AS CIDADEALUNO, E1.TXESTADO AS ESTADOCURSO, E2.TXESTADO AS ESTADOALUNO, ";
                 qry += "ISNULL((SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO),0) AS AVALIACAO, ";
@@ -292,6 +294,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E1 ON E1.IDESTADO = C1.IDESTADO ";
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
+                qry += "LEFT JOIN EMPRESAS E ON E.IDEMPRESA = A.IDEMPRESA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
@@ -336,7 +339,7 @@ namespace Biblioteca.DB
                 string qry = "";
                 DBSession session = new DBSession();
 
-                qry = "SELECT DISTINCT M.TXMERCADO, CO2.TXCOR AS CORALUNO, A.TXALUNO, A.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry = "SELECT DISTINCT M.TXMERCADO, CO2.TXCOR AS CORALUNO, A.TXALUNO, E.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
                 qry += "SUBSTRING((SELECT ', ' + TXEMAIL FROM ALUNOS_EMAILS WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS EMAILS, ";
                 qry += "SUBSTRING((SELECT ', ' + TXTELEFONE FROM ALUNOS_TELEFONES WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS TELEFONES ";
                 qry += "FROM CURSOS C ";
@@ -354,6 +357,7 @@ namespace Biblioteca.DB
                 qry += "LEFT JOIN ESTADOS E1 ON E1.IDESTADO = C1.IDESTADO ";
                 qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
                 qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
+                qry += "LEFT JOIN EMPRESAS E ON E.IDEMPRESA = A.IDEMPRESA ";
                 qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
                 if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
                 if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
