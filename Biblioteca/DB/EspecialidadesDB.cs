@@ -16,13 +16,9 @@ namespace Biblioteca.DB
         {
             try
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Especialidades (idorganizador, txespecialidade, txsigla) VALUES (@organizador, @especialidade, @sigla)");
-                query.SetParameter("organizador", variavel.idorganizador);
+                Query query = session.CreateQuery("INSERT INTO Especialidades (txespecialidade) VALUES (@especialidade)");
                 query.SetParameter("especialidade", variavel.txespecialidade);
-                query.SetParameter("sigla", variavel.txsigla);
                 query.ExecuteUpdate();
                 session.Close();          
             }
@@ -37,10 +33,9 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Especialidades SET txespecialidade = @especialidade, txsigla = @sigla WHERE idespecialidade = @id");
+                Query query = session.CreateQuery("UPDATE Especialidades SET txespecialidade = @especialidade WHERE idespecialidade = @id");
                 query.SetParameter("id", variavel.idespecialidade);
                 query.SetParameter("especialidade", variavel.txespecialidade);
-                query.SetParameter("sigla", variavel.txsigla);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -72,16 +67,13 @@ namespace Biblioteca.DB
             {
                 List<Especialidades> list_especialidades = new List<Especialidades>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select  * from Especialidades WHERE idorganizador = @idorganizador ORDER by txespecialidade");
-                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                Query query = session.CreateQuery("select  * from Especialidades ORDER by txespecialidade");
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]), Convert.ToString(reader["txsigla"]), 0));
+                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"])));
                 }
                 reader.Close();
                 session.Close();
@@ -100,18 +92,15 @@ namespace Biblioteca.DB
             {
                 List<Especialidades> list_especialidades = new List<Especialidades>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select  COUNT(*) OVER() as total, * from Especialidades WHERE idorganizador = @idorganizador ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
-                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                Query query = session.CreateQuery("select  COUNT(*) OVER() as total, * from Especialidades ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("regs", regs);
                 query.SetParameter("page", page);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]), Convert.ToString(reader["txsigla"]), Convert.ToInt32(reader["total"])));
+                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"])));
                 }
                 reader.Close();
                 session.Close();
@@ -130,19 +119,16 @@ namespace Biblioteca.DB
             {
                 List<Especialidades> list_especialidades = new List<Especialidades>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, * from Especialidades WHERE idorganizador = @idorganizador and txespecialidade LIKE @especialidade OR txsigla LIKE @especialidade ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, * from Especialidades WHERE txespecialidade LIKE @especialidade OR txsigla LIKE @especialidade ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("especialidade", "%" + especialidade.Replace(" ", "%") + "%");
-                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
                 query.SetParameter("page", page);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]), Convert.ToString(reader["txsigla"]), Convert.ToInt32(reader["total"])));
+                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"])));
                 }
                 reader.Close();
                 session.Close();
@@ -168,7 +154,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    Especialidades = new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]), Convert.ToString(reader["txsigla"]),0);
+                    Especialidades = new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]));
                 }
                 reader.Close();
                 session.Close();

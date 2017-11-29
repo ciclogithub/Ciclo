@@ -158,7 +158,6 @@
     <Compile Include="Areas\Painel\Controllers\RelatoriosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ConfiguracoesController.cs" />
     <Compile Include="Areas\Painel\Controllers\CursosController.cs" />
-    <Compile Include="Areas\Painel\Controllers\EspecialidadesController.cs" />
     <Compile Include="Areas\Painel\Controllers\TemasController.cs" />
     <Compile Include="Areas\Painel\Controllers\LocaisController.cs" />
     <Compile Include="Areas\Painel\Controllers\PainelController.cs" />
@@ -242,8 +241,6 @@
     <Content Include="Areas\Painel\Views\Cursos\Valores.cshtml" />
     <Content Include="Areas\Painel\Views\Cursos\Folder.cshtml" />
     <Content Include="Areas\Painel\Views\Cursos\Avaliacao.cshtml" />
-    <Content Include="Areas\Painel\Views\Especialidades\Incluir.cshtml" />
-    <Content Include="Areas\Painel\Views\Especialidades\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Relatorios\Index.cshtml" />
     <Content Include="Areas\Painel\Views\Relatorios\Relatorio.cshtml" />
     <Content Include="Areas\Painel\Views\Empresas\Incluir.cshtml" />

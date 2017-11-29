@@ -81,6 +81,29 @@ namespace Biblioteca.DB
             }
         }
 
+        public string ListarNomes(string id)
+        {
+            try
+            {
+                string result = "";
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select SUBSTRING((select ', ' + txempresa from empresas where idempresa in (" + id + ") FOR XML PATH('')),3,9999) as result");
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = Convert.ToString(reader["result"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Empresas> Listar()
         {
             try

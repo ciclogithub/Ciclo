@@ -2,12 +2,12 @@
 
 $('select').not('.no-js').select2();
 
-    $('#selectallav').click(function () {
-        val = $(this).prop('checked')
-        $('#table_avaliacao tr th[scope=row]').find('input').each(function (index) {
-            $(this).prop('checked', val);
-        });
-    })
+$('#selectallav').click(function () {
+    val = $(this).prop('checked');
+    $('#table_avaliacao tr th[scope=row]').find('input').each(function (index) {
+        $(this).prop('checked', val);
+    });
+});
 
     $("#pesquisa_curso").click(function () {
         CursoPesquisar();
@@ -51,11 +51,10 @@ $('select').not('.no-js').select2();
     });
 
     $("#idcor").on("change", function () {
-        $("#bgcor").removeClass()
-        $("#bgcor").addClass("input-group-addon")
+        $("#bgcor").removeClass();
+        $("#bgcor").addClass("input-group-addon");
         $("#bgcor").addClass($(this).find(":selected").text().replace(" ", "_"));
-
-    })
+    });
 
     $("#incluir_avaliacoes_btn").click(function () {       
         cont = 0;
@@ -73,7 +72,7 @@ $('select').not('.no-js').select2();
             if (cont === 0) {
                 alert("Selecione pelo menos 1 registro");
             } else {
-                IncluirAvaliacao()
+                IncluirAvaliacao();
             }
         }
     });
@@ -203,6 +202,7 @@ function IncluirCurso() {
     var flgratuito = $("#flgratuito").prop('checked');
     var idcor = $("#idcor").val();
     var txidentificador = $("#txidentificador").val();
+    var idespecialidade = $("#idespecialidade").val();
 
     var form = $('#form-modal')[0];
     var data = new FormData(form);
@@ -219,6 +219,7 @@ function IncluirCurso() {
     data.append("gratuito", flgratuito);
     data.append("cor", idcor);
     data.append("identificador", txidentificador);
+    data.append("especialidade", idespecialidade);
     
     $.ajax({
         type: "POST",
@@ -618,14 +619,14 @@ function ShowHide(id) {
     if ($("#cel_" + id).hasClass("hide")) {
         $("#cel_" + id).removeClass("hide");
     } else {
-        $("#cel_" + id).addClass("hide")
+        $("#cel_" + id).addClass("hide");
     }
 }
 
 /* FOLDER */
 
 function CursoFolder(id) {
-    alert("Em desenvolvimento")
+    alert("Em desenvolvimento");
 }
 
 

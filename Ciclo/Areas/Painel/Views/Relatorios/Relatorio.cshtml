@@ -29,7 +29,7 @@
                     case 5: <li class="tg-active">Por Cursos</li>
                         break;
 
-                    case 6: <li class="tg-active">Por Especialiadades</li>
+                    case 6: <li class="tg-active">Por Mercados</li>
                         break;
 
                     case 7: <li class="tg-active">Por Locais</li>
@@ -55,7 +55,8 @@
     <input type="hidden" id="tempcorcurso" name="tempcorcurso" value="@ViewBag.form["tempcorcurso"]" />
     <input type="hidden" id="tempcoraluno" name="tempcoraluno" value="@ViewBag.form["tempcoraluno"]" />
     <input type="hidden" id="templocal" name="templocal" value="@ViewBag.form["templocal"]" />
-    <input type="hidden" id="tempespecialidade" name="tempespecialidade" value="@ViewBag.form["tempespecialidade"]" />
+    <input type="hidden" id="tempmercado" name="tempmercado" value="@ViewBag.form["tempmercado"]" />
+    <input type="hidden" id="tempempresa" name="tempempresa" value="@ViewBag.form["tempempresa"]" />
     <input type="hidden" id="tprelatorio" name="tprelatorio" value="@ViewBag.form["tprelatorio"]" />
     <input type="hidden" id="dtini" name="dtini" value="@ViewBag.form["dtini"]" />
     <input type="hidden" id="dtfim" name="dtfim" value="@ViewBag.form["dtfim"]" />
@@ -76,6 +77,141 @@
                     <a href="~/Painel/Relatorios"><button class="tg-btn" type="button">Voltar</button></a>
                 </div>
             </div>
+            <div class="row pt15">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 div-filtro">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong>
+                                @switch (Convert.ToInt32(ViewBag.form["tprelatorio"]))
+                                {
+                                    case 1: <span>Relatório por Alunos</span>; break;
+                                    case 2: <span>Relatório por Categorias</span>; break;
+                                    case 3: <span>Relatório por Classificação (Aluno)</span>; break;
+                                    case 4: <span>Relatório por Classificação (Curso)</span>; break;
+                                    case 5: <span>Relatório por Cursos</span>; break;
+                                    case 6: <span>Relatório por Mercados</span>; break;
+                                    case 7: <span>Relatório por Locais</span>; break;
+                                    case 8: <span>Relatório por Instrutores</span>; break;
+                                    case 9: <span>Relatório por Temas</span>; break;
+                                }
+                            </strong>
+                        </div>
+                        @if ((@ViewBag.form["dtini"] != "") || (@ViewBag.form["dtfim"] != "") || (@ViewBag.form["dtmes"] != ""))
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @if ((ViewBag.form["dtini"] != "") && (ViewBag.form["dtfim"] != "") && (ViewBag.form["dtmes"] != ""))
+                            {
+                                @Html.Raw("Período: " + @ViewBag.form["dtini"] + " à " + ViewBag.form["dtfim"] + " (somente o mês de " + @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(ViewBag.form["dtmes"])) + ")");
+                            }
+                            @if ((ViewBag.form["dtini"] != "") && (ViewBag.form["dtfim"] != "") && (ViewBag.form["dtmes"] == ""))
+                            {
+                                @Html.Raw("Período: " + @ViewBag.form["dtini"] + " à " + ViewBag.form["dtfim"]);
+                            }
+                            @if ((ViewBag.form["dtini"] != "") && (ViewBag.form["dtfim"] == "") && (ViewBag.form["dtmes"] != ""))
+                            {
+                                @Html.Raw("Período: a partir de " + @ViewBag.form["dtini"] + " (somente o mês de " + @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(ViewBag.form["dtmes"])) + ")");
+                            }
+                            @if ((ViewBag.form["dtini"] == "") && (ViewBag.form["dtfim"] != "") && (ViewBag.form["dtmes"] != ""))
+                            {
+                                @Html.Raw("Período: até " + ViewBag.form["dtfim"] + " (somente o mês de " + @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(ViewBag.form["dtmes"])) + ")");
+                            }
+                            @if ((ViewBag.form["dtini"] != "") && (ViewBag.form["dtfim"] == "") && (ViewBag.form["dtmes"] == ""))
+                            {
+                                @Html.Raw("Período: a partir de " + @ViewBag.form["dtini"]);
+                            }
+                            @if ((ViewBag.form["dtini"] == "") && (ViewBag.form["dtfim"] != "") && (ViewBag.form["dtmes"] == ""))
+                            {
+                                @Html.Raw("Período: até " + ViewBag.form["dtfim"]);
+                            }
+                            @if ((ViewBag.form["dtini"] == "") && (ViewBag.form["dtfim"] == "") && (ViewBag.form["dtmes"] != ""))
+                            {
+                                @Html.Raw("Período: somente o mês de " + @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(ViewBag.form["dtmes"])));
+                            }
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempinstrutor"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.InstrutoresDB().ListarNomes(@ViewBag.form["tempinstrutor"]); }
+                            Instrutores: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["temptema"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.TemasDB().ListarNomes(@ViewBag.form["temptema"]); }
+                            Temas: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempcurso"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.CursosDB().ListarNomes(@ViewBag.form["tempcurso"]); }
+                            Cursos: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempcategoria"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.CategoriasDB().ListarNomes(@ViewBag.form["tempcategoria"]); }
+                            Categorias: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempaluno"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.AlunosDB().ListarNomes(@ViewBag.form["tempaluno"]); }
+                            Alunos: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempcorcurso"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.CoresDB().ListarNomes(@ViewBag.form["tempcorcurso"]); }
+                            Classificação (Cursos): @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempcoraluno"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.CoresDB().ListarNomes(@ViewBag.form["tempcoraluno"]); }
+                            Classificação (Alunos): @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["templocal"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.LocaisDB().ListarNomes(@ViewBag.form["templocal"]); }
+                            Locais: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempmercado"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.MercadosDB().ListarNomes(@ViewBag.form["tempmercado"]); }
+                            Mercados: @result
+                        </div>
+                        }
+
+                        @if (@ViewBag.form["tempempresa"] != "")
+                        {
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            @{ string result = new Biblioteca.DB.EmpresasDB().ListarNomes(@ViewBag.form["tempempresa"]); }
+                            Empresas: @result
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
             <div id="div_grafico" style="width:100%; height:600px;" class="hide pt15"></div>
             <div class="row pt">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="table2excel" style="overflow:auto;">
@@ -94,7 +230,7 @@
                                             <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
                                             <th bgcolor="#ECECEC">ALUNO</th>
                                             <th bgcolor="#ECECEC">EMPRESA</th>
-                                            <th bgcolor="#ECECEC">ESPECIALIDADE</th>
+                                            <th bgcolor="#ECECEC">MERCADOS</th>
                                             <th bgcolor="#ECECEC">CIDADE/ESTADO</th>
                                             <th bgcolor="#ECECEC">E-MAILS</th>
                                             <th bgcolor="#ECECEC">TELEFONES</th>
@@ -115,7 +251,7 @@
                                                 <td class="@p.coraluno.Replace(" ","_")">&nbsp;</td>
                                                 <td>@p.aluno</td>
                                                 <td>@p.empresa</td>
-                                                <td>@p.especialidade</td>
+                                                <td>@p.mercados</td>
                                                 <td>@p.cidadealuno / @p.estadoaluno</td>
                                                 <td>@p.emails</td>
                                                 <td>@p.telefones</td>
@@ -218,7 +354,7 @@
                                         @:     <tr>
                                         @:         <th bgcolor="#ECECEC" width="20%">ALUNO</th>
                                         @:         <th bgcolor="#ECECEC" width="20%">EMPRESA</th>
-                                        @:         <th bgcolor="#ECECEC" width="15%">ESPECIALIDADE</th>
+                                        @:         <th bgcolor="#ECECEC" width="15%">MERCADOS</th>
                                         @:         <th bgcolor="#ECECEC" width="15%">CIDADE / ESTADO</th>        
                                         @:         <th bgcolor="#ECECEC" width="15%">E-MAILS</th>
                                         @:         <th bgcolor="#ECECEC" width="15%">TELEFONES</th>
@@ -230,7 +366,7 @@
                                     @: <tr>
                                     @:     <td>@p.aluno</td>
                                     @:     <td>@p.empresa</td>
-                                    @:     <td>@p.especialidade</td>
+                                    @:     <td>@p.mercados</td>
                                     @:     <td>@p.cidadealuno / @p.estadoaluno</td>
                                     @:     <td>@p.emails</td>
                                     @:     <td>@p.telefones</td>
@@ -359,7 +495,7 @@
                                         @:         <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
                                         @:         <th bgcolor="#ECECEC" width='30%'>ALUNO</th>
                                         @:         <th bgcolor="#ECECEC" width='24%'>EMPRESA</th>
-                                        @:         <th bgcolor="#ECECEC" width='15%'>ESPECIALIDADE</th>        
+                                        @:         <th bgcolor="#ECECEC" width='15%'>MERCADOS</th>        
                                         @:         <th bgcolor="#ECECEC" width='20%'>CIDADE / ESTADO</th>
                                         @:         <th bgcolor="#ECECEC" width='10%'>AVALIAÇÃO</th>
                                         @:     </tr>
@@ -371,7 +507,7 @@
                                     @:     <td class="@p.coraluno">&nbsp;</td>                                        
                                     @:     <td>@p.aluno</td>
                                     @:     <td>@p.empresa</td>
-                                    @:     <td>@p.especialidade</td>
+                                    @:     <td>@p.mercados</td>
                                     @:     <td>@p.cidadealuno / @p.estadoaluno</td>
                                     @:     <td>@(p.avaliacao == 0 ? "N/A" : (Convert.ToDouble(p.avaliacao) / 5).ToString("N1"))</td>
                                     @: </tr>
@@ -386,15 +522,15 @@
 
                             break;
 
-                            // Especialidades
+                            // Mercados
                             case 6:
 
                                 @: <table class="table table-bordered table-hover table-responsive table-relat">
                                 foreach (var p in Model)
                                 {
-                                    if (p.especialidade != temp)
+                                    if (p.mercados != temp)
                                     {
-                                        temp = p.especialidade;
+                                        temp = p.mercados;
 
                                         if (cont > 0)
                                         {
@@ -409,7 +545,7 @@
 
                                         @: <thead>
                                         @:     <tr>
-                                        @:         <th bgcolor="#DDDDDD" colspan="6">ESPECIALIDADE: @p.especialidade</th>
+                                        @:         <th bgcolor="#DDDDDD" colspan="6">MERCADO: @p.mercados</th>
                                         @:     </tr>
                                         @:     <tr>
                                         @:         <th bgcolor="#ECECEC" width="1%">&nbsp;</th>

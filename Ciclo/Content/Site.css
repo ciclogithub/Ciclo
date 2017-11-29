@@ -390,3 +390,8 @@ h3.perfil span {
 .w80 {
     width: 80% !important;
 }
+
+.div-filtro {
+    background-color:#dbdbdb;
+    font-size:12px;
+}
