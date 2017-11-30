@@ -68,6 +68,7 @@ function ListaCidades(estado, cidade) {
             }
             temp += "</select>";
             $("#dv_cidade").html(temp);
+            $('select#idcidade').select2();
         },
         error: function (reponse) {
             $("#dv_cidade").html("Não foi possível carregar a lista de cidades");

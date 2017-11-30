@@ -129,7 +129,14 @@ table input {
     background-color: #ececec;
     border-radius: 5px;
 }
-
+#error_mercado {
+    opacity: 1;
+    position: absolute;
+    top: 202px;
+    left: 15px;
+    margin-top: 0px;
+    display: none;
+}
 #error_email {
     opacity: 1;
     position: absolute;
