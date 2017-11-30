@@ -19,7 +19,7 @@ namespace Biblioteca.DB
                 List<Cursos_Lista> list_cursos = new List<Cursos_Lista>();
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select top 10 c.txcurso, (select count(ci.idinstrutor) from Cursos_Instrutores ci where ci.idcurso = c.idcurso) as instrutores, (select count(ca.idaluno) from Cursos_Alunos ca where ca.idcurso = c.idcurso) as Alunos, isnull(c.nrmaximo,0) as nrmaximo, c.idcurso, isnull(c.idcor,0) as idcor from cursos c INNER JOIN Cursos_Datas cd on cd.idcurso = c.idcurso AND cd.dtcurso >= getdate()  where c.idorganizador = @organizador order by c.txcurso");
+                Query query = session.CreateQuery("select top 10 c.txcurso, (select count(ci.idinstrutor) from Cursos_Instrutores ci where ci.idcurso = c.idcurso) as instrutores, (select count(ca.idaluno) from Cursos_Alunos ca where ca.idcurso = c.idcurso) as Alunos, isnull(c.nrmaximo,0) as nrmaximo, c.idcurso, isnull(c.idcor,0) as idcor from cursos c INNER JOIN Cursos_Datas cd on cd.idcurso = c.idcurso AND cd.dtcurso >= getdate()  where c.idorganizador = @organizador order by (select max(dtcurso) from Cursos_Datas where idcurso = c.idcurso), c.txcurso");
                 query.SetParameter("organizador", id);
                 IDataReader reader = query.ExecuteQuery();
 

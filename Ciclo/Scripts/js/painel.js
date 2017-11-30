@@ -12,6 +12,18 @@
             $(this).prop('checked', val);
         });
     })
+
+    $("#page_select").on("blur", function () {
+        if ($(this).val() == "") {
+            alert("Informe o número da página");
+        } else {
+            if ((parseInt($(this).val()) < 1) || (parseInt($(this).val()) > parseInt($("#totalpage").val()))) {
+                alert("Página inválida");
+            } else {
+                pagination($(this).val())
+            }
+        }
+    })
 });
 
 

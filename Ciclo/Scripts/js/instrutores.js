@@ -88,7 +88,7 @@ function IncluirInstrutor() {
     var txtelefone = $("#form-modal_instrutor #txtelefone").val();
     var txdescritivo = $("#form-modal_instrutor #txdescritivo").val();
 
-    var form = $('#form-modal_instrutor #form-modal')[0];
+    var form = $('#form-modal_instrutor')[0];
     var data = new FormData(form);
     data.append("id", idinstrutor);
     data.append("nome", txinstrutor);

@@ -157,7 +157,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l left join cidades c on c.idcidade = l.idcidade left join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, l.*, c.txcidade, e.txestado from Locais l left join cidades c on c.idcidade = l.idcidade left join  estados e on e.idestado = c.idestado WHERE (l.txlocal LIKE @local OR l.txlogradouro LIKE @local OR c.txcidade LIKE @local OR e.txestado LIKE @local) AND l.idorganizador = @idorganizador ORDER by l.txlocal OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("local", "%" + local.Replace(" ", "%") + "%");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);

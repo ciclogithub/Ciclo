@@ -24,7 +24,7 @@
                     <div class="counter">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_aluno</p>
                                         <p class="bg_cinza">
@@ -36,7 +36,7 @@
                                         <p><a href="~/Painel/Alunos" class="dashlink">Alunos</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_empresas</p>
                                         <p class="bg_cinza">
@@ -48,36 +48,40 @@
                                         <p><a href="~/Painel/Empresas" class="dashlink">Empresas</a></p>
                                     </div>
                                 </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div>
+                                        <p class="counter-count">@ViewBag.contadores.avaliacao</p>
+                                        <p class="bg_cinza">
+                                            <strong>@ViewBag.contadores.cont_avaliacao_enviada</strong> - Avaliações enviadas<br />
+                                            <strong>@ViewBag.contadores.cont_avaliacao_respondida</strong> - Avaliações respondidas<br />
+                                        </p>
+                                        <p class="dashlink">Avaliação Média</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row pt30">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_instrutor</p>
                                         <p><a href="~/Painel/Instrutores" class="dashlink">Instrutores</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_curso</p>
                                         <p><a href="~/Painel/Cursos" class="dashlink">Cursos</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_temas</p>
                                         <p><a href="~/Painel/Temas" class="dashlink">Temas</a></p>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div>
                                         <p class="counter-count">@ViewBag.contadores.cont_locais</p>
                                         <p><a href="~/Painel/Locais" class="dashlink">Locais</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div>
-                                        <p class="counter-count">@ViewBag.contadores.avaliacao</p>
-                                        <p class="dashlink">Avaliação Média</p>
                                     </div>
                                 </div>
                             </div>

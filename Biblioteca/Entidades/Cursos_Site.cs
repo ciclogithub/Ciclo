@@ -14,7 +14,7 @@ namespace Biblioteca.Entidades
         public int idcurso { get; set; }
         public string txcurso { get; set; }
         public string txcategoria { get; set; }
-        public string txtema { get; set; }
+        public string txespecialidade { get; set; }
         public string instrutores { get; set; }
         public string txfoto { get; set; }
 
@@ -24,18 +24,18 @@ namespace Biblioteca.Entidades
             this.idcurso = 0;
             this.txcurso = "";
             this.txcategoria = "";
-            this.txtema = "";
+            this.txespecialidade = "";
             this.instrutores = "";
             this.txfoto = "";
         }
 
-        public Cursos_Site(int total, int idcurso, string txcurso, string txcategoria, string txtema, string instrutores, string txfoto)
+        public Cursos_Site(int total, int idcurso, string txcurso, string txcategoria, string txespecialidade, string instrutores, string txfoto)
         {
             this.total = total;
             this.idcurso = idcurso;
             this.txcurso = txcurso;
             this.txcategoria = txcategoria;
-            this.txtema = txtema;
+            this.txespecialidade = txespecialidade;
             this.instrutores = instrutores;
             this.txfoto = txfoto;
         }

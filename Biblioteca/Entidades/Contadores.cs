@@ -22,6 +22,8 @@ namespace Biblioteca.Entidades
         public int cont_empresas_email { get; set; }
         public int cont_temas { get; set; }
         public int cont_locais { get; set; }
+        public int cont_avaliacao_enviada { get; set; }
+        public int cont_avaliacao_respondida { get; set; }
 
         public Contadores()
         {
@@ -38,9 +40,11 @@ namespace Biblioteca.Entidades
             this.cont_empresas_email = 0;
             this.cont_temas = 0;
             this.cont_locais = 0;
+            this.cont_avaliacao_enviada = 0;
+            this.cont_avaliacao_respondida = 0;
         }
 
-        public Contadores(int instrutor, int cursos, int alunos, int avaliacaoes, int empresas, int ciclo, int compra, int emails, int empciclo, int empcompra, int empemails, int temas, int locais)
+        public Contadores(int instrutor, int cursos, int alunos, int avaliacaoes, int empresas, int ciclo, int compra, int emails, int empciclo, int empcompra, int empemails, int temas, int locais, int avalenviada, int avalrespondida)
         {
             this.cont_instrutor = instrutor;
             this.cont_curso = cursos;
@@ -55,6 +59,8 @@ namespace Biblioteca.Entidades
             this.cont_empresas_email = empemails;
             this.cont_temas = temas;
             this.cont_locais = locais;
+            this.cont_avaliacao_enviada = avalenviada;
+            this.cont_avaliacao_respondida = avalrespondida;
         }
 
     }
