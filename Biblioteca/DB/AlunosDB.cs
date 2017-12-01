@@ -64,11 +64,23 @@ namespace Biblioteca.DB
         {
             try
             {
-                DBSession sessioni = new DBSession();
-                Query queryi = sessioni.CreateQuery("DELETE FROM Organizadores_Alunos WHERE idaluno = @id");
-                queryi.SetParameter("id", id);
-                queryi.ExecuteUpdate();
-                sessioni.Close();
+                DBSession sessione = new DBSession();
+                Query querye = sessione.CreateQuery("DELETE FROM alunos_emails WHERE idaluno = @id");
+                querye.SetParameter("id", id);
+                querye.ExecuteUpdate();
+                sessione.Close();
+
+                DBSession sessiont = new DBSession();
+                Query queryt = sessiont.CreateQuery("DELETE FROM alunos_telefones WHERE idaluno = @id");
+                queryt.SetParameter("id", id);
+                queryt.ExecuteUpdate();
+                sessiont.Close();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM alunos WHERE idaluno = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
             }
             catch (Exception erro)
             {

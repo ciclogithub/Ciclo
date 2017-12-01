@@ -69,6 +69,18 @@ namespace Biblioteca.DB
         {
             try
             {
+                DBSession sessione = new DBSession();
+                Query querye = sessione.CreateQuery("DELETE FROM Empresas_emails WHERE idempresa = @id");
+                querye.SetParameter("id", id);
+                querye.ExecuteUpdate();
+                sessione.Close();
+
+                DBSession sessiont = new DBSession();
+                Query queryt = sessiont.CreateQuery("DELETE FROM Empresas_telefones WHERE idempresa = @id");
+                queryt.SetParameter("id", id);
+                queryt.ExecuteUpdate();
+                sessiont.Close();
+
                 DBSession sessioni = new DBSession();
                 Query queryi = sessioni.CreateQuery("DELETE FROM Empresas WHERE idempresa = @id");
                 queryi.SetParameter("id", id);
