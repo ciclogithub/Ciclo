@@ -332,7 +332,7 @@ address { font-style: italic; }
     font: 500 14px/40px 'Poppins', Arial, Helvetica, sans-serif;
 }
     .tg-btn:hover {
-        background: #E12325;
+        background: #455481;
         color: #fff !important;
         -webkit-box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
         box-shadow: 0 0 10px 0 rgba(68,67,73,0.20);
@@ -858,7 +858,7 @@ li.tg-rss a{background:#ff6600;}
 .tg-messagestatus time:before{
 	top: 0;
 	right: 0;
-	color: #E12325;
+	color: #455481;
 	content: '\ea6c';
 	font-size: 12px;
 	line-height: 12px;
@@ -2624,12 +2624,12 @@ body.tg-homeone .tg-themescrollbar{height:265px;}
     width: 100%;
     float: left;
     padding: 33px 0;
-    background: #706D78;
+    background: rgba(68,67,73,0.20);
 }
 .tg-copyrights{
 	margin:0;
 	float:left;
-	color:#fff;
+	color:#000;
 	padding:19px 0;
 	font-size:14px;
 	line-height:14px;

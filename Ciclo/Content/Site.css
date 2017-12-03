@@ -288,7 +288,7 @@ table input {
 }
 
 .pagesel {
-    background-color: #E12325 !important;
+    background-color: #455481 !important;
     Color: #ffffff !important;
 }
 
@@ -297,7 +297,7 @@ textarea {
 }
 
 .dashlink {
-    color: #E12325;
+    color: #455481;
     text-transform:uppercase;
     font-weight:600;
     font-size:17px;
@@ -340,7 +340,7 @@ h3.perfil input {
 h3.perfil span {
     text-transform: capitalize;
     font-size: 20px;
-    color: #E12325;
+    color: #455481;
 }
 
 .header {
@@ -370,9 +370,9 @@ h3.perfil span {
 
 
     .div-curso div.border {
-        -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.51);
-        -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.51);
-        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.51);
+        -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.31);
+        -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.31);
+        box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.31);
     }
 
 .gray-box span {
@@ -397,7 +397,7 @@ h3.perfil span {
 }
 
 .instrutores a:hover {
-    background-color:#E12325;
+    background-color:#455481;
     color:#ffffff;
 }
 
@@ -418,31 +418,65 @@ h3.perfil span {
     max-height:70px;
 }
 
+.tg-logo a img {
+    max-height:52px !important;
+    width:auto !important;
+}
+
+.tg-logo2 a img {
+    max-height: 70px !important;
+    width: auto !important;
+}
+
 @media only screen and (max-device-width: 480px) {
     #slideshow {
-        margin: 170px 0px 30px 0px;
-        position: relative;
-        height: 120px;
-        overflow: hidden;
-
+        margin: 170px 0px 30px 0px !important;
+        position: relative !important;
+        height: 120px !important;
+        overflow: hidden !important;
     }
 
         #slideshow img {
-            max-height: 120px;
-            width: 100%;
+            max-height: 120px !important;
+            width: 100% !important;
         }
 }
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 640px) {
     #slideshow {
-        margin: 100px 0px 30px 0px;
-        position: relative;
-        height: 230px;
-        overflow: hidden;
+        margin: 100px 0px 30px 0px !important;
+        position: relative !important;
+        height: 230px !important;
+        overflow: hidden !important;
     }
 
         #slideshow img {
-            max-height: 230px;
-            width: 100%;
+            max-height: 230px !important;
+            width: 100% !important;
         }
 }
+
+@media only screen and (min-device-width: 641px) and (max-device-width: 1800px) {
+    #slideshow {
+        height: 460px !important;
+    }
+
+        #slideshow img {
+            max-height: 460px !important;
+        }
+}
+
+@media only screen and (min-device-width: 1801px) {
+    #slideshow {
+        height: 652px !important;
+    }
+
+    #slideshow img {
+        max-height: 652px !important;
+    }
+
+    #tg-main {
+        min-height: 617px !important;
+    }
+}
+

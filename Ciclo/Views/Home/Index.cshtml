@@ -15,8 +15,15 @@
     <div class="tg-sectionspace">
         <div class="container">
             <div class="row">
+                @{int c = 0;}
                 @foreach (var p in Model)
                 {
+
+                    if ((c % 3) == 0)
+                    {
+                        @Html.Raw("</div><div class='row'>");
+                    }
+
                     <div class="col-md-4 col-xs-12 col-sm-6 div-curso">
                         <div class="border">
                             <a href="Curso/@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
@@ -43,15 +50,16 @@
                                                    @Html.Raw(arrTemp[0].Trim());
                                                 }
                                                 @*<a href="Instrutor/@arrTemp[1]">@arrTemp[0].Trim()</a>*@
-                                            cont = cont + 1;
-                                        }
+                                                cont = cont + 1;
+                                            }
                                         }
                                     </span>
                                 </p>
-                                <a href="Curso/@p.idcurso"><button class="btn btn-success btn-rounded waves-effect waves-light m-t-10 center-block">Mais informações</button></a>
+                                <a href="Curso/@p.idcurso"><button class="btn btn-info btn-rounded waves-effect waves-light m-t-10 center-block">Mais informações</button></a>
                             </div>
                         </div>
                     </div>
+                    c++;
                 }                
             </div>
         </div>
