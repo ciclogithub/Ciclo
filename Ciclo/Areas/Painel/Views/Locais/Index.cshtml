@@ -45,7 +45,7 @@
                                 <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
                                 <th width="33%">LOCAL</th>
                                 <th width="32%">LOGRADOURO</th>
-                                <th width="32%">CIDADE / ESTADO</th>
+                                <th width="32%">CIDADE / ESTADO / PAÍS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,7 +55,11 @@
                                     <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idlocal" /></th>
                                     <td>@p.txlocal</td>
                                     <td>@p.txlogradouro</td>
-                                    <td>@p.txcidade / @p.txestado</td>
+                                    <td>
+                                    @if (p.txcidade != "") {
+                                        @Html.Raw(p.txcidade + " / " + p.txestado + " / " + p.txpais);
+                                    }
+                                    </td>
                                 </tr>
                             }
                         </tbody>

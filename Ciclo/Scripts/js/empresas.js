@@ -14,18 +14,12 @@
         }
     });
 
-    $("#idestado").on("change", function () {
-        if ($(this).val() == "") {
-            $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
-        } else {
-            $("#dv_cidade").html("Carregando lista ...");
-            ListaCidades($(this).val(), 0)
-        }
-    })
-
-    if ($("#idestado")) {
-        if ($("#idestado").val() != "") {
-            ListaCidades($("#idestado").val(), $("#tempcidade").val());
+    if ($("#idpais")) {
+        if ($("#idpais").val() != "") {
+            ListaEstados($("#idpais").val(), $("#tempestado").val());
+            if ($("#tempestado").val() > 0) {
+                ListaCidades($("#tempestado").val(), $("#tempcidade").val());
+            }
         }
     }
 
@@ -234,29 +228,4 @@ function whatsapp(o) {
         $('#whatsapp_label').addClass("verde_escuro");
     }
 
-}
-
-function ListaCidades(estado, cidade) {
-    $.ajax({
-        url: "/Painel/Locais/ListaCidades",
-        data: { id: estado },
-        cache: false,
-        type: "POST",
-        success: function (data) {
-            var temp = "";
-            temp += "<label class='control-label' for='idcidade'>Cidade</label>";
-            temp += "<select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione --</option>";
-            for (var x = 0; x < data.length; x++) {
-                temp += "<option value=" + data[x].idcidade;
-                if (parseInt(data[x].idcidade) === parseInt(cidade)) { temp += " selected " }
-                temp += ">" + data[x].txcidade + "</option>";
-            }
-            temp += "</select>";
-            $("#dv_cidade").html(temp);
-            $('select#idcidade').select2();
-        },
-        error: function (reponse) {
-            $("#dv_cidade").html("Não foi possível carregar a lista de cidades");
-        }
-    });
 }

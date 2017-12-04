@@ -26,6 +26,7 @@ namespace Biblioteca.Entidades
         public int diagweb { get; set; }
         public int idempresa { get; set; }
         public List<Mercados> txmercado { get; set; }
+        public int idpais { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
@@ -43,6 +44,7 @@ namespace Biblioteca.Entidades
             this.txobs = "";
             this.diagweb = 0;
             this.idempresa = 0;
+            this.idpais = 26;
         }
 
         public Alunos(int id, string aluno, string cpf, int cidade, int cor, int idempresa, int total, string obs, int diagweb)
@@ -55,7 +57,16 @@ namespace Biblioteca.Entidades
             this.txtelefone = new AlunosDB().ListarTelefones(id);
             this.idcidade = cidade;
             this.idcor = cor;
-            this.idestado = new EstadosDB().Buscar(cidade);
+            if (cidade > 0)
+            {
+                this.idestado = new EstadosDB().Buscar(cidade);
+                this.idpais = new PaisesDB().Buscar(this.idestado);
+            }
+            else
+            {
+                this.idestado = 0;
+                this.idpais = 26;
+            }
             this.txcor = new CoresDB().Buscar(cor);
             this.total = total;
             this.txobs = obs;

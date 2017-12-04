@@ -10,7 +10,7 @@
         $('#form-modal_tema').validationEngine('attach');
         if ($('#form-modal_tema').validationEngine('validate')) {
             IncluirTema();
-        };
+        }
     });
 
 });
@@ -38,11 +38,11 @@ function TemaAlterar() {
         }
     });
 
-    if (cont == 0) {
-        alert("Selecione pelo menos 1 registro")
+    if (cont === 0) {
+        alert("Selecione pelo menos 1 registro");
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            alert("Selecione somente 1 registro para alterar");
         } else {
             Temas(val);
         }
@@ -55,13 +55,13 @@ function TemaExcluir() {
     ids = "";
     $("input[name='ident']").each(function () {
         if ($(this).is(":checked")) {
-            ids = ids + "," + $(this).val()
+            ids = ids + "," + $(this).val();
         }
     });
 
     var ids = ids.substring(1);
 
-    if (ids != "") {
+    if (ids !== "") {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
@@ -76,12 +76,11 @@ function TemaExcluir() {
             });
         }
     } else {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     }
 }
 
 function IncluirTema() {
-
     var idtema = $("#form-modal_tema #idtema").val();
     var txtema = $("#form-modal_tema #txtema").val();
     var txsubtitulo = $("#form-modal_tema #txsubtitulo").val();
@@ -97,7 +96,6 @@ function IncluirTema() {
 
             alert("Operação realizada com sucesso!");
 
-
             if ($("#modal2").is(":visible")) {
                 window.setTimeout(function () {
                     $('#modal2.modal').modal('hide');
@@ -108,6 +106,7 @@ function IncluirTema() {
                     $('#modal1.modal').modal('hide');
                 }, 1000);
 
+                $("#filtro_pesquisa").val("");
                 TemaPesquisar();
             }
 
@@ -115,3 +114,26 @@ function IncluirTema() {
     });
 
 }
+
+//function ValidaTema() {
+
+//    // Tema já existe
+//    $.post("/Painel/Temas/VerificaTema", { id: $("#form-modal_tema #idtema").val(), nome: $("#form-modal_tema #txtema").val() }).done(function (data) {
+//        if (data == 1) {
+//            swal({
+//                title: 'Já existe um tema com o mesmo nome, confirma a gravação de um novo registro',
+//                type: 'warning',
+//                showCancelButton: true,
+//                confirmButtonText: 'Sim',
+//                cancelButtonText: 'Não'
+//            }).then((result) => {
+//                if (result.value) {
+//                    return true;
+//                }
+//            })
+//        } else {
+//            return true;
+//        }
+//    });
+//    return true
+//}

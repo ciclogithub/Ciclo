@@ -82,5 +82,12 @@ namespace Ciclo.Areas.Painel.Controllers
 
             return Json(new Retorno());
         }
+
+        [Autenticacao]
+        public int VerificaTema(int id = 0, string nome = "")
+        {
+            int retorno = new TemasDB().VerificaTema(id, nome);
+            return retorno;
+        }
     }
 }

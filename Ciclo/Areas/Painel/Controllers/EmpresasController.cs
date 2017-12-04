@@ -58,7 +58,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 empresa = new EmpresasDB().Buscar(id);
             }
 
-            ViewBag.estados = new EstadosDB().Listar();
+            ViewBag.paises = new PaisesDB().Listar();
 
             return PartialView(empresa);
         }

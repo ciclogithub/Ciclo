@@ -205,5 +205,30 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public int VerificaTema(int id, string nome)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from temas where idtema <> @id and txtema COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                query.SetParameter("id", id);
+                query.SetParameter("nome", nome);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }

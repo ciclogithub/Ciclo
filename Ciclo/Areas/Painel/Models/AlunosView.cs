@@ -9,7 +9,7 @@ namespace Ciclo.Areas.Painel.Models
 {
     public class AlunosView
     {
-        public List<Estados> estados { get; set; }
+        public List<Paises> paises { get; set; }
         public List<Cores> cores { get; set; }
         public List<Mercados> mercados { get; set; }
         public List<RedesSociais> redes { get; set; }
@@ -18,7 +18,7 @@ namespace Ciclo.Areas.Painel.Models
 
         public AlunosView(int id)
         {
-            this.estados = new EstadosDB().Listar();
+            this.paises = new PaisesDB().Listar();
             this.cores = new CoresDB().Listar();
             this.mercados = new MercadosDB().Listar();
             this.redes = new RedesSociaisDB().Listar();

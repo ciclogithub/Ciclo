@@ -12,6 +12,32 @@ namespace Biblioteca.DB
 {
     public class EstadosDB
     {
+        public List<Estados> Listar(int pais = 0)
+        {
+            try
+            {
+                List<Estados> list_estados = new List<Estados>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Estados WHERE idpais = @pais ORDER by txestado");
+                query.SetParameter("pais", pais);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_estados.Add(new Estados(Convert.ToInt32(reader["idestado"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txsigla"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_estados;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Estados> Listar()
         {
             try

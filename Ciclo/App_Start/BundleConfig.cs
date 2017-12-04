@@ -34,6 +34,7 @@ namespace Ciclo
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/plugins/select2/js/select2.full.min.js",
+                    "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
                     "~/Scripts/js/painel.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/painelaluno").Include(
@@ -41,6 +42,7 @@ namespace Ciclo
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/plugins/select2/js/select2.full.min.js",
+                    "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
                     "~/Scripts/js/painelaluno.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(

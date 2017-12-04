@@ -25,6 +25,7 @@ namespace Biblioteca.Entidades
         public List<TelefonesEmpresas> txtelefone { get; set; }
         public int total { get; set; }
         public int idestado { get; set; }
+        public int idpais { get; set; }
         public int diagweb { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
@@ -45,6 +46,7 @@ namespace Biblioteca.Entidades
             this.total = 0;
             this.idestado = 0;
             this.diagweb = 0;
+            this.idpais = 26;
         }
 
         public Empresas(int id, string empresa, string cnpj, string codigo, string cep, int cidade, string numero, string logradouro, string complemento, int total, string bairro, int diagweb)
@@ -63,7 +65,16 @@ namespace Biblioteca.Entidades
             this.txcomplemento = complemento;
             this.txbairro = bairro;
             this.total = total;
-            this.idestado = new EstadosDB().Buscar(cidade);
+            if (cidade > 0)
+            {
+                this.idestado = new EstadosDB().Buscar(cidade);
+                this.idpais = new PaisesDB().Buscar(this.idestado);
+            }
+            else
+            {
+                this.idestado = 0;
+                this.idpais = 26;
+            }
             this.diagweb = diagweb;
         }
 

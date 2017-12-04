@@ -66,6 +66,7 @@
                     <input type="hidden" id="txemail" name="txemail" value="@emails" />
                     <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
                     <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
+                    <input type="hidden" id="tempestado" name="tempestado" value="@Model.idestado" />
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-12 form-group">
                             <label class="control-label" for="txcodigo">Código</label>
@@ -89,14 +90,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12 form-group">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <label class="control-label" for="idpais">País</label>
+                            <select id="idpais" name="idpais" class="form-control validate[required]" onchange="MudaPais(this.value)">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var t in ViewBag.paises)
+                                {
+                                    <option value="@t.idpais" @(Model.idpais == t.idpais ? "selected" : "")>@t.txpais</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12" id="dv_estado">
                             <label class="control-label" for="idestado">Estado</label>
                             <select id="idestado" name="idestado" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var t in ViewBag.estados)
-                                {
-                                    <option value="@t.idestado" @(Model.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
-                                }
+                                <option value="">-- Selecione o país --</option>
                             </select>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 form-group" id="dv_cidade">
@@ -105,21 +112,21 @@
                                 <option value="">-- Selecione o estado --</option>
                             </select>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
                             <label class="control-label" for="txbairro">Bairro</label>
                             <input type="text" class="form-control validate[minSize[3],maxSize[100]]" id="txbairro" name="txbairro" value="@Model.txbairro" maxlength="100" />
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                        <div class="col-lg-5 col-md-5 col-sm-12 form-group">
                             <label class="control-label" for="txlogradouro">Endereço</label>
                             <input type="text" class="form-control validate[minSize[3],maxSize[300]]" id="txlogradouro" name="txlogradouro" value="@Model.txlogradouro" maxlength="300" />
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-12 form-group">
                             <label class="control-label" for="txnumero">Número</label>
                             <input type="text" class="form-control validate[maxSize[20]]" id="txnumero" name="txnumero" value="@Model.txnumero" maxlength="20" />
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-12 form-group">
                             <label class="control-label" for="txcomplemento">Complemento</label>
                             <input type="text" class="form-control validate[maxSize[100]]" id="txcomplemento" name="txcomplemento" value="@Model.txcomplemento" maxlength="100" />
                         </div>

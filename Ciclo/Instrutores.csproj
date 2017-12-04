@@ -601,6 +601,7 @@
     <Content Include="Scripts\plugins\select2\js\select2.full.min.js" />
     <Content Include="Scripts\plugins\select2\js\select2.js" />
     <Content Include="Scripts\plugins\select2\js\select2.min.js" />
+    <Content Include="Scripts\plugins\sweetalert\sweetalert2.all.js" />
     <Content Include="Scripts\plugins\table2excel\jquery.table2excel.js" />
     <Content Include="Scripts\plugins\table2excel\jquery.table2excel.min.js" />
     <Content Include="Scripts\plugins\validate\css\validationEngine.jquery.css" />

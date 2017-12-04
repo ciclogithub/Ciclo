@@ -56,7 +56,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 local = new LocaisDB().Buscar(id);
             }
 
-            ViewBag.estados = new EstadosDB().Listar();
+            ViewBag.paises = new PaisesDB().Listar();
 
             return PartialView(local);
         }
@@ -67,6 +67,14 @@ namespace Ciclo.Areas.Painel.Controllers
         {
             List<Cidades> cidades = new CidadesDB().Listar(id);
             return Json(cidades);
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ListaEstados(int id = 0)
+        {
+            List<Estados> estados = new EstadosDB().Listar(id);
+            return Json(estados);
         }
 
         [Autenticacao]

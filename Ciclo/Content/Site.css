@@ -409,6 +409,10 @@ h3.perfil span {
     width: 80% !important;
 }
 
+.w30 {
+    width: 30% !important;
+}
+
 .div-filtro {
     background-color:#dbdbdb;
     font-size:12px;
@@ -461,9 +465,13 @@ h3.perfil span {
         height: 460px !important;
     }
 
-        #slideshow img {
-            max-height: 460px !important;
-        }
+    #slideshow img {
+        max-height: 460px !important;
+    }
+
+    #tg-main {
+        min-height: 330px !important;
+    }
 }
 
 @media only screen and (min-device-width: 1801px) {

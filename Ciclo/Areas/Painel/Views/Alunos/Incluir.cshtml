@@ -101,6 +101,7 @@
                     <input type="hidden" id="txmercados" name="txmercados" value="@mercados" />
                     <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
                     <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.alunos.idcidade" />
+                    <input type="hidden" id="tempestado" name="tempestado" value="@Model.alunos.idestado" />
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-12 form-group">
                             <label class="control-label" for="txinstrutor">Nome *</label>
@@ -112,7 +113,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                        <div class="col-lg-8 col-md-8 col-sm-12 form-group">
                             <label class="control-label" for="idempresa">Empresa</label>
                             <div class="input-group">
                                 <select id="idempresa" name="idempresa" class="form-control">
@@ -125,7 +126,7 @@
                                 <span class="input-group-addon" onclick="addEmpresa()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                        <div class="col-lg-4 col-md-4 col-sm-12 form-group">
                             <label class="control-label" for="idcor">Classificacao</label>
                             <div class="input-group">
                                 <select id="idcor" name="idcor" class="form-control no-js">
@@ -140,17 +141,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <label class="control-label" for="txinstrutor">Estado</label>
-                            <select id="idestado" name="idestado" class="form-control">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <label class="control-label" for="idpais">País</label>
+                            <select id="idpais" name="idpais" class="form-control validate[required]" onchange="MudaPais(this.value)">
                                 <option value="">-- Selecione --</option>
-                                @foreach (var t in Model.estados)
+                                @foreach (var t in Model.paises)
                                 {
-                                    <option value="@t.idestado" @(Model.alunos.idestado == t.idestado ? "selected" : "")>@t.txestado</option>
+                                    <option value="@t.idpais" @(Model.alunos.idpais == t.idpais ? "selected" : "")>@t.txpais</option>
                                 }
                             </select>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 form-group" id="dv_cidade">
+                        <div class="col-lg-4 col-md-4 col-sm-12" id="dv_estado">
+                            <label class="control-label" for="idestado">Estado</label>
+                            <select id="idestado" name="idestado" class="form-control">
+                                <option value="">-- Selecione o país --</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 form-group" id="dv_cidade">
                             <label class="control-label" for="idcidade">Cidade</label>
                             <select id="idcidade" name="idcidade" class="form-control">
                                 <option value="">-- Selecione o estado --</option>

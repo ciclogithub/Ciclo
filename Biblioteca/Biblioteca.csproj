@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\Cursos_SiteDB.cs" />
+    <Compile Include="DB\PaisesDB.cs" />
     <Compile Include="DB\MercadosDB.cs" />
     <Compile Include="DB\LogadoDB.cs" />
     <Compile Include="DB\EmpresasDB.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
     <Compile Include="Entidades\Cursos_Site.cs" />
+    <Compile Include="Entidades\Paises.cs" />
     <Compile Include="Entidades\Mercados.cs" />
     <Compile Include="Entidades\Logado.cs" />
     <Compile Include="Entidades\Empresas.cs" />
