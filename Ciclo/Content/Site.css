@@ -432,6 +432,19 @@ h3.perfil span {
     width: auto !important;
 }
 
+.no-margin {
+    margin:0px !important;
+}
+
+.no-border tr td {
+    border: 0px !important;
+    line-height:0px !important;
+}
+
+.no-label tr td label {
+    display:none !important;
+}
+
 @media only screen and (max-device-width: 480px) {
     #slideshow {
         margin: 170px 0px 30px 0px !important;

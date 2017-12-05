@@ -29,6 +29,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        text-align:left;
     }
     .select2-container .select2-selection--single .select2-selection__clear {
       position: relative; }
@@ -500,3 +501,11 @@
 
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
+
+
+
+
+div.input-group .select2-container--default .select2-selection--single {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}

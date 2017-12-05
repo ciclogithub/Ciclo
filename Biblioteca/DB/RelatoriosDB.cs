@@ -61,6 +61,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",","','") + "')) "; }
                 qry += "ORDER BY A.TXALUNO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -122,6 +123,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY CT.TXCATEGORIA, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -185,6 +187,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY CO2.TXCOR, A.TXALUNO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -246,6 +249,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY CO1.TXCOR, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -310,6 +314,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY C.TXCURSO, A.TXALUNO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -373,6 +378,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY M.TXMERCADO, A.TXALUNO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -434,6 +440,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY L.TXLOCAL, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -495,6 +502,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY I.TXINSTRUTOR, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -556,6 +564,7 @@ namespace Biblioteca.DB
                 if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
                 if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
                 if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
                 qry += "ORDER BY T.TXTEMA, C.TXCURSO";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
@@ -563,6 +572,70 @@ namespace Biblioteca.DB
                 while (reader.Read())
                 {
                     list_relat.Add(new Relatorios(9, Convert.ToString(reader["TXCURSO"]), "", "", "", Convert.ToString(reader["CORCURSO"]), "", Convert.ToString(reader["TXTEMA"]), "", "", "", "", "", "", Convert.ToString(reader["TXLOCAL"]), Convert.ToString(reader["TXCATEGORIA"]), Convert.ToString(reader["TXIDENTIFICADOR"]), Convert.ToInt32(reader["ALUNOS"]), "", "", 0,0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_relat;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Relatorios> ListarLocalidadeAluno(FormCollection collection)
+        {
+            try
+            {
+                List<Relatorios> list_relat = new List<Relatorios>();
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                string qry = "";
+                DBSession session = new DBSession();
+
+                qry = "SELECT DISTINCT CONCAT(C2.TXCIDADE,'/',E2.TXSIGLA) AS CIDADEALUNO, CO2.TXCOR, A.TXALUNO, E.TXEMPRESA, C2.TXCIDADE AS CIDADEALUNO, E2.TXESTADO AS ESTADOALUNO, ";
+                qry += "SUBSTRING((SELECT ', ' + M.TXMERCADO FROM ALUNOS_MERCADOS AM LEFT JOIN MERCADOS M ON M.IDMERCADO = AM.IDMERCADO WHERE AM.IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS MERCADOS, ";
+                qry += "SUBSTRING((SELECT ', ' + TXEMAIL FROM ALUNOS_EMAILS WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS EMAILS, ";
+                qry += "SUBSTRING((SELECT ', ' + TXTELEFONE FROM ALUNOS_TELEFONES WHERE IDALUNO = A.IDALUNO FOR XML PATH('')),3,999) AS TELEFONES ";
+                qry += "FROM CURSOS C ";
+                qry += "LEFT JOIN CURSOS_DATAS CD ON CD.IDCURSO = C.IDCURSO ";
+                qry += "LEFT JOIN CURSOS_ALUNOS CA ON CA.IDCURSO = C.IDCURSO ";
+                qry += "LEFT JOIN ALUNOS A ON A.IDALUNO = CA.IDALUNO AND A.IDORGANIZADOR = " + cookie.Value + " ";
+                qry += "LEFT JOIN CORES CO1 ON CO1.IDCOR = C.IDCOR LEFT JOIN CORES CO2 ON CO2.IDCOR = A.IDCOR ";
+                qry += "LEFT JOIN TEMAS T ON T.IDTEMA = C.IDTEMA LEFT JOIN CURSOS_INSTRUTORES CI ON CI.IDCURSO = C.IDCURSO ";
+                qry += "LEFT JOIN INSTRUTORES I ON I.IDINSTRUTOR = CI.IDINSTRUTOR ";
+                qry += "LEFT JOIN ALUNOS_MERCADOS AM ON AM.IDALUNO = A.IDALUNO ";
+                qry += "LEFT JOIN LOCAIS L ON L.IDLOCAL = C.IDLOCAL ";
+                qry += "LEFT JOIN CIDADES C1 ON C1.IDCIDADE = L.IDCIDADE ";
+                qry += "LEFT JOIN CIDADES C2 ON C2.IDCIDADE = A.IDCIDADE ";
+                qry += "LEFT JOIN ESTADOS E1 ON E1.IDESTADO = C1.IDESTADO ";
+                qry += "LEFT JOIN ESTADOS E2 ON E2.IDESTADO = C2.IDESTADO ";
+                qry += "LEFT JOIN CATEGORIAS CT ON CT.IDCATEGORIA = C.IDCATEGORIA ";
+                qry += "LEFT JOIN EMPRESAS E ON E.IDEMPRESA = A.IDEMPRESA ";
+                qry += "WHERE C.IDORGANIZADOR = " + cookie.Value + " ";
+                if (collection["tempinstrutor"] != "") { qry += "AND CI.IDINSTRUTOR IN (" + collection["tempinstrutor"] + ") "; }
+                if (collection["temptema"] != "") { qry += "AND C.IDTEMA IN (" + collection["temptema"] + ") "; }
+                if (collection["tempempresa"] != "") { qry += "AND A.IDEMPRESA IN (" + collection["tempempresa"] + ") "; }
+                if (collection["templocal"] != "") { qry += "AND C.IDLOCAL IN (" + collection["templocal"] + ") "; }
+                if (collection["tempcorcurso"] != "") { qry += "AND C.IDCOR IN (" + collection["tempcorcurso"] + ") "; }
+                if (collection["tempcoraluno"] != "") { qry += "AND A.IDCOR IN (" + collection["tempcoraluno"] + ") "; }
+                if (collection["tempcategoria"] != "") { qry += "AND CT.IDCATEGORIA IN (" + collection["tempcategoria"] + ") "; }
+                if (collection["tempcurso"] != "") { qry += "AND C.IDCURSO IN (" + collection["tempcurso"] + ") "; }
+                if (collection["tempaluno"] != "") { qry += "AND A.IDALUNO IN (" + collection["tempaluno"] + ") "; }
+                if (collection["tempmercado"] != "") { qry += "AND AM.IDMERCADO IN (" + collection["tempmercado"] + ") "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] == "")) { qry += "AND CD.DTCURSO >= '" + collection["dtini"] + "' "; }
+                if ((collection["dtini"] == "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO <= '" + collection["dtfim"] + "' "; }
+                if ((collection["dtini"] != "") && (collection["dtfim"] != "")) { qry += "AND CD.DTCURSO BETWEEN '" + collection["dtini"] + "' AND '" + collection["dtfim"] + "' "; }
+                if (collection["dtmes"] != "") { qry += "AND MONTH(CD.DTCURSO) = " + collection["dtmes"] + " "; }
+                if (collection["templocalidade"] != "") { qry += "AND (CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_', A.IDCIDADE) IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '_', C2.IDESTADO, '_') IN ('" + collection["templocalidade"].Replace(",", "','") + "') OR CONCAT(E2.IDPAIS, '__') IN ('" + collection["templocalidade"].Replace(",", "','") + "')) "; }
+                qry += "ORDER BY CONCAT(C2.TXCIDADE,'/',E2.TXSIGLA), A.TXALUNO";
+                Query query = session.CreateQuery(qry);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_relat.Add(new Relatorios(10, "", "", Convert.ToString(reader["TXALUNO"]), Convert.ToString(reader["TXEMPRESA"]), "", Convert.ToString(reader["TXCOR"]), "", "", Convert.ToString(reader["MERCADOS"]), "", "", Convert.ToString(reader["CIDADEALUNO"]), "", "", "", "", 0, Convert.ToString(reader["EMAILS"]), Convert.ToString(reader["TELEFONES"]), 0, 0));
                 }
                 reader.Close();
                 session.Close();

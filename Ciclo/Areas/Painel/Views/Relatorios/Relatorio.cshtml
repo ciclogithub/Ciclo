@@ -40,6 +40,9 @@
 
                     case 9: <li class="tg-active">Por Temas</li>
                         break;
+
+                    case 10: <li class="tg-active">Por Localidades (Aluno)</li>
+                        break;
                 }
             </ol>
         </div>
@@ -57,6 +60,7 @@
     <input type="hidden" id="templocal" name="templocal" value="@ViewBag.form["templocal"]" />
     <input type="hidden" id="tempmercado" name="tempmercado" value="@ViewBag.form["tempmercado"]" />
     <input type="hidden" id="tempempresa" name="tempempresa" value="@ViewBag.form["tempempresa"]" />
+    <input type="hidden" id="templocalidade" name="templocalidade" value="@ViewBag.form["templocalidade"]" />
     <input type="hidden" id="tprelatorio" name="tprelatorio" value="@ViewBag.form["tprelatorio"]" />
     <input type="hidden" id="dtini" name="dtini" value="@ViewBag.form["dtini"]" />
     <input type="hidden" id="dtfim" name="dtfim" value="@ViewBag.form["dtfim"]" />
@@ -93,6 +97,7 @@
                                     case 7: <span>Relatório por Locais</span>; break;
                                     case 8: <span>Relatório por Instrutores</span>; break;
                                     case 9: <span>Relatório por Temas</span>; break;
+                                    case 10: <span>Relatório por Localidades (Aluno)</span>; break;
                                 }
                             </strong>
                         </div>
@@ -764,6 +769,62 @@
                                 @: </table>
 
                             break;
+
+                            // Localidade do Aluno
+                            case 10:
+
+                                @: <table class="table table-bordered table-hover table-responsive table-relat">
+                                foreach (var p in Model)
+                                {
+                                    if (p.cidadealuno != temp)
+                                    {
+                                        temp = p.cidadealuno;
+
+                                        if (cont > 0)
+                                        {
+                                            @:  <tr>
+                                            @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                            @:  </tr>
+                                            @: </tbody>
+                                            @: </table>
+                                            @: <table class="table table-bordered table-hover table-responsive table-relat">
+                                            cont = 0;
+                                        }
+
+                                        @: <thead>
+                                        @:     <tr>
+                                        @:         <th colspan="6">LOCALIDADE ALUNO: @p.cidadealuno.ToUpper()</th>
+                                        @:     </tr>
+                                        @:     <tr>
+                                        @:         <th bgcolor="#ECECEC" width="20%">ALUNO</th>
+                                        @:         <th bgcolor="#ECECEC" width="20%">EMPRESA</th>
+                                        @:         <th bgcolor="#ECECEC" width="16%">MERCADOS</th>
+                                        @:         <th bgcolor="#ECECEC" width="4%">CLASSIFICAÇÃO</th>        
+                                        @:         <th bgcolor="#ECECEC" width="20%">E-MAILS</th>
+                                        @:         <th bgcolor="#ECECEC" width="20%">TELEFONES</th>
+                                        @:     </tr>
+                                        @: </thead>
+                                        @: <tbody>
+                                    }
+                                    
+                                    @: <tr>
+                                    @:     <td>@p.aluno</td>
+                                    @:     <td>@p.empresa</td>
+                                    @:     <td>@p.mercados</td>
+                                    @:     <td>@p.coraluno</td>
+                                    @:     <td>@p.emails</td>
+                                    @:     <td>@p.telefones</td>
+                                    @: </tr>
+                                    
+                                    cont = cont + 1;
+                                }
+                                @:  <tr>
+                                @:      <td style="text-align:right !important" colspan="6">TOTAL: @cont</td>
+                                @:  </tr>
+                                @: </tbody>
+                                @: </table>
+
+                                break;
                             }
                         }
                 </div>

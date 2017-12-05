@@ -19,6 +19,32 @@
 
 });
 
+function addLocalidade() {
+    var valp = $("#idpais option:selected").val();
+    var vale = $("#idestado option:selected").val();
+    var valc = $("#idcidade option:selected").val();
+    var textp = $("#idpais option:selected").text();
+    var texte = $("#idestado option:selected").text();
+    var textc = $("#idcidade option:selected").text();
+    if ((valp !== "") || (vale !== "") || (valc !== "")) {
+        valor = valp + "_" + vale + "_" + valc;
+        texto = textp;
+        if (vale !== "") { texto = texto + " / " + texte; }
+        if (valc !== "") { texto = texto + " / " + textc; }
+        if (!inArray("localidade", valor)) {
+            $("#listlocalidade").append("<li id=" + valor + "><i class='glyphicon glyphicon-trash' onclick=remove('localidade','" + valor + "')></i><span>" + texto + "</span></li>");
+            if ($("#templocalidade").val() === "") {
+                $("#templocalidade").val(valor);
+            } else {
+                $("#templocalidade").val($("#templocalidade").val() + "," + valor);
+            }
+        } else {
+            alert("Já selecionado")
+        }
+    }
+}
+
+
 function add(campo) {
     var val = $("#id" + campo + " option:selected").val();
     var text = $("#id" + campo + " option:selected").text();
@@ -70,7 +96,8 @@ function abreGrafico(id) {
         case 6: titulo = "Total de alunos por mercados"; titulo2 = "Alunos";  break;
         case 7: titulo = "Total de alunos por local"; titulo2 = "Alunos";  break;
         case 8: titulo = "Total de alunos por instrutor"; titulo2 = "Alunos";  break;
-        case 9: titulo = "Total de alunos por tema"; titulo2 = "Alunos";  break;            
+        case 9: titulo = "Total de alunos por tema"; titulo2 = "Alunos"; break;  
+        case 10: titulo = "Total de alunos por localidade"; titulo2 = "Alunos"; break;  
     }
 
     if ($("#div_grafico").hasClass("hide")) {

@@ -54,6 +54,9 @@ namespace Ciclo.Areas.Painel.Controllers{
                 case 9:
                     graf = new GraficosDB().ListarTema(collection);
                     break;
+                case 10:
+                    graf = new GraficosDB().ListarLocalidadeAluno(collection);
+                    break;
             }
 
             return Json(graf);
@@ -95,6 +98,9 @@ namespace Ciclo.Areas.Painel.Controllers{
                     break;
                 case 9:
                     list = new RelatoriosDB().ListarTema(collection);
+                    break;
+                case 10:
+                    list = new RelatoriosDB().ListarLocalidadeAluno(collection);
                     break;
             }
 

@@ -18,6 +18,7 @@ namespace Ciclo.Areas.Painel.Models
         public List<Instrutores> instrutores { get; set; }
         public List<Locais> locais { get; set; }
         public List<Empresas> empresas { get; set; }
+        public List<Paises> paises { get; set; }
 
         public RelatoriosView()
         {
@@ -30,6 +31,7 @@ namespace Ciclo.Areas.Painel.Models
             this.cursos = new CursosDB().ListarRel();
             this.cores = new CoresDB().Listar();
             this.empresas = new EmpresasDB().ListarRel();
+            this.paises = new PaisesDB().Listar();
         }
         
     }
