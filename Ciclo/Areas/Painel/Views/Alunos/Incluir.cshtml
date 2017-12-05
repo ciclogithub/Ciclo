@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 form-group">
-                            <label class="control-label" for="idcor">Classificacao</label>
+                            <label class="control-label" for="idcor">Classificação</label>
                             <div class="input-group">
                                 <select id="idcor" name="idcor" class="form-control no-js">
                                     <option value="">-- Selecione --</option>
@@ -227,7 +227,7 @@
                     <div class="form-group">
                         <label class="control-label" for="tempredes">Redes Sociais</label>
                         <div class="input-group">
-                            <select id="idredesocial" name="idredesocial" class="form-control no-js w20" font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
+                            <select id="idredesocial" name="idredesocial" class="form-control no-js w20" style="font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
                                 @foreach (var r in Model.redes)
                                 {
                                     <option value="@r.idredesocial" name="@r.txicone">@Html.Raw("&#xf" + r.idcodigo + ";")</option>
