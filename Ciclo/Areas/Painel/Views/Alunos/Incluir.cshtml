@@ -104,11 +104,11 @@
                     <input type="hidden" id="tempestado" name="tempestado" value="@Model.alunos.idestado" />
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-12 form-group">
-                            <label class="control-label" for="txinstrutor">Nome *</label>
+                            <label class="control-label" for="txaluno">Nome *</label>
                             <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.alunos.txaluno" maxlength="200" />
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 form-group">
-                            <label class="control-label" for="txemail">CPF</label>
+                            <label class="control-label" for="txcpf">CPF</label>
                             <input type="text" class="form-control validate[minSize[14],maxSize[14],cpf]" data-mask="000.000.000-00" id="txcpf" name="txcpf" value="@Model.alunos.txcpf" maxlength="14" />
                         </div>
                     </div>

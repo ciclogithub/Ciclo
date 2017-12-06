@@ -4,7 +4,16 @@
 
 
 function confirmaSair() {
-    if (confirm("Confirma a saída do sistema?")) {
-        location.href = "/Aluno/Aluno/Sair"
-    }
+    swal({
+        title: 'Deseja realmente sair do sistema',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Não'
+    }).then((result) => {
+        if (result.value) {
+            location.href = "/Aluno/Aluno/Sair"
+        }
+    })
 }
+

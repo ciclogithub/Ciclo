@@ -100,5 +100,19 @@ namespace Ciclo.Areas.Painel.Controllers
 
             return Json(new Retorno());
         }
+
+        [Autenticacao]
+        public int VerificaLocais(int id = 0, string nome = "")
+        {
+            int retorno = new LocaisDB().VerificaLocais(id, nome);
+            return retorno;
+        }
+
+        [Autenticacao]
+        public int VerificaLocaisExcluir(string id = "")
+        {
+            int retorno = new LocaisDB().VerificaLocaisExcluir(id);
+            return retorno;
+        }
     }
 }

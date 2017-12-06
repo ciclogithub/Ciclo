@@ -89,5 +89,12 @@ namespace Ciclo.Areas.Painel.Controllers
             int retorno = new TemasDB().VerificaTema(id, nome);
             return retorno;
         }
+
+        [Autenticacao]
+        public int VerificaTemaExcluir(string id = "")
+        {
+            int retorno = new TemasDB().VerificaTemaExcluir(id);
+            return retorno;
+        }
     }
 }

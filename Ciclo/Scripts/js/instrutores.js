@@ -9,7 +9,7 @@
     $("#incluir_btn_instrutor").click(function () {
         $('#form-modal_instrutor').validationEngine('attach');
         if ($('#form-modal_instrutor').validationEngine('validate')) {
-            IncluirInstrutor();
+            ValidaInstrutorInclusao();
         };
     });
 
@@ -38,11 +38,11 @@ function InstrutorAlterar() {
         }
     });
 
-    if (cont == 0) {
-        alert("Selecione pelo menos 1 registro")
+    if (cont === 0) {
+        swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            swal({ title: "Selecione somente 1 registro para alterar", type: "error", timer: 3000 });
         } else {
             Instrutores(val);
         }
@@ -61,22 +61,10 @@ function InstrutorExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids != "") {
-        if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
-            $.ajax({
-                type: "POST",
-                url: "/Painel/Instrutores/Excluir",
-                data: { ident: ids },
-                dataType: "json",
-                traditional: true,
-                success: function () {
-                    $("#instrutor").val("");
-                    InstrutorPesquisar();
-                }
-            });
-        }
+    if (ids !== "") {
+        ValidaInstrutorExcluir(ids);
     } else {
-        alert("Selecione pelo menos 1 registro")
+        swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     }
 }
 
@@ -107,20 +95,19 @@ function IncluirInstrutor() {
         traditional: true,
         success: function (json) {
 
-            alert("Operação realizada com sucesso!");
-
-            if ($("#modal2").is(":visible")) {
-                window.setTimeout(function () {
-                    $('#modal2.modal').modal('hide');
-                }, 1000);
-            } else {
-
-                window.setTimeout(function () {
-                    $('#modal1.modal').modal('hide');
-                }, 1000);
-
-                InstrutorPesquisar();
-            }
+            swal({
+                title: 'Operação realizada com sucesso!',
+                type: 'success',
+                confirmButtonText: 'Fechar',
+                timer: 3000,
+            }).then((result) => {
+                if (result.dismiss === 'timer') {
+                    closeModal("InstrutorPesquisar()");
+                }
+                if (result.value) {
+                    closeModal("InstrutorPesquisar()");
+                }
+            })
 
         }
     });
@@ -138,4 +125,55 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+function ValidaInstrutorInclusao() {
+
+    $.post("/Painel/Instrutores/VerificaInstrutor", { id: $("#form-modal_instrutor #idinstrutor").val(), nome: $("#form-modal_instrutor #txinstrutor").val() }).done(function (data) {
+        if (data == 1) {
+            swal({
+                title: 'Já existe um instrutor com o mesmo nome, confirma a gravação de um novo registro',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    IncluirInstrutor();
+                }
+            })
+        } else {
+            IncluirInstrutor();
+        }
+    });
+}
+
+function ValidaInstrutorExcluir(ids) {
+    $.post("/Painel/Instrutores/VerificaInstrutorExcluir", { id: ids.toString() }).done(function (data) {
+        if (data == 1) {
+            swal({
+                title: 'Existem cursos vinculados a um dos instrutores selecionados, confirma a exclusão',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    confirmaExcluir("Instrutores", "instrutor", "InstrutorPesquisar()", ids);
+                }
+            })
+        } else {
+            swal({
+                title: 'Confirma a exclusão do(s) registro(s)',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    confirmaExcluir("Instrutores", "instrutor", "InstrutorPesquisar()", ids);
+                }
+            })
+        }
+    });
 }

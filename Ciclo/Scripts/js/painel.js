@@ -41,9 +41,17 @@ $('.counter-count').each(function () {
 });
 
 function confirmaSair() {
-    if (confirm("Confirma a saída do sistema?")) {
-        location.href = "/Painel/Painel/Sair"
-    }
+    swal({
+        title: 'Deseja realmente sair do sistema',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Não'
+    }).then((result) => {
+        if (result.value) {
+            location.href = "/Painel/Painel/Sair"
+        }
+    })
 }
 
 var Aguarde;
@@ -283,6 +291,54 @@ function ListaEstados(pais, estado) {
         },
         error: function (reponse) {
             $("#dv_estado").html("<label class='control-label' for='idestado'>Estado</label>Não foi possível carregar a lista de estados");
+        }
+    });
+}
+
+function closeModal(func) {
+    if ($("#modal2").is(":visible")) {
+        window.setTimeout(function () {
+            $('#modal2.modal').modal('hide');
+        }, 1000);
+    } else {
+
+        window.setTimeout(function () {
+            $('#modal1.modal').modal('hide');
+        }, 1000);
+
+        $("#filtro_pesquisa").val("");
+        eval(func);
+    }
+}
+
+function confirmaExcluir(url, campo, func, ids) {
+    $.ajax({
+        type: "POST",
+        url: "/Painel/" + url + "/Excluir",
+        data: { ident: ids },
+        dataType: "json",
+        traditional: true,
+        success: function () {
+            swal({
+                title: 'Operação realizada com sucesso!',
+                type: 'success',
+                confirmButtonText: 'Fechar',
+                timer: 3000,
+            }).then((result) => {
+                if (result.dismiss === 'timer') {
+                    $("#" + campo).val("");
+                    if (func !== "") {
+                        eval(func);
+                    }
+                }
+                if (result.value) {
+                    $("#" + campo).val("");
+                    if (func !== "") {
+                        eval(func);
+                    }
+                }
+            })
+
         }
     });
 }

@@ -9,7 +9,7 @@
     $("#incluir_btn_local").click(function () {
         $('#form-modal_local').validationEngine('attach');
         if ($('#form-modal_local').validationEngine('validate')) {
-            IncluirLocal();
+            ValidaLocalInclusao();
         };
     });
 
@@ -46,11 +46,11 @@ function LocalAlterar() {
         }
     });
 
-    if (cont == 0) {
-        alert("Selecione pelo menos 1 registro")
+    if (cont === 0) {
+        swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            swal({ title: "Selecione somente 1 registro para alterar", type: "error", timer: 3000 });
         } else {
             Locais(val);
         }
@@ -69,22 +69,10 @@ function LocalExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids != "") {
-        if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
-            $.ajax({
-                type: "POST",
-                url: "/Painel/Locais/Excluir",
-                data: { ident: ids },
-                dataType: "json",
-                traditional: true,
-                success: function () {
-                    $("#local").val("");
-                    LocalPesquisar();
-                }
-            });
-        }
+    if (ids !== "") {
+        ValidaLocalExcluir(ids);
     } else {
-        alert("Selecione pelo menos 1 registro")
+        swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     }
 }
 
@@ -103,22 +91,72 @@ function IncluirLocal() {
         traditional: true,
         success: function (json) {
 
-            alert("Operação realizada com sucesso!");
-
-            if ($("#modal2").is(":visible")) {
-                window.setTimeout(function () {
-                    $('#modal2.modal').modal('hide');
-                }, 1000);
-            } else {
-
-                window.setTimeout(function () {
-                    $('#modal1.modal').modal('hide');
-                }, 1000);
-
-                LocalPesquisar();
-            }
+            swal({
+                title: 'Operação realizada com sucesso!',
+                type: 'success',
+                confirmButtonText: 'Fechar',
+                timer: 3000,
+            }).then((result) => {
+                if (result.dismiss === 'timer') {
+                    closeModal("LocalPesquisar()");
+                }
+                if (result.value) {
+                    closeModal("LocalPesquisar()");
+                }
+            })
 
         }
     });
 
+}
+
+function ValidaLocalInclusao() {
+
+    $.post("/Painel/Locais/VerificaLocais", { id: $("#form-modal_local #idlocal").val(), nome: $("#form-modal_local #txlocal").val() }).done(function (data) {
+        if (data == 1) {
+            swal({
+                title: 'Já existe um local com o mesmo nome, confirma a gravação de um novo registro',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    IncluirLocal();
+                }
+            })
+        } else {
+            IncluirLocal();
+        }
+    });
+}
+
+function ValidaLocalExcluir(ids) {
+    $.post("/Painel/Locais/VerificaLocaisExcluir", { id: ids.toString() }).done(function (data) {
+        if (data == 1) {
+            swal({
+                title: 'Existem cursos vinculados a um dos locais selecionados, confirma a exclusão',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    confirmaExcluir("Locais", "local", "LocalPesquisar()", ids);
+                }
+            })
+        } else {
+            swal({
+                title: 'Confirma a exclusão do(s) registro(s)',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    confirmaExcluir("Locais", "local", "LocalPesquisar()", ids);
+                }
+            })
+        }
+    });
 }

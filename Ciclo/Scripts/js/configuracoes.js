@@ -31,8 +31,19 @@ function IncluirConfiguracao() {
         traditional: true,
         success: function (json) {
 
-            alert("Operação realizada com sucesso!");
-            location.href = "Configuracoes";
+            swal({
+                title: 'Operação realizada com sucesso!',
+                type: 'success',
+                confirmButtonText: 'Fechar',
+                timer: 3000,
+            }).then((result) => {
+                if (result.dismiss === 'timer') {
+                    location.href = "Configuracoes";
+                }
+                if (result.value) {
+                    location.href = "Configuracoes";
+                }
+            })
 
         }
     });
@@ -53,10 +64,21 @@ function AlterarSenha() {
         success: function (json) {
             json = jQuery.parseJSON(json);
             if (json.retorno == "OK") {
-                alert("Operação realizada com sucesso!");
-                location.href = "Configuracoes";
+                swal({
+                    title: 'Operação realizada com sucesso!',
+                    type: 'success',
+                    confirmButtonText: 'Fechar',
+                    timer: 3000,
+                }).then((result) => {
+                    if (result.dismiss === 'timer') {
+                        location.href = "Configuracoes";
+                    }
+                    if (result.value) {
+                        location.href = "Configuracoes";
+                    }
+                })                
             } else {
-                alert(json.retorno)
+                swal({ title: json.retorno, type: "error", timer: 3000 });
             }
         }
     });

@@ -124,5 +124,21 @@ namespace Ciclo.Areas.Painel.Controllers
         {
             return Json(new CepView(cep));
         }
+
+        [Autenticacao]
+        public int VerificaEmpresa(int id = 0, string nome = "", string cnpj = "")
+        {
+            int retorno = 0;
+            if (cnpj != "") { retorno = new EmpresasDB().VerificaEmpresaCNPJ(id, cnpj); }
+            if (retorno == 0) { retorno = new EmpresasDB().VerificaEmpresa(id, nome); }
+            return retorno;
+        }
+
+        [Autenticacao]
+        public int VerificaEmpresaExcluir(string id = "")
+        {
+            int retorno = new EmpresasDB().VerificaEmpresaExcluir(id);
+            return retorno;
+        }
     }
 }

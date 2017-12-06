@@ -145,5 +145,21 @@ namespace Ciclo.Areas.Painel.Controllers
             return Json(empresas);
         }
 
+        [Autenticacao]
+        public int VerificaAluno(int id = 0, string nome = "", string cpf = "")
+        {
+            int retorno = 0;
+            if (cpf != "") { retorno = new AlunosDB().VerificaAlunoCPF(id, cpf); }
+            if (retorno == 0) { retorno = new AlunosDB().VerificaAluno(id, nome); }
+            return retorno;
+        }
+
+        [Autenticacao]
+        public int VerificaAlunoExcluir(string id = "")
+        {
+            int retorno = new AlunosDB().VerificaAlunoExcluir(id);
+            return retorno;
+        }
+
     }
 }

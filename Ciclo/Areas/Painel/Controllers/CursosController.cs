@@ -386,5 +386,21 @@ namespace Ciclo.Areas.Painel.Controllers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        [Autenticacao]
+        public int VerificaCurso(int id = 0, string nome = "", string identificador = "")
+        {
+            int retorno = 0;
+            if (identificador != "") { retorno = new CursosDB().VerificaCursoIdent(id, identificador); }
+            if (retorno == 0) { retorno = new CursosDB().VerificaCurso(id, nome); }
+            return retorno;
+        }
+
+        [Autenticacao]
+        public int VerificaCursoExcluir(string id = "")
+        {
+            int retorno = new CursosDB().VerificaCursoExcluir(id);
+            return retorno;
+        }
     }
 }

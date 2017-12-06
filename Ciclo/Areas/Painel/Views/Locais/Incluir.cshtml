@@ -21,18 +21,18 @@
             <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
             <input type="hidden" id="tempestado" name="tempestado" value="@Model.idestado" />
             <div class="form-group">
-                <label class="control-label" for="txinstrutor">Nome *</label>
-                <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txlocal" name="txlocal" value="@Model.txlocal" maxlength="200" />
+                <label class="control-label" for="txlocal">Nome *</label>
+                <input type="text" class="form-control validate[required,minSize[2],maxSize[200]]" id="txlocal" name="txlocal" value="@Model.txlocal" maxlength="200" />
             </div>
             <div class="form-group">
-                <label class="control-label" for="txinstrutor">Logradouro *</label>
+                <label class="control-label" for="txlogradouro">Logradouro *</label>
                 <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txlogradouro" name="txlogradouro" value="@Model.txlogradouro" maxlength="300" />
             </div>
             <div class="form-group">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <label class="control-label" for="idpais">País</label>
-                        <select id="idpais" name="idpais" class="form-control validate[required]" onchange="MudaPais(this.value)">
+                        <select id="idpais" name="idpais" class="form-control" onchange="MudaPais(this.value)">
                             <option value="">-- Selecione --</option>
                             @foreach (var t in ViewBag.paises)
                             {
@@ -42,13 +42,13 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12" id="dv_estado">
                         <label class="control-label" for="idestado">Estado</label>
-                        <select id="idestado" name="idestado" class="form-control validate[required]">
+                        <select id="idestado" name="idestado" class="form-control">
                             <option value="">-- Selecione o país --</option>
                         </select>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12" id="dv_cidade">
                         <label class="control-label" for="idcidade">Cidade</label>
-                        <select id="idcidade" name="idcidade" class="form-control validate[required]">
+                        <select id="idcidade" name="idcidade" class="form-control">
                             <option value="">-- Selecione o estado --</option>
                         </select>
                     </div>

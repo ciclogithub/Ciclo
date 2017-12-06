@@ -379,6 +379,83 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public int VerificaEmpresaCNPJ(int id, string cnpj)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from empresas where idorganizador = @idorganizador and idempresa <> @id and txcnpj = @cnpj");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("cnpj", cnpj);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 2;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaEmpresa(int id, string nome)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from empresas where idorganizador = @idorganizador and idempresa <> @id and txempresa COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("nome", nome);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaEmpresaExcluir(string ids)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 * from alunos where idempresa in (" + ids + ")");
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }
 

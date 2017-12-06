@@ -116,5 +116,19 @@ namespace Ciclo.Areas.Painel.Controllers
 
             return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
+
+        [Autenticacao]
+        public int VerificaInstrutor(int id = 0, string nome = "")
+        {
+            int retorno = new InstrutoresDB().VerificaInstrutor(id, nome);
+            return retorno;
+        }
+
+        [Autenticacao]
+        public int VerificaInstrutorExcluir(string id = "")
+        {
+            int retorno = new InstrutoresDB().VerificaInstrutorExcluir(id);
+            return retorno;
+        }
     }
 }

@@ -428,7 +428,7 @@ h3.perfil span {
 }
 
 .tg-logo2 a img {
-    max-height: 70px !important;
+    max-height: 52px !important;
     width: auto !important;
 }
 
@@ -483,7 +483,7 @@ h3.perfil span {
     }
 
     #tg-main {
-        min-height: 330px !important;
+        min-height: 394px !important;
     }
 }
 
@@ -497,7 +497,7 @@ h3.perfil span {
     }
 
     #tg-main {
-        min-height: 617px !important;
+        min-height: 681px !important;
     }
 }
 

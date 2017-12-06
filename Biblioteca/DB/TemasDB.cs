@@ -210,11 +210,36 @@ namespace Biblioteca.DB
         {
             try
             {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
                 int result = 0;
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from temas where idtema <> @id and txtema COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                Query query = session.CreateQuery("select * from temas where idorganizador = @idorganizador and idtema <> @id and txtema COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("id", id);
                 query.SetParameter("nome", nome);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaTemaExcluir(string ids)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 * from cursos where idtema in (" + ids + ")");
                 IDataReader reader = query.ExecuteQuery();
                 if (reader.Read())
                 {

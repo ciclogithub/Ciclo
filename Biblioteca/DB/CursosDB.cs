@@ -94,6 +94,30 @@ namespace Biblioteca.DB
         {
             try
             {
+                DBSession sessionca = new DBSession();
+                Query queryca = sessionca.CreateQuery("DELETE FROM Cursos_Alunos WHERE idcurso = @id");
+                queryca.SetParameter("id", id);
+                queryca.ExecuteUpdate();
+                sessionca.Close();
+
+                DBSession sessioncd = new DBSession();
+                Query querycd = sessioncd.CreateQuery("DELETE FROM Cursos_datas WHERE idcurso = @id");
+                querycd.SetParameter("id", id);
+                querycd.ExecuteUpdate();
+                sessioncd.Close();
+
+                DBSession sessioncv = new DBSession();
+                Query querycv = sessioncv.CreateQuery("DELETE FROM Cursos_valores WHERE idcurso = @id");
+                querycv.SetParameter("id", id);
+                querycv.ExecuteUpdate();
+                sessioncv.Close();
+
+                DBSession sessionci = new DBSession();
+                Query queryci = sessionci.CreateQuery("DELETE FROM Cursos_Instrutores WHERE idcurso = @id");
+                queryci.SetParameter("id", id);
+                queryci.ExecuteUpdate();
+                sessionci.Close();
+
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Cursos WHERE idcurso = @id");
                 query.SetParameter("id", id);
@@ -370,6 +394,83 @@ namespace Biblioteca.DB
             catch (Exception erro)
             {
                 throw erro;
+            }
+        }
+
+        public int VerificaCursoIdent(int id, string identificador)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from cursos where idorganizador = @idorganizador and idcurso <> @id and txidentificador = @identificador");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("identificador", identificador);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 2;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaCurso(int id, string nome)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from cursos where idorganizador = @idorganizador and idcurso <> @id and txcurso COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("nome", nome);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaCursoExcluir(string ids)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 * from Cursos_Alunos where idcurso in (" + ids + ")");
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
             }
         }
     }

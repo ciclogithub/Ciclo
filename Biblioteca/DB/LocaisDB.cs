@@ -204,5 +204,55 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public int VerificaLocais(int id, string nome)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from locais where idorganizador = @idorganizador and idlocal <> @id and txlocal COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("nome", nome);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaLocaisExcluir(string ids)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 * from cursos where idlocal in (" + ids + ")");
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }

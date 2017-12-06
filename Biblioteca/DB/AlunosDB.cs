@@ -18,7 +18,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Alunos (idorganizador, txaluno, txcpf, idcidade, idcor, idempresa, txobs) output INSERTED.idaluno VALUES (@organizador, @aluno, @cpf, @especialidade, @cidade, @cor, @empresa, @obs)");
+                Query query = session.CreateQuery("INSERT INTO Alunos (idorganizador, txaluno, txcpf, idcidade, idcor, idempresa, txobs) output INSERTED.idaluno VALUES (@organizador, @aluno, @cpf, @cidade, @cor, @empresa, @obs)");
                 query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("aluno", variavel.txaluno);
                 query.SetParameter("cpf", variavel.txcpf);
@@ -576,6 +576,83 @@ namespace Biblioteca.DB
                 session.Close();
 
                 return list_aluno;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaAlunoCPF(int id, string cpf)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from alunos where idorganizador = @idorganizador and idaluno <> @id and txcpf = @cpf");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("cpf", cpf);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 2;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaAluno(int id, string nome)
+        {
+            try
+            {
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from alunos where idorganizador = @idorganizador and idaluno <> @id and txaluno COLLATE Latin1_general_CI_AI = @nome COLLATE Latin1_general_CI_AI");
+                query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("id", id);
+                query.SetParameter("nome", nome);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int VerificaAlunoExcluir(string ids)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 * from Cursos_alunos where idaluno in (" + ids + ")");
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = 1;
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
             }
             catch (Exception error)
             {
