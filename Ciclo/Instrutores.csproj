@@ -151,7 +151,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Aluno\AlunoAreaRegistration.cs" />
+    <Compile Include="Areas\Aluno\Controllers\AlterarSenhaController.cs" />
     <Compile Include="Areas\Aluno\Controllers\AlunoController.cs" />
+    <Compile Include="Areas\Aluno\Controllers\CertificadosController.cs" />
+    <Compile Include="Areas\Aluno\Controllers\CursosController.cs" />
+    <Compile Include="Areas\Aluno\Controllers\NotificacoesController.cs" />
+    <Compile Include="Areas\Aluno\Controllers\PerfilController.cs" />
+    <Compile Include="Areas\Aluno\Models\PerfilView.cs" />
     <Compile Include="Areas\Painel\Controllers\EmpresasController.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ListasController.cs" />
@@ -253,6 +259,11 @@
     <Content Include="Areas\Aluno\Views\Aluno\Index.cshtml" />
     <Content Include="Areas\Aluno\Views\Aluno\Usuario.cshtml" />
     <Content Include="Areas\Painel\Views\Painel\Paginacao.cshtml" />
+    <Content Include="Areas\Aluno\Views\Certificados\Index.cshtml" />
+    <Content Include="Areas\Aluno\Views\Notificacoes\Index.cshtml" />
+    <Content Include="Areas\Aluno\Views\AlterarSenha\Index.cshtml" />
+    <Content Include="Areas\Aluno\Views\Cursos\Index.cshtml" />
+    <Content Include="Areas\Aluno\Views\Perfil\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\banner.jpg" />
     <Content Include="images\diagweb-16x16.png" />
@@ -510,21 +521,26 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
-    <Content Include="Scripts\js\empresas.js" />
-    <Content Include="Scripts\js\cursos.js" />
-    <Content Include="Scripts\js\configuracoes.js" />
-    <Content Include="Scripts\js\especialidades.js" />
-    <Content Include="Scripts\js\lista.js" />
-    <Content Include="Scripts\js\painelaluno.js" />
-    <Content Include="Scripts\js\relatorios.js" />
-    <Content Include="Scripts\js\avaliacao.js" />
+    <Content Include="Scripts\js\aluno\alterarsenha.js" />
+    <Content Include="Scripts\js\aluno\certificados.js" />
+    <Content Include="Scripts\js\aluno\notificacoes.js" />
+    <Content Include="Scripts\js\aluno\perfil.js" />
+    <Content Include="Scripts\js\aluno\cursos.js" />
+    <Content Include="Scripts\js\aluno\painelaluno.js" />
+    <Content Include="Scripts\js\organizador\empresas.js" />
+    <Content Include="Scripts\js\organizador\cursos.js" />
+    <Content Include="Scripts\js\organizador\configuracoes.js" />
+    <Content Include="Scripts\js\organizador\especialidades.js" />
+    <Content Include="Scripts\js\organizador\lista.js" />
+    <Content Include="Scripts\js\organizador\relatorios.js" />
+    <Content Include="Scripts\js\organizador\avaliacao.js" />
     <Content Include="Scripts\js\home.js" />
-    <Content Include="Scripts\js\temas.js" />
-    <Content Include="Scripts\js\locais.js" />
-    <Content Include="Scripts\js\alunos.js" />
+    <Content Include="Scripts\js\organizador\temas.js" />
+    <Content Include="Scripts\js\organizador\locais.js" />
+    <Content Include="Scripts\js\organizador\alunos.js" />
     <Content Include="Scripts\js\site.js" />
-    <Content Include="Scripts\js\instrutores.js" />
-    <Content Include="Scripts\js\painel.js" />
+    <Content Include="Scripts\js\organizador\instrutores.js" />
+    <Content Include="Scripts\js\organizador\painel.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\packery.pkgd.min.js" />
@@ -631,7 +647,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Aluno\Models\" />
     <Folder Include="images\Instrutores\" />
   </ItemGroup>
   <ItemGroup>

@@ -99,16 +99,16 @@ function CadastroOrganizador() {
 
 function CadastroAluno() {
 
-    var aluno = $("#form_cadastro_aluno #txaluno").val();
+    var usuario = $("#form_cadastro_aluno #txusuario").val();
     var email = $("#form_cadastro_aluno #txemail").val();
-    var senha = $("#form_cadastro_aluno #txsenhaa").val();
-    var confsenha = $("#form_cadastro_aluno #txconfsenhaa").val();
+    var senha = $("#form_cadastro_aluno #txsenhaaluno").val();
+    var confsenha = $("#form_cadastro_aluno #txconfsenhaaluno").val();
 
     var erro = false;
     var erroMsg = "";
     var erroMsg2 = "";
 
-    if (aluno.length < 2) {
+    if (usuario.length < 2) {
         erro = true;
         erroMsg += "aluno";
     }
@@ -157,8 +157,8 @@ function CadastroAluno() {
 function LoginOrganizador() {
 
     var email = $("#txemail").val();
-    var senha = $("#txsenha").val();
     var perfil = $("#perfil:checked").val();
+    var senha = $("#txsenha").val();
 
     var erro = false;
     var erroMsg = "";
@@ -183,13 +183,12 @@ function LoginOrganizador() {
         link = "/Aluno";
     }
 
-
     if (!erro) {
         $("#form-error").addClass("bg-info").html('Aguarde...');
         $.ajax({
             type: "POST",
             url: url,
-            data: $('#form_login_organizador :input').serialize(),
+            data: $('#form_login_organizador :input').serialize() + '&' + $.param({ 'txsenhaaluno': senha }),
             dataType: "json",
             traditional: true,
             success: function (msg) {

@@ -87,14 +87,14 @@ namespace Biblioteca.Funcoes
             {
                 usuariosview.txemail = usuariosview.txemail.TrimStart().TrimEnd();
 
-                if (new UsuariosDB().ExisteEmail(usuariosview.txemail) && usuariosview.idaluno == 0)
+                if (new UsuariosDB().ExisteEmail(usuariosview.txemail) && usuariosview.idusuario == 0)
                 {
                     retorno.erro = true;
                     retorno.mensagem = "E-mail já cadastrado";
                 }
                 else
                 {
-                    if (new UsuariosDB().ExisteCPF(usuariosview.txcpf) && usuariosview.idaluno == 0)
+                    if (new UsuariosDB().ExisteCPF(usuariosview.txcpf) && usuariosview.idusuario == 0)
                     {
                         retorno.erro = true;
                         retorno.mensagem = "CPF já cadastrado";
@@ -103,22 +103,22 @@ namespace Biblioteca.Funcoes
                     {
 
                         Usuarios usuarios = new Usuarios();
-                        usuariosview.txsenha = MD5Hash.CalculaHash(usuariosview.txsenha);
-                        if (usuariosview.idaluno == 0)
+                        usuariosview.txsenhaaluno = MD5Hash.CalculaHash(usuariosview.txsenhaaluno);
+                        if (usuariosview.idusuario == 0)
                         {
                             usuarios = usuariosview.Retornar();
                             int idorganizador = usuarios.Salvar();
                         }
                         else
                         {
-                            usuarios = usuariosview.Atualizar(new UsuariosDB().Buscar(usuariosview.idaluno));
+                            usuarios = usuariosview.Atualizar(new UsuariosDB().Buscar(usuariosview.idusuario));
                             usuarios.Alterar();
                         }
 
                         retorno.erro = false;
                         retorno.mensagem = "Redirecionando...";
 
-                        var id = new UsuariosDB().Email(usuariosview.txemail).idaluno;
+                        var id = new UsuariosDB().Email(usuariosview.txemail).idusuario;
 
                         retorno.id = id;
 

@@ -24,10 +24,17 @@ namespace Ciclo
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            // SITE
+
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                     "~/Scripts/js/site.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/home").Include(
+                      "~/Scripts/js/home.js"));
+
+            // PAINEL ORGANIZADOR 
 
             bundles.Add(new ScriptBundle("~/bundles/painel").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
@@ -35,7 +42,42 @@ namespace Ciclo
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/plugins/select2/js/select2.full.min.js",
                     "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
-                    "~/Scripts/js/painel.js"));
+                    "~/Scripts/js/organizador/painel.js"));           
+
+            bundles.Add(new ScriptBundle("~/bundles/avaliacao").Include(
+                      "~/Scripts/js/organizador/avaliacao.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/instrutores").Include(
+                      "~/Scripts/js/organizador/instrutores.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/alunos").Include(
+                      "~/Scripts/js/organizador/alunos.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/lista").Include(
+                      "~/Scripts/js/organizador/lista.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/empresas").Include(
+                      "~/Scripts/js/organizador/empresas.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/locais").Include(
+                      "~/Scripts/js/organizador/locais.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/temas").Include(
+                      "~/Scripts/js/organizador/temas.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cursos").Include(
+                      "~/Scripts/js/organizador/cursos.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/relatorios").Include(
+                      "~/Scripts/js/organizador/relatorios.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/especialidades").Include(
+                      "~/Scripts/js/organizador/especialidades.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/configuracoes").Include(
+                      "~/Scripts/js/organizador/configuracoes.js"));            
+
+            // PAINEL ALUNO 
 
             bundles.Add(new ScriptBundle("~/bundles/painelaluno").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
@@ -43,57 +85,22 @@ namespace Ciclo
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/plugins/select2/js/select2.full.min.js",
                     "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
-                    "~/Scripts/js/painelaluno.js"));
+                    "~/Scripts/js/aluno/painelaluno.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
-                    "~/Scripts/highcharts/5.0.14/js/highcharts.js",
-                    "~/Scripts/highcharts/5.0.14/js/modules/serial-label.js",
-                    "~/Scripts/highcharts/5.0.14/js/modules/exporting.js"));
+            bundles.Add(new ScriptBundle("~/bundles/alterarsenha").Include(
+                      "~/Scripts/js/aluno/alterarsenha.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/mask").Include(
-                   "~/Scripts/jquery.mask.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/certificados").Include(
+                      "~/Scripts/js/aluno/certificados.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/barrating").Include(
-                    "~/Scripts/plugins/barrating/jquery.barrating.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/notificacoes").Include(
+                      "~/Scripts/js/aluno/notificacoes.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/avaliacao").Include(
-                      "~/Scripts/js/avaliacao.js"));
+            bundles.Add(new ScriptBundle("~/bundles/perfil").Include(
+                      "~/Scripts/js/aluno/perfil.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/instrutores").Include(
-                      "~/Scripts/js/instrutores.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/alunos").Include(
-                      "~/Scripts/js/alunos.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/lista").Include(
-                      "~/Scripts/js/lista.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/empresas").Include(
-                      "~/Scripts/js/empresas.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/locais").Include(
-                      "~/Scripts/js/locais.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/temas").Include(
-                      "~/Scripts/js/temas.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/cursos").Include(
-                      "~/Scripts/js/cursos.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/relatorios").Include(
-                      "~/Scripts/js/relatorios.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/especialidades").Include(
-                      "~/Scripts/js/especialidades.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/configuracoes").Include(
-                      "~/Scripts/js/configuracoes.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/home").Include(
-                      "~/Scripts/js/home.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/table2excel").Include(
-                      "~/Scripts/plugins/table2excel/jquery.table2excel.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/alunocursos").Include(
+                      "~/Scripts/js/aluno/cursos.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
                 "~/Scripts/customScrollbar.min.js",
@@ -103,6 +110,24 @@ namespace Ciclo
                 "~/Scripts/jquery.fullpage.js",
                 "~/Scripts/isotope.pkgd.js",
                 "~/Scripts/main.js"));
+
+            // PLUGINS
+
+            bundles.Add(new ScriptBundle("~/bundles/mask").Include(
+                   "~/Scripts/jquery.mask.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/barrating").Include(
+                    "~/Scripts/plugins/barrating/jquery.barrating.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
+                    "~/Scripts/highcharts/5.0.14/js/highcharts.js",
+                    "~/Scripts/highcharts/5.0.14/js/modules/serial-label.js",
+                    "~/Scripts/highcharts/5.0.14/js/modules/exporting.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/table2excel").Include(
+                      "~/Scripts/plugins/table2excel/jquery.table2excel.min.js"));
+
+            // ESTILOS
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

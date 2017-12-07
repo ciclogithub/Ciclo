@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Biblioteca.Entidades;
 using System.Data;
 using System.Web;
+using Biblioteca.Funcoes;
 
 namespace Biblioteca.DB
 {
@@ -91,6 +92,32 @@ namespace Biblioteca.DB
             }
         }
 
+        public Usuarios BuscarCompleto(int codigo = 0)
+        {
+            try
+            {
+                Usuarios usuarios = null;
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("SELECT *, ISNULL(idcidade,0) AS cidade FROM Usuarios WHERE idusuario = @codigo");
+                quey.SetParameter("codigo", codigo);
+                IDataReader reader = quey.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    usuarios = new Usuarios(Convert.ToInt32(reader["idusuario"]), Convert.ToString(reader["txusuario"]), Convert.ToString(reader["txemail"]), Convert.ToString(reader["txcpf"]), Convert.ToString(reader["txempresa"]), Convert.ToInt32(reader["cidade"]));
+                }
+                reader.Close();
+                session.Close();
+
+                return usuarios;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public bool ExisteEmail(string email)
         {
             try
@@ -149,10 +176,10 @@ namespace Biblioteca.DB
             {
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Usuarios (txusuario, txemail, txsenha, txcpf) output INSERTED.idusuario VALUES (@aluno, @email, @senha, @cpf) ");
-                query.SetParameter("aluno", variavel.txaluno);
+                Query query = session.CreateQuery("INSERT INTO Usuarios (txusuario, txemail, txsenha, txcpf) output INSERTED.idusuario VALUES (@usuario, @email, @senha, @cpf) ");
+                query.SetParameter("usuario", variavel.txusuario);
                 query.SetParameter("email", variavel.txemail);
-                query.SetParameter("senha", variavel.txsenha);
+                query.SetParameter("senha", variavel.txsenhaaluno);
                 query.SetParameter("cpf", variavel.txcpf);
                 int ident = query.ExecuteScalar();
                 session.Close();
@@ -170,11 +197,11 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Usuarios SET txusuario = @aluno, txemail = @email, txsenha = @senha,  txcpf = @cpf WHERE idusuario = @id");
-                query.SetParameter("id", variavel.idaluno);
-                query.SetParameter("aluno", variavel.txaluno);
+                Query query = session.CreateQuery("UPDATE Usuarios SET txusuario = @usuario, txemail = @email, txsenha = @senha,  txcpf = @cpf WHERE idusuario = @id");
+                query.SetParameter("id", variavel.idusuario);
+                query.SetParameter("usuario", variavel.txusuario);
                 query.SetParameter("email", variavel.txemail);
-                query.SetParameter("senha", variavel.txsenha);
+                query.SetParameter("senha", variavel.txsenhaaluno);
                 query.SetParameter("cpf", variavel.txcpf);
                 query.ExecuteUpdate();
                 session.Close();
@@ -191,7 +218,7 @@ namespace Biblioteca.DB
             {
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("UPDATE Usuarios SET txsenha = @senha WHERE idusuario = @id");
-                query.SetParameter("id", variavel.idaluno);
+                query.SetParameter("id", variavel.idusuario);
                 query.SetParameter("senha", variavel.txnovasenha);
                 query.ExecuteUpdate();
                 session.Close();
@@ -208,7 +235,7 @@ namespace Biblioteca.DB
             {
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("DELETE FROM Usuarios WHERE idusuario = @id");
-                query.SetParameter("id", variavel.idaluno);
+                query.SetParameter("id", variavel.idusuario);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -238,6 +265,84 @@ namespace Biblioteca.DB
 
                 return usuarios;
 
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Mercados> ListarMercados(int id = 0)
+        {
+            try
+            {
+                List<Mercados> list_mercados = new List<Mercados>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select m.idmercado, m.txmercado from Usuarios_Mercados am left join mercados m on m.idmercado = am.idmercado where am.idusuario = @id order by m.txmercado");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_mercados.Add(new Mercados(Convert.ToInt32(reader["idmercado"]), Convert.ToString(reader["txmercado"]), 0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_mercados;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Telefones> ListarTelefones(int id = 0)
+        {
+            try
+            {
+                List<Telefones> list_telefone = new List<Telefones>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Usuarios_Telefones where idusuario = @id order by txtelefone");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_telefone.Add(new Telefones(Convert.ToInt32(reader["idusuario"]), Convert.ToString(reader["txtelefone"]), Convert.ToInt32(reader["flwhatsapp"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_telefone;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Redes> ListarRedesSociais(int id = 0)
+        {
+            try
+            {
+                List<Redes> list_redes = new List<Redes>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select AR.*, RS.txicone from Usuarios_RedesSociais AR Inner Join RedesSociais RS on RS.idredesocial = AR.idredesocial where AR.idusuario = @id order by RS.txredesocial");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_redes.Add(new Redes(Convert.ToInt32(reader["idusuario"]), Convert.ToString(reader["txredesocial"]), Convert.ToString(reader["txicone"]), Convert.ToInt32(reader["idredesocial"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_redes;
             }
             catch (Exception error)
             {

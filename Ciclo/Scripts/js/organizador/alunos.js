@@ -13,7 +13,7 @@
         }
     });
 
-    if ($("#idpais")) {
+    if ($("#idpais").length > 0) {
         if ($("#idpais").val() != "") {
             ListaEstados($("#idpais").val(), $("#tempestado").val());
             if ($("#tempestado").val() > 0) {
@@ -30,7 +30,7 @@
     });
     
 
-    if ($("#idestado")) {
+    if ($("#idestado").length > 0) {
         if ($("#idestado").val() !== "") {
             ListaCidades($("#idestado").val(), $("#tempcidade").val());
         }

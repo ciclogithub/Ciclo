@@ -72,8 +72,8 @@ namespace Ciclo.Controllers
             string retorno = "";
 
             UsuariosDB db = new UsuariosDB();
-            usuariosview.txsenha = MD5Hash.CalculaHash(usuariosview.txsenha);
-            Usuarios usuario = db.Buscar(usuariosview.txemail, usuariosview.txsenha);
+            usuariosview.txsenhaaluno = MD5Hash.CalculaHash(usuariosview.txsenhaaluno);
+            Usuarios usuario = db.Buscar(usuariosview.txemail, usuariosview.txsenhaaluno);
 
             if (usuario == null)
             {
@@ -89,13 +89,13 @@ namespace Ciclo.Controllers
                 HttpCookie cookie2 = Request.Cookies["ciclo_perfil"];
                 if (cookie != null)
                 {
-                    cookie.Value = Convert.ToString(usuario.idaluno);
+                    cookie.Value = Convert.ToString(usuario.idusuario);
                     cookie2.Value = "2";
                 }
                 else
                 {
                     cookie = new HttpCookie("ciclo_usuario");
-                    cookie.Value = Convert.ToString(usuario.idaluno);
+                    cookie.Value = Convert.ToString(usuario.idusuario);
                     cookie2 = new HttpCookie("ciclo_perfil");
                     cookie2.Value = "2";
                 }

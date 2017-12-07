@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "Meus Dados";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+               <h1>@Html.Action("Usuario", "Aluno")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Aluno">Dashboard</a></li>
+                <li class="tg-active">Perfil</li>
+                <li class="tg-active">Meus Dados</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+@{
+    string mercados = "";
+    string list_mercados = "";
+    string telefones = "";
+    string list_telefones = "";
+    string redes = "";
+    string listredes = "";
+
+    int i = 0;
+    if (Model.usuarios.txmercado != null)
+    {
+        if (Model.usuarios.txmercado.Count > 0)
+        {
+            foreach (var item in Model.usuarios.txmercado)
+            {
+                mercados = mercados + "," + item.idmercado + "|" + item.txmercado;
+                list_mercados = list_mercados + "<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + i + ")'></i><span>" + item.txmercado + "</span></li>";
+                i++;
+            }
+            mercados = mercados.Substring(1);
+        }
+    }
+
+    i = 0;
+    if (Model.usuarios.txtelefone != null)
+    {
+        if (Model.usuarios.txtelefone.Count > 0)
+        {
+            foreach (var item in Model.usuarios.txtelefone)
+            {
+                telefones = telefones + "," + item.flwhatsapp + "|" + item.txtelefone;
+                list_telefones = list_telefones + "<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + i + ")'></i><span>" + item.txtelefone;
+                if (item.flwhatsapp == 1)
+                {
+                    list_telefones = list_telefones + " <i class='fa fa-whatsapp'></i>";
+                }
+                list_telefones = list_telefones + "</span></li>";
+                i++;
+            }
+            telefones = telefones.Substring(1);
+        }
+    }
+
+    i = 0;
+    if (Model.usuarios.txredes != null)
+    {
+        if (Model.usuarios.txredes.Count > 0)
+        {
+            foreach (var item in Model.usuarios.txredes)
+            {
+                redes = redes + "," + item.idredesocial + "|" + item.txredesocial + "|" + item.txicone;
+                listredes = listredes + "<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + i + ")'></i><span><i class='fa " + item.txicone + "'></i>" + item.txredesocial + "</span></li>";
+                i++;
+            }
+            redes = redes.Substring(1);
+        }
+    }
+}
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form method="post" action="" id="form-modal_aluno">
+                        <input type="hidden" id="txredes" name="txredes" value="@redes" />
+                        <input type="hidden" id="txmercados" name="txmercados" value="@mercados" />
+                        <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
+                        <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.usuarios.idcidade" />
+                        <input type="hidden" id="tempestado" name="tempestado" value="@Model.usuarios.idestado" />
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                                <label class="control-label">E-mail</label>
+                                <h4 style="text-transform:lowercase">@Model.usuarios.txemail</h4>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                                <label class="control-label" for="txaluno">CPF</label>
+                                <h4>@Model.usuarios.txcpf</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <label class="control-label" for="txaluno">Nome *</label>
+                                <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.usuarios.txusuario" maxlength="200" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <label class="control-label" for="txempresa">Empresa Atual</label>
+                                <input type="text" class="form-control validate[required,minSize[2],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.usuarios.txempresa" maxlength="300" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <label class="control-label" for="idpais">País</label>
+                                <select id="idpais" name="idpais" class="form-control validate[required]" onchange="MudaPais(this.value)">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var t in Model.paises)
+                                    {
+                                        <option value="@t.idpais" @(Model.usuarios.idpais == t.idpais ? "selected" : "")>@t.txpais</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12" id="dv_estado">
+                                <label class="control-label" for="idestado">Estado</label>
+                                <select id="idestado" name="idestado" class="form-control">
+                                    <option value="">-- Selecione o país --</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 form-group" id="dv_cidade">
+                                <label class="control-label" for="idcidade">Cidade</label>
+                                <select id="idcidade" name="idcidade" class="form-control">
+                                    <option value="">-- Selecione o estado --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <form id="form-modal-mercados">
+                        <div class="form-group">
+                            <label class="control-label" for="tempmercado">Mercados</label>
+                            <div class="input-group">
+                                <select id="idmercado" name="idmercado" class="form-control validate[required]">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var t in Model.mercados)
+                                    {
+                                        <option value="@t.idmercado">@t.txmercado</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listmercado">@Html.Raw(list_mercados)</ul>
+                            <div id="error_mercado" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <form id="form-modal-telefone">
+                        <div class="form-group">
+                            <label class="control-label" for="temptelefone">Telefone</label>
+                            <div class="input-group">
+                                <span onclick="whatsapp()" class="input-group-addon" style="cursor:pointer" id="whatsapp_label"><i class="fa fa-whatsapp"></i><input type="checkbox" id="flwhatsapp" name="flwhatsapp" value="1" class="hide" /></span>
+                                <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
+                                <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listtelefone">@Html.Raw(list_telefones)</ul>
+                            <div id="error_telefone" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <form id="form-modal-redes">
+                        <div class="form-group">
+                            <label class="control-label" for="tempredes">Redes Sociais</label>
+                            <div class="input-group">
+                                <select id="idredesocial" name="idredesocial" class="form-control no-js w20" style="font-size:18px; padding:0px 10px !important; font-family: 'FontAwesome'">
+                                    @foreach (var r in Model.redes)
+                                    {
+                                        <option value="@r.idredesocial" name="@r.txicone">@Html.Raw("&#xf" + r.idcodigo + ";")</option>
+                                    }
+                                </select>
+                                <input type="text" class="form-control validate[required,minSize[2],maxSize[50]] w80" id="tempredes" name="tempredes" value="" maxlength="50" />
+                                <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>
+                            <div id="error_redes" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Gravar Dados</button>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/perfil")
+    @Scripts.Render("~/bundles/mask")
+}
