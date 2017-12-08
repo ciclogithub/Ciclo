@@ -197,12 +197,12 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Usuarios SET txusuario = @usuario, txemail = @email, txsenha = @senha,  txcpf = @cpf WHERE idusuario = @id");
+                Query query = session.CreateQuery("UPDATE Usuarios SET txusuario = @usuario, txcpf = @cpf, idcidade = @cidade, txempresa = @empresa WHERE idusuario = @id");
                 query.SetParameter("id", variavel.idusuario);
                 query.SetParameter("usuario", variavel.txusuario);
-                query.SetParameter("email", variavel.txemail);
-                query.SetParameter("senha", variavel.txsenhaaluno);
                 query.SetParameter("cpf", variavel.txcpf);
+                query.SetParameter("cidade", variavel.idcidade);
+                query.SetParameter("empresa", variavel.txempresa);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -347,6 +347,110 @@ namespace Biblioteca.DB
             catch (Exception error)
             {
                 throw error;
+            }
+        }
+
+        public void RemoverMercados(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Usuarios_Mercados WHERE idusuario = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void RemoverTelefones(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Usuarios_Telefones WHERE idusuario = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void RemoverRedesSociais(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Usuarios_RedesSociais WHERE idusuario = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarMercado(int id, int mercado)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Usuarios_Mercados (idusuario, idmercado) VALUES (@usuario, @mercado)");
+                query.SetParameter("usuario", id);
+                query.SetParameter("mercado", mercado);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarTelefone(int id, string telefone, int whatsapp)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Usuarios_Telefones (idusuario, txtelefone, flwhatsapp) VALUES (@usuario, @telefone, @whatsapp)");
+                query.SetParameter("usuario", id);
+                query.SetParameter("telefone", telefone);
+                query.SetParameter("whatsapp", whatsapp);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarRedeSocial(int id, string rede, int codigo)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Usuarios_RedesSociais (idusuario, idredesocial, txredesocial) VALUES (@usuario, @codigo, @rede)");
+                query.SetParameter("usuario", id);
+                query.SetParameter("codigo", codigo);
+                query.SetParameter("rede", rede);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
             }
         }
     }

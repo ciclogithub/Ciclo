@@ -10,7 +10,7 @@
         $('#form-modal_especialidade').validationEngine('attach');
         if ($('#form-modal_especialidade').validationEngine('validate')) {
             IncluirEspecialidade();
-        };
+        }
     });
 
 });
@@ -38,11 +38,11 @@ function EspecialidadeAlterar() {
         }
     });
 
-    if (cont == 0) {
-        alert("Selecione pelo menos 1 registro")
+    if (cont === 0) {
+        alert("Selecione pelo menos 1 registro");
     } else {
         if (cont > 1) {
-            alert("Selecione somente 1 registro para alterar")
+            alert("Selecione somente 1 registro para alterar");
         } else {
             Especialidades(val);
         }
@@ -55,13 +55,13 @@ function EspecialidadeExcluir() {
     ids = "";
     $("input[name='ident']").each(function () {
         if ($(this).is(":checked")) {
-            ids = ids + "," + $(this).val()
+            ids = ids + "," + $(this).val();
         }
     });
 
     var ids = ids.substring(1);
 
-    if (ids != "") {
+    if (ids !== "") {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",
@@ -76,7 +76,7 @@ function EspecialidadeExcluir() {
             });
         }
     } else {
-        alert("Selecione pelo menos 1 registro")
+        alert("Selecione pelo menos 1 registro");
     }
 }
 

@@ -107,6 +107,7 @@
     <Compile Include="Entidades\Painel.cs" />
     <Compile Include="Entidades\Retorno.cs" />
     <Compile Include="Filters\AutenticacaoAttribute.cs" />
+    <Compile Include="Funcoes\Email.cs" />
     <Compile Include="Funcoes\Inclusao.cs" />
     <Compile Include="Funcoes\Nulo.cs" />
     <Compile Include="Funcoes\Md5Hash.cs" />

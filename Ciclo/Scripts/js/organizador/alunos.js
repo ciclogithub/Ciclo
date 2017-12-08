@@ -14,7 +14,7 @@
     });
 
     if ($("#idpais").length > 0) {
-        if ($("#idpais").val() != "") {
+        if ($("#idpais").val() !== "") {
             ListaEstados($("#idpais").val(), $("#tempestado").val());
             if ($("#tempestado").val() > 0) {
                 ListaCidades($("#tempestado").val(), $("#tempcidade").val());
@@ -117,7 +117,7 @@ function IncluirAluno() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("AlunoPesquisar()");
@@ -125,7 +125,7 @@ function IncluirAluno() {
                 if (result.value) {
                     closeModal("AlunoPesquisar()");
                 }
-            })
+            });
 
         }
     });
@@ -232,7 +232,7 @@ function addMercado() {
             if ($("#txmercados").val() === "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
             $("#txmercados").val(txt);
         } else {
-            alert("Já selecionado")
+            alert("Já selecionado");
         }
     }
 }
@@ -334,7 +334,7 @@ function ListaEmpresas() {
 function ValidaAlunoInclusao() {
 
     $.post("/Painel/Alunos/VerificaAluno", { id: $("#form-modal_aluno #idaluno").val(), nome: $("#form-modal_aluno #txaluno").val(), cpf: $("#form-modal_aluno #txcpf").val() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Já existe um aluno com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -345,9 +345,9 @@ function ValidaAlunoInclusao() {
                 if (result.value) {
                     IncluirAluno();
                 }
-            })
+            });
         } else {
-            if (data == 2) {
+            if (data === 2) {
                 swal({ title: "CPF já cadastrado", type: "error", timer: 3000 });
             } else {
                 IncluirAluno();
@@ -358,7 +358,7 @@ function ValidaAlunoInclusao() {
 
 function ValidaAlunoExcluir(ids) {
     $.post("/Painel/Alunos/VerificaAlunoExcluir", { id: ids.toString() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Existem alunos selecionados que estão vinculados há cursos, confirma a exclusão',
                 type: 'question',
@@ -369,7 +369,7 @@ function ValidaAlunoExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Alunos", "aluno", "AlunoPesquisar()", ids);
                 }
-            })
+            });
         } else {
             swal({
                 title: 'Confirma a exclusão do(s) registro(s)',
@@ -381,7 +381,7 @@ function ValidaAlunoExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Alunos", "aluno", "AlunoPesquisar()", ids);
                 }
-            })
+            });
         }
     });
 }

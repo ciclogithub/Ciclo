@@ -87,7 +87,7 @@ function IncluirTema() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("TemaPesquisar()");
@@ -95,7 +95,7 @@ function IncluirTema() {
                 if (result.value) {
                     closeModal("TemaPesquisar()");
                 }
-            })
+            });
 
         }
     });
@@ -105,7 +105,7 @@ function IncluirTema() {
 function ValidaTemaInclusao() {
 
     $.post("/Painel/Temas/VerificaTema", { id: $("#form-modal_tema #idtema").val(), nome: $("#form-modal_tema #txtema").val() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Já existe um tema com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -116,7 +116,7 @@ function ValidaTemaInclusao() {
                 if (result.value) {
                     IncluirTema();
                 }
-            })
+            });
         } else {
             IncluirTema();
         }
@@ -125,7 +125,7 @@ function ValidaTemaInclusao() {
 
 function ValidaTemaExcluir(ids) {
     $.post("/Painel/Temas/VerificaTemaExcluir", { id: ids.toString() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Existem cursos vinculados a um dos temas selecionados, confirma a exclusão',
                 type: 'question',
@@ -136,7 +136,7 @@ function ValidaTemaExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Temas", "tema", "TemaPesquisar()", ids);
                 }
-            })
+            });
         } else {
             swal({
                 title: 'Confirma a exclusão do(s) registro(s)',
@@ -148,7 +148,7 @@ function ValidaTemaExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Temas", "tema", "TemaPesquisar()", ids);
                 }
-            })
+            });
         }
     });
 }

@@ -29,6 +29,7 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                     "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
                     "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
+                    "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
                     "~/Scripts/js/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/home").Include(

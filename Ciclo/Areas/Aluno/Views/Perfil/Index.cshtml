@@ -81,7 +81,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <form method="post" action="" id="form-modal_aluno">
+                    <form method="post" action="" id="form-modal_usuario">
                         <input type="hidden" id="txredes" name="txredes" value="@redes" />
                         <input type="hidden" id="txmercados" name="txmercados" value="@mercados" />
                         <input type="hidden" id="txtelefone" name="txtelefone" value="@telefones" />
@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 form-group">
                                 <label class="control-label" for="txempresa">Empresa Atual</label>
-                                <input type="text" class="form-control validate[required,minSize[2],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.usuarios.txempresa" maxlength="300" />
+                                <input type="text" class="form-control validate[minSize[2],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.usuarios.txempresa" maxlength="300" />
                             </div>
                         </div>
                         <div class="row">
@@ -157,7 +157,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <form id="form-modal-telefone">
                         <div class="form-group">
-                            <label class="control-label" for="temptelefone">Telefone</label>
+                            <label class="control-label" for="temptelefone">Telefones</label>
                             <div class="input-group">
                                 <span onclick="whatsapp()" class="input-group-addon" style="cursor:pointer" id="whatsapp_label"><i class="fa fa-whatsapp"></i><input type="checkbox" id="flwhatsapp" name="flwhatsapp" value="1" class="hide" /></span>
                                 <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />

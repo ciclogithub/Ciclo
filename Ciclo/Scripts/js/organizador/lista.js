@@ -4,7 +4,7 @@
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             $('#form-modal').submit();
-        };
+        }
     });
 
     $("#exportar").click(function () {

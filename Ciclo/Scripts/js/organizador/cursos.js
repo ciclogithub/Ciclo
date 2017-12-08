@@ -191,7 +191,6 @@ function IncluirCurso() {
     var flgratuito = $("#form-modal_curso #flgratuito").prop('checked');
     var idcor = $("#form-modal_curso #idcor").val();
     var txidentificador = $("#form-modal_curso #txidentificador").val();
-    var idespecialidade = $("#form-modal_curso #idespecialidade").val();
 
     var form = $('#form-modal_curso #form-modal')[0];
     var data = new FormData(form);
@@ -208,7 +207,6 @@ function IncluirCurso() {
     data.append("gratuito", flgratuito);
     data.append("cor", idcor);
     data.append("identificador", txidentificador);
-    data.append("especialidade", idespecialidade);
     
     $.ajax({
         type: "POST",
@@ -225,7 +223,7 @@ function IncluirCurso() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("CursoPesquisar()");
@@ -233,7 +231,7 @@ function IncluirCurso() {
                 if (result.value) {
                     closeModal("CursoPesquisar()");
                 }
-            })
+            });
 
         }
     });
@@ -242,7 +240,7 @@ function IncluirCurso() {
 function ValidaCursoInclusao() {
 
     $.post("/Painel/Cursos/VerificaCurso", { id: $("#form-modal_curso #idcurso").val(), nome: $("#form-modal_curso #txcurso").val(), identificador: $("#form-modal_curso #txidentificador").val() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Já existe um curso com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -253,9 +251,9 @@ function ValidaCursoInclusao() {
                 if (result.value) {
                     IncluirCurso();
                 }
-            })
+            });
         } else {
-            if (data == 2) {
+            if (data === 2) {
                 swal({
                     title: 'Já existe um curso com o mesmo identificador, confirma a gravação de um novo registro',
                     type: 'question',
@@ -266,7 +264,7 @@ function ValidaCursoInclusao() {
                     if (result.value) {
                         IncluirCurso();
                     }
-                })
+                });
             } else {
                 IncluirCurso();
             }
@@ -276,7 +274,7 @@ function ValidaCursoInclusao() {
 
 function ValidaCursoExcluir(ids) {
     $.post("/Painel/Cursos/VerificaCursoExcluir", { id: ids.toString() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Existem alunos vinculados a um dos cursos selecionados, confirma a exclusão',
                 type: 'question',
@@ -287,7 +285,7 @@ function ValidaCursoExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Cursos", "curso", "CursoPesquisar()", ids);
                 }
-            })
+            });
         } else {
             swal({
                 title: 'Confirma a exclusão do(s) registro(s)',
@@ -299,7 +297,7 @@ function ValidaCursoExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Cursos", "curso", "CursoPesquisar()", ids);
                 }
-            })
+            });
         }
     });
 }
@@ -327,7 +325,7 @@ function IncluirInstrutores() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("");
@@ -335,7 +333,7 @@ function IncluirInstrutores() {
                 if (result.value) {
                     closeModal("");
                 }
-            })
+            });
 
         }
     });
@@ -407,7 +405,7 @@ function IncluirAlunos() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("");
@@ -415,7 +413,7 @@ function IncluirAlunos() {
                 if (result.value) {
                     closeModal("");
                 }
-            })
+            });
 
         }
     });
@@ -498,7 +496,7 @@ function IncluirDatas() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     NovaData();
@@ -508,7 +506,7 @@ function IncluirDatas() {
                     NovaData();
                     ListaDatas(idcurso);
                 }
-            })
+            });
         }
     });
 
@@ -579,7 +577,7 @@ function ExcluirData(id) {
                     }
                 });
             }
-        })
+        });
     }
 }
 
@@ -615,7 +613,7 @@ function IncluirValores() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     NovoValor();
@@ -625,7 +623,7 @@ function IncluirValores() {
                     NovoValor();
                     ListaValores(idcurso);
                 }
-            })
+            });
         }
     });
 
@@ -694,7 +692,7 @@ function ExcluirValor(id) {
                     }
                 });
             }
-        })
+        });
     }
 }
 
@@ -733,7 +731,7 @@ function IncluirAvaliacao() {
                         title: 'Operação realizada com sucesso!',
                         type: 'success',
                         confirmButtonText: 'Fechar',
-                        timer: 3000,
+                        timer: 3000
                     }).then((result) => {
                         if (result.dismiss === 'timer') {
                             closeModal("");
@@ -741,11 +739,11 @@ function IncluirAvaliacao() {
                         if (result.value) {
                             closeModal("");
                         }
-                    })
+                    });
                 }
             });
         }
-    })
+    });
 }
 
 function ShowHide(id) {

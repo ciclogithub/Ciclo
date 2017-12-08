@@ -14,7 +14,7 @@
     });
 
     if ($("#idpais")) {
-        if ($("#idpais").val() != "") {
+        if ($("#idpais").val() !== "") {
             ListaEstados($("#idpais").val(), $("#tempestado").val());
             if ($("#tempestado").val() > 0) {
                 ListaCidades($("#tempestado").val(), $("#tempcidade").val());
@@ -36,8 +36,8 @@
                     if (data.idestado === 0) {
                         $("#dv_cep").html(data.endereco);
                     } else {
-                        $("#txlogradouro").val((data.endereco));
-                        $("#idestado").val((data.idestado));
+                        $("#txlogradouro").val(data.endereco);
+                        $("#idestado").val(data.idestado);
                         ListaCidades($("#idestado").val(), data.idcidade);
                         $("#txbairro").val(data.bairro);
                         $("#dv_cep").html("");
@@ -131,7 +131,7 @@ function IncluirEmpresa() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("EmpresaPesquisar()");
@@ -139,7 +139,7 @@ function IncluirEmpresa() {
                 if (result.value) {
                     closeModal("EmpresaPesquisar()");
                 }
-            })
+            });
 
         }
     });
@@ -218,7 +218,7 @@ function whatsapp(o) {
 function ValidaEmpresaInclusao() {
 
     $.post("/Painel/Empresas/VerificaEmpresa", { id: $("#form-modal_empresa #idempresa").val(), nome: $("#form-modal_empresa #txempresa").val(), cnpj: $("#form-modal_empresa #txcnpj").val() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Já existe uma empresa com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -229,9 +229,9 @@ function ValidaEmpresaInclusao() {
                 if (result.value) {
                     IncluirEmpresa();
                 }
-            })
+            });
         } else {
-            if (data == 2) {
+            if (data === 2) {
                 swal({ title: "CNPJ já cadastrado", type: "error", timer: 3000 });
             } else {
                 IncluirEmpresa();
@@ -242,7 +242,7 @@ function ValidaEmpresaInclusao() {
 
 function ValidaEmpresaExcluir(ids) {
     $.post("/Painel/Empresas/VerificaEmpresaExcluir", { id: ids.toString() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Existem alunos vinculados a uma das empresas selecionadas, confirma a exclusão',
                 type: 'question',
@@ -253,7 +253,7 @@ function ValidaEmpresaExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Empresas", "empresa", "EmpresaPesquisar()", ids);
                 }
-            })
+            });
         } else {
             swal({
                 title: 'Confirma a exclusão do(s) registro(s)',
@@ -265,7 +265,7 @@ function ValidaEmpresaExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Empresas", "empresa", "EmpresaPesquisar()", ids);
                 }
-            })
+            });
         }
     });
 }

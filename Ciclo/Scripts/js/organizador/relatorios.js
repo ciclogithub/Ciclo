@@ -4,7 +4,7 @@
         $('#form-modal').validationEngine('attach');
         if ($('#form-modal').validationEngine('validate')) {
             $('#form-modal').submit();
-        };
+        }
     });
 
     $("#exportar").click(function () {
@@ -26,7 +26,7 @@ function addLocalidade() {
     var textp = $("#idpais option:selected").text();
     var texte = $("#idestado option:selected").text();
     var textc = $("#idcidade option:selected").text();
-    if ((valp !== "") || (vale !== "") || (valc !== "")) {
+    if (valp !== "" || vale !== "" || valc !== "") {
         valor = valp + "_" + vale + "_" + valc;
         texto = textp;
         if (vale !== "") { texto = texto + " / " + texte; }
@@ -39,7 +39,7 @@ function addLocalidade() {
                 $("#templocalidade").val($("#templocalidade").val() + "," + valor);
             }
         } else {
-            alert("Já selecionado")
+            alert("Já selecionado");
         }
     }
 }
@@ -57,7 +57,7 @@ function add(campo) {
                 $("#temp" + campo).val($("#temp" + campo).val() + "," + val);
             }
         } else {
-            alert("Já selecionado")
+            alert("Já selecionado");
         }
     }
 }
@@ -145,7 +145,7 @@ function abreGrafico(id) {
                         title: {
                             text: titulo2
                         }
-                    },
+                    }
 
                 });
 
@@ -165,7 +165,7 @@ function abreGrafico(id) {
                     chart.addSeries({
                         type: 'column',
                         name: value1,
-                        data: valor,
+                        data: valor
                     }, false);
 
                 });

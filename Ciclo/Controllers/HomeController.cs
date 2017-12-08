@@ -51,9 +51,9 @@ namespace Ciclo.Controllers
             return PartialView(ViewBag.view);
         }
 
-        public JsonResult Esqueceu(string email)
+        public JsonResult Esqueceu(string email, int perfil)
         {
-            return Json(new Inclusao().EsqueceuSenha(email));
+            return Json(new Inclusao().EsqueceuSenha(email, perfil));
         }
     }
 

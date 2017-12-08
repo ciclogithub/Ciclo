@@ -145,6 +145,14 @@ table input {
     margin-top: 0px;
     display:none;
 }
+#error_especialidade {
+    opacity: 1;
+    position: absolute;
+    top: 202px;
+    left: 15px;
+    margin-top: 0px;
+    display: none;
+}
 #error_telefone {
     opacity: 1;
     position: absolute;

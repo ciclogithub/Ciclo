@@ -10,7 +10,7 @@
         $('#form-modal_instrutor').validationEngine('attach');
         if ($('#form-modal_instrutor').validationEngine('validate')) {
             ValidaInstrutorInclusao();
-        };
+        }
     });
 
 });
@@ -55,7 +55,7 @@ function InstrutorExcluir() {
     ids = "";
     $("input[name='ident']").each(function () {
         if ($(this).is(":checked")) {
-            ids = ids + "," + $(this).val()
+            ids = ids + "," + $(this).val();
         }
     });
 
@@ -99,7 +99,7 @@ function IncluirInstrutor() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     closeModal("InstrutorPesquisar()");
@@ -107,7 +107,7 @@ function IncluirInstrutor() {
                 if (result.value) {
                     closeModal("InstrutorPesquisar()");
                 }
-            })
+            });
 
         }
     });
@@ -121,7 +121,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#prev_img').attr('src', e.target.result);
-        }
+        };
 
         reader.readAsDataURL(input.files[0]);
     }
@@ -130,7 +130,7 @@ function readURL(input) {
 function ValidaInstrutorInclusao() {
 
     $.post("/Painel/Instrutores/VerificaInstrutor", { id: $("#form-modal_instrutor #idinstrutor").val(), nome: $("#form-modal_instrutor #txinstrutor").val() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Já existe um instrutor com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -141,7 +141,7 @@ function ValidaInstrutorInclusao() {
                 if (result.value) {
                     IncluirInstrutor();
                 }
-            })
+            });
         } else {
             IncluirInstrutor();
         }
@@ -150,7 +150,7 @@ function ValidaInstrutorInclusao() {
 
 function ValidaInstrutorExcluir(ids) {
     $.post("/Painel/Instrutores/VerificaInstrutorExcluir", { id: ids.toString() }).done(function (data) {
-        if (data == 1) {
+        if (data === 1) {
             swal({
                 title: 'Existem cursos vinculados a um dos instrutores selecionados, confirma a exclusão',
                 type: 'question',
@@ -161,7 +161,7 @@ function ValidaInstrutorExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Instrutores", "instrutor", "InstrutorPesquisar()", ids);
                 }
-            })
+            });
         } else {
             swal({
                 title: 'Confirma a exclusão do(s) registro(s)',
@@ -173,7 +173,7 @@ function ValidaInstrutorExcluir(ids) {
                 if (result.value) {
                     confirmaExcluir("Instrutores", "instrutor", "InstrutorPesquisar()", ids);
                 }
-            })
+            });
         }
     });
 }

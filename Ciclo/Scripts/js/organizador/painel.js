@@ -7,23 +7,23 @@
     });
 
     $('#selectall').click(function () {
-        val = $(this).prop('checked')
+        val = $(this).prop('checked');
         $('.table tr th[scope=row]').find('input').each(function (index) {
             $(this).prop('checked', val);
         });
-    })
+    });
 
     $("#page_select").on("blur", function () {
-        if ($(this).val() == "") {
+        if ($(this).val() === "") {
             alert("Informe o número da página");
         } else {
             if ((parseInt($(this).val()) < 1) || (parseInt($(this).val()) > parseInt($("#totalpage").val()))) {
                 alert("Página inválida");
             } else {
-                pagination($(this).val())
+                pagination($(this).val());
             }
         }
-    })
+    });
 });
 
 
@@ -49,9 +49,9 @@ function confirmaSair() {
         cancelButtonText: 'Não'
     }).then((result) => {
         if (result.value) {
-            location.href = "/Painel/Painel/Sair"
+            location.href = "/Painel/Painel/Sair";
         }
-    })
+    });
 }
 
 var Aguarde;
@@ -63,7 +63,7 @@ Aguarde = Aguarde || (function () {
         },
         hide: function () {
             pleaseWaitDiv.modal('hide');
-        },
+        }
 
     };
 })();
@@ -71,14 +71,14 @@ Aguarde = Aguarde || (function () {
 function AguardeDiv() {
     var pleaseWaitDiv = '<div class="Aguarde-fade"><BR><BR><BR><p>Carregando ...</p><img src="data:image/gif;base64,R0lGODlhNgA3AIAAAM7Ozv///yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCgABACwHAAUALQAwAAACfoyPmcCtDyNsFMiLT625z+14ogYy41map5haq9e+xvbRclmHDyXhN5fj/YQ7kCxgKyZXy4XxSAy6jtSq9YrNarfcriLK5TWzLVW47C1PtzQwW+eNy+f0uv2OdTPhSj4KKEU1hjDIAthn9lJIkji0hpfnF7f4ptdFqYWZKZlRAAAh+QQJCgABACwHAAYALQAvAAACfYyPmcCtDyNsFMiLUXW5x814ogJa4xmU6KmS1bq87iZRcFqaM4fmemxb+SayXo4YNLYeSSXo1llCMbSp9YrNarfcGq9rq3J9ITC5ixuaw99xGw2Py+f0ut3ahOV3ZX2R+efUB7g3Ikb4Zhi4g5d4N1WIdhg3CVcpuWjpiFEAACH5BAkKAAEALAcABwAvAC4AAAJ9jI+pwKAPozStzYtTZbnf7XjiA46mZp1qVn6pCnJSe8ZhRJv2lI/7vFn9gDJYbOULIpfMpvMJjRorUtwxQJXahs/tFertNcNK8Bb7MnOrlC8bIX7L5/S6PVkUpq3Z6Z5UVhMIEedRCDeI9weY53c312d3WDWplShXadkoUgAAIfkECQoAAQAsBwAHAC4ALgAAAnqMj6nAoA+jDK3Ni1Fluc/teOKyjaZmneoaVazhfuUKyrFaSzk+t/2583Fet5fxiEwql8ym85krKkHU0LIaTGJ/2m3qSqV8wVko94lOq9dmafuccHu2wrGIDil38A99hk8i94elY3dHmFZ1JCjGeOhIZvg2tObnBClRAAAh+QQJCgABACwHAAcALQAwAAACfYyPqcCgD6NsTdq7qMPc6t2FGSWWCWmm6lStBhp9rhxrs13DKQ3xO54DrXSuovGITCqXzKaTxXgGSD7lp5q8ApdaYtbmtbak5LL5jE6Xsafxj/3alrTBqIrek4vwDziH3+c2Ihjn93cVGBbSJcTEKPX4FOk02VRpibimh1EAACH5BAkKAAEALAcABwAtAC8AAAJ5jI+pwKAPo2xN2ruow9zq3YUZJZYJaabqVK0GGn2uHGuzXcMpDfE7ngOtdK6i8YhMKpfMppPFeAZIPuWnmrwCl1pi1ua1tqTksvmMRmCbWnJXWAq/uqr1lP6Tv+tbNd5kt8cXFaTXB3g4Zye2+NWI1OZ2VRYpKWdRAAAh+QQJCgABACwFAAcALwAuAAACe4yPqQYNC6OEzs2LU2253/144gKOpmad6jpVLJO2G1vK7lpL+blTM/6zhWixl/GITCqXTF6wiepBQbeli1pEYrHMLbXrfWrDVeWNC1VI0+y2+w2PrKdfIEdYHs0PaGdeXeeXBbiHURjQJ2goFvcx2HZoxcgWaTZJ+YhRAAAh+QQJCgABACwGAAcALgAuAAACfYyPqQENC6Nczs2LUW25z/14ogKO1CZVJgmGa9darxrF3FpCtjvmZzxD6WxB2q/1YshqyKTH54xKp9Sq9aoRYllQqwqI3Rm94tu1bCaXt8pblw2Py+f0ul06LvKG+Z6Wv4Tzd5Rm8pZw+DR4hBd4p7Ynl7g1GbYIV2lZ2FEAADs=" /><BR><BR><BR></div>';
     return pleaseWaitDiv;
-};
+}
 
 var ajax_conteudo;
 function Conteudo(url) {
 
     Aguarde.show();
 
-    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
         ajax_conteudo.abort();
     }
 
@@ -98,10 +98,10 @@ function ConteudoPaginacao(url, pagina) {
 
     Aguarde.show();
 
-    if (pagina == null)
+    if (pagina === null)
         pagina = 1;
 
-    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
         ajax_conteudo.abort();
     }
 
@@ -119,7 +119,7 @@ function ConteudoPaginacao(url, pagina) {
 }
 
 function Modal(url, id, titulo, func) {
-    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
         ajax_conteudo.abort();
     }
 
@@ -136,9 +136,9 @@ function Modal(url, id, titulo, func) {
             $("#modal1.modal .modal-body").html(msg);
             $('#modal1.modal').modal('show');
             
-            if (func != "") {
+            if (func !== "") {
                 $("#modal1.modal").on("shown.bs.modal", function () {
-                    var funcao = func + "(" + id + ")"
+                    var funcao = func + "(" + id + ")";
                     eval(funcao);
                     $(this).off('shown.bs.modal');
                 });
@@ -151,7 +151,7 @@ function Modal(url, id, titulo, func) {
 }
 
 function Modal2(url, id, titulo, func) {
-    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
         ajax_conteudo.abort();
     }
 
@@ -168,9 +168,9 @@ function Modal2(url, id, titulo, func) {
             $("#modal2.modal .modal-body").html(msg);
             $('#modal2.modal').modal('show');
 
-            if (func != "") {
+            if (func !== "") {
                 $("#modal2.modal").on("hidden.bs.modal", function () {
-                    var funcao = func + "(" + id + ")"
+                    var funcao = func + "(" + id + ")";
                     eval(funcao);
                     $(this).off('hidden.bs.modal');
                 });
@@ -185,17 +185,17 @@ function Modal2(url, id, titulo, func) {
 function Alert(texto, alert, tag, timeout) {
 
     // alert => success, info, warning, danger
-    if (tag == undefined || tag == null || tag == '')
+    if (tag === undefined || tag === null || tag === '')
         tag = "body";
 
     var txt = '<div class="alert alert-' + alert;
 
-    if (tag == "body")
+    if (tag === "body")
         txt += ' alert-position';
 
     txt += ' alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">×</span></button> <p class="pull-left"> ' + texto + ' </p></div>';
 
-    if (timeout != undefined && timeout != null && timeout != '' && timeout != '0' && timeout != 0)
+    if (timeout !== undefined && timeout !== null && timeout !== '' && timeout !== '0' && timeout !== 0)
         setTimeout(function () {
             $(".alert").alert('close');
         }, timeout);
@@ -229,21 +229,21 @@ function pagination(c) {
 }
 
 function MudaPais(val) {
-    if (val == "") {
+    if (val === "") {
         $("#dv_estado").html("<label class='control-label' for='idestado'>Estado</label><select id='idestado' name='idestado' class='form-control'><option value=''>-- Selecione o país --</option></select>");
     } else {
         $("#dv_estado").html("<label class='control-label' for='idestado'>Estado</label>Carregando lista ...");
-        ListaEstados(val, 0)
+        ListaEstados(val, 0);
     }
     $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
 }
 
 function MudaEstado(val) {
-    if (val == "") {
+    if (val === "") {
         $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
     } else {
         $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label>Carregando lista ...");
-        ListaCidades(val, 0)
+        ListaCidades(val, 0);
     }
 }
 
@@ -258,7 +258,7 @@ function ListaCidades(estado, cidade) {
             temp += "<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idcidade;
-                if (data[x].idcidade == cidade) { temp += " selected " }
+                if (data[x].idcidade === cidade) { temp += " selected "; }
                 temp += ">" + data[x].txcidade + "</option>";
             }
             temp += "</select>";
@@ -282,7 +282,7 @@ function ListaEstados(pais, estado) {
             temp += "<label class='control-label' for='idestado'>Estado</label><select id='idestado' name='idestado' onchange='MudaEstado(this.value)' class='form-control'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idestado;
-                if (data[x].idestado == estado) { temp += " selected " }
+                if (data[x].idestado === estado) { temp += " selected "; }
                 temp += ">" + data[x].txestado + "</option>";
             }
             temp += "</select>";
@@ -323,7 +323,7 @@ function confirmaExcluir(url, campo, func, ids) {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     $("#" + campo).val("");
@@ -337,7 +337,7 @@ function confirmaExcluir(url, campo, func, ids) {
                         eval(func);
                     }
                 }
-            })
+            });
 
         }
     });

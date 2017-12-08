@@ -8,7 +8,43 @@
         }
     }
 
+    $("#incluir_btn_alterar").click(function () {
+        $('#form-modal_usuario').validationEngine('attach');
+        if ($('#form-modal_usuario').validationEngine('validate')) {
+            IncluirUsuario();
+        }
+    });
+
 });
+
+function IncluirUsuario() {
+
+    var txaluno = $("#form-modal_usuario #txaluno").val();
+    var txtelefone = $("#form-modal_usuario #txtelefone").val();
+    var idcidade = $("#form-modal_usuario #idcidade").val();
+    var txempresa = $("#form-modal_usuario #txempresa").val();
+    var txredes = $("#form-modal_usuario #txredes").val();
+    var txmercados = $("#form-modal_usuario #txmercados").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/Aluno/Perfil/IncluirConcluir',
+        data: { nome: txaluno, telefone: txtelefone.toString(), cidade: idcidade, empresa: txempresa, redes: txredes.toString(), mercados: txmercados.toString() },
+        dataType: "json",
+        traditional: true,
+        success: function (json) {
+
+            swal({
+                title: 'Operação realizada com sucesso!',
+                type: 'success',
+                confirmButtonText: 'Fechar',
+                timer: 3000,
+            })
+
+        }
+    });
+
+}
 
 function addTelefone() {
     $('#form-modal-telefone').validationEngine('attach');

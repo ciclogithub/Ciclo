@@ -147,40 +147,65 @@ namespace Biblioteca.Funcoes
 
         }
 
-        public Retorno EsqueceuSenha(string esqueceu)
+        public Retorno EsqueceuSenha(string email, int perfil)
         {
             Retorno retorno = new Retorno();
 
-            if (esqueceu.Length > 2)
+            if (email.Length > 2)
             {
-                //Alunos aluno = new AlunosDB().Email(esqueceu);
 
-                //if (aluno == null)
-                //{
-                //    retorno.retorno = 0;
-                //    retorno.mensagem = "Dados incorretos.";
-                //}
-                //else
-                //{
-                //    retorno.retorno = 1;
-                //    retorno.id = aluno.codigo;
-                    //new Envio_email()
-                    //{
-                    //    para = aluno.email,
-                    //    assunto = "Dados de acesso - www.treinaauto.com.br",
-                    //    texto = "Segue os dados de acceso conforme solicitado.<BR>Usuário: " + aluno.email + "<BR>Senha: " + aluno.senha
-                    //}.Salvar();
-            //        retorno.mensagem = "Dados enviados com sucesso.";
-            //    }
-            //}
-            //else
-            //{
-            //    retorno.retorno = 0;
-            //    retorno.mensagem = "Dados incorretos.";
+                if (perfil == 1)
+                {
+                    Organizadores organizadores = new OrganizadoresDB().Email(email);
+                    if (organizadores == null)
+                    {
+                        retorno.retorno = 0;
+                        retorno.mensagem = "Dados incorretos.";
+                    }
+                    else
+                    {
+                        Email mail = new Email();
+                        mail.destinatario = organizadores.txemail;
+                        mail.assunto = "Dados de acesso - www.treinaauto.com.br";
+                        mail.mensagem = "Segue os dados de acceso conforme solicitado.<BR>Usuário: " + organizadores.txemail + "<BR>Senha: " + organizadores.txsenha;
+                        string ret = mail.EnviaMensagem(mail);
+
+                        retorno.mensagem = ret;
+                    }
+                }
+
+                if (perfil == 2)
+                {
+                    Usuarios usuarios = new UsuariosDB().Email(email);
+                    if (usuarios == null)
+                    {
+                        retorno.retorno = 0;
+                        retorno.mensagem = "Dados incorretos.";
+                    }
+                    else
+                    {
+                        retorno.retorno = 1;
+                        retorno.id = usuarios.idusuario;
+
+                        Email mail = new Email();
+                        mail.destinatario = usuarios.txemail;
+                        mail.assunto = "Dados de acesso - www.treinaauto.com.br";
+                        mail.mensagem = "Segue os dados de acceso conforme solicitado.<BR>Usuário: " + usuarios.txemail + "<BR>Senha: " + usuarios.txsenhaaluno;
+                        string ret = mail.EnviaMensagem(mail);
+
+                        retorno.mensagem = ret;
+                    }
+                }
+
+            }
+            else
+            {
+                retorno.retorno = 0;
+                retorno.mensagem = "Dados incorretos.";
             }
 
             return retorno;
 
         }
-    }
+    } 
 }

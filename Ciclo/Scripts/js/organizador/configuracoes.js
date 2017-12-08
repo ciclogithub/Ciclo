@@ -35,7 +35,7 @@ function IncluirConfiguracao() {
                 title: 'Operação realizada com sucesso!',
                 type: 'success',
                 confirmButtonText: 'Fechar',
-                timer: 3000,
+                timer: 3000
             }).then((result) => {
                 if (result.dismiss === 'timer') {
                     location.href = "Configuracoes";
@@ -43,7 +43,7 @@ function IncluirConfiguracao() {
                 if (result.value) {
                     location.href = "Configuracoes";
                 }
-            })
+            });
 
         }
     });
@@ -63,12 +63,12 @@ function AlterarSenha() {
         traditional: true,
         success: function (json) {
             json = jQuery.parseJSON(json);
-            if (json.retorno == "OK") {
+            if (json.retorno === "OK") {
                 swal({
                     title: 'Operação realizada com sucesso!',
                     type: 'success',
                     confirmButtonText: 'Fechar',
-                    timer: 3000,
+                    timer: 3000
                 }).then((result) => {
                     if (result.dismiss === 'timer') {
                         location.href = "Configuracoes";
@@ -76,7 +76,7 @@ function AlterarSenha() {
                     if (result.value) {
                         location.href = "Configuracoes";
                     }
-                })                
+                });                
             } else {
                 swal({ title: json.retorno, type: "error", timer: 3000 });
             }

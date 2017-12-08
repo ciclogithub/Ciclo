@@ -8,7 +8,7 @@
         $('#form_cadastro_avaliacao').validationEngine('attach');
         if ($('#form_cadastro_avaliacao').validationEngine('validate')) {
             IncluirAvaliacao();
-        };
+        }
     });
 
 });
