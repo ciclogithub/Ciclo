@@ -1,6 +1,7 @@
 ﻿using Biblioteca.DB;
 using Biblioteca.Entidades;
 using Biblioteca.Filters;
+using Ciclo.Areas.Painel.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,24 +54,11 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public ActionResult Incluir(int id = 0)
         {
-            Cursos curso = new Cursos();
-            if (id != 0)
-            {
-                curso = new CursosDB().Buscar(id);
-            }
-
-            ViewBag.temas = new TemasDB().Listar();
-            ViewBag.categorias = new CategoriasDB().Listar();
-            ViewBag.locais = new LocaisDB().Listar();
-            ViewBag.cores = new CoresDB().Listar();
-            ViewBag.especialidades = new EspecialidadesDB().Listar();
-            ViewBag.mercados = new MercadosDB().Listar();
-
-            return PartialView(curso);
+            return PartialView(new CursosView(id));
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = false, int cor = 0, string identificador = "")
+        public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome_curso = "", int tema = 0, int categoria = 0, int codlocal = 0, string local = "", string minimo = "", string maximo = "", string cargahoraria = "", string descricao = "", bool gratuito = false, int cor = 0, string identificador = "", string mercados = "", string especialidades = "")
         {
             CursosDB db = new CursosDB();
             int ident = 0;
@@ -99,6 +87,29 @@ namespace Ciclo.Areas.Painel.Controllers
                 curso.txidentificador = identificador;
 
                 db.Alterar(curso);
+
+                db.RemoverMercados(ident);
+                db.RemoverEspecialidades(ident);
+            }
+
+            var arrM = mercados.Split(',');
+            foreach (var i in arrM)
+            {
+                if (i != "")
+                {
+                    var arrTemp = i.Split('|');
+                    new CursosDB().SalvarMercado(ident, Convert.ToInt32(arrTemp[0]));
+                }
+            }
+
+            var arrE = especialidades.Split(',');
+            foreach (var i in arrE)
+            {
+                if (i != "")
+                {
+                    var arrTemp = i.Split('|');
+                    new CursosDB().SalvarEspecialidades(ident, Convert.ToInt32(arrTemp[0]));
+                }
             }
 
             if (txfoto != null)

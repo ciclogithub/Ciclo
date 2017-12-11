@@ -17,7 +17,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Cursos (idorganizador, txcurso, idtema,idcategoria, idlocal, nrminimo, nrmaximo, txcargahoraria, flgratuito, txlocal, txdescritivo, idcor, txidentificador, idespecialidade) output INSERTED.idcurso VALUES (@organizador, @curso, @tema, @categoria, @codlocal, @minimo, @maximo, @carga, @gratuito, @local, @descritivo, @cor, @identificador, @especialidade)");
+                Query query = session.CreateQuery("INSERT INTO Cursos (idorganizador, txcurso, idtema,idcategoria, idlocal, nrminimo, nrmaximo, txcargahoraria, flgratuito, txlocal, txdescritivo, idcor, txidentificador) output INSERTED.idcurso VALUES (@organizador, @curso, @tema, @categoria, @codlocal, @minimo, @maximo, @carga, @gratuito, @local, @descritivo, @cor, @identificador)");
                 query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("curso", variavel.txcurso);
                 query.SetParameter("tema", variavel.idtema);
@@ -48,7 +48,7 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Cursos SET txcurso = @curso, idtema = @tema, idcategoria = @categoria, idlocal = @codlocal, nrminimo = @minimo, nrmaximo = @maximo, txcargahoraria = @carga, flgratuito = @gratuito, txlocal = @local, txdescritivo = @descritivo, idcor = @cor, txidentificador = @identificador, idespecialidade = @especialidade WHERE idcurso = @id");
+                Query query = session.CreateQuery("UPDATE Cursos SET txcurso = @curso, idtema = @tema, idcategoria = @categoria, idlocal = @codlocal, nrminimo = @minimo, nrmaximo = @maximo, txcargahoraria = @carga, flgratuito = @gratuito, txlocal = @local, txdescritivo = @descritivo, idcor = @cor, txidentificador = @identificador  WHERE idcurso = @id");
                 query.SetParameter("id", variavel.idcurso);
                 query.SetParameter("curso", variavel.txcurso);
                 query.SetParameter("tema", variavel.idtema);
@@ -521,6 +521,74 @@ namespace Biblioteca.DB
             catch (Exception error)
             {
                 throw error;
+            }
+        }
+
+        public void RemoverMercados(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Cursos_Mercados WHERE idcurso = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void RemoverEspecialidades(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Cursos_Especialidades WHERE idcurso = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarMercado(int id, int mercado)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Cursos_Mercados (idcurso, idmercado) VALUES (@curso, @mercado)");
+                query.SetParameter("curso", id);
+                query.SetParameter("mercado", mercado);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarEspecialidades(int id, int especialidade)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Cursos_Especialidades (idcurso, idespecialidade) VALUES (@curso, @especialidade)");
+                query.SetParameter("curso", id);
+                query.SetParameter("especialidade", especialidade);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
             }
         }
     }

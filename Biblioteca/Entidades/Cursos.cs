@@ -123,6 +123,16 @@ namespace Biblioteca.Entidades
             new CursosDB().Excluir(ident);
         }
 
+        public void RemoverMercados(int id = 0)
+        {
+            new CursosDB().RemoverMercados(id);
+        }
+
+        public void RemoverEspecialidades(int id = 0)
+        {
+            new CursosDB().RemoverEspecialidades(id);
+        }
+
         public void AlterarFoto()
         {
             new CursosDB().AlterarFoto(this);

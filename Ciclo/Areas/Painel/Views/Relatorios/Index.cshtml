@@ -188,7 +188,7 @@
                     </div>
                     <div class="row pt15">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label class="control-label" for="idmercado">Mercados</label>
+                            <label class="control-label" for="idmercado">Mercados (Aluno)</label>
                             <div class="input-group">
                                 <select id="idmercado" name="idmercado" class="form-control">
                                     <option value="">-- Selecione --</option>
@@ -200,6 +200,36 @@
                                 <span class="input-group-addon" onclick="add('mercado')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
                             <ul class="list-itens" id="listmercado"></ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <label class="control-label" for="idmercadocurso">Mercados (Curso)</label>
+                            <div class="input-group">
+                                <select id="idmercadocurso" name="idmercadocurso" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var e in Model.mercados)
+                                    {
+                                        <option value="@e.idmercado">@e.txmercado</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('mercadocurso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listmercadocurso"></ul>
+                        </div>                        
+                    </div>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <label class="control-label" for="idespecialidade">Especialidades</label>
+                            <div class="input-group">
+                                <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var e in Model.especialidades)
+                                    {
+                                        <option value="@e.idespecialidade">@e.txespecialidade</option>
+                                    }
+                                </select>
+                                <span class="input-group-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                            <ul class="list-itens" id="listespecialidade"></ul>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label class="control-label" for="idlocal">Locais</label>
@@ -214,7 +244,7 @@
                                 <span class="input-group-addon" onclick="add('local')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
                             <ul class="list-itens" id="listlocal"></ul>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row pt15">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">

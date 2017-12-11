@@ -7,33 +7,28 @@ using System.Web;
 
 namespace Ciclo.Areas.Painel.Models
 {
-    public class RelatoriosView
+    public class CursosView
     {
         public List<Temas> temas { get; set; }
         public List<Categorias> categorias { get; set; }
-        public List<Cores> cores { get; set; }
-        public List<Cursos> cursos { get; set; }
-        public List<Alunos> alunos { get; set; }
         public List<Mercados> mercados { get; set; }
-        public List<Instrutores> instrutores { get; set; }
         public List<Locais> locais { get; set; }
-        public List<Empresas> empresas { get; set; }
-        public List<Paises> paises { get; set; }
+        public List<Cores> cores { get; set; }
         public List<Especialidades> especialidades { get; set; }
+        public Cursos cursos = new Cursos();
 
-        public RelatoriosView()
+        public CursosView(int id)
         {
             this.temas = new TemasDB().Listar();
             this.categorias = new CategoriasDB().Listar();
             this.locais = new LocaisDB().Listar();
-            this.instrutores = new InstrutoresDB().Listar();
-            this.alunos = new AlunosDB().ListarRel();
-            this.mercados = new MercadosDB().Listar();
-            this.cursos = new CursosDB().ListarRel();
             this.cores = new CoresDB().Listar();
-            this.empresas = new EmpresasDB().ListarRel();
-            this.paises = new PaisesDB().Listar();
             this.especialidades = new EspecialidadesDB().Listar();
+            this.mercados = new MercadosDB().Listar();
+            if (id != 0)
+            {
+                this.cursos = new CursosDB().Buscar(id);
+            }
         }
         
     }

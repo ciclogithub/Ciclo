@@ -191,7 +191,9 @@ function IncluirCurso() {
     var flgratuito = $("#form-modal_curso #flgratuito").prop('checked');
     var idcor = $("#form-modal_curso #idcor").val();
     var txidentificador = $("#form-modal_curso #txidentificador").val();
-
+    var txmercados = $("#form-modal_curso #txmercados").val();
+    var txespecialidades = $("#form-modal_curso #txespecialidades").val();
+    
     var form = $('#form-modal_curso #form-modal')[0];
     var data = new FormData(form);
     data.append("id", idcurso);
@@ -207,6 +209,8 @@ function IncluirCurso() {
     data.append("gratuito", flgratuito);
     data.append("cor", idcor);
     data.append("identificador", txidentificador);
+    data.append("mercados", txmercados);
+    data.append("especialidades", txespecialidades);
     
     $.ajax({
         type: "POST",
@@ -835,4 +839,71 @@ function ListaLocais() {
             }));
         }
     });
+}
+
+function addMercado() {
+    var idmercado = $("#idmercado").val();
+    if (idmercado != "") {
+        var mercado = $("#idmercado option:selected").html();
+        if (!inArray("txmercados", idmercado + "|" + mercado)) {
+            var cont = $("#listmercado li").length;
+            var txt = "";
+            $("#listmercado").append("<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + cont + ")'></i><span>" + mercado + "</span></li>");
+            if ($("#txmercados").val() === "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
+            $("#txmercados").val(txt);
+        } else {
+            alert("Já selecionado");
+        }
+    }
+}
+
+function removeMercados(i) {
+    var arr = $("#txmercados").val().split(",");
+    var txt = "";
+    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    $("#txmercados").val(txt.slice(1));
+    $("#listmercado").empty();
+    if ($("#txmercados").val() !== "") {
+        arr = $("#txmercados").val().split(",");
+        for (x = 0; x < arr.length; x++) {
+            arrT = arr[x].split("|");
+            $("#listmercado").append("<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + x + ")'></i><span>" + arrT[1] + "</span></li>");
+        }
+    }
+}
+
+function addEspecialidade() {
+    var idespecialidade = $("#idespecialidade").val();
+    if (idespecialidade != "") {
+        var especialidade = $("#idespecialidade option:selected").html();
+        if (!inArray("txespecialidades", idespecialidade + "|" + especialidade)) {
+            var cont = $("#listespecialidade li").length;
+            var txt = "";
+            $("#listespecialidade").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEspecialidades(" + cont + ")'></i><span>" + especialidade + "</span></li>");
+            if ($("#txespecialidades").val() === "") { txt = idespecialidade + "|" + especialidade; } else { txt = $("#txespecialidades").val() + "," + idespecialidade + "|" + especialidade; }
+            $("#txespecialidades").val(txt);
+        } else {
+            alert("Já selecionado");
+        }
+    }
+}
+
+function removeEspecialidades(i) {
+    var arr = $("#txespecialidades").val().split(",");
+    var txt = "";
+    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    $("#txespecialidades").val(txt.slice(1));
+    $("#listespecialidade").empty();
+    if ($("#txespecialidades").val() !== "") {
+        arr = $("#txespecialidades").val().split(",");
+        for (x = 0; x < arr.length; x++) {
+            arrT = arr[x].split("|");
+            $("#listespecialidade").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEspecialidades(" + x + ")'></i><span>" + arrT[1] + "</span></li>");
+        }
+    }
+}
+
+function inArray(campo, val) {
+    arr = $("#" + campo).val().split(",");
+    if ($.inArray(val, arr) < 0) { return false; } else { return true; }
 }

@@ -168,6 +168,7 @@
     <Compile Include="Areas\Painel\Controllers\LocaisController.cs" />
     <Compile Include="Areas\Painel\Controllers\PainelController.cs" />
     <Compile Include="Areas\Painel\Controllers\InstrutoresController.cs" />
+    <Compile Include="Areas\Painel\Models\CursosView.cs" />
     <Compile Include="Areas\Painel\Models\CepView.cs" />
     <Compile Include="Areas\Painel\Models\AlunosView.cs" />
     <Compile Include="Areas\Painel\Models\RelatoriosView.cs" />

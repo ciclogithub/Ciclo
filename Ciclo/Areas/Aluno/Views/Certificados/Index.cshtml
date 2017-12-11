@@ -1,7 +1,72 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Certificados";
 }
 
-<h2>Index</h2>
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Aluno")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Aluno">Dashboard</a></li>
+                <li class="tg-active">Perfil</li>
+                <li class="tg-active">Certificados</li>
+            </ol>
+        </div>
+    </div>
+</div>
 
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_certificado">Localizar</button>
+                    &nbsp;<button class="tg-btn" type="button" onclick="CertificadosTodos();">Todos</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <button class="tg-btn" type="button" onclick="Certificados(0);">Novo</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="CertificadoAlterar()">Alterar</button>
+                    &nbsp;
+                    <button class="tg-btn" type="button" onclick="CertificadoExcluir()">Excluir</button>
+                </div>
+            </div>
+            <div class="row pt">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                <th width="33%">CERTIFICADORA</th>
+                                <th width="32%">CURSO</th>
+                                <th width="32%">PERÍODO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcertificado" /></th>
+                                    <td>@p.txcertificadora</td>
+                                    <td>@p.txcurso</td>
+                                    <td>@p.dtinicio / @p.dtfim</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            @*@Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")*@
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/certificados")
+}
