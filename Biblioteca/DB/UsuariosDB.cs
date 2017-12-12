@@ -453,5 +453,6 @@ namespace Biblioteca.DB
                 throw erro;
             }
         }
-    }
+
+    }        
 }

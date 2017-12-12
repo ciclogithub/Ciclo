@@ -173,6 +173,7 @@
     <Compile Include="Areas\Painel\Models\AlunosView.cs" />
     <Compile Include="Areas\Painel\Models\RelatoriosView.cs" />
     <Compile Include="Areas\Painel\PainelAreaRegistration.cs" />
+    <Compile Include="Controllers\AlteraSenhaController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Areas\Aluno\Views\AlterarSenha\Index.cshtml" />
     <Content Include="Areas\Aluno\Views\Cursos\Index.cshtml" />
     <Content Include="Areas\Aluno\Views\Perfil\Index.cshtml" />
+    <Content Include="Areas\Aluno\Views\Certificados\Incluir.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\banner.jpg" />
     <Content Include="images\diagweb-16x16.png" />
@@ -645,6 +647,7 @@
     <Content Include="Views\Avaliacao\Index.cshtml" />
     <Content Include="Scripts\plugins\barrating\jquery.barrating.min.js.map" />
     <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\AlteraSenha\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

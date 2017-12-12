@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+===
     $('select').not('.no-js').select2();
 
     $("#pesquisa_empresa").click(function () {
@@ -14,7 +14,7 @@
     });
 
     if ($("#idpais")) {
-        if ($("#idpais").val() !== "") {
+        if ($("#idpais").val() != "") {
             ListaEstados($("#idpais").val(), $("#tempestado").val());
             if ($("#tempestado").val() > 0) {
                 ListaCidades($("#tempestado").val(), $("#tempcidade").val());
@@ -23,7 +23,7 @@
     }
 
     $("#txcep").on("blur", function () {
-        if ($(this).val().length === 9) {
+        if ($(this).val().length == 9) {
             $("#dv_cep").html("<br>Aguarde, buscando informaçoes ...");
             $.ajax({
                 type: "POST",
@@ -33,7 +33,7 @@
                 traditional: true,
                 success: function (data) {
 
-                    if (data.idestado === 0) {
+                    if (data.idestado == 0) {
                         $("#dv_cep").html(data.endereco);
                     } else {
                         $("#txlogradouro").val(data.endereco);
@@ -74,7 +74,7 @@ function EmpresaAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
@@ -97,7 +97,7 @@ function EmpresaExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         ValidaEmpresaExcluir(ids);
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
@@ -133,7 +133,7 @@ function IncluirEmpresa() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("EmpresaPesquisar()");
                 }
                 if (result.value) {
@@ -154,7 +154,7 @@ function addEmail() {
         var txt = "";
         $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + cont + ")'></i><span>" + temp + "</span></li>");
         $("#tempemail").val("");
-        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp; }
+        if ($("#txemail").val() == "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp; }
         $("#txemail").val(txt);
     }
 }
@@ -162,10 +162,10 @@ function addEmail() {
 function removeEmail(i) {
     var arr = $("#txemail").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txemail").val(txt.slice(1));
     $("#listemail").empty();
-    if ($("#txemail").val() !== "") {
+    if ($("#txemail").val() != "") {
         arr = $("#txemail").val().split(",");
         for (x = 0; x < arr.length; x++) {
             $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + x + ")'></i><span>" + arr[x] + "</span></li>");
@@ -180,9 +180,9 @@ function addTelefone() {
         var temp = $("#temptelefone").val();
         var cont = $("#listtelefone li").length;
         var txt = "";
-        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         $("#temptelefone").val("");
-        if ($("#txtelefone").val() === "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
+        if ($("#txtelefone").val() == "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
         $("#txtelefone").val(txt);
         $('#flwhatsapp').prop('checked', false);
         $('#whatsapp_label').removeClass("verde_escuro");
@@ -192,14 +192,14 @@ function addTelefone() {
 function removeTelefone(i) {
     var arr = $("#txtelefone").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txtelefone").val(txt.slice(1));
     $("#listtelefone").empty();
-    if ($("#txtelefone").val() !== "") {
+    if ($("#txtelefone").val() != "") {
         arr = $("#txtelefone").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
-            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         }
     }
 }
@@ -218,7 +218,7 @@ function whatsapp(o) {
 function ValidaEmpresaInclusao() {
 
     $.post("/Painel/Empresas/VerificaEmpresa", { id: $("#form-modal_empresa #idempresa").val(), nome: $("#form-modal_empresa #txempresa").val(), cnpj: $("#form-modal_empresa #txcnpj").val() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Já existe uma empresa com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -231,7 +231,7 @@ function ValidaEmpresaInclusao() {
                 }
             });
         } else {
-            if (data === 2) {
+            if (data == 2) {
                 swal({ title: "CNPJ já cadastrado", type: "error", timer: 3000 });
             } else {
                 IncluirEmpresa();
@@ -242,7 +242,7 @@ function ValidaEmpresaInclusao() {
 
 function ValidaEmpresaExcluir(ids) {
     $.post("/Painel/Empresas/VerificaEmpresaExcluir", { id: ids.toString() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Existem alunos vinculados a uma das empresas selecionadas, confirma a exclusão',
                 type: 'question',

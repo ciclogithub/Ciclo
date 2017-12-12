@@ -61,7 +61,7 @@ namespace Ciclo.Areas.Aluno.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, string certificadora = "", string curso = "", string data_inicio = "", string data_fim = "")
+        public JsonResult IncluirConcluir(int id, string certificadora, string curso, DateTime data_inicio, DateTime data_fim)
         {
             CertificadosDB db = new CertificadosDB();
 

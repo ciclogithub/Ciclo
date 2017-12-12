@@ -38,7 +38,7 @@ function TemaAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
@@ -61,7 +61,7 @@ function TemaExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         ValidaTemaExcluir(ids);
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
@@ -89,7 +89,7 @@ function IncluirTema() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("TemaPesquisar()");
                 }
                 if (result.value) {
@@ -105,7 +105,7 @@ function IncluirTema() {
 function ValidaTemaInclusao() {
 
     $.post("/Painel/Temas/VerificaTema", { id: $("#form-modal_tema #idtema").val(), nome: $("#form-modal_tema #txtema").val() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Já existe um tema com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -125,7 +125,7 @@ function ValidaTemaInclusao() {
 
 function ValidaTemaExcluir(ids) {
     $.post("/Painel/Temas/VerificaTemaExcluir", { id: ids.toString() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Existem cursos vinculados a um dos temas selecionados, confirma a exclusão',
                 type: 'question',

@@ -41,9 +41,9 @@
                         <thead>
                             <tr>
                                 <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="33%">CERTIFICADORA</th>
-                                <th width="32%">CURSO</th>
-                                <th width="32%">PERÍODO</th>
+                                <th width="37%">CERTIFICADORA</th>
+                                <th width="37%">CURSO</th>
+                                <th width="23%">PERÍODO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +53,7 @@
                                     <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcertificado" /></th>
                                     <td>@p.txcertificadora</td>
                                     <td>@p.txcurso</td>
-                                    <td>@p.dtinicio / @p.dtfim</td>
+                                    <td>@p.dtinicio.ToShortDateString() à @p.dtfim.ToShortDateString()</td>
                                 </tr>
                             }
                         </tbody>

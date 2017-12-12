@@ -150,6 +150,8 @@ namespace Biblioteca.Funcoes
         public Retorno EsqueceuSenha(string email, int perfil)
         {
             Retorno retorno = new Retorno();
+            String codigo = RandomString(20);
+            Altera_Senha senha = new Altera_Senha();
 
             if (email.Length > 2)
             {
@@ -166,9 +168,16 @@ namespace Biblioteca.Funcoes
                     {
                         Email mail = new Email();
                         mail.destinatario = organizadores.txemail;
-                        mail.assunto = "Dados de acesso - www.treinaauto.com.br";
-                        mail.mensagem = "Segue os dados de acceso conforme solicitado.<BR>Usuário: " + organizadores.txemail + "<BR>Senha: " + organizadores.txsenha;
+                        mail.assunto = "Solicitação de alteração de senha - www.treinaauto.com.br";
+                        mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + organizadores.txorganizador + ",<br><br>Para criar uma nova senha, clique ou copie o link: <a href='http://www.treinaauto.com.br/AlteraSenha?q=" + codigo + "'>http://www.treinaauto.com.br/AlteraSenha?q=" + codigo + "</a>.<br><br>Este link é válido por 24 horas.<br>Caso não tenha solicitado este e-mail, favor desconsiderar.<br><br>Att,<br><br>Treinaauto<br>contato@treinaauto.com.br";
                         string ret = mail.EnviaMensagem(mail);
+
+                        senha.idperfil = 1;
+                        senha.idusuario = organizadores.idorganizador;
+                        senha.data = DateTime.Now;
+                        senha.codigo = codigo;
+                        senha.ativo = 1;
+                        senha.Salvar();
 
                         retorno.mensagem = ret;
                     }
@@ -189,9 +198,16 @@ namespace Biblioteca.Funcoes
 
                         Email mail = new Email();
                         mail.destinatario = usuarios.txemail;
-                        mail.assunto = "Dados de acesso - www.treinaauto.com.br";
-                        mail.mensagem = "Segue os dados de acceso conforme solicitado.<BR>Usuário: " + usuarios.txemail + "<BR>Senha: " + usuarios.txsenhaaluno;
+                        mail.assunto = "Solicitação de alteração de senha - www.treinaauto.com.br";
+                        mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + usuarios.txusuario + ",<br><br>Para criar uma nova senha, clique ou copie o link: <a href='http://www.treinaauto.com.br/AlteraSenha?q=" + codigo + "'>http://www.treinaauto.com.br/AlteraSenha?q=" + codigo + "</a>.<br><br>Este link é válido por 24 horas.<br>Caso não tenha solicitado este e-mail, favor desconsiderar.<br><br>Att,<br><br>Treinaauto<br>contato@treinaauto.com.br";
                         string ret = mail.EnviaMensagem(mail);
+
+                        senha.idperfil = 1;
+                        senha.idusuario = usuarios.idusuario;
+                        senha.data = DateTime.Now;
+                        senha.codigo = codigo;
+                        senha.ativo = 1;
+                        senha.Salvar();
 
                         retorno.mensagem = ret;
                     }
@@ -206,6 +222,14 @@ namespace Biblioteca.Funcoes
 
             return retorno;
 
+        }
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     } 
 }

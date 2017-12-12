@@ -59,7 +59,7 @@ $('#selectallav').click(function () {
     $("#incluir_avaliacoes_btn").click(function () {       
         cont = 0;
         val = 0;
-        if ($("#form-modal_avaliacoes input[name='ident']").length === 0) {
+        if ($("#form-modal_avaliacoes input[name='ident']").length == 0) {
             swal({ title: "Todos os alunos já receberam o formulário de avaliação", type: "info", timer: 3000 });
         } else {
             $("#form-modal_avaliacoes input[name='ident']").each(function () {
@@ -69,7 +69,7 @@ $('#selectallav').click(function () {
                 }
             });
 
-            if (cont === 0) {
+            if (cont == 0) {
                 swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
             } else {
                 IncluirAvaliacao();
@@ -146,7 +146,7 @@ function CursoAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
@@ -169,7 +169,7 @@ function CursoExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         ValidaCursoExcluir(ids);
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
@@ -229,7 +229,7 @@ function IncluirCurso() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("CursoPesquisar()");
                 }
                 if (result.value) {
@@ -244,7 +244,7 @@ function IncluirCurso() {
 function ValidaCursoInclusao() {
 
     $.post("/Painel/Cursos/VerificaCurso", { id: $("#form-modal_curso #idcurso").val(), nome: $("#form-modal_curso #txcurso").val(), identificador: $("#form-modal_curso #txidentificador").val() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Já existe um curso com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -257,7 +257,7 @@ function ValidaCursoInclusao() {
                 }
             });
         } else {
-            if (data === 2) {
+            if (data == 2) {
                 swal({
                     title: 'Já existe um curso com o mesmo identificador, confirma a gravação de um novo registro',
                     type: 'question',
@@ -278,7 +278,7 @@ function ValidaCursoInclusao() {
 
 function ValidaCursoExcluir(ids) {
     $.post("/Painel/Cursos/VerificaCursoExcluir", { id: ids.toString() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Existem alunos vinculados a um dos cursos selecionados, confirma a exclusão',
                 type: 'question',
@@ -331,7 +331,7 @@ function IncluirInstrutores() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("");
                 }
                 if (result.value) {
@@ -350,7 +350,7 @@ function BuscarInstrutores() {
     $("#lstinstrutor > option").each(function () {
         str += "," + $(this).val();
     });
-    if (str === "") { str = 0; } else { str = str.slice(1); }
+    if (str == "") { str = 0; } else { str = str.slice(1); }
 
     $("#cmbinstrutor").empty();
     $("#cmbinstrutor").append($('<option>', {
@@ -411,7 +411,7 @@ function IncluirAlunos() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("");
                 }
                 if (result.value) {
@@ -430,7 +430,7 @@ function BuscarAlunos() {
     $("#lstaluno > option").each(function () {
         str += "," + $(this).val();
     });
-    if (str === "") { str = 0; } else { str = str.slice(1); }
+    if (str == "") { str = 0; } else { str = str.slice(1); }
 
     $("#cmbaluno").empty();
     $("#cmbaluno").append($('<option>', {
@@ -502,7 +502,7 @@ function IncluirDatas() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     NovaData();
                     ListaDatas(idcurso);
                 }
@@ -541,7 +541,7 @@ function ListaDatas(id) {
 }
 
 function AlterarData(id) {
-    if (id !== "") {
+    if (id != "") {
         $.ajax({
             type: "POST",
             url: "/Painel/Cursos/AlterarData",
@@ -561,7 +561,7 @@ function AlterarData(id) {
 
 function ExcluirData(id) {
 
-    if (id !== "") {
+    if (id != "") {
         swal({
             title: 'Confirma a exclusão do(s) registro(s)',
             type: 'question',
@@ -619,7 +619,7 @@ function IncluirValores() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     NovoValor();
                     ListaValores(idcurso);
                 }
@@ -658,7 +658,7 @@ function ListaValores(id) {
 }
 
 function AlterarValor(id) {
-    if (id !== "") {
+    if (id != "") {
         $.ajax({
             type: "POST",
             url: "/Painel/Cursos/AlterarValor",
@@ -676,7 +676,7 @@ function AlterarValor(id) {
 
 function ExcluirValor(id) {
 
-    if (id !== "") {
+    if (id != "") {
         swal({
             title: 'Confirma a exclusão do(s) registro(s)',
             type: 'question',
@@ -737,7 +737,7 @@ function IncluirAvaliacao() {
                         confirmButtonText: 'Fechar',
                         timer: 3000
                     }).then((result) => {
-                        if (result.dismiss === 'timer') {
+                        if (result.dismiss == 'timer') {
                             closeModal("");
                         }
                         if (result.value) {
@@ -849,7 +849,7 @@ function addMercado() {
             var cont = $("#listmercado li").length;
             var txt = "";
             $("#listmercado").append("<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + cont + ")'></i><span>" + mercado + "</span></li>");
-            if ($("#txmercados").val() === "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
+            if ($("#txmercados").val() == "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
             $("#txmercados").val(txt);
         } else {
             alert("Já selecionado");
@@ -860,10 +860,10 @@ function addMercado() {
 function removeMercados(i) {
     var arr = $("#txmercados").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txmercados").val(txt.slice(1));
     $("#listmercado").empty();
-    if ($("#txmercados").val() !== "") {
+    if ($("#txmercados").val() != "") {
         arr = $("#txmercados").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
@@ -880,7 +880,7 @@ function addEspecialidade() {
             var cont = $("#listespecialidade li").length;
             var txt = "";
             $("#listespecialidade").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEspecialidades(" + cont + ")'></i><span>" + especialidade + "</span></li>");
-            if ($("#txespecialidades").val() === "") { txt = idespecialidade + "|" + especialidade; } else { txt = $("#txespecialidades").val() + "," + idespecialidade + "|" + especialidade; }
+            if ($("#txespecialidades").val() == "") { txt = idespecialidade + "|" + especialidade; } else { txt = $("#txespecialidades").val() + "," + idespecialidade + "|" + especialidade; }
             $("#txespecialidades").val(txt);
         } else {
             alert("Já selecionado");
@@ -891,10 +891,10 @@ function addEspecialidade() {
 function removeEspecialidades(i) {
     var arr = $("#txespecialidades").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txespecialidades").val(txt.slice(1));
     $("#listespecialidade").empty();
-    if ($("#txespecialidades").val() !== "") {
+    if ($("#txespecialidades").val() != "") {
         arr = $("#txespecialidades").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");

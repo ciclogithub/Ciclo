@@ -14,8 +14,8 @@ namespace Biblioteca.Entidades
         public int idusuario { get; set; }
         public string txcertificadora { get; set; }
         public string txcurso { get; set; }
-        public string dtinicio { get; set; }
-        public string dtfim { get; set; }
+        public DateTime dtinicio { get; set; }
+        public DateTime dtfim { get; set; }
         public int total { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
@@ -26,12 +26,12 @@ namespace Biblioteca.Entidades
             this.idusuario = Convert.ToInt32(cookie.Value);
             this.txcertificadora = "";
             this.txcurso = "";
-            this.dtinicio = "";
-            this.dtfim = "";
+            this.dtinicio = DateTime.Now;
+            this.dtfim = DateTime.Now;
             this.total = 0;
         }
 
-        public Certificados(int id, string certificadora, string curso, string datainicio, string datafim, int total)
+        public Certificados(int id, string certificadora, string curso, DateTime datainicio, DateTime datafim, int total)
         {
             this.idcertificado = id;
             this.idusuario = Convert.ToInt32(cookie.Value);

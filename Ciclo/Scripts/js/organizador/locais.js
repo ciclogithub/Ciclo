@@ -14,7 +14,7 @@
     });
 
     if ($("#idpais")) {
-        if ($("#idpais").val() !== "") {
+        if ($("#idpais").val() != "") {
             ListaEstados($("#idpais").val(), $("#tempestado").val());
             if ($("#tempestado").val() > 0) {
                 ListaCidades($("#tempestado").val(), $("#tempcidade").val());
@@ -46,7 +46,7 @@ function LocalAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
@@ -69,7 +69,7 @@ function LocalExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         ValidaLocalExcluir(ids);
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
@@ -97,7 +97,7 @@ function IncluirLocal() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("LocalPesquisar()");
                 }
                 if (result.value) {
@@ -113,7 +113,7 @@ function IncluirLocal() {
 function ValidaLocalInclusao() {
 
     $.post("/Painel/Locais/VerificaLocais", { id: $("#form-modal_local #idlocal").val(), nome: $("#form-modal_local #txlocal").val() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Já existe um local com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -133,7 +133,7 @@ function ValidaLocalInclusao() {
 
 function ValidaLocalExcluir(ids) {
     $.post("/Painel/Locais/VerificaLocaisExcluir", { id: ids.toString() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Existem cursos vinculados a um dos locais selecionados, confirma a exclusão',
                 type: 'question',

@@ -38,7 +38,7 @@ function InstrutorAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
@@ -61,7 +61,7 @@ function InstrutorExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         ValidaInstrutorExcluir(ids);
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
@@ -101,7 +101,7 @@ function IncluirInstrutor() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("InstrutorPesquisar()");
                 }
                 if (result.value) {
@@ -130,7 +130,7 @@ function readURL(input) {
 function ValidaInstrutorInclusao() {
 
     $.post("/Painel/Instrutores/VerificaInstrutor", { id: $("#form-modal_instrutor #idinstrutor").val(), nome: $("#form-modal_instrutor #txinstrutor").val() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Já existe um instrutor com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -150,7 +150,7 @@ function ValidaInstrutorInclusao() {
 
 function ValidaInstrutorExcluir(ids) {
     $.post("/Painel/Instrutores/VerificaInstrutorExcluir", { id: ids.toString() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Existem cursos vinculados a um dos instrutores selecionados, confirma a exclusão',
                 type: 'question',

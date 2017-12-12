@@ -38,7 +38,7 @@ function EspecialidadeAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         alert("Selecione pelo menos 1 registro");
     } else {
         if (cont > 1) {
@@ -61,7 +61,7 @@ function EspecialidadeExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         if (confirm("Certeza que deseja excluir o(s) registro(s) selecionado(s)?")) {
             $.ajax({
                 type: "POST",

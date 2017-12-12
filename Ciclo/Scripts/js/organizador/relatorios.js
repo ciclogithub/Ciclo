@@ -26,14 +26,14 @@ function addLocalidade() {
     var textp = $("#idpais option:selected").text();
     var texte = $("#idestado option:selected").text();
     var textc = $("#idcidade option:selected").text();
-    if (valp !== "" || vale !== "" || valc !== "") {
+    if (valp != "" || vale != "" || valc != "") {
         valor = valp + "_" + vale + "_" + valc;
         texto = textp;
-        if (vale !== "") { texto = texto + " / " + texte; }
-        if (valc !== "") { texto = texto + " / " + textc; }
+        if (vale != "") { texto = texto + " / " + texte; }
+        if (valc != "") { texto = texto + " / " + textc; }
         if (!inArray("localidade", valor)) {
             $("#listlocalidade").append("<li id=" + valor + "><i class='glyphicon glyphicon-trash' onclick=remove('localidade','" + valor + "')></i><span>" + texto + "</span></li>");
-            if ($("#templocalidade").val() === "") {
+            if ($("#templocalidade").val() == "") {
                 $("#templocalidade").val(valor);
             } else {
                 $("#templocalidade").val($("#templocalidade").val() + "," + valor);
@@ -48,10 +48,10 @@ function addLocalidade() {
 function add(campo) {
     var val = $("#id" + campo + " option:selected").val();
     var text = $("#id" + campo + " option:selected").text();
-    if (val !== "") {
+    if (val != "") {
         if (!inArray(campo, val)) {
             $("#list" + campo).append("<li id=" + val + "><i class='glyphicon glyphicon-trash' onclick=remove('" + campo + "'," + val + ")></i><span>" + text + "</span></li>");
-            if ($("#temp" + campo).val() === "") {
+            if ($("#temp" + campo).val() == "") {
                 $("#temp" + campo).val(val);
             } else {
                 $("#temp" + campo).val($("#temp" + campo).val() + "," + val);
@@ -65,7 +65,7 @@ function add(campo) {
 function remove(campo, i) {
     var arr = $("#temp" + campo).val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (arr[x] !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (arr[x] != i) { txt = txt + "," + arr[x]; } }
     $("#temp" + campo).val(txt.slice(1));    
     $("#list" + campo + " li[id=" + i + "]").remove();
 }
@@ -119,12 +119,12 @@ function abreGrafico(id) {
             success: function (data) {
                 for (var x = 0; x < data.length; x++) {
 
-                    if (tempCat !== data[x].categoria) {
+                    if (tempCat != data[x].categoria) {
                         arrCat.push(data[x].categoria);
                         tempCat = data[x].categoria;
                     }
 
-                    if ($.inArray(data[x].serie, arrSerie) === -1) {
+                    if ($.inArray(data[x].serie, arrSerie) == -1) {
                         arrSerie.push(data[x].serie);
                         arrValues[data[x].serie] = {};
                     }
@@ -155,7 +155,7 @@ function abreGrafico(id) {
                     valor = [];
 
                     $.each(arrCat, function (key2, value2) {
-                        if (arrValues[value1][value2] === undefined) {
+                        if (arrValues[value1][value2] == undefined) {
                             valor.push(0);
                         } else {
                             valor.push(arrValues[value1][value2]);

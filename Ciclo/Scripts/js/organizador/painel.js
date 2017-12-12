@@ -14,7 +14,7 @@
     });
 
     $("#page_select").on("blur", function () {
-        if ($(this).val() === "") {
+        if ($(this).val() == "") {
             alert("Informe o número da página");
         } else {
             if ((parseInt($(this).val()) < 1) || (parseInt($(this).val()) > parseInt($("#totalpage").val()))) {
@@ -78,7 +78,7 @@ function Conteudo(url) {
 
     Aguarde.show();
 
-    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
         ajax_conteudo.abort();
     }
 
@@ -98,10 +98,10 @@ function ConteudoPaginacao(url, pagina) {
 
     Aguarde.show();
 
-    if (pagina === null)
+    if (pagina == null)
         pagina = 1;
 
-    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
         ajax_conteudo.abort();
     }
 
@@ -119,7 +119,7 @@ function ConteudoPaginacao(url, pagina) {
 }
 
 function Modal(url, id, titulo, func) {
-    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
         ajax_conteudo.abort();
     }
 
@@ -136,7 +136,7 @@ function Modal(url, id, titulo, func) {
             $("#modal1.modal .modal-body").html(msg);
             $('#modal1.modal').modal('show');
             
-            if (func !== "") {
+            if (func != "") {
                 $("#modal1.modal").on("shown.bs.modal", function () {
                     var funcao = func + "(" + id + ")";
                     eval(funcao);
@@ -151,7 +151,7 @@ function Modal(url, id, titulo, func) {
 }
 
 function Modal2(url, id, titulo, func) {
-    if (ajax_conteudo && ajax_conteudo.readyState !== 4) {
+    if (ajax_conteudo && ajax_conteudo.readyState != 4) {
         ajax_conteudo.abort();
     }
 
@@ -168,7 +168,7 @@ function Modal2(url, id, titulo, func) {
             $("#modal2.modal .modal-body").html(msg);
             $('#modal2.modal').modal('show');
 
-            if (func !== "") {
+            if (func != "") {
                 $("#modal2.modal").on("hidden.bs.modal", function () {
                     var funcao = func + "(" + id + ")";
                     eval(funcao);
@@ -185,17 +185,17 @@ function Modal2(url, id, titulo, func) {
 function Alert(texto, alert, tag, timeout) {
 
     // alert => success, info, warning, danger
-    if (tag === undefined || tag === null || tag === '')
+    if (tag == undefined || tag == null || tag == '')
         tag = "body";
 
     var txt = '<div class="alert alert-' + alert;
 
-    if (tag === "body")
+    if (tag == "body")
         txt += ' alert-position';
 
     txt += ' alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">×</span></button> <p class="pull-left"> ' + texto + ' </p></div>';
 
-    if (timeout !== undefined && timeout !== null && timeout !== '' && timeout !== '0' && timeout !== 0)
+    if (timeout != undefined && timeout != null && timeout != '' && timeout != '0' && timeout != 0)
         setTimeout(function () {
             $(".alert").alert('close');
         }, timeout);
@@ -213,12 +213,12 @@ function pagination(c) {
     var n = $("#namepage").val();
     var p = $("#page").val();
     var t = $("#totalpage").val();
-    if (c === -1) {
+    if (c == -1) {
         c = parseInt(p) - 1;
         if (c <= 0) { c = 1; }
         window.location = "/Painel/" + n + "/?pagina=" + c + "&filtro=" + $("#filtro_pesquisa").val();
     } else {
-        if (c === 0) {
+        if (c == 0) {
             c = parseInt(p) + 1;
             if (c > t) { c = t; }
             window.location = "/Painel/" + n + "/?pagina=" + c + "&filtro=" + $("#filtro_pesquisa").val();
@@ -229,7 +229,7 @@ function pagination(c) {
 }
 
 function MudaPais(val) {
-    if (val === "") {
+    if (val == "") {
         $("#dv_estado").html("<label class='control-label' for='idestado'>Estado</label><select id='idestado' name='idestado' class='form-control'><option value=''>-- Selecione o país --</option></select>");
     } else {
         $("#dv_estado").html("<label class='control-label' for='idestado'>Estado</label>Carregando lista ...");
@@ -239,7 +239,7 @@ function MudaPais(val) {
 }
 
 function MudaEstado(val) {
-    if (val === "") {
+    if (val == "") {
         $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione o estado --</option></select>");
     } else {
         $("#dv_cidade").html("<label class='control-label' for='idcidade'>Cidade</label>Carregando lista ...");
@@ -258,7 +258,7 @@ function ListaCidades(estado, cidade) {
             temp += "<label class='control-label' for='idcidade'>Cidade</label><select id='idcidade' name='idcidade' class='form-control'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idcidade;
-                if (data[x].idcidade === cidade) { temp += " selected "; }
+                if (data[x].idcidade == cidade) { temp += " selected "; }
                 temp += ">" + data[x].txcidade + "</option>";
             }
             temp += "</select>";
@@ -282,7 +282,7 @@ function ListaEstados(pais, estado) {
             temp += "<label class='control-label' for='idestado'>Estado</label><select id='idestado' name='idestado' onchange='MudaEstado(this.value)' class='form-control'><option value=''>-- Selecione --</option>";
             for (var x = 0; x < data.length; x++) {
                 temp += "<option value=" + data[x].idestado;
-                if (data[x].idestado === estado) { temp += " selected "; }
+                if (data[x].idestado == estado) { temp += " selected "; }
                 temp += ">" + data[x].txestado + "</option>";
             }
             temp += "</select>";
@@ -325,15 +325,15 @@ function confirmaExcluir(url, campo, func, ids) {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     $("#" + campo).val("");
-                    if (func !== "") {
+                    if (func != "") {
                         eval(func);
                     }
                 }
                 if (result.value) {
                     $("#" + campo).val("");
-                    if (func !== "") {
+                    if (func != "") {
                         eval(func);
                     }
                 }

@@ -19,11 +19,11 @@ namespace Biblioteca.Funcoes
             try 
             {
                 SmtpClient smtp = new SmtpClient();
-                NetworkCredential credenciais = new NetworkCredential("usuario@dominio.com", "senha");
+                NetworkCredential credenciais = new NetworkCredential("contato@treinaauto.com.br", "Tre!@@uto2017");
                 MailMessage msg = new MailMessage();
-                MailAddress from = new MailAddress("usuario@dominio.com");
+                MailAddress from = new MailAddress("contato@treinaauto.com.br");
 
-                smtp.Host = "smtp.gmail.com";
+                smtp.Host = "smtp.zoho.com";
                 smtp.EnableSsl = true;
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;

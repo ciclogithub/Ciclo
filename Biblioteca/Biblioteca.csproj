@@ -54,6 +54,7 @@
     <Compile Include="DB\LogadoDB.cs" />
     <Compile Include="DB\EmpresasDB.cs" />
     <Compile Include="DB\CertificadosDB.cs" />
+    <Compile Include="DB\Altera_SenhaDB.cs" />
     <Compile Include="DB\UsuariosDB.cs" />
     <Compile Include="DB\RedesSociaisDB.cs" />
     <Compile Include="DB\GraficosDB.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="DB\OrganizadoresDB.cs" />
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
+    <Compile Include="Entidades\Altera_Senha.cs" />
     <Compile Include="Entidades\Cursos_Site.cs" />
     <Compile Include="Entidades\Paises.cs" />
     <Compile Include="Entidades\Mercados.cs" />

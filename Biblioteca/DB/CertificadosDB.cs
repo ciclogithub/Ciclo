@@ -87,7 +87,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_certificados.Add(new Certificados(Convert.ToInt32(reader["idcertificado"]), Convert.ToString(reader["txcertificadora"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["dtinicio"]), Convert.ToString(reader["dtfim"]),  Convert.ToInt32(reader["total"])));
+                    list_certificados.Add(new Certificados(Convert.ToInt32(reader["idcertificado"]), Convert.ToString(reader["txcertificadora"]), Convert.ToString(reader["txcurso"]), Convert.ToDateTime(reader["dtinicio"]), Convert.ToDateTime(reader["dtfim"]),  Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -109,7 +109,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Usuarios_Certificados WHERE idusuario = @usuario and (txcertificadora LIKE @certificado OR txcurso LIKE @certificado) ORDER by txtema OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total,* from Usuarios_Certificados WHERE idusuario = @usuario and (txcertificadora LIKE @certificado OR txcurso LIKE @certificado) ORDER by txcertificadora OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("certificado", "%" + tema.Replace(" ", "%") + "%");
                 query.SetParameter("usuario", Convert.ToInt32(cookie.Value));
                 query.SetParameter("regs", regs);
@@ -118,7 +118,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_certificados.Add(new Certificados(Convert.ToInt32(reader["idcertificado"]), Convert.ToString(reader["txcertificadora"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["dtinicio"]), Convert.ToString(reader["dtfim"]), Convert.ToInt32(reader["total"])));
+                    list_certificados.Add(new Certificados(Convert.ToInt32(reader["idcertificado"]), Convert.ToString(reader["txcertificadora"]), Convert.ToString(reader["txcurso"]), Convert.ToDateTime(reader["dtinicio"]), Convert.ToDateTime(reader["dtfim"]), Convert.ToInt32(reader["total"])));
                 }
                 reader.Close();
                 session.Close();
@@ -144,7 +144,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    certificado = new Certificados(Convert.ToInt32(reader["idcertificado"]), Convert.ToString(reader["txcertificadora"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["dtinicio"]), Convert.ToString(reader["dtfim"]), Convert.ToInt32(reader["total"]));
+                    certificado = new Certificados(Convert.ToInt32(reader["idcertificado"]), Convert.ToString(reader["txcertificadora"]), Convert.ToString(reader["txcurso"]), Convert.ToDateTime(reader["dtinicio"]), Convert.ToDateTime(reader["dtfim"]), 0);
                 }
                 reader.Close();
                 session.Close();

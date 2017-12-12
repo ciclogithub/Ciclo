@@ -53,9 +53,9 @@ function addTelefone() {
         var temp = $("#temptelefone").val();
         var cont = $("#listtelefone li").length;
         var txt = "";
-        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         $("#temptelefone").val("");
-        if ($("#txtelefone").val() === "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
+        if ($("#txtelefone").val() == "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
         $("#txtelefone").val(txt);
         $('#flwhatsapp').prop('checked', false);
         $('#whatsapp_label').removeClass("verde_escuro");
@@ -65,14 +65,14 @@ function addTelefone() {
 function removeTelefone(i) {
     var arr = $("#txtelefone").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txtelefone").val(txt.slice(1));
     $("#listtelefone").empty();
-    if ($("#txtelefone").val() !== "") {
+    if ($("#txtelefone").val() != "") {
         arr = $("#txtelefone").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
-            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         }
     }
 }
@@ -87,7 +87,7 @@ function addRedes() {
         var txt = "";
         $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + cont + ")'></i><span><i class='fa " + rede + "'></i> " + temp + "</span></li>");
         $("#tempredes").val("");
-        if ($("#txredes").val() === "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede; }
+        if ($("#txredes").val() == "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede; }
         $("#txredes").val(txt);
     }
 }
@@ -95,10 +95,10 @@ function addRedes() {
 function removeRedes(i) {
     var arr = $("#txredes").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txredes").val(txt.slice(1));
     $("#listredes").empty();
-    if ($("#txredes").val() !== "") {
+    if ($("#txredes").val() != "") {
         arr = $("#txredes").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
@@ -116,7 +116,7 @@ function addMercado() {
             var cont = $("#listmercado li").length;
             var txt = "";
             $("#listmercado").append("<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + cont + ")'></i><span>" + mercado + "</span></li>");
-            if ($("#txmercados").val() === "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
+            if ($("#txmercados").val() == "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
             $("#txmercados").val(txt);
         } else {
             alert("Já selecionado")
@@ -127,10 +127,10 @@ function addMercado() {
 function removeMercados(i) {
     var arr = $("#txmercados").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txmercados").val(txt.slice(1));
     $("#listmercado").empty();
-    if ($("#txmercados").val() !== "") {
+    if ($("#txmercados").val() != "") {
         arr = $("#txmercados").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");

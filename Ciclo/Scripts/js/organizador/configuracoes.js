@@ -37,7 +37,7 @@ function IncluirConfiguracao() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     location.href = "Configuracoes";
                 }
                 if (result.value) {
@@ -63,14 +63,14 @@ function AlterarSenha() {
         traditional: true,
         success: function (json) {
             json = jQuery.parseJSON(json);
-            if (json.retorno === "OK") {
+            if (json.retorno == "OK") {
                 swal({
                     title: 'Operação realizada com sucesso!',
                     type: 'success',
                     confirmButtonText: 'Fechar',
                     timer: 3000
                 }).then((result) => {
-                    if (result.dismiss === 'timer') {
+                    if (result.dismiss == 'timer') {
                         location.href = "Configuracoes";
                     }
                     if (result.value) {

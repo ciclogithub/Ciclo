@@ -27,7 +27,7 @@ function AlterarSenha() {
                     confirmButtonText: 'Fechar',
                     timer: 3000,
                 }).then((result) => {
-                    if (result.dismiss === 'timer') {
+                    if (result.dismiss == 'timer') {
                         location.href = "AlterarSenha";
                     }
                     if (result.value) {

@@ -241,7 +241,7 @@ function LoginSite() {
             success: function (msg) {
                 var json = $.parseJSON(msg);
                 
-                if (json.retorno === "OK") {
+                if (json.retorno == "OK") {
                     window.location = link;
                     swal({
                         title: "Redirecionando...",
@@ -250,12 +250,12 @@ function LoginSite() {
                     })
                 }
 
-                if (json.retorno === "Dados incorretos") {
+                if (json.retorno == "Dados incorretos") {
                     swal({ title: json.retorno, type: "error", timer: 3000 });
 
                 }
 
-                if (json.retorno === "Usuário desativado, por favor entre em contato") {
+                if (json.retorno == "Usuário desativado, por favor entre em contato") {
                     swal({ title: json.retorno, type: "error", timer: 3000 });
                 }
             }

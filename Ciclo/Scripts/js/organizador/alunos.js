@@ -14,7 +14,7 @@
     });
 
     if ($("#idpais").length > 0) {
-        if ($("#idpais").val() !== "") {
+        if ($("#idpais").val() != "") {
             ListaEstados($("#idpais").val(), $("#tempestado").val());
             if ($("#tempestado").val() > 0) {
                 ListaCidades($("#tempestado").val(), $("#tempcidade").val());
@@ -31,7 +31,7 @@
     
 
     if ($("#idestado").length > 0) {
-        if ($("#idestado").val() !== "") {
+        if ($("#idestado").val() != "") {
             ListaCidades($("#idestado").val(), $("#tempcidade").val());
         }
     }
@@ -61,7 +61,7 @@ function AlunoAlterar() {
         }
     });
 
-    if (cont === 0) {
+    if (cont == 0) {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     } else {
         if (cont > 1) {
@@ -84,7 +84,7 @@ function AlunoExcluir() {
 
     var ids = ids.substring(1);
 
-    if (ids !== "") {
+    if (ids != "") {
         ValidaAlunoExcluir(ids);
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
@@ -119,7 +119,7 @@ function IncluirAluno() {
                 confirmButtonText: 'Fechar',
                 timer: 3000
             }).then((result) => {
-                if (result.dismiss === 'timer') {
+                if (result.dismiss == 'timer') {
                     closeModal("AlunoPesquisar()");
                 }
                 if (result.value) {
@@ -140,7 +140,7 @@ function addEmail() {
         var txt = "";
         $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + cont + ")'></i><span>" + temp + "</span></li>");
         $("#tempemail").val("");
-        if ($("#txemail").val() === "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp; }
+        if ($("#txemail").val() == "") { txt = temp; } else { txt = $("#txemail").val() + "," + temp; }
         $("#txemail").val(txt);
     }
 }
@@ -148,10 +148,10 @@ function addEmail() {
 function removeEmail(i) {
     var arr = $("#txemail").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txemail").val(txt.slice(1));
     $("#listemail").empty();
-    if ($("#txemail").val() !== "") {
+    if ($("#txemail").val() != "") {
         arr = $("#txemail").val().split(",");
         for (x = 0; x < arr.length; x++) {
             $("#listemail").append("<li><i class='glyphicon glyphicon-trash' onclick='removeEmail(" + x + ")'></i><span>" + arr[x] + "</span></li>");
@@ -166,9 +166,9 @@ function addTelefone() {
         var temp = $("#temptelefone").val();
         var cont = $("#listtelefone li").length;
         var txt = "";
-        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+        $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + cont + ")'></i><span>" + temp + (whatsapp == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         $("#temptelefone").val("");
-        if ($("#txtelefone").val() === "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
+        if ($("#txtelefone").val() == "") { txt = whatsapp + "|" + temp; } else { txt = $("#txtelefone").val() + "," + whatsapp + "|" + temp; }
         $("#txtelefone").val(txt);
         $('#flwhatsapp').prop('checked', false);
         $('#whatsapp_label').removeClass("verde_escuro");
@@ -178,14 +178,14 @@ function addTelefone() {
 function removeTelefone(i) {
     var arr = $("#txtelefone").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txtelefone").val(txt.slice(1));
     $("#listtelefone").empty();
-    if ($("#txtelefone").val() !== "") {
+    if ($("#txtelefone").val() != "") {
         arr = $("#txtelefone").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
-            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] === 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
+            $("#listtelefone").append("<li><i class='glyphicon glyphicon-trash' onclick='removeTelefone(" + x + ")'></i><span>" + arrT[1] + (arrT[0] == 1 ? " <i class='fa fa-whatsapp'></i> " : "") + "</span></li>");
         }
     }
 }
@@ -200,7 +200,7 @@ function addRedes() {
         var txt = "";
         $("#listredes").append("<li><i class='glyphicon glyphicon-trash' onclick='removeRedes(" + cont + ")'></i><span><i class='fa " + rede + "'></i> " + temp + "</span></li>");
         $("#tempredes").val("");
-        if ($("#txredes").val() === "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede; }
+        if ($("#txredes").val() == "") { txt = idrede + "|" + temp + "|" + rede; } else { txt = $("#txredes").val() + "," + idrede + "|" + temp + "|" + rede; }
         $("#txredes").val(txt);
     }
 }
@@ -208,10 +208,10 @@ function addRedes() {
 function removeRedes(i) {
     var arr = $("#txredes").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txredes").val(txt.slice(1));
     $("#listredes").empty();
-    if ($("#txredes").val() !== "") {
+    if ($("#txredes").val() != "") {
         arr = $("#txredes").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
@@ -229,7 +229,7 @@ function addMercado() {
             var cont = $("#listmercado li").length;
             var txt = "";
             $("#listmercado").append("<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + cont + ")'></i><span>" + mercado + "</span></li>");
-            if ($("#txmercados").val() === "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
+            if ($("#txmercados").val() == "") { txt = idmercado + "|" + mercado; } else { txt = $("#txmercados").val() + "," + idmercado + "|" + mercado; }
             $("#txmercados").val(txt);
         } else {
             alert("Já selecionado");
@@ -240,10 +240,10 @@ function addMercado() {
 function removeMercados(i) {
     var arr = $("#txmercados").val().split(",");
     var txt = "";
-    for (x = 0; x < arr.length; x++) { if (x !== i) { txt = txt + "," + arr[x]; } }
+    for (x = 0; x < arr.length; x++) { if (x != i) { txt = txt + "," + arr[x]; } }
     $("#txmercados").val(txt.slice(1));
     $("#listmercado").empty();
-    if ($("#txmercados").val() !== "") {
+    if ($("#txmercados").val() != "") {
         arr = $("#txmercados").val().split(",");
         for (x = 0; x < arr.length; x++) {
             arrT = arr[x].split("|");
@@ -334,7 +334,7 @@ function ListaEmpresas() {
 function ValidaAlunoInclusao() {
 
     $.post("/Painel/Alunos/VerificaAluno", { id: $("#form-modal_aluno #idaluno").val(), nome: $("#form-modal_aluno #txaluno").val(), cpf: $("#form-modal_aluno #txcpf").val() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Já existe um aluno com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
@@ -347,7 +347,7 @@ function ValidaAlunoInclusao() {
                 }
             });
         } else {
-            if (data === 2) {
+            if (data == 2) {
                 swal({ title: "CPF já cadastrado", type: "error", timer: 3000 });
             } else {
                 IncluirAluno();
@@ -358,7 +358,7 @@ function ValidaAlunoInclusao() {
 
 function ValidaAlunoExcluir(ids) {
     $.post("/Painel/Alunos/VerificaAlunoExcluir", { id: ids.toString() }).done(function (data) {
-        if (data === 1) {
+        if (data == 1) {
             swal({
                 title: 'Existem alunos selecionados que estão vinculados há cursos, confirma a exclusão',
                 type: 'question',
