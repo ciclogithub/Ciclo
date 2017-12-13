@@ -202,7 +202,7 @@ namespace Biblioteca.Funcoes
                         mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + usuarios.txusuario + ",<br><br>Para criar uma nova senha, clique ou copie o link: <a href='http://www.treinaauto.com.br/AlteraSenha?q=" + codigo + "'>http://www.treinaauto.com.br/AlteraSenha?q=" + codigo + "</a>.<br><br>Este link é válido por 24 horas.<br>Caso não tenha solicitado este e-mail, favor desconsiderar.<br><br>Att,<br><br>Treinaauto<br>contato@treinaauto.com.br";
                         string ret = mail.EnviaMensagem(mail);
 
-                        senha.idperfil = 1;
+                        senha.idperfil = 2;
                         senha.idusuario = usuarios.idusuario;
                         senha.data = DateTime.Now;
                         senha.codigo = codigo;

@@ -25,15 +25,16 @@
                     }
 
                     <div class="col-md-4 col-xs-12 col-sm-6 div-curso">
-                        <div class="border">
+                        <div>
                             <a href="Curso/@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
                             <div class="gray-box">
-                                <h3><a href="Curso/@p.idcurso">@p.txcurso</a></h3>
+                                <h4><a href="Curso/@p.idcurso">@p.txcurso</a></h4>
                                 <p>
                                     <span><strong>Categoria:</strong> @p.txcategoria</span><br />
                                     <span><strong>Especialidade:</strong> @p.txespecialidade</span><br />
-                                    <span><strong>Carga Horária:</strong> 0</span><br />
-                                    <span class="instrutores"><strong>Instrutor(es):</strong> 
+                                    <span><strong>Local:</strong> @p.txcidade / @p.txestado</span><br />
+                                    @*<span class="instrutores">
+                                        <strong>Instrutor(es):</strong>
                                         @{
                                             var arrI = p.instrutores.Split(',');
                                             var arrE = "";
@@ -47,13 +48,13 @@
                                                 }
                                                 else
                                                 {
-                                                   @Html.Raw(arrTemp[0].Trim());
+                                                    @Html.Raw(arrTemp[0].Trim());
                                                 }
-                                                @*<a href="Instrutor/@arrTemp[1]">@arrTemp[0].Trim()</a>*@
-                                                cont = cont + 1;
-                                            }
+                                            cont = cont + 1;
                                         }
-                                    </span>
+                                        }
+                                    </span>*@
+
                                 </p>
                                 <a href="Curso/@p.idcurso"><button class="btn btn-info btn-rounded waves-effect waves-light m-t-10 center-block">Mais informações</button></a>
                             </div>

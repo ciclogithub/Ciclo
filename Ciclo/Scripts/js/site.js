@@ -1,8 +1,15 @@
 ﻿$(document).ready(function () {
-
+    
     $("#CadastroEnviaSenha").click(function () {
         CadastroEnviaSenha();
     })
+
+    $("#btn_alterar_senha").click(function () {
+        $('#form-modal_senha').validationEngine('attach');
+        if ($('#form-modal_senha').validationEngine('validate')) {
+            AlterarSenha();
+        }
+    });
 
     $("#btn_cadastro_aluno").click(function () {
         $('#form_cadastro_aluno').validationEngine('attach');
@@ -37,36 +44,40 @@ function recuperarSenha() {
         input: 'email',
         showCancelButton: true,
         cancelButtonText: "Cancelar",
+        confirmButtonText: 'Solicitar',
+        showLoaderOnConfirm: true,
         inputPlaceholder: 'E-mail',
         inputValidator: (value) => {
             if (!value) {
                 return 'Preencha o e-mail corretamente';
-            } else {
-                if (isValidEmailAddress(value)) {     
-                    var msg = "";
-                    $.ajax({
-                        type: "POST",
-                        url: "/Home/Esqueceu/",
-                        data: { email: value, perfil: $("#perfil:checked").val() },
-                        dataType: "json",
-                        traditional: true,
-                        async: false,
-                        success: function (retorno) {
-                            if (retorno.retorno == 0) {
-                                msg = retorno.mensagem;
-                            } else {
-                                msg = 'Senha enviada para o e-mail cadastrado.';
-                            }
-                        }
-                    });
-                    return msg;
-                } else {
-                    return 'E-mail inválido';
-                }
             }
-            
+        },
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.value) {
+            valor = result.value;
+            if (isValidEmailAddress(valor)) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Esqueceu/",
+                    data: { email: valor, perfil: $("#perfil:checked").val() },
+                    dataType: "json",
+                    traditional: true,
+                    async: false,
+                    success: function (retorno) {
+                        if (retorno.retorno == 0) {
+                            swal({ title: retorno.mensagem, type: "error", timer: 3000 });
+                        } else {
+                            swal({ title: 'Mensagem enviada para o e-mail cadastrado.', type: "success", timer: 3000 });
+                        }
+                    }
+                });
+            } else {
+                swal({ title: 'E-mail inválido', type: "error", timer: 3000 });
+            }
         }
     })
+
 }
 
 function CadastroOrganizador() {
@@ -114,8 +125,6 @@ function CadastroOrganizador() {
     }
     
     if (!erro) {
-       
-        $("#form_cadastro_organizador #form-error").addClass("bg-info").html('Aguarde...');
         $.ajax({
             type: "POST",
             url: "/Cadastro/Formulario/",
@@ -176,7 +185,6 @@ function CadastroAluno() {
     }
 
     if (!erro) {
-        $("#form_cadastro_aluno #form-error").addClass("bg-info").html('Aguarde...');
         $.ajax({
             type: "POST",
             url: "/Cadastro/FormularioAluno/",
@@ -273,4 +281,37 @@ function mudaPerfil(id) {
         $("#form_cadastro_organizador").addClass("hide");
         $("#form_cadastro_aluno").removeClass("hide");
     }
+}
+
+function AlterarSenha() {
+
+    var perfil = $("#form-modal_senha #perfil").val();
+    var usuario = $("#form-modal_senha #usuario").val();
+    var codigo = $("#form-modal_senha #codigo").val();
+    var txnovasenha = $("#form-modal_senha #txnovasenha").val();
+    var txconfirmasenha = $("#form-modal_senha #txconfirmasenha").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/AlteraSenha/NovaSenha/",
+        data: { perfil: perfil, usuario: usuario, codigo: codigo, txnovasenha: txnovasenha, txconfirmasenha: txconfirmasenha },
+        dataType: "json",
+        traditional: true,
+        success: function (retorno) {
+            if (retorno.id == 0) {
+                swal({ title: retorno.mensagem, type: "error", timer: 3000 });
+            } else {
+                swal({
+                    title: retorno.mensagem,
+                    type: 'success',
+                    confirmButtonText: 'Fechar',
+                }).then((result) => {
+                    alert(result.value)
+                    if (result.value) {
+                        window.location = "/Login";
+                    }
+                })
+            }
+        }
+    });
 }

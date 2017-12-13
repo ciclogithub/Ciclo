@@ -377,11 +377,6 @@ h3.perfil span {
     }
 
 
-    .div-curso div.border {
-        -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.31);
-        -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.31);
-        box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.31);
-    }
 
 .gray-box span {
     line-height:30px;

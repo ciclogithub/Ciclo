@@ -14,6 +14,7 @@ namespace Biblioteca.Entidades
         public DateTime data { get; set; }
         public string codigo { get; set; }
         public Byte ativo { get; set; }
+        public string senha { get; set; }
 
         public Altera_Senha()
         {
@@ -22,6 +23,7 @@ namespace Biblioteca.Entidades
             this.data = DateTime.Now;
             this.codigo = "";
             this.ativo = 1;
+            this.senha = "";
         }
 
         public Altera_Senha(int perfil, int usuario, DateTime data, string codigo, Byte ativo)
@@ -36,6 +38,11 @@ namespace Biblioteca.Entidades
         public void Salvar()
         {
             new Altera_SenhaDB().Salvar(this);
+        }
+
+        public void Alterar()
+        {
+            new Altera_SenhaDB().Alterar(this);
         }
 
     }
