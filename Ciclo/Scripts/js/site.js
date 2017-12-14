@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    
-    $("#CadastroEnviaSenha").click(function () {
-        CadastroEnviaSenha();
-    })
+
+    $("#btn_solicitar_inscricao").click(function () {
+        SolicitarInscricao();
+    });
 
     $("#btn_alterar_senha").click(function () {
         $('#form-modal_senha').validationEngine('attach');
@@ -212,6 +212,7 @@ function CadastroAluno() {
 function LoginSite() {
 
     var email = $("#txemail").val();
+    var curso = $("#curso").val();
     var perfil = $("#perfil:checked").val();
     var senha = $("#txsenha").val();
 
@@ -235,7 +236,7 @@ function LoginSite() {
         link = "/Painel";
     } else {
         url = "/Login/FormularioAluno/";
-        link = "/Aluno";
+        if ((curso == 0) || (curso == "")) { link = "/Aluno"; } else { link = "/Inscricao" }
     }
 
     if (!erro) {
@@ -314,4 +315,14 @@ function AlterarSenha() {
             }
         }
     });
+}
+
+function SolicitarInscricao() {
+
+    var curso = $("#form_inscricao #curso").val();
+    if (curso == "") {
+        swal({ title: "Erro ao solicitar a inscrição, recarregue a página", type: "error", timer: 3000 });
+    } else {
+        $("#form_inscricao").submit();        
+    }
 }

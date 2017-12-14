@@ -176,11 +176,14 @@
     <Compile Include="Controllers\AlteraSenhaController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InscricaoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CursoView.cs" />
     <Compile Include="Models\VerificaLogado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -648,6 +651,8 @@
     <Content Include="Scripts\plugins\barrating\jquery.barrating.min.js.map" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\AlteraSenha\Index.cshtml" />
+    <Content Include="Views\Curso\Index.cshtml" />
+    <Content Include="Views\Inscricao\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -47,7 +47,7 @@ namespace Biblioteca.Entidades
         public Instrutores(int id, string instrutor, string email, string telefone, string descritivo, string foto, int total)
         {
             this.idinstrutor = id;
-            this.idorganizador = Convert.ToInt32(cookie.Value);
+            //this.idorganizador = Convert.ToInt32(cookie.Value);
             this.txinstrutor = instrutor;
             this.txemail = email;
             this.txtelefone = telefone;

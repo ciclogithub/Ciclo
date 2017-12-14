@@ -270,12 +270,9 @@ namespace Biblioteca.DB
             {
                 List<Instrutores> list_instrutor = new List<Instrutores>();
 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
-
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from Instrutores where idorganizador = @organizador and idinstrutor in (select idinstrutor from Cursos_Instrutores where idcurso = @id) order by txinstrutor");
+                Query query = session.CreateQuery("select * from Instrutores where idinstrutor in (select idinstrutor from Cursos_Instrutores where idcurso = @id) order by txinstrutor");
                 query.SetParameter("id", id);
-                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())

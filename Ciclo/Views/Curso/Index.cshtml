@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = @Model.cursos.txcurso;
+}
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                    <img class="img-responsive" alt="@Model.cursos.txcurso" src="~/images/banner.jpg" style="width:100%; max-height:400px;">
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12">
+                    <h1>@Model.cursos.txcurso</h1>
+                </div>
+                <div class="col-lg-~2 col-md-2 col-xs-12 col-sm-12 text-right">
+                        <a href="javascript:void(0);"><i class="fa fa-facebook"></i></a>&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:void(0);"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a>
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+                    <i class="fa fa-map"></i>&nbsp;&nbsp;<strong>LOCALIZAÇÃO</strong>
+                    <br />@Model.cursos.txlocal
+                    <br />@Model.cursos.txlogradouro - @Model.cursos.txcidade/@Model.cursos.txestado, @Model.cursos.txpais
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;<strong>DATA(S)</strong>
+                    @foreach (var p in Model.cursos.datas)
+                    {
+                        @Html.Raw("<br />" + p.dtcurso + " - " + @p.hrinicial + " às " + @p.hrfinal);
+                    }
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                    <i class="fa fa-user"></i>&nbsp;&nbsp;<strong>ORGANIZADOR</strong>
+                    <br /><a href="#">@Model.cursos.txorganizador</a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                    <i class="fa fa-bars"></i>&nbsp;&nbsp;<strong>ESPECIALIDADE(S)</strong>
+                    @foreach (var p in Model.cursos.especialidades)
+                    {
+                        @Html.Raw("<br /><a href='#'>" + @p.txespecialidade + "</a>");
+                    }
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                    <i class="fa fa-car"></i>&nbsp;&nbsp;<strong>MERCADO(S)</strong>
+                    @foreach (var p in Model.cursos.mercados)
+                    {
+                        @Html.Raw("<br /><a href='#'>" + @p.txmercado + "</a>");
+                    }
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                    <i class="fa fa-book"></i>&nbsp;&nbsp;<strong>DESCRIÇÃO DO CURSO</strong>
+                    <br />@Model.cursos.txdescritivo
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                    <i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;<strong>INSTRUTOR(ES)</strong>
+                    @foreach (var p in Model.cursos.instrutores)
+                    {
+                       <div class="row pt15">
+                           <div class="col-lg-1 col-md-1 col-xs-12 col-sm-12">
+                               <img class="img-responsive" src="~/images/instrutores/@p.txfoto" style="width:100%;">
+                           </div>
+                           <div class="col-lg-11 col-md-11 col-xs-12 col-sm-12">
+                               <strong>@p.txinstrutor</strong><br />@p.txdescritivo
+                           </div>
+                       </div>
+                    }
+                </div>
+            </div>
+            <div class="row pt30 text-center">
+                <form id="form_inscricao" action="Inscricao" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="curso" name="curso" value="@Model.cursos.idcurso" />
+                    <button class="tg-btn" type="button" id="btn_solicitar_inscricao">Solicitar Inscrição</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

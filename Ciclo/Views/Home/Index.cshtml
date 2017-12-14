@@ -26,12 +26,12 @@
 
                     <div class="col-md-4 col-xs-12 col-sm-6 div-curso">
                         <div>
-                            <a href="Curso/@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
+                            <a href="Curso?c=@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
                             <div class="gray-box">
                                 <h4><a href="Curso/@p.idcurso">@p.txcurso</a></h4>
                                 <p>
                                     <span><strong>Categoria:</strong> @p.txcategoria</span><br />
-                                    <span><strong>Especialidade:</strong> @p.txespecialidade</span><br />
+                                    <span><strong>Especialidade:</strong> </span><br />
                                     <span><strong>Local:</strong> @p.txcidade / @p.txestado</span><br />
                                     @*<span class="instrutores">
                                         <strong>Instrutor(es):</strong>
@@ -56,7 +56,7 @@
                                     </span>*@
 
                                 </p>
-                                <a href="Curso/@p.idcurso"><button class="btn btn-info btn-rounded waves-effect waves-light m-t-10 center-block">Mais informações</button></a>
+                                <a href="Curso?c=@p.idcurso"><button class="btn btn-info btn-rounded waves-effect waves-light m-t-10 center-block">Mais informações</button></a>
                             </div>
                         </div>
                     </div>
