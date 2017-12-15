@@ -18,6 +18,39 @@
 
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
-        ---
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    @if(Convert.ToInt32(ViewBag.status) == 9) {
+                        <h3 class="text-danger">Inscrição solicitada com sucesso</h3>
+                        @Html.Raw("Aguarde o organizador do curso confirmar sua inscrição. Você será avisado por e-mail.")
+                    }
+                    else
+                    {
+                        <h3 class="text-danger">Solicitação já enviada em @ViewBag.data</h3>
+                        switch(ViewBag.status)
+                        {
+                            case 1:
+                                <text>Status: Confirmado</text>
+                                break;
+                            case 2:
+                                <text>Status: Recusado</text>
+                                break;
+                            default:
+                                <text>Status: Aguardando confirmação</text>
+                                break;
+                        }
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <Br /><br /><strong>@Model.cursos.txcurso</strong><br />
+                    @Model.cursos.txlocal
+                    <br />@Model.cursos.txlogradouro - @Model.cursos.txcidade/@Model.cursos.txestado, @Model.cursos.txpais
+                    <br /><a href="#">@Model.cursos.txorganizador</a>
+                </div>
+            </div>
+        </div>
     </div>
 </main>

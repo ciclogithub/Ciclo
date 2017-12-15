@@ -155,6 +155,7 @@ function CadastroAluno() {
     var email = $("#form_cadastro_aluno #txemail").val();
     var senha = $("#form_cadastro_aluno #txsenhaaluno").val();
     var confsenha = $("#form_cadastro_aluno #txconfsenhaaluno").val();
+    var curso = $("#form_cadastro_aluno #curso").val();
 
     var erro = false;
     var erroMsg = "";
@@ -184,6 +185,8 @@ function CadastroAluno() {
         erroMsg2 += "Senha e confirmação devem ser iguais";
     }
 
+    if ((curso == 0) || (curso == "")) { link = "/Aluno"; } else { link = "/Inscricao" }
+
     if (!erro) {
         $.ajax({
             type: "POST",
@@ -195,7 +198,8 @@ function CadastroAluno() {
                 if (retorno.id == 0) {
                     swal({ title: retorno.mensagem, type: "error", timer: 3000 });
                 } else {
-                    window.location = "/Aluno";
+                    $('#form_redirect').html('<form action="' + link + '" id="form_red" method="post" style="display:none;"><input type="hidden" id="curso" name="curso" value= "' + curso + '" /></form>');
+                    $("#form_red").submit();
                     swal({
                         title: retorno.mensagem,
                         type: 'success',
@@ -251,7 +255,8 @@ function LoginSite() {
                 var json = $.parseJSON(msg);
                 
                 if (json.retorno == "OK") {
-                    window.location = link;
+                    $('#form_redirect').html('<form action="' + link + '" id="form_red" method="post" style="display:none;"><input type="hidden" id="curso" name="curso" value= "' + curso + '" /></form>');
+                    $("#form_red").submit();
                     swal({
                         title: "Redirecionando...",
                         type: 'success',

@@ -23,59 +23,70 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <h3 class="perfil">
                         Perfil para cadastro:
-                        <input type="radio" value="1" id="perfil" name="perfil" onclick="mudaPerfil(1)" checked /> <span>Organizador</span>
-                        <input type="radio" value="2" id="perfil" name="perfil" onclick="mudaPerfil(2)" /> <span>Aluno</span>
+                        @if (ViewBag.curso == 0)
+                        {
+                            <input type="radio" value="1" id="perfil" name="perfil" onclick="mudaPerfil(1)" checked /> <span>Organizador</span>
+                            <input type="radio" value="2" id="perfil" name="perfil" onclick="mudaPerfil(2)" /> <span>Aluno</span>
+                        }
+                        else
+                        {
+                            <input type="radio" value="2" id="perfil" name="perfil" checked /> <span>Aluno</span>
+                        }
                     </h3>
                 </div>
             </div>
             <div class="clearfix"></div>
             <div class="row pt30">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <form id="form_cadastro_organizador">
-                        @Html.AntiForgeryToken()
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
-                                ORGANIZADOR
+                    @if (ViewBag.curso == 0)
+                    {
+                        <form id="form_cadastro_organizador">
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
+                                    ORGANIZADOR
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" placeholder="Organizador *" maxlength="200">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" placeholder="Organizador *" maxlength="200">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfsenha]]" placeholder="Senha *" maxlength="20">
+                                </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="password" name="txsenha" id="txsenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfsenha]]" placeholder="Senha *" maxlength="20">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="text" name="txemail" id="txemail" class="form-control validate[required,minSize[3],maxSize[200],email]" placeholder="E-mail *" maxlength="200">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="password" name="txconfsenha" id="txconfsenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txsenha]]" placeholder="Confirmar Senha *" maxlength="200">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="text" name="txemail" id="txemail" class="form-control validate[required,minSize[3],maxSize[200],email]" placeholder="E-mail *" maxlength="200">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="text" name="txtelefone" id="txtelefone" class="form-control validate[required,minSize[3],maxSize[100]]" placeholder="Telefone *" maxlength="100">
+                                </div>                            
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="password" name="txconfsenha" id="txconfsenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txsenha]]" placeholder="Confirmar Senha *" maxlength="200">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="text" name="txtelefone" id="txtelefone" class="form-control validate[required,minSize[3],maxSize[100]]" placeholder="Telefone *" maxlength="100">
-                            </div>                            
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição"></textarea>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="checkbox" name="flinstrutor" id="flinstrutor" value="1">&nbsp;&nbsp;O organizador também é o instrutor?
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input type="checkbox" name="flinstrutor" id="flinstrutor" value="1">&nbsp;&nbsp;O organizador também é o instrutor?
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                    <button class="tg-btn" type="button" id="btn_cadastro_organizador">Cadastrar</button>
+                                </div>                            
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                <button class="tg-btn" type="button" id="btn_cadastro_organizador">Cadastrar</button>
-                            </div>                            
-                        </div>
-                    </form> 
-                    <form id="form_cadastro_aluno" class="hide">
+                        </form> 
+                    }
+                    <form id="form_cadastro_aluno" class="@(ViewBag.curso == 0 ? "hide" : "")">
+                        <input type="hidden" id="curso" name="curso" value="@ViewBag.curso" />
                         @Html.AntiForgeryToken()
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
@@ -115,6 +126,7 @@
         </div>
     </div>
 </main>
+<div id="form_redirect"></div>
 
 @section scripts {
     @Scripts.Render("~/bundles/mask")

@@ -160,13 +160,13 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador ORDER by txcurso");
+                Query query = session.CreateQuery("select idorganizador, idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador ORDER by txcurso");
                 query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), 0));
+                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), 0, Convert.ToInt32(reader["idorganizador"])));
                 }
                 reader.Close();
                 session.Close();
@@ -246,7 +246,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador and txcurso LIKE @curso OR txidentificador LIKE @curso ORDER by txcurso OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, idorganizador, idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador from cursos where idorganizador = @organizador and txcurso LIKE @curso OR txidentificador LIKE @curso ORDER by txcurso OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("curso", "%" + curso.Replace(" ", "%") + "%");
                 query.SetParameter("regs", regs);
@@ -255,7 +255,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), Convert.ToInt32(reader["total"])));
+                    list_cursos.Add(new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), Convert.ToInt32(reader["total"]), Convert.ToInt32(reader["idorganizador"])));
                 }
                 reader.Close();
                 session.Close();
@@ -275,13 +275,13 @@ namespace Biblioteca.DB
                 Cursos Cursos = null;
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("SELECT idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador FROM Cursos WHERE idcurso = @id");
+                Query quey = session.CreateQuery("SELECT idorganizador, idcurso, txcurso, isnull(idtema,0) as idtema, isnull(idcategoria,0) as idcategoria, isnull(idlocal,0) as idlocal, txlocal, isnull(nrminimo,0) as nrminimo, isnull(nrmaximo,0) as nrmaximo, txcargahoraria, txdescritivo, isnull(flgratuito,0) as flgratuito, txfoto, isnull(idcor,0) as idcor, txidentificador FROM Cursos WHERE idcurso = @id");
                 quey.SetParameter("id", id);
                 IDataReader reader = quey.ExecuteQuery();
 
                 if (reader.Read())
                 {
-                    Cursos = new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), 0);
+                    Cursos = new Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToInt32(reader["idtema"]), Convert.ToInt32(reader["idcategoria"]), Convert.ToInt32(reader["idlocal"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["nrminimo"]), Convert.ToString(reader["nrmaximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToString(reader["txdescritivo"]), Convert.ToBoolean(reader["flgratuito"]), Convert.ToString(reader["txfoto"]), Convert.ToInt32(reader["idcor"]), Convert.ToString(reader["txidentificador"]), 0, Convert.ToInt32(reader["idorganizador"]));
                 }
                 reader.Close();
                 session.Close();

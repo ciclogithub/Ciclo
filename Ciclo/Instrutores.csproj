@@ -160,6 +160,7 @@
     <Compile Include="Areas\Aluno\Models\PerfilView.cs" />
     <Compile Include="Areas\Painel\Controllers\EmpresasController.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
+    <Compile Include="Areas\Painel\Controllers\InscricoesController.cs" />
     <Compile Include="Areas\Painel\Controllers\ListasController.cs" />
     <Compile Include="Areas\Painel\Controllers\RelatoriosController.cs" />
     <Compile Include="Areas\Painel\Controllers\ConfiguracoesController.cs" />
@@ -270,6 +271,7 @@
     <Content Include="Areas\Aluno\Views\Cursos\Index.cshtml" />
     <Content Include="Areas\Aluno\Views\Perfil\Index.cshtml" />
     <Content Include="Areas\Aluno\Views\Certificados\Incluir.cshtml" />
+    <Content Include="Areas\Painel\Views\Inscricoes\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\banner.jpg" />
     <Content Include="images\diagweb-16x16.png" />
@@ -533,6 +535,7 @@
     <Content Include="Scripts\js\aluno\perfil.js" />
     <Content Include="Scripts\js\aluno\cursos.js" />
     <Content Include="Scripts\js\aluno\painelaluno.js" />
+    <Content Include="Scripts\js\organizador\inscricoes.js" />
     <Content Include="Scripts\js\organizador\empresas.js" />
     <Content Include="Scripts\js\organizador\cursos.js" />
     <Content Include="Scripts\js\organizador\configuracoes.js" />
@@ -541,6 +544,7 @@
     <Content Include="Scripts\js\organizador\relatorios.js" />
     <Content Include="Scripts\js\organizador\avaliacao.js" />
     <Content Include="Scripts\js\home.js" />
+    <Content Include="Scripts\js\organizador\dashboard.js" />
     <Content Include="Scripts\js\organizador\temas.js" />
     <Content Include="Scripts\js\organizador\locais.js" />
     <Content Include="Scripts\js\organizador\alunos.js" />

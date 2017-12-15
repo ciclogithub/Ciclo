@@ -63,10 +63,11 @@ namespace Ciclo.Areas.Painel.Controllers
             CursosDB db = new CursosDB();
             int ident = 0;
             string fileName = "";
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
 
             if (id == 0)
             {
-                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, "", cor, identificador, 0));
+                ident = db.Salvar(new Cursos(id, nome_curso, tema, categoria, codlocal, local, minimo, maximo, cargahoraria, descricao, gratuito, "", cor, identificador, 0, Convert.ToInt32(cookie.Value)));
                 Cursos curso = db.Buscar(id);
             }
             else
@@ -85,6 +86,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 curso.flgratuito = gratuito;
                 curso.idcor = cor;
                 curso.txidentificador = identificador;
+                curso.idorganizador = Convert.ToInt32(cookie.Value);
 
                 db.Alterar(curso);
 

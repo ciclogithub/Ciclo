@@ -26,8 +26,15 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h3 class="perfil">
                             Perfil de acesso:
-                            <input type="radio" value="1" id="perfil" name="perfil" checked /> <span>Organizador</span>
-                            <input type="radio" value="2" id="perfil" name="perfil" /> <span>Aluno</span>
+                            @if (ViewBag.curso == 0)
+                            {
+                                <input type="radio" value="1" id="perfil" name="perfil" checked /> <span>Organizador</span>
+                                <input type="radio" value="2" id="perfil" name="perfil" /> <span>Aluno</span>
+                            }
+                            else
+                            {
+                                <input type="radio" value="2" id="perfil" name="perfil" checked /> <span>Aluno</span>
+                            }
                         </h3>
                     </div>
                 </div>
@@ -54,7 +61,12 @@
                         </div>
                         <div class="row pt30">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                Não tem cadastro? <a href="Cadastro">clique aqui</a>
+                                @if (ViewBag.curso == 0)
+                                {
+                                    @Html.Raw("Não tem cadastro ? <a href='Cadastro'>clique aqui</a>")
+                                } else {
+                                    @Html.Raw("Não tem cadastro ? <a href='Cadastro?curso=" + ViewBag.curso + "'>clique aqui</a>")
+                                }
                             </div>
                         </div>
                     </form>
@@ -63,3 +75,4 @@
         </div>
     </div>
 </main>
+<div id="form_redirect"></div>

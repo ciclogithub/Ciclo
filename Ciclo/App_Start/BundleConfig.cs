@@ -43,7 +43,13 @@ namespace Ciclo
                     "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
                     "~/Scripts/plugins/select2/js/select2.full.min.js",
                     "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
-                    "~/Scripts/js/organizador/painel.js"));           
+                    "~/Scripts/js/organizador/painel.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/dashboard").Include(
+                      "~/Scripts/js/organizador/dashboard.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/inscricoes").Include(
+                      "~/Scripts/js/organizador/inscricoes.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/avaliacao").Include(
                       "~/Scripts/js/organizador/avaliacao.js"));

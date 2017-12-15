@@ -12,8 +12,9 @@ namespace Ciclo.Controllers
     public class CadastroController : Controller
     {
         // GET: Cadastro
-        public ActionResult Index()
+        public ActionResult Index(int curso = 0)
         {
+            ViewBag.curso = curso;
             return View();
         }
 

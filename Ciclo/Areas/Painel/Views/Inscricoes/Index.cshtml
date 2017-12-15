@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Inscrições";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Painel")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Painel">Dashboard</a></li>
+                <li class="tg-active">Inscrições</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />
+                    &nbsp;<select id="filtro_status" name="filtro_status" class="form-control w30">
+                        <option value="0" @(ViewBag.status == 0 ? "selected" : "")>Pendentes</option>
+                        <option value="1" @(ViewBag.status == 1 ? "selected" : "")>Confirmados</option>
+                        <option value="2" @(ViewBag.status == 2 ? "selected" : "")>Recusados</option>
+                    </select>
+                    &nbsp;<button class="tg-btn" type="button" id="pesquisa_inscricao">Localizar</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                    @if (ViewBag.status == 0)
+                    {
+                    <text>
+                    <button class="tg-btn" type="button" onclick="InscricaoConfirmar()">Confirmar</button>&nbsp;
+                    <button class="tg-btn" type="button" onclick="InscricaoRecusar()">Recusar</button>
+                    </text>
+                    }
+                </div>
+            </div>
+            <div class="row pt">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                <th width="27%">USUÁRIO</th>
+                                <th width="50%">CURSO</th>
+                                <th width="20%">DATA SOLICITAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinscricao" /></th>
+                                    <td>@p.usuario</td>
+                                    <td>@p.curso</td>
+                                    <td>@p.dtinscricao</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/inscricoes")
+}
+
+

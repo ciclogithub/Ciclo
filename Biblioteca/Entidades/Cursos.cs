@@ -61,10 +61,10 @@ namespace Biblioteca.Entidades
             this.total = 0;
         }
 
-        public Cursos(int id, string curso, int tema, int categoria, int codlocal, string local, string minimo, string maximo, string cargahoraria, string descricao, bool gratuito, string foto, int cor, string identificador, int total)
+        public Cursos(int id, string curso, int tema, int categoria, int codlocal, string local, string minimo, string maximo, string cargahoraria, string descricao, bool gratuito, string foto, int cor, string identificador, int total, int organizador)
         {
             this.idcurso = id;
-            this.idorganizador = Convert.ToInt32(cookie.Value);
+            this.idorganizador = organizador;
             this.txcurso = curso;
             this.idtema = tema;
             this.idcategoria = categoria;
