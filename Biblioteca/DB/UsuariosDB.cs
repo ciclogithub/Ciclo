@@ -13,6 +13,23 @@ namespace Biblioteca.DB
     public class UsuariosDB
     {
 
+        public void GravaAluno(int usuario = 0, int aluno = 0)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Usuarios_Alunos (idusuario, idaluno) values (@usuario, @aluno)");
+                query.SetParameter("usuario", usuario);
+                query.SetParameter("aluno", aluno);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         public Usuarios Buscar(string email, string senha)
         {
             try
@@ -111,6 +128,78 @@ namespace Biblioteca.DB
                 session.Close();
 
                 return usuarios;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int BuscarCodigoAluno(int usuario = 0)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select * from Usuarios_Alunos where idusuario = @id");                
+                query.SetParameter("id", usuario);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = Convert.ToInt32(reader["idaluno"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int BuscarAlunoPorCpf(string cpf)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 idaluno from Alunos where txcpf = @cpf");
+                query.SetParameter("cpf", cpf);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = Convert.ToInt32(reader["idaluno"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public int BuscarAlunoPorEmail(string email)
+        {
+            try
+            {
+                int result = 0;
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 1 idaluno from Alunos_Emails where txemail = @email");
+                query.SetParameter("email", email);
+                IDataReader reader = query.ExecuteQuery();
+                if (reader.Read())
+                {
+                    result = Convert.ToInt32(reader["idaluno"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return result;
             }
             catch (Exception error)
             {

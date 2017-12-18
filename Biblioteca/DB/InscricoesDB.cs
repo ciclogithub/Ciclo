@@ -31,6 +31,39 @@ namespace Biblioteca.DB
             }
         }
 
+        public void Recusar(int inscricao = 0, string motivo = "")
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("UPDATE Inscricoes set idstatus = 2, dtstatus = getdate(), txmotivo = @motivo where idinscricao = @inscricao");
+                query.SetParameter("inscricao", inscricao);
+                query.SetParameter("motivo", motivo);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void Confirmar(int inscricao = 0)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("UPDATE Inscricoes set idstatus = 1, dtstatus = getdate() where idinscricao = @inscricao");
+                query.SetParameter("inscricao", inscricao);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         public Inscricoes Buscar(int usuario = 0, int curso = 0)
         {
             try
@@ -47,7 +80,35 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]));
+                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"]));
+                }
+                reader.Close();
+                session.Close();
+
+                return inscricoes;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public Inscricoes Buscar(int inscricao = 0)
+        {
+            try
+            {
+                Inscricoes inscricoes = null;
+
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+
+                DBSession session = new DBSession();
+                Query quey = session.CreateQuery("SELECT * FROM Inscricoes WHERE idinscricao = @inscricao");
+                quey.SetParameter("inscricao", inscricao);
+                IDataReader reader = quey.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"]));
                 }
                 reader.Close();
                 session.Close();
@@ -69,7 +130,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, i.idinscricao, i.dtinscricao, c.txcurso, u.txusuario from inscricoes i left join Cursos c on c.idcurso = i.idcurso left join Usuarios u on u.idusuario = i.idusuario where i.idstatus = @idstatus and c.idorganizador = @idorganizador order by c.txcurso, u.txusuario OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, i.txmotivo, i.dtstatus, i.idinscricao, i.dtinscricao, c.txcurso, u.txusuario from inscricoes i left join Cursos c on c.idcurso = i.idcurso left join Usuarios u on u.idusuario = i.idusuario where i.idstatus = @idstatus and c.idorganizador = @idorganizador order by c.txcurso, u.txusuario OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("idstatus", status);
                 query.SetParameter("regs", regs);
@@ -78,7 +139,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"])));
+                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"])));
                 }
                 reader.Close();
                 session.Close();
@@ -100,7 +161,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, i.idinscricao, i.dtinscricao, c.txcurso, u.txusuario from inscricoes i left join Cursos c on c.idcurso = i.idcurso left join Usuarios u on u.idusuario = i.idusuario where (c.txcurso like @filtro OR u.txusuario like @filtro) and i.idstatus = @idstatus and c.idorganizador = @idorganizador order by c.txcurso, u.txusuario OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, i.txmotivo, i.dtstatus, i.idinscricao, i.dtinscricao, c.txcurso, u.txusuario from inscricoes i left join Cursos c on c.idcurso = i.idcurso left join Usuarios u on u.idusuario = i.idusuario where (c.txcurso like @filtro OR u.txusuario like @filtro) and i.idstatus = @idstatus and c.idorganizador = @idorganizador order by c.txcurso, u.txusuario OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("filtro", "%" + filtro.Replace(" ", "%") + "%");
                 query.SetParameter("idstatus", status);
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
@@ -110,7 +171,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"])));
+                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"])));
                 }
                 reader.Close();
                 session.Close();

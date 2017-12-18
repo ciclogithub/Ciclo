@@ -97,6 +97,11 @@ namespace Biblioteca.Entidades
             new UsuariosDB().Excluir(this);
         }
 
+        public void GravaAluno(int usuario = 0, int aluno = 0)
+        {
+            new UsuariosDB().GravaAluno(usuario, aluno);
+        }
+
         public Usuarios Retornar()
         {
             Usuarios usuario = new Usuarios();

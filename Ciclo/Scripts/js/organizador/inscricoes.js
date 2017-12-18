@@ -23,19 +23,32 @@ function InscricaoRecusar() {
 
     if (ids != "") {
         swal({
-            title: 'Confirma o cancelamento de inscrição do(s) registro(s)',
-            type: 'question',
+            title: 'Informe o motivo do cancelamento',
+            input: 'text',
             showCancelButton: true,
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não'
+            cancelButtonText: "Cancelar",
+            confirmButtonText: 'Recusar',
+            showLoaderOnConfirm: true,
+            inputPlaceholder: 'Motivo',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Preencha o motivo corretamente';
+                } else {
+                    if (value.length > 300) {
+                        return 'Preencha o motivo com até 300 caracteres';
+                    }
+                }
+            },
+            allowOutsideClick: false
         }).then((result) => {
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: '/Painel/Inscricoes/Cancelamento',
-                    data: { id: ids },
+                    url: "/Painel/Inscricoes/Recusar",
+                    data: { id: ids, motivo: result.value },
                     dataType: "json",
                     traditional: true,
+                    async: false,
                     success: function (json) {
                         swal({
                             title: 'Operação realizada com sucesso!',
@@ -50,11 +63,10 @@ function InscricaoRecusar() {
                                 InscricaoPesquisar()
                             }
                         });
-
                     }
                 });
             }
-        });
+        })
     } else {
         swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
     }
@@ -86,6 +98,7 @@ function InscricaoConfirmar() {
                     data: { id: ids },
                     dataType: "json",
                     traditional: true,
+                    async: false,
                     success: function (json) {
                         swal({
                             title: 'Operação realizada com sucesso!',

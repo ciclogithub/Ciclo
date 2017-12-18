@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ciclo.Areas.Aluno.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace Ciclo.Areas.Aluno.Controllers
         // GET: Aluno/Cursos
         public ActionResult Index()
         {
-            return View();
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+
+            return View(new CursosView(Convert.ToInt32(cookie.Value)));
         }
     }
 }

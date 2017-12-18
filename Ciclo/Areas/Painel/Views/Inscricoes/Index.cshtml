@@ -47,9 +47,11 @@
                         <thead>
                             <tr>
                                 <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="27%">USUÁRIO</th>
-                                <th width="50%">CURSO</th>
-                                <th width="20%">DATA SOLICITAÇÃO</th>
+                                <th width="22%">USUÁRIO</th>
+                                <th width="22%">CURSO</th>
+                                <th width="16%">DATA SOLICITAÇÃO</th>
+                                <th width="16%">DATA STATUS</th>
+                                <th width="21%">MOTIVO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,6 +62,8 @@
                                     <td>@p.usuario</td>
                                     <td>@p.curso</td>
                                     <td>@p.dtinscricao</td>
+                                    <td>@p.dtstatus</td>
+                                    <td>@p.motivo</td>
                                 </tr>
                             }
                         </tbody>

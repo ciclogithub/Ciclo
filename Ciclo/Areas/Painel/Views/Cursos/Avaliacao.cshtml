@@ -10,7 +10,7 @@
                     <table class="table table-bordered table-hover" id="table_avaliacao">
                         <thead>
                             <tr>
-                                <th width="4%"><input type="checkbox" id="selectallav" name="selectallav" /></th>
+                                <!--<th width="4%"><input type="checkbox" id="selectallav" name="selectallav" /></th>-->
                                 <th width="48%">ALUNO</th>
                                 <th width="25%">DATA</th>
                                 <th width="20%">MÉDIA AVALIAÇÃO</th>
@@ -21,12 +21,12 @@
                             @foreach (var p in ViewBag.avaliacoes)
                             {
                                 <tr>
-                                    <th scope="row">
+                                    <!--<th scope="row">
                                         @if (p.avaliacao == "")
                                         {
                                             <input type="checkbox" id="ident" name="ident" value="@p.idcursoaluno" />
                                         }
-                                    </th>
+                                    </th>-->
                                     <td>@p.aluno</td>
                                     <td>
                                     @if (p.avaliacao == "") {
@@ -80,11 +80,11 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                     <button id="incluir_avaliacoes_btn" class="tg-btn" type="button">Enviar Avaliações</button>
                 </div>
-            </div>
+            </div>-->
         </</form>
     </div>
 </div>

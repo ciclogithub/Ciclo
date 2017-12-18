@@ -1,7 +1,121 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Meus Cursos";
 }
 
-<h2>Index</h2>
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Aluno")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Aluno">Dashboard</a></li>
+                <li class="tg-active">Meus Cursos</li>
+            </ol>
+        </div>
+    </div>
+</div>
 
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+
+            <div class="row pt">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr><th colspan="3" style="background-color:#ECECEC">CURSOS ATIVOS</th></tr>
+                            <tr>
+                                <th width="42%">CURSO</th>
+                                <th width="42%">LOCAL</th>
+                                <th width="16%">DATA DO CURSO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.cursos_ativos)
+                            {
+                                <tr>
+                                    <td>@p.txcurso</td>
+                                    <td>@p.txlocal</td>
+                                    <td>@p.dtcurso.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr><th colspan="3" style="background-color:#ECECEC">CURSOS FINALIZADOS</th></tr>
+                            <tr>
+                                <th width="80%">CURSO</th>
+                                <th width="17%">DATA DO CURSO</th>
+                                <th width="3%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.cursos_finalizados)
+                            {
+                                <tr>
+                                    <td>@p.txcurso</td>
+                                    <td>@p.dtcurso.ToShortDateString()</td>
+                                    <td title="Avaliação" class="td"><i class="glyphicon glyphicon-star"></i></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr><th colspan="3" style="background-color:#ECECEC">INSCRIÇÕES PENDENTES</th></tr>
+                            <tr>
+                                <th width="67%">CURSO</th>
+                                <th width="16%">DATA DO CURSO</th>
+                                <th width="17%">DATA DA SOLICITAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.inscricoes_pendentes)
+                            {
+                                <tr>
+                                    <td>@p.txcurso</td>
+                                    <td>@p.dtcurso.ToShortDateString()</td>
+                                    <td>@p.dtsolicitacao.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr><th colspan="4" style="background-color:#ECECEC">INSCRIÇÕES RECUSADAS</th></tr>
+                            <tr>
+                                <th width="30%">CURSO</th>
+                                <th width="17%">DATA DA SOLICITAÇÃO</th>
+                                <th width="16%">DATA DA RESPOSTA</th>
+                                <th width="37%">MOTIVO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.inscricoes_recusada)
+                            {
+                                <tr>
+                                    <td>@p.txcurso</td>
+                                    <td>@p.dtsolicitacao.ToShortDateString()</td>
+                                    <td>@p.dtstatus.ToShortDateString()</td>
+                                    <td>@p.txmotivo</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/alunocursos")
+}
