@@ -25,7 +25,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), null, null, ""));
+                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), null, null, "", null));
                 }
                 reader.Close();
                 session.Close();
@@ -45,13 +45,13 @@ namespace Biblioteca.DB
                 List<Meus_Cursos> list = new List<Meus_Cursos>();
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select distinct c.txcurso, l.txlocal, cd.dtcurso, c.idcurso, (select top 1 c1.dtcurso from Cursos_Datas c1 where c1.idcurso = c.idcurso order by c1.dtcurso) as dtcurso from Usuarios_Alunos ua INNER JOIN Cursos_Alunos ca ON ca.idaluno = ua.idaluno inner join Cursos c on c.idcurso = ca.idcurso INNER JOIN Cursos_Datas cd on cd.idcurso = c.idcurso AND cd.dtcurso < getdate() LEFT JOIN Locais l on l.idlocal = c.idlocal WHERE ua.idusuario = @id");
+                Query query = session.CreateQuery("select distinct c.txcurso, l.txlocal, cd.dtcurso, c.idcurso, (select top 1 c1.dtcurso from Cursos_Datas c1 where c1.idcurso = c.idcurso order by c1.dtcurso) as dtcurso, (SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO) AS AVALIACAO from Usuarios_Alunos ua INNER JOIN Cursos_Alunos ca ON ca.idaluno = ua.idaluno inner join Cursos c on c.idcurso = ca.idcurso INNER JOIN Cursos_Datas cd on cd.idcurso = c.idcurso AND cd.dtcurso < getdate() LEFT JOIN Locais l on l.idlocal = c.idlocal WHERE ua.idusuario = @id");
                 query.SetParameter("id", id);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
                 {
-                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), null, null, ""));
+                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), null, null, "", Convert.ToInt32(reader["AVALIACAO"])));
                 }
                 reader.Close();
                 session.Close();
@@ -77,7 +77,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToDateTime(reader["dtstatus"]), ""));
+                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToDateTime(reader["dtstatus"]), "", null));
                 }
                 reader.Close();
                 session.Close();
@@ -102,7 +102,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"])));
+                    list.Add(new Meus_Cursos(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txlocal"]), Convert.ToDateTime(reader["dtcurso"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"]), null));
                 }
                 reader.Close();
                 session.Close();

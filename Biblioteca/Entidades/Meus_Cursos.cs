@@ -16,6 +16,7 @@ namespace Biblioteca.Entidades
         public Nullable<DateTime> dtsolicitacao { get; set; }
         public Nullable<DateTime> dtstatus { get; set; }
         public string txmotivo { get; set; }
+        public Nullable<int> avaliacao { get; set; }
 
         public Meus_Cursos()
         {
@@ -26,9 +27,10 @@ namespace Biblioteca.Entidades
             this.dtsolicitacao = null;
             this.dtstatus = null;
             this.txmotivo = "";
+            this.avaliacao = null;
         }
 
-        public Meus_Cursos(int id, string curso, string local, Nullable<DateTime> dtcurso, Nullable<DateTime> dtsolicitacao, Nullable<DateTime> dtstatus, string motivo)
+        public Meus_Cursos(int id, string curso, string local, Nullable<DateTime> dtcurso, Nullable<DateTime> dtsolicitacao, Nullable<DateTime> dtstatus, string motivo, Nullable<int> avaliacao)
         {
             this.idcurso = id;
             this.txcurso = curso;
@@ -37,6 +39,7 @@ namespace Biblioteca.Entidades
             this.dtsolicitacao = dtsolicitacao;
             this.dtstatus = dtstatus;
             this.txmotivo = motivo;
+            this.avaliacao = avaliacao;
         }
 
     }

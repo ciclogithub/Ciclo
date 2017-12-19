@@ -21,6 +21,8 @@
 /* =============================================
 			Theme Reset Style
 ============================================= */
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,500,700|Mr+Dafoe); * {
     margin: 0px;
     padding: 0px;
@@ -3679,7 +3681,6 @@ body.tg-comingsoonpage .tg-foorterbar .tg-socialicons{padding:0;}
 	background: #fff;
 	position: fixed;
 	padding: 15px 0;
-	border-bottom: 2px solid;
 }
 .tg-homevtwo .tg-nav{padding: 8px 0 0;}
 .tg-homevtwo .tg-navigation > ul > li{padding-bottom: 8px;}

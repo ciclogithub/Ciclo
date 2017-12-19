@@ -13,7 +13,7 @@ namespace Biblioteca.Entidades
         public int idinscricao { get; set; }
         public int idusuario { get; set; }
         public int idcurso { get; set; }
-        public DateTime dtinscricao { get; set; }
+        public Nullable<DateTime> dtinscricao { get; set; }
         public int idstatus { get; set; }
         public string curso { get; set; }
         public string usuario { get; set; }
@@ -37,7 +37,7 @@ namespace Biblioteca.Entidades
             this.motivo = "";
         }
 
-        public Inscricoes(int id, int usuario, DateTime data, int curso, int status, Nullable<DateTime> dtstatus, string motivo)
+        public Inscricoes(int id, int usuario, Nullable<DateTime> data, int curso, int status, Nullable<DateTime> dtstatus, string motivo)
         {
             this.idinscricao = id;
             this.idusuario = usuario;
@@ -49,7 +49,7 @@ namespace Biblioteca.Entidades
             this.motivo = motivo;
         }
 
-        public Inscricoes(int id, DateTime data, string curso, string usuario, int total, Nullable<DateTime> dtstatus, string motivo)
+        public Inscricoes(int id, Nullable<DateTime> data, string curso, string usuario, int total, Nullable<DateTime> dtstatus, string motivo)
         {
             this.idinscricao = id;
             this.dtinscricao = data;

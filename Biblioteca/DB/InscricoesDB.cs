@@ -102,13 +102,13 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("SELECT * FROM Inscricoes WHERE idinscricao = @inscricao");
+                Query quey = session.CreateQuery("SELECT *, isnull(dtinscricao,'') as data_inscricao, isnull(dtstatus,'') as data_status FROM Inscricoes WHERE idinscricao = @inscricao");
                 quey.SetParameter("inscricao", inscricao);
                 IDataReader reader = quey.ExecuteQuery();
 
                 if (reader.Read())
                 {
-                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"]));
+                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["data_inscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["data_status"]), Convert.ToString(reader["txmotivo"]));
                 }
                 reader.Close();
                 session.Close();
@@ -130,7 +130,7 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select COUNT(*) OVER() as total, i.txmotivo, i.dtstatus, i.idinscricao, i.dtinscricao, c.txcurso, u.txusuario from inscricoes i left join Cursos c on c.idcurso = i.idcurso left join Usuarios u on u.idusuario = i.idusuario where i.idstatus = @idstatus and c.idorganizador = @idorganizador order by c.txcurso, u.txusuario OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, i.txmotivo, isnull(i.dtstatus,'') as dtstatus, i.idinscricao, isnull(i.dtinscricao,'') as dtinscricao, c.txcurso, u.txusuario from inscricoes i left join Cursos c on c.idcurso = i.idcurso left join Usuarios u on u.idusuario = i.idusuario where i.idstatus = @idstatus and c.idorganizador = @idorganizador order by c.txcurso, u.txusuario OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
                 query.SetParameter("idorganizador", Convert.ToInt32(cookie.Value));
                 query.SetParameter("idstatus", status);
                 query.SetParameter("regs", regs);

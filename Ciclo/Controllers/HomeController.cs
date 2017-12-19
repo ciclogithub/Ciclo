@@ -12,21 +12,10 @@ namespace Ciclo.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(int pagina = 1)
+        public ActionResult Index()
         {
             List<Cursos_Site> list = new List<Cursos_Site>();
-            list = new Cursos_SiteDB().Listar(pagina, 12);
-
-            if (list.Count > 0)
-            {
-                ViewBag.total = list.First().total;
-                ViewBag.pagina = pagina;
-            }
-            else
-            {
-                ViewBag.total = 0;
-                ViewBag.pagina = 0;
-            }
+            list = new Cursos_SiteDB().Listar();
 
             return View(list);
         }
