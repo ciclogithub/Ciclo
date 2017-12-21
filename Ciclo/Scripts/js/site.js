@@ -1,4 +1,99 @@
 ﻿$(document).ready(function () {
+    var today = moment().format('DD/MM/YYYY')
+    $('#filtro_data').daterangepicker({
+        "autoApply": true,
+        "ranges": {
+            "Hoje": [ today, today ],
+            "Amanhã": [ moment().add(1, 'd'), moment().add(1, 'd') ],
+            "Próximos 7 dias": [ today, moment().add(7, 'd') ],
+            "Próximos 15 dias": [ today, moment().add(15, 'd') ],
+            "Neste Mês": [ moment().startOf('month'), moment().endOf('month') ],
+            "Próximo Mês": [ moment().add(1, 'M').startOf('month'), moment().add(1, 'M').endOf('month') ]
+        },
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "daysOfWeek": [ "Do", "Se", "Te", "Qu", "Qu", "Sex", "Sa" ],
+            "monthNames": [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
+            "firstDay": 1
+        },
+        "alwaysShowCalendars": true,
+        "opens": "left",
+    });
+    $('#filtro_data').val('');
+
+    $(function () {
+        var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+        ];
+        $("#filtro_cidade").autocomplete({
+            source: availableTags
+        });
+    });
+
+    //$("#filtro_cidade").autocomplete({
+    //    source: function (request, response) {
+    //        $.ajax({
+    //            type: "POST",
+    //            url: '/Pesquisa/Cidades',
+    //            data: { term: request.term },
+    //            dataType: "json",
+    //            traditional: true,
+    //            success: function (json) {
+    //                response($.map(json, function (value, key) {
+    //                    return {
+    //                        label: value.label,
+    //                        value: value.value
+    //                    };
+    //                }));   
+    //            }
+    //        });
+    //    },
+    //    minLength: 3,
+    //});
+
+    //var cache = {};
+    //$("#filtro_cidade").autocomplete({
+    //    minLength: 3,
+    //    source: function (request, response) {
+    //        var term = request.term;
+    //        if (term in cache) {
+    //            response(cache[term]);
+    //            return;
+    //        }
+
+    //        $.getJSON("Pesquisa/Cidades", request, function (data, status, xhr) {
+    //            alert(data)
+    //            cache[term] = data;
+    //            response(data);
+    //        });
+    //    }
+    //});
+
+    $("#filtro_pesquisar").click(function () {
+        $("#filtro_form").submit();
+    });
 
     $("#btn_solicitar_inscricao").click(function () {
         SolicitarInscricao();

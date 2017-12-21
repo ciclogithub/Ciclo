@@ -1391,7 +1391,7 @@ li.tg-rss a{background:#ff6600;}
 	width:100%;
 	height:100%;
 	position:absolute;
-	background:
+	/*background:
 		-moz-linear-gradient(top,
 		rgba(217,8,69,0.8) 0%,
 		rgba(217,8,69,0.8) 1%,
@@ -1406,7 +1406,7 @@ li.tg-rss a{background:#ff6600;}
 		rgba(217,8,69,0.8) 0%,
 		rgba(217,8,69,0.8) 1%,
 		rgba(217,8,69,0.8) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccd90845', endColorstr='#ccd90845',GradientType=0 );
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccd90845', endColorstr='#ccd90845',GradientType=0 );*/
 }
 .tg-bgcounter{background-image: url(../images/bg-parallax/bg-parallax-01.jpg);}
 .tg-statisticscounters{

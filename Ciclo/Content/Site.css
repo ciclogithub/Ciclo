@@ -37,9 +37,13 @@ textarea {
 
 
 .tg-innerbannercontent {
-    padding: 55px 0 20px !important;
+    padding: 25px 0 20px !important;
     text-align: left !important;
-}   
+}
+
+.panel-page .tg-innerbannercontent {
+    padding: 55px 0 20px !important;
+}
 
 .p10 {
     padding:10px;
@@ -392,7 +396,16 @@ h3.perfil span {
         background-color: #ffffff;
     }
 
+.gray-box p {
+    margin-bottom: 0px !important;
+    line-height: 25px;
+}
 
+.gray-box {
+    padding: 20px;
+    background-color: #E1EBED;
+    font-family: 'Roboto', sans-serif !important;
+}
 
 .white-box p {
     margin-bottom:0px !important;
@@ -548,6 +561,24 @@ h3.perfil span {
     content: "\f002"
 }
 
+#calendar:after {
+    right: 30px;
+    top: 5px;
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 14px;
+    content: "\f073"
+}
+
+#mapa:after {
+    right: 30px;
+    top: 5px;
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 14px;
+    content: "\f041"
+}
+
 .tg-sectioncategorias {
     padding:50px 0px 0px 0px;
 }
@@ -586,8 +617,12 @@ h3.perfil span {
 }
 
 .tg-sectionspace {
+    /*background-color: #E1EBED;
+    margin-top:50px;*/
+}
+
+.tg-cursos {
     background-color: #E1EBED;
-    margin-top:50px;
 }
 
 .tg-sectionboxes {
@@ -612,7 +647,7 @@ h3.perfil span {
 
 .tg-sectionicones .img-text {
     float:right;
-    width:75%;
+    width:80%;
     font-size:14px;
 }
 
@@ -642,7 +677,7 @@ h3.perfil span {
 
 .tg-sectiontreina .img-text {
     float: right;
-    width: 75%;
+    width: 80%;
     font-size: 14px;
 }
 
@@ -668,9 +703,24 @@ h3.perfil span {
     margin-bottom: 20px;
 }
 
+.daterangepicker .calendar th, .daterangepicker .calendar td {
+    min-width: 28px !important;
+}
+.ranges li:last-child {
+    display: none;
+}
+
+.calendar-table table th, .calendar-table table td {
+    padding:0px !important;
+}
+
+.tg-bgparallax {
+    background-color: #1F95DD !important;
+}
+
 @media only screen and (max-device-width: 480px) {
     #slideshow {
-        margin: 170px 0px 30px 0px !important;
+        margin: 0px !important;
         position: relative !important;
         height: 120px !important;
         overflow: hidden !important;
@@ -680,20 +730,42 @@ h3.perfil span {
             max-height: 120px !important;
             width: 100% !important;
         }
+
+    #filtro_form input {
+        margin-bottom: 10px !important;
+    }
+
+    .categorias div.item {
+        line-height: 30px !important;
+        padding-top: 50px;
+    }
+
+    .box2 {
+        padding: 10px !important;
+    }
+
+    .tg-sectionparavoce div.box {
+        margin: 11px !important;
+        padding: 17px !important;
+    }
+
 }
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 640px) {
     #slideshow {
-        margin: 100px 0px 30px 0px !important;
+        margin: 0px !important;
         position: relative !important;
         height: 230px !important;
         overflow: hidden !important;
     }
 
-        #slideshow img {
-            max-height: 230px !important;
-            width: 100% !important;
-        }
+    #slideshow img {
+        max-height: 230px !important;
+        width: 100% !important;
+    }
+    #filtro_form input {
+        margin-bottom: 10px !important;
+    }
 }
 
 @media only screen and (min-device-width: 641px) and (max-device-width: 1800px) {

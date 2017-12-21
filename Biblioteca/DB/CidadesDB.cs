@@ -64,5 +64,32 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Cidades> ListarPesquisa(string term)
+        {
+            try
+            {
+                List<Cidades> list_cidades = new List<Cidades>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select top 20 c.idcidade, c.idestado, CONCAT(c.txcidade, '/', e.txsigla) as cidade from Cidades c inner join Estados e on e.idestado = c.idestado WHERE c.txcidade like '%goi%' ORDER by c.txcidade");
+                query.SetParameter("term", "'%" + term + "%'");
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_cidades.Add(new Cidades(Convert.ToInt32(reader["idcidade"]), Convert.ToInt32(reader["idestado"]), Convert.ToString(reader["cidade"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_cidades;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+
     }
 }

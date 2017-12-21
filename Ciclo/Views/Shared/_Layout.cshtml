@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/calendar/css/datepicker.css?1" />
     <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/select2/css/select2.css?1" />
     <link rel="stylesheet" type="text/css" href="~/Content/responsive.css?1" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     @*@Styles.Render("~/Content/css")
     @Styles.Render("~/Content/template")*@
@@ -52,31 +53,34 @@
             </div>
         </header>
 
-        <div class="pesquisa">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                        <h3>Maior plataforma de ensino automotivo nacional. <strong>Encontre seu próximo curso aqui!</strong></h3>
+        <form action="Pesquisa" method="post" id="filtro_form" name="filtro_form">
+            <div class="pesquisa">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                            <h3>Maior plataforma de ensino automotivo nacional. <strong>Encontre seu próximo curso aqui!</strong></h3>
+                        </div>
                     </div>
-                </div>
-                <div class="row pt30">
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
-                        <div id="lupa"></div>
-                        <input type="text" id="" name="" placeholder="Pesquisar curso" />
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
-                        <div id="lupa"></div>
-                        <input type="text" id="" name="" placeholder="Pesquisar por cidade" />
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
-                        <input type="text" id="" name="" placeholder="Todas as datas" />
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
-                        <input type="button" id="" name="" value="Pesquisar" />
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
+                            <div id="lupa"></div>
+                            <input type="text" id="filtro_curso" name="filtro_curso" placeholder="Pesquisar curso" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
+                            <div id="mapa"></div>
+                            <input type="text" id="filtro_cidade" name="filtro_cidade" placeholder="Pesquisar por cidade" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
+                            <div id="calendar"></div>
+                            <input readonly type="text" id="filtro_data" name="filtro_data" placeholder="Todas as datas" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
+                            <input type="button" id="filtro_pesquisar" name="filtro_pesquisar" value="Pesquisar" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         @RenderBody()
 
@@ -88,7 +92,7 @@
                             <p class="tg-copyrights">@DateTime.Now.Year - Todos os direitos reservados</p>
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6 text-center">
-                            <strong class="tg-logo2"><a href="/"><img src="images/logo.png" alt="www.treinaauto.com.br"></a></strong>
+                            <strong class="tg-logo2"><a href="/"><img src="images/logo_branca.png" alt="www.treinaauto.com.br"></a></strong>
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
                             <ul class="tg-socialicons">
@@ -115,7 +119,8 @@
 </body>
 </html>
 
-
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
 
         

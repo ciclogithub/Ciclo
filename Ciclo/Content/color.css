@@ -103,20 +103,22 @@ a:active,
 .tg-galleryhover,
 .tg-bgparallax:before,
 .tg-shceduledetailimg:before {
-    background: -moz-linear-gradient(top, rgba(36,150,222,0.85) 0%, rgba(23,41,97,0.8) 100%);
+    background-color: #1F95DD !important;
+    /*background: -moz-linear-gradient(top, rgba(36,150,222,0.85) 0%, rgba(23,41,97,0.8) 100%);
     background: -webkit-linear-gradient(top, rgba(36,150,222,0.85) 0%, rgba(23,41,97,0.8) 100%);
-    background: linear-gradient(to bottom, rgba(36,150,222,0.85) 0%, rgba(23,41,97,0.8) 100%);
+    background: linear-gradient(to bottom, rgba(36,150,222,0.85) 0%, rgba(23,41,97,0.8) 100%);*/
     /*background: linear-gradient(to bottom, rgba(95,181,54,0.85) 0%, rgba(95,181,54,0.8) 100%);*/
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2496DE', endColorstr='172961',GradientType=0 );
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2496DE', endColorstr='172961',GradientType=0 );*/
 }
 
 .tg-innerbanner:before,
 .tg-bannerimg figcaption,
 .tg-bgparallax.tg-bgtwitter:before {
-    background: -moz-linear-gradient(top, rgba(66,66,66,0.85) 0%, rgba(95,181,54,0.85) 60%);
+    background-color: #1F95DD !important;
+    /*background: -moz-linear-gradient(top, rgba(66,66,66,0.85) 0%, rgba(95,181,54,0.85) 60%);
     background: -webkit-linear-gradient(top, rgba(66,66,66,0.85) 0%, rgba(95,181,54,0.85) 60%);
     background: linear-gradient(to bottom, rgba(66,66,66,0.85) 0%, rgba(95,181,54,0.85) 60%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9424242', endColorstr='#d95fb536',GradientType=0 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9424242', endColorstr='#d95fb536',GradientType=0 );*/
 }
 /*=============================================
 			Theme Border Color
