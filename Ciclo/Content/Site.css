@@ -37,7 +37,7 @@ textarea {
 
 
 .tg-innerbannercontent {
-    padding: 25px 0 20px !important;
+    padding: 55px 0 20px !important; /*25 com pesquisa */
     text-align: left !important;
 }
 
@@ -611,8 +611,8 @@ h3.perfil span {
 
 .boxes .box2 {
     background-color: #136FB8;
-    padding: 30px;
-    font-size: 14px;
+    padding: 20px;
+    font-size: 16px;
     font-weight: lighter;
 }
 
@@ -673,6 +673,11 @@ h3.perfil span {
     color: #4EBDE8;
     font-weight: lighter;
     margin-bottom: 20px;
+}
+
+.tg-sectioncategorias h2 {
+    color: #4EBDE8;
+    font-weight: lighter;
 }
 
 .tg-sectiontreina .img-text {
@@ -746,7 +751,7 @@ h3.perfil span {
 
 @media only screen and (max-device-width: 480px) {
     #slideshow {
-        margin: 0px !important;
+        margin: 80px 0px 0px 0px !important; /*0*/
         position: relative !important;
         height: 120px !important;
         overflow: hidden !important;
@@ -767,7 +772,8 @@ h3.perfil span {
     }
 
     .box2 {
-        padding: 10px !important;
+        padding: 5px !important;
+        height:200px !important;
     }
 
     .tg-sectionparavoce div.box {
@@ -777,6 +783,10 @@ h3.perfil span {
 
     .tg-socialicons {
         margin-top:10px !important;
+    }
+
+    .tg-innerbannercontent {
+        padding: 100px 0 20px !important;
     }
 
     .panel-page .tg-innerbannercontent {
@@ -794,10 +804,14 @@ h3.perfil span {
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 680px) {
     #slideshow {
-        margin: 0px !important;
+        margin: 70px 0px 0px 0px !important; /*0*/
         position: relative !important;
         height: 230px !important;
         overflow: hidden !important;
+    }
+
+    .tg-innerbannercontent {
+        padding: 100px 0 20px !important;
     }
 
     #slideshow img {
