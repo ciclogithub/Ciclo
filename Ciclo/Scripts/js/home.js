@@ -4,11 +4,11 @@
 
     setInterval(function () {
         $('#slideshow > div:first')
-            .fadeOut(3000)
+            .fadeOut(4000)
             .next()
-            .fadeIn(3000)
+            .fadeIn(4000)
             .end()
             .appendTo('#slideshow');
-    }, 5000);
+    }, 7000);
 
 });

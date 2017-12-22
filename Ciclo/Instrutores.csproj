@@ -305,7 +305,9 @@
     <Content Include="images\logo.png" />
     <Content Include="images\logo_branca.png" />
     <Content Include="images\slider\img1.jpg" />
+    <Content Include="images\slider\img1.png" />
     <Content Include="images\slider\img2.jpg" />
+    <Content Include="images\slider\img2.png" />
     <Content Include="Scripts\highcharts\5.0.14\css\highcharts.css" />
     <Content Include="Scripts\highcharts\5.0.14\highcharts-3d.js" />
     <Content Include="Scripts\highcharts\5.0.14\highcharts-3d.src.js" />
@@ -722,7 +724,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52966</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
