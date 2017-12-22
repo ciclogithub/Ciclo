@@ -103,7 +103,7 @@ table input {
     line-height: 34px;
 }
 
-#form_cadastro_organizador .row, #form_cadastro_aluno .row {
+#form_cadastro_organizador .row, #form_cadastro_aluno .row, #form_login_aluno .row, #form_login_organizador .row {
     margin-bottom: 10px;
 }
 
@@ -408,8 +408,8 @@ h3.perfil span {
 }
 
 .white-box p {
-    margin-bottom:0px !important;
-    line-height:25px;
+    margin-bottom: 0px !important;
+    line-height: 25px;
 }
 
 .white-box {
@@ -717,6 +717,32 @@ h3.perfil span {
 .tg-bgparallax {
     background-color: #1F95DD !important;
 }
+
+.pesquisa_news h3 {
+    color:#1D93DB  !important;
+    font-weight:600 !important;
+}
+
+.aluno h3 {
+    color: #1D93DB !important;
+    font-weight: 600 !important;
+}
+
+.bg_azul_escuro {
+    background-color: #183765 !important;
+}
+
+.btn-verde {
+    background-color: #28DA78 !important;
+    color: #FFF !important;
+    border-radius: unset !important;
+}
+.btn-azul {
+    background-color: #1F95DD !important;
+    color: #FFF !important;
+    border-radius: unset !important;
+}
+
 
 @media only screen and (max-device-width: 480px) {
     #slideshow {

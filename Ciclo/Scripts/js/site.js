@@ -91,6 +91,13 @@
     //    }
     //});
 
+    $("#news_enviar").click(function () {
+        $('#news_form').validationEngine('attach');
+        if ($('#news_form').validationEngine('validate')) {
+            CadastraNewsletter();
+        }
+    });
+
     $("#filtro_pesquisar").click(function () {
         $("#filtro_form").submit();
     });
@@ -119,21 +126,60 @@
             CadastroOrganizador();
         }
     });
+    
+    $("#btn_login_aluno").click(function () {
+        $('#form_login_aluno').validationEngine('attach');
+        if ($('#form_login_aluno').validationEngine('validate')) {
+            LoginAluno();
+        }
+    });
 
     $("#btn_login_organizador").click(function () {
         $('#form_login_organizador').validationEngine('attach');
         if ($('#form_login_organizador').validationEngine('validate')) {
-            LoginSite();
+            LoginOrganizador();
         }
     });
 });
+
+function CadastraNewsletter() {
+    var nome = $("#news_form #news_nome").val();
+    var curso = $("#news_form #news_curso").val();
+    var email = $("#news_form #news_email").val();
+    var whatsapp = $("#news_form #news_whatsapp").val();
+    var cidade = $("#news_form #news_cidade").val();
+    var estado = $("#news_form #news_estado").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/Pesquisa/Formulario/",
+        data: { nome: nome, curso: curso, email: email, whatsapp: whatsapp, cidade:cidade, estado:estado },
+        dataType: "json",
+        traditional: true,
+        success: function (retorno) {
+            swal({
+                title: "Mensagem enviada com sucesso",
+                type: 'success',
+                confirmButtonText: 'Fechar',
+            })
+          }
+    });
+}
 
 function isValidEmailAddress(emailAddress) {
     var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
     return pattern.test(emailAddress);
 };
 
-function recuperarSenha() { 
+function recuperarSenhaAluno() {
+    recuperarSenha(2);
+}
+
+function recuperarSenhaOrganizador() {
+    recuperarSenha(1);
+}
+
+function recuperarSenha(perfil) { 
     swal({
         title: 'Informe o e-mail cadastrado',
         input: 'email',
@@ -155,7 +201,7 @@ function recuperarSenha() {
                 $.ajax({
                     type: "POST",
                     url: "/Home/Esqueceu/",
-                    data: { email: valor, perfil: $("#perfil:checked").val() },
+                    data: { email: valor, perfil: perfil },
                     dataType: "json",
                     traditional: true,
                     async: false,
@@ -308,11 +354,66 @@ function CadastroAluno() {
     }
 }
 
-function LoginSite() {
+function LoginOrganizador() {
 
-    var email = $("#txemail").val();
-    var curso = $("#curso").val();
-    var perfil = $("#perfil:checked").val();
+    var email = $("#txemailorganizador").val();
+    var curso = $("#idcurso").val();
+    var senha = $("#txsenhaorganizador").val();
+
+    var erro = false;
+    var erroMsg = "";
+
+    if (email.length < 2) {
+        erro = true;
+        erroMsg += "e-mail";
+    }
+
+    if (senha.length < 2) {
+        erro = true;
+        if (erroMsg != "")
+            erroMsg += ", ";
+        erroMsg += "senha";
+    }
+
+    if (!erro) {
+        $.ajax({
+            type: "POST",
+            url: "/Login/Formulario/",
+            data: $('#form_login_organizador :input').serialize(),
+            dataType: "json",
+            traditional: true,
+            success: function (msg) {
+                var json = $.parseJSON(msg);
+                
+                if (json.retorno == "OK") {
+                    $('#form_redirect').html('<form action="/Painel" id="form_red" method="post" style="display:none;"><input type="hidden" id="curso" name="curso" value= "' + curso + '" /></form>');
+                    $("#form_red").submit();
+                    swal({
+                        title: "Redirecionando...",
+                        type: 'success',
+                        confirmButtonText: 'Fechar',
+                    })
+                }
+
+                if (json.retorno == "Dados incorretos") {
+                    swal({ title: json.retorno, type: "error", timer: 3000 });
+
+                }
+
+                if (json.retorno == "Usuário desativado, por favor entre em contato") {
+                    swal({ title: json.retorno, type: "error", timer: 3000 });
+                }
+            }
+        });
+    } else {
+        swal({ title: "Preencha " + erroMsg + " corretamente.", type: "error", timer: 3000 });
+    }
+}
+
+function LoginAluno() {
+
+    var email = $("#txemailaluno").val();
+    var curso = $("#idcurso").val();
     var senha = $("#txsenha").val();
 
     var erro = false;
@@ -330,25 +431,18 @@ function LoginSite() {
         erroMsg += "senha";
     }
 
-    if (perfil == 1) {
-        url = "/Login/Formulario/";
-        link = "/Painel";
-    } else {
-        url = "/Login/FormularioAluno/";
-        if ((curso == 0) || (curso == "")) { link = "/Aluno"; } else { link = "/Inscricao" }
-    }
+    if ((curso == 0) || (curso == "")) { link = "/Aluno"; } else { link = "/Inscricao" }
 
     if (!erro) {
-        $("#form-error").addClass("bg-info").html('Aguarde...');
         $.ajax({
             type: "POST",
-            url: url,
-            data: $('#form_login_organizador :input').serialize() + '&' + $.param({ 'txsenhaaluno': senha }),
+            url: "/Login/FormularioAluno/",
+            data: $('#form_login_aluno :input').serialize(),
             dataType: "json",
             traditional: true,
             success: function (msg) {
                 var json = $.parseJSON(msg);
-                
+
                 if (json.retorno == "OK") {
                     $('#form_redirect').html('<form action="' + link + '" id="form_red" method="post" style="display:none;"><input type="hidden" id="curso" name="curso" value= "' + curso + '" /></form>');
                     $("#form_red").submit();

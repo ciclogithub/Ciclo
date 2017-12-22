@@ -38,5 +38,24 @@ namespace Ciclo.Controllers
         {
             return Json(new CidadesDB().ListarPesquisa(term));
         }
+
+        [HttpPost]
+        [Route("Pesquisa/Formulario")]
+        public JsonResult Formulario(string nome, string curso, string email, string whatsapp, string cidade, string estado)
+        {
+
+            Newsletter news = new Newsletter();
+            news.txnome = nome;
+            news.txcurso = curso;
+            news.txemail = email;
+            news.txwhatsapp = whatsapp;
+            news.txcidade = cidade;
+            news.txestado = estado;
+
+            news.Salvar();
+
+
+            return Json(new Retorno());
+        }
     }
 }

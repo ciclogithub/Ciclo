@@ -18,6 +18,7 @@ namespace Biblioteca.Entidades
         public string txfoto { get; set; }
         public string txcidade { get; set; }
         public string txestado { get; set; }
+        public List<Cursos_Datas> datas { get; set; }
 
         public Cursos_Site()
         {
@@ -41,6 +42,7 @@ namespace Biblioteca.Entidades
             this.txfoto = txfoto;
             this.txcidade = cidade;
             this.txestado = estado;
+            this.datas = new Cursos_DatasDB().Listar(idcurso);
         }
 
         

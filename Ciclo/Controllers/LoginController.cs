@@ -21,13 +21,13 @@ namespace Ciclo.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("Login/Formulario")]
-        public JsonResult Formulario(Organizadores organizadoresview)
+        public JsonResult Formulario(string txemailorganizador, string txsenhaorganizador)
         {
             string retorno = "";
 
             PainelDB db = new PainelDB();
-            organizadoresview.txsenha = MD5Hash.CalculaHash(organizadoresview.txsenha);
-            Painel painel = db.Buscar(organizadoresview.txemail, organizadoresview.txsenha);
+            txsenhaorganizador = MD5Hash.CalculaHash(txsenhaorganizador);
+            Painel painel = db.Buscar(txemailorganizador, txsenhaorganizador);
 
             if (painel == null)
             {
@@ -68,13 +68,13 @@ namespace Ciclo.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("Login/FormularioAluno")]
-        public JsonResult FormularioAluno(Usuarios usuariosview)
+        public JsonResult FormularioAluno(string txemailaluno, string txsenha)
         {
             string retorno = "";
 
             UsuariosDB db = new UsuariosDB();
-            usuariosview.txsenhaaluno = MD5Hash.CalculaHash(usuariosview.txsenhaaluno);
-            Usuarios usuario = db.Buscar(usuariosview.txemail, usuariosview.txsenhaaluno);
+            txsenha = MD5Hash.CalculaHash(txsenha);
+            Usuarios usuario = db.Buscar(txemailaluno, txsenha);
 
             if (usuario == null)
             {

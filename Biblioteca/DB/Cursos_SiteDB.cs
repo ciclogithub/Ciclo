@@ -37,7 +37,7 @@ namespace Biblioteca.DB
             }
         }
 
-        public List<Cursos_Site> ListarPesquisa(string curso = "", string cidade = "", string data = "", int page = 1, int regs = 10)
+        public List<Cursos_Site> ListarPesquisa(string curso = "", string cidade = "", string data = "", int page = 1, int regs = 12)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Biblioteca.DB
                 qry += "where 1 = 1 ";
 
                 if (curso != "") { qry += " and c.txcurso like '%" + curso.Replace(" ","%") + "%' "; }
-                if (cidade != "") { qry += " and l.idcidade = 10 "; }
+                if (cidade != "") { qry += " and c.txcidade like '%" + cidade.Replace(" ", "%")  + "%' "; }
                 if (data == "")
                 {
                     qry += " AND cd.dtcurso >= getdate() ";
@@ -65,7 +65,7 @@ namespace Biblioteca.DB
                     qry += " AND cd.dtcurso between '" + d[0].Trim() + "' and '" + d[1].Trim() + "' ";
                 }
                 qry += "ORDER by cd.dtcurso ";
-                qry += "OFFSET 12 * (1 - 1) ROWS FETCH NEXT 12 ROWS ONLY";
+                qry += "OFFSET " + regs + " * (" + page + " - 1) ROWS FETCH NEXT " + regs + " ROWS ONLY";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
 

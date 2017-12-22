@@ -18,6 +18,22 @@ namespace Ciclo.Controllers
             return View();
         }
 
+        // GET: Cadastro Aluno
+        [Route("Cadastro/Aluno")]
+        public ActionResult Aluno(int curso = 0)
+        {
+            ViewBag.curso = curso;
+            return View();
+        }
+
+        // GET: Cadastro Instrutor
+        [Route("Cadastro/Instrutor")]
+        public ActionResult Instrutor(int curso = 0)
+        {
+            ViewBag.curso = curso;
+            return View();
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("Cadastro/Formulario")]
