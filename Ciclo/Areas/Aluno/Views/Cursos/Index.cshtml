@@ -59,14 +59,13 @@
                                 <tr>
                                     <td>@p.txcurso</td>
                                     <td>@p.dtcurso.ToShortDateString()</td>
-                                    <td>
-                                    @if (p.avaliacao == null)
+                                    @if (p.avaliacao == 0)
                                     {
-                                        <a href="#">avaliar</a></td>
+                                        <td><a href="#">avaliar</a></td>
                                     }
                                     else
                                     {
-                                        Html.Raw(p.avaliacao);
+                                        Html.Raw("<td>" + p.avaliacao + "</td>");
                                     }
                                 </tr>
                             }

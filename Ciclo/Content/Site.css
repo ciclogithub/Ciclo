@@ -775,9 +775,24 @@ h3.perfil span {
         padding: 17px !important;
     }
 
+    .tg-socialicons {
+        margin-top:10px !important;
+    }
+
+    .panel-page .tg-innerbannercontent {
+        padding: 100px 0 20px !important;
+    }
+
+    .sub-menu {
+        display:block !important;
+    }
+    .tg-btnbookseat {
+        float: left !important;
+        margin-left:30px !important;
+    }
 }
 
-@media only screen and (min-device-width: 481px) and (max-device-width: 640px) {
+@media only screen and (min-device-width: 481px) and (max-device-width: 680px) {
     #slideshow {
         margin: 0px !important;
         position: relative !important;
@@ -792,9 +807,22 @@ h3.perfil span {
     #filtro_form input {
         margin-bottom: 10px !important;
     }
+
+    .panel-page .tg-innerbannercontent {
+        padding: 100px 0 20px !important;
+    }
+
+    .sub-menu {
+        display: block !important;
+    }
+
+    .tg-btnbookseat {
+        float: left !important;
+        margin-left: 30px !important;
+    }
 }
 
-@media only screen and (min-device-width: 641px) and (max-device-width: 1800px) {
+@media only screen and (min-device-width: 681px) and (max-device-width: 1800px) {
     #slideshow {
         margin-top:0px;
         height: 460px !important;

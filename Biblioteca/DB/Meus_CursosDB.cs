@@ -45,7 +45,7 @@ namespace Biblioteca.DB
                 List<Meus_Cursos> list = new List<Meus_Cursos>();
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select distinct c.txcurso, l.txlocal, cd.dtcurso, c.idcurso, (select top 1 c1.dtcurso from Cursos_Datas c1 where c1.idcurso = c.idcurso order by c1.dtcurso) as dtcurso, (SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO) AS AVALIACAO from Usuarios_Alunos ua INNER JOIN Cursos_Alunos ca ON ca.idaluno = ua.idaluno inner join Cursos c on c.idcurso = ca.idcurso INNER JOIN Cursos_Datas cd on cd.idcurso = c.idcurso AND cd.dtcurso < getdate() LEFT JOIN Locais l on l.idlocal = c.idlocal WHERE ua.idusuario = @id");
+                Query query = session.CreateQuery("select distinct c.txcurso, l.txlocal, cd.dtcurso, c.idcurso, (select top 1 c1.dtcurso from Cursos_Datas c1 where c1.idcurso = c.idcurso order by c1.dtcurso) as dtcurso, ISNULL((SELECT ISNULL(NRNOTA1, 0) + ISNULL(NRNOTA2, 0) + ISNULL(NRNOTA3, 0) + ISNULL(NRNOTA4, 0) + ISNULL(NRNOTA5, 0) FROM CURSOS_AVALIACOES WHERE IDCURSOALUNO = CA.IDCURSOALUNO) ,0) AS AVALIACAO from Usuarios_Alunos ua INNER JOIN Cursos_Alunos ca ON ca.idaluno = ua.idaluno inner join Cursos c on c.idcurso = ca.idcurso INNER JOIN Cursos_Datas cd on cd.idcurso = c.idcurso AND cd.dtcurso < getdate() LEFT JOIN Locais l on l.idlocal = c.idlocal WHERE ua.idusuario = @id");
                 query.SetParameter("id", id);
                 IDataReader reader = query.ExecuteQuery();
 

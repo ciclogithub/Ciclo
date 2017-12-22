@@ -43,7 +43,7 @@ namespace Biblioteca.DB
             {
                 List<Cursos_Site> list_cursos = new List<Cursos_Site>();
                 string qry = "";
-                var d = data.Split(',');
+                var d = data.Split('-');
                 DBSession session = new DBSession();
                 qry = "select c.idcurso, c.txcurso, ct.txcategoria, SUBSTRING((SELECT ', ' + i.txinstrutor + '|' + cast(i.idinstrutor as varchar) FROM Cursos_Instrutores ci inner join instrutores i on i.idinstrutor = ci.idinstrutor WHERE ci.idcurso = c.idcurso FOR XML PATH('')), 3, 999) as instrutores, c.txfoto, ci.txcidade, es.txsigla ";
                 qry += "from cursos c ";
