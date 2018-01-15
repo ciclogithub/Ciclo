@@ -9,6 +9,39 @@ $('#selectallav').click(function () {
     });
 });
 
+$("#sugEspecialidade").click(function () {
+    swal({
+        title: 'Sugestão de especialidade',
+        input: 'text',
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonText: 'Enviar',
+        showLoaderOnConfirm: true,
+        inputPlaceholder: 'Especialidade',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Preencha o campo corretamente';
+            }
+        },
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.value) {
+            valor = result.value;
+            $.ajax({
+                type: "POST",
+                url: "Cursos/SugestaoEspecialidade/",
+                data: { sugestao: valor },
+                dataType: "json",
+                traditional: true,
+                async: false,
+                success: function (retorno) {
+                    swal({ title: 'Obrigado pelo sugestão, iremos analisar e em breve entraremos em contato.', type: "success", timer: 3000 });
+                }
+            });
+        }
+    })
+});
+
     $("#pesquisa_curso").click(function () {
         CursoPesquisar();
     });

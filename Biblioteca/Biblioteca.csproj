@@ -59,6 +59,7 @@
     <Compile Include="DB\CertificadosDB.cs" />
     <Compile Include="DB\Altera_SenhaDB.cs" />
     <Compile Include="DB\NewsletterDB.cs" />
+    <Compile Include="DB\NotificacoesDB.cs" />
     <Compile Include="DB\UsuariosDB.cs" />
     <Compile Include="DB\RedesSociaisDB.cs" />
     <Compile Include="DB\GraficosDB.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Entidades\Cidades.cs" />
     <Compile Include="Entidades\Certificados.cs" />
     <Compile Include="Entidades\Newsletter.cs" />
+    <Compile Include="Entidades\Notificacoes.cs" />
     <Compile Include="Entidades\Usuarios.cs" />
     <Compile Include="Entidades\RedesSociais.cs" />
     <Compile Include="Entidades\Cursos_Alunos.cs" />

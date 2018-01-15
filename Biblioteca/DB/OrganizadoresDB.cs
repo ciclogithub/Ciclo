@@ -96,7 +96,7 @@ namespace Biblioteca.DB
             {
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Organizadores (txorganizador, txemail, txsenha, txtelefone, txdescritivo) output INSERTED.idorganizador VALUES (@organizador, @email, @senha, @telefone, @descritivo) ");
+                Query query = session.CreateQuery("INSERT INTO Organizadores (txorganizador, txemail, txsenha, txtelefone, txdescritivo, dtcadastro) output INSERTED.idorganizador VALUES (@organizador, @email, @senha, @telefone, @descritivo, getdate()) ");
                 query.SetParameter("organizador", variavel.txorganizador);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("senha", variavel.txsenha);

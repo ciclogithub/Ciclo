@@ -327,10 +327,11 @@ address { font-style: italic; }
     padding: 0 40px;
     position: relative;
     text-align: center;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     background: #706D78;
     display: inline-block;
     vertical-align: middle;
+    text-transform:uppercase;
     font: 500 14px/40px 'Poppins', Arial, Helvetica, sans-serif;
 }
     .tg-btn:hover {

@@ -166,5 +166,33 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public List<Especialidades> BuscarNotificacao(int id)
+        {
+            try
+            {
+                List<Especialidades> list_especialidades = new List<Especialidades>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select COUNT(*) OVER() as total, * from Especialidades WHERE txespecialidade LIKE @especialidade OR txsigla LIKE @especialidade ORDER by txespecialidade OFFSET @regs * (@page - 1) ROWS FETCH NEXT @regs ROWS ONLY");
+                //query.SetParameter("especialidade", "%" + especialidade.Replace(" ", "%") + "%");
+                //query.SetParameter("regs", regs);
+                //query.SetParameter("page", page);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_especialidades;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }

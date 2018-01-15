@@ -1,6 +1,7 @@
 ﻿using Biblioteca.DB;
 using Biblioteca.Entidades;
 using Biblioteca.Filters;
+using Biblioteca.Funcoes;
 using Ciclo.Areas.Painel.Models;
 using System;
 using System.Collections.Generic;
@@ -414,6 +415,19 @@ namespace Ciclo.Areas.Painel.Controllers
         {
             int retorno = new CursosDB().VerificaCursoExcluir(id);
             return retorno;
+        }
+
+        public JsonResult SugestaoEspecialidade(string sugestao)
+        {
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+            Organizadores org = new OrganizadoresDB().Buscar(Convert.ToInt32(cookie.Value));
+
+            Email mail = new Email();
+            mail.destinatario = "contato@treinaauto.com.br";
+            mail.assunto = "Sugestão de especialidade - www.treinaauto.com.br";
+            mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>O usuário " + org.txorganizador + " enviou uma sugestão de especialidade.<br>Sugestão: "+sugestao+".<br><br>Att,<br><br>Treinaauto<br>contato@treinaauto.com.br";
+            string ret = mail.EnviaMensagem(mail);
+            return Json(ret);
         }
     }
 }

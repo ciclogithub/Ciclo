@@ -159,6 +159,7 @@
     <Compile Include="Areas\Aluno\Controllers\PerfilController.cs" />
     <Compile Include="Areas\Aluno\Models\CursosView.cs" />
     <Compile Include="Areas\Aluno\Models\PerfilView.cs" />
+    <Compile Include="Areas\Aluno\Models\NotificacoesView.cs" />
     <Compile Include="Areas\Painel\Controllers\EmpresasController.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
     <Compile Include="Areas\Painel\Controllers\InscricoesController.cs" />

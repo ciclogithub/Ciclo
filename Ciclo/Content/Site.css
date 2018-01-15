@@ -748,6 +748,18 @@ h3.perfil span {
     border-radius: unset !important;
 }
 
+.swal2-popup .swal2-styled {
+    padding: 0 40px !important;
+    text-align: center !important;
+    border-radius: 0px !important;
+    vertical-align: middle !important;
+    text-transform: uppercase !important;
+    font: 500 14px/40px 'Poppins', Arial, Helvetica, sans-serif !important;
+}
+
+.link_p {
+    font-size:10px;
+}
 
 @media only screen and (max-device-width: 480px) {
     #slideshow {
