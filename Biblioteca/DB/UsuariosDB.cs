@@ -265,7 +265,7 @@ namespace Biblioteca.DB
             {
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Usuarios (txusuario, txemail, txsenha, txcpf) output INSERTED.idusuario VALUES (@usuario, @email, @senha, @cpf) ");
+                Query query = session.CreateQuery("INSERT INTO Usuarios (txusuario, txemail, txsenha, txcpf, dtcadastro) output INSERTED.idusuario VALUES (@usuario, @email, @senha, @cpf, getdate()) ");
                 query.SetParameter("usuario", variavel.txusuario);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("senha", variavel.txsenhaaluno);
