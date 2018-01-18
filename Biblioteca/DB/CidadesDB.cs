@@ -64,6 +64,31 @@ namespace Biblioteca.DB
             }
         }
 
+        public string BuscarCidade(int id = 0)
+        {
+            try
+            {
+                string cidade = "";
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT txcidade from cidades where idcidade = @id");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    cidade = Convert.ToString(reader["txcidade"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return cidade;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Cidades> ListarPesquisa(string term)
         {
             try

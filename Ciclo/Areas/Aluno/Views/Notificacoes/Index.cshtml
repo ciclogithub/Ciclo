@@ -11,31 +11,20 @@
                 <h1>@Html.Action("Usuario", "Aluno")</h1>
             </div>
             <ol class="tg-breadcrumb">
-                <li><a href="~/Aluno">Dashboard</a></li>
-                <li class="tg-active">Notificações</li>
+                <li><a href="~/Aluno">Painel</a></li>
+                <li class="tg-active">Meus Interesses</li>
             </ol>
         </div>
     </div>
 </div>
 
 @{
-    string especialidades = "";
-    string list_especialidades = "";
-
-    int i = 0;
-    if (Model.notificacao.especialidades != null)
-    {
-        if (Model.notificacao.especialidades.Count > 0)
-        {
-            foreach (var item in Model.notificacao.especialidades)
-            {
-                especialidades = especialidades + "," + item.idespecialidade + "|" + item.txespecialidade;
-                list_especialidades = list_especialidades + "<li><i class='glyphicon glyphicon-trash' onclick='remove('especialidade', " + i + ")'></i><span>" + item.txespecialidade + "</span></li>";
-                i++;
-            }
-            especialidades = especialidades.Substring(1);
-        }
-    }
+    string locais = "";
+    string[] especialidades = {};
+    string[] categorias = {};
+    if (Model.usuario != null) { locais = Model.usuario.idlocalidade; }
+    if ((Model.usuario != null) && (Model.usuario.idespecialidade != "")) { especialidades = Model.usuario.idespecialidade.Split(','); }
+    if ((Model.usuario != null) && (Model.usuario.idcategoria != "")) { categorias = Model.usuario.idcategoria.Split(','); }
 
 }
 
@@ -43,47 +32,60 @@
     <div class="tg-sectionspace">
         <div class="container">
             <form method="post" action="" id="form-modal">
-                <input type="hidden" id="tempcategoria" name="tempcategoria" value="" />
-                <input type="hidden" id="templocalidade" name="templocalidade" value="" />
-                <input type="hidden" id="tempespecialidade" name="tempespecialidade" value="@especialidades" />
+                <input type="hidden" id="templocalidade" name="templocalidade" value="@locais" />
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        Selecione abaixo os tipos de cursos que você deseja ser notificado, e assim que um novo curso for aberto, enviaremos um e-mail informando.
+                        Selecione abaixo os tipos de cursos que você tem interesse e deseja ser notificado, e assim que um novo curso for aberto, enviaremos um e-mail informando.
                     </div>
                 </div>
                 <div class="row pt30">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <label class="control-label" for="idcategoria">Categorias</label>
-                        <div class="input-group">
-                            <select id="idcategoria" name="idcategoria" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var c in Model.categorias)
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <label class="control-label" for="idcategoria"><b>Categorias</b></label>
+                        @foreach (var c in Model.categorias)
+                        {
+                            @: <input type="checkbox" id="idcategoria" name="idcategoria" 
+                            foreach (string x in categorias)
+                            {
+                                if (Convert.ToInt32(x) == c.idcategoria)
                                 {
-                                    <option value="@c.idcategoria">@c.txcategoria</option>
+                                    @: checked
                                 }
-                            </select>
-                            <span class="input-group-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                        </div>
-                        <ul class="list-itens" id="listcategoria"></ul>
+                            }
+                            @: value ="@c.idcategoria"> @c.txcategoria<br />
+                        }
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <label class="control-label" for="idespecialidade">Especialidades</label>
-                        <div class="input-group">
-                            <select id="idespecialidade" name="idespecialidade" class="form-control">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var e in Model.especialidades)
-                                {
-                                    <option value="@e.idespecialidade">@e.txespecialidade</option>
+                    <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9>
+                        <label class="control-label" for="idespecialidade"><b>Especialidades</b></label>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                @{
+                                    int cont = 0;
+                                    foreach (var e in Model.especialidades)
+                                    {
+                                        @: <input type="checkbox" id="idespecialidade" name="idespecialidade" 
+                                        foreach (string x in especialidades)
+                                        {
+                                            if (Convert.ToInt32(x) == e.idespecialidade)
+                                            {
+                                                @: checked
+                                            }
+                                        }
+                                        @: value ="@e.idespecialidade"> @e.txespecialidade<br />
+                                        cont = cont + 1;
+                                        if (cont == (Model.especialidades.Count / 2))
+                                        {
+                                           @: </div>
+                                           @: <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        }
+                                    }
                                 }
-                            </select>
-                            <span class="input-group-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
                         </div>
-                        <ul class="list-itens" id="listespecialidade">@Html.Raw(list_especialidades)</ul>
                     </div>
                 </div>
                 <div class="row pt15">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <label class="control-label" for="idpais">Localidade do Curso</label>
+                        <label class="control-label" for="idpais"><b>Localidade do Curso</b></label>
                         <div class="input-group">
                             <table class="no-margin no-border no-label">
                                 <tr>
@@ -110,7 +112,7 @@
                             </table>
                             <span class="input-group-addon" onclick="addLocalidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
-                        <ul class="list-itens" id="listlocalidade"></ul>
+                        <ul class="list-itens" id="listlocalidade">@Html.Raw(Model.localidades)</ul>
                     </div>
                 </div>
                 <div class="row pt30 text-center">

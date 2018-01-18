@@ -55,7 +55,7 @@ namespace Biblioteca.DB
                 qry += "where 1 = 1 ";
 
                 if (curso != "") { qry += " and c.txcurso like '%" + curso.Replace(" ","%") + "%' "; }
-                if (cidade != "") { qry += " and c.txcidade like '%" + cidade.Replace(" ", "%")  + "%' "; }
+                if (cidade != "") { qry += " and ci.txcidade like '%" + cidade.Replace(" ", "%")  + "%' "; }
                 if (data == "")
                 {
                     qry += " AND cd.dtcurso >= getdate() ";

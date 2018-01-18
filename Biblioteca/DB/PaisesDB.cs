@@ -62,6 +62,31 @@ namespace Biblioteca.DB
             }
         }
 
+        public string BuscarPais(int id = 0)
+        {
+            try
+            {
+                string pais = "";
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT txpais from paises where idpais = @id");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    pais = Convert.ToString(reader["txpais"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return pais;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public int Buscar(string pais)
         {
             try

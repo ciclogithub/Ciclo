@@ -35,7 +35,7 @@ $("#sugEspecialidade").click(function () {
                 traditional: true,
                 async: false,
                 success: function (retorno) {
-                    swal({ title: 'Obrigado pelo sugestão, iremos analisar e em breve entraremos em contato.', type: "success", timer: 3000 });
+                    swal({ title: 'Obrigado pela sugestão, iremos analisar e em breve entraremos em contato.', type: "success", timer: 3000 });
                 }
             });
         }

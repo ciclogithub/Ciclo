@@ -11,11 +11,16 @@
 
 });
 
+function SelectedValues(field) {
+    return $("input[name=" + field + "]:checked").map(
+        function () { return this.value; }).get().join(",");
+}
+
 function GravarNotificacoes() {
 
-    var txcategoria = $("#form-modal #tempcategoria").val();
+    var txcategoria = SelectedValues("idcategoria");
     var txlocalidade = $("#form-modal #templocalidade").val();
-    var txespecialidade = $("#form-modal #tempespecialidade").val();
+    var txespecialidade = SelectedValues("idespecialidade");
 
     $.ajax({
         type: "POST",

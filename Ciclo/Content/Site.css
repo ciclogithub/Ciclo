@@ -32,17 +32,19 @@ textarea {
 }
 
 .tg-sectionspace {
-    padding: 50px 0 !important;
+    padding: 20px 0 !important; /*50 */
 }
 
 
 .tg-innerbannercontent {
-    padding: 55px 0 20px !important; /*25 com pesquisa */
+    /* padding: 55px 0 20px !important; */
+    padding: 15px 0 10px !important; /*25 com pesquisa */
     text-align: left !important;
 }
 
 .panel-page .tg-innerbannercontent {
-    padding: 55px 0 20px !important;
+    padding: 45px 0 10px !important;
+    /*padding: 55px 0 20px !important;*/
 }
 
 .p10 {
@@ -528,7 +530,7 @@ h3.perfil span {
     font-family: 'Roboto', sans-serif;
     color: #1D93DB !important;
     margin-top:34px;
-    padding:60px 0px;
+    padding:30px 0px;
 }
 
 .pesquisa h3 {
@@ -759,6 +761,11 @@ h3.perfil span {
 
 .link_p {
     font-size:10px;
+}
+
+.bg-menu {
+    background-color: #E2EAED;
+    color:#000;
 }
 
 @media only screen and (max-device-width: 480px) {

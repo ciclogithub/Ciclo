@@ -63,6 +63,31 @@ namespace Biblioteca.DB
             }
         }
 
+        public string BuscarEstado(int id = 0)
+        {
+            try
+            {
+                string estado = "";
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT txestado from estados where idestado = @id");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    estado = Convert.ToString(reader["txestado"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return estado;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public int Buscar(int id)
         {
             try

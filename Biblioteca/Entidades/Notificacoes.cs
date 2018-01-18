@@ -14,8 +14,6 @@ namespace Biblioteca.Entidades
         public string idespecialidade { get; set; }
         public string idcategoria { get; set; }
         public string idlocalidade { get; set; }
-        public List<Especialidades> especialidades { get; set; }
-        public List<Categorias> categorias { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
