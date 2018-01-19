@@ -108,6 +108,9 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/perfil").Include(
                 "~/Scripts/js/aluno/perfil.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/mercados").Include(
+                "~/Scripts/js/aluno/mercados.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/alunocursos").Include(
                 "~/Scripts/js/aluno/cursos.js"));
 

@@ -52,6 +52,7 @@
     <Compile Include="DB\InscricoesDB.cs" />
     <Compile Include="DB\Curso_SiteDB.cs" />
     <Compile Include="DB\Cursos_SiteDB.cs" />
+    <Compile Include="DB\PainelAlunoDB.cs" />
     <Compile Include="DB\PaisesDB.cs" />
     <Compile Include="DB\MercadosDB.cs" />
     <Compile Include="DB\LogadoDB.cs" />

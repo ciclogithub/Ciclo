@@ -1,4 +1,7 @@
 ﻿$(function () {
+
+    $(".bg-menu").height($("#tg-main").height());
+
     $("#incluir_btn_alterar_senha").click(function () {
         $('#form-modal_senha').validationEngine('attach');
         if ($('#form-modal_senha').validationEngine('validate')) {

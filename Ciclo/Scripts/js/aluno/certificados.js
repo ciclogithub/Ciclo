@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    $(".bg-menu").height($("#tg-main").height());
+
     $('select').not('.no-js').select2();
 
     $("#pesquisa_certificado").click(function () {
@@ -75,11 +77,13 @@ function IncluirCertificado() {
     var txcurso = $("#form-modal_certificado #txcurso").val();
     var dtinicio = $("#form-modal_certificado #dtinicio").val();
     var dtfim = $("#form-modal_certificado #dtfim").val();
+    var txinstrutor = $("#form-modal_certificado #txinstrutor").val();
+    var nrnota = $("#form-modal_certificado #nrnota").val();
 
     $.ajax({
         type: "POST",
         url: '/Aluno/Certificados/IncluirConcluir',
-        data: { id: idcertificado, certificadora: txcertificadora, curso: txcurso, data_inicio: dtinicio, data_fim: dtfim },
+        data: { id: idcertificado, certificadora: txcertificadora, curso: txcurso, data_inicio: dtinicio, data_fim: dtfim, instrutor: txinstrutor, nota: nrnota },
         dataType: "json",
         traditional: true,
         success: function (json) {

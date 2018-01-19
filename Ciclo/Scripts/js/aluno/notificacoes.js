@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+
+    $(".bg-menu").height($("#tg-main").height());
+
     $("#idpais").val(26);
     MudaPais(26);
 

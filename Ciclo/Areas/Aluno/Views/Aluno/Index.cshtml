@@ -18,11 +18,63 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
+
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h3>Seja bem-vindo ao seu painel de controle.</h3>
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Aluno")
                 </div>
-            </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <h4 class="font-azul">Seja bem-vindo ao seu painel de controle.</h4>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 alerta">
+                            <div onclick="location.href='Aluno/Perfil';"><b>Meus Dados</b><br />Mantenha seus dados atualizados é a melhor forma de você ser notificado de cursos interessantes.</div>
+                            @if (Model.perfil)
+                            {
+                                @: <i class="fa fa-check green-icon"></i> Parabéns, mantenha seus dados atualizados!
+                            }
+                            else
+                            {
+                                @: <i class="fa fa-times red-icon"></i> Atenção suas informações não estão completas!
+                            }
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 alerta">
+                            <div onclick="location.href='Aluno/Certificados';"><b>Cursos que já fiz</b><br />Diga-nos quais os cursos você já fez, quando foi, quem organizou, quem ministrou, e qual a nota você dá.</div>
+                            @if (Model.cursos)
+                            {
+                                @: <i class="fa fa-check green-icon"></i> Parabéns, mantenha seus dados atualizados!
+                            }
+                            else
+                            {
+                                @: <i class="fa fa-times red-icon"></i> Atenção suas informações não estão completas!
+                             }
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 alerta">
+                            <div onclick="location.href='Aluno/Mercado';"><b>Meu mercado</b><br />Onde atuo? Qual a minha especialidade?</div>
+                            @if (Model.mercado)
+                            {
+                                @: <i class="fa fa-check green-icon"></i> Parabéns, mantenha seus dados atualizados!
+                            }
+                            else
+                            {
+                                @: <i class="fa fa-times red-icon"></i> Atenção suas informações não estão completas!
+                            }
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 alerta">
+                            <div onclick="location.href='Aluno/Notificacoes';"><b>Meus interesses</b><br />Que tipo de curso você está interessado?</div>
+                            @if (Model.interesse)
+                            {
+                                @: <i class="fa fa-check green-icon"></i> Parabéns, mantenha seus dados atualizados!
+                            }
+                            else
+                            {
+                                @: <i class="fa fa-times red-icon"></i> Atenção suas informações não estão completas!
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>           
         </div>
     </div>
 </main>

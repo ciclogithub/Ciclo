@@ -20,31 +20,40 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
-            <form method="post" action="" id="form-modal_senha">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="control-label" for="txsenhaatual">Senha Atual *</label>
-                            <input type="password" name="txsenhaatual" id="txsenhaatual" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="control-label" for="txnovasenha">Nova Senha *</label>
-                            <input type="password" name="txnovasenha" id="txnovasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfirmasenha],notEquals[txsenhaatual]]" placeholder="Nova Senha *" maxlength="20">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <div class="form-group">
-                            <label class="control-label" for="txconfirmasenha">Confirmar Senha *</label>
-                            <input type="password" name="txconfirmasenha" id="txconfirmasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txnovasenha]]" placeholder="Confirmar Senha *" maxlength="20">
-                        </div>
-                    </div>
+
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Aluno")
                 </div>
-            </form>
-        </div>
-        <div class="text-center">
-            <button id="incluir_btn_alterar_senha" class="tg-btn text-center" type="button">Gravar Dados</button>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <h4 class="font-azul">Utilize letras maiúsculas, minúsculas, números e caracteres para deixar sua senha mais forte.</h4><br />
+                    <form method="post" action="" id="form-modal_senha">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="txsenhaatual">Senha Atual *</label>
+                                    <input type="password" name="txsenhaatual" id="txsenhaatual" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="txnovasenha">Nova Senha *</label>
+                                    <input type="password" name="txnovasenha" id="txnovasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfirmasenha],notEquals[txsenhaatual]]" placeholder="Nova Senha *" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="txconfirmasenha">Confirmar Senha *</label>
+                                    <input type="password" name="txconfirmasenha" id="txconfirmasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txnovasenha]]" placeholder="Confirmar Senha *" maxlength="20">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center">
+                    <button id="incluir_btn_alterar_senha" class="tg-btn text-center" type="button">Gravar Dados</button>
+                </div>
+            </div>
         </div>
     </div>
 </main>

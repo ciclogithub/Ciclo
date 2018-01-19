@@ -21,6 +21,7 @@ namespace Biblioteca.Entidades
         public List<Telefones> txtelefone { get; set; }
         public List<Redes> txredes { get; set; }
         public List<Mercados> txmercado { get; set; }
+        public List<Especialidades> txespecialidade { get; set; }
         public int idcidade { get; set; }
         public int idestado { get; set; }
         public int idpais { get; set; }
@@ -69,6 +70,7 @@ namespace Biblioteca.Entidades
             this.txtelefone = new UsuariosDB().ListarTelefones(id);
             this.txredes = new UsuariosDB().ListarRedesSociais(id);
             this.txmercado = new UsuariosDB().ListarMercados(id);
+            this.txespecialidade = new UsuariosDB().ListarEspecialidades(id);
         }
 
         public Usuarios(string usuario)

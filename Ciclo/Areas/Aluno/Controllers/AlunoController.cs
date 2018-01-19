@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ciclo.Areas.Aluno.Models;
 
 namespace Ciclo.Areas.Aluno.Controllers
 {
@@ -13,13 +14,21 @@ namespace Ciclo.Areas.Aluno.Controllers
         [Autenticacao]
         public ActionResult Index()
         {
-            return View();
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+
+            return View(new PainelView(Convert.ToInt32(cookie.Value)));
         }
 
         [Autenticacao]
         public ActionResult Usuario()
         {
             return PartialView(new VerificaLogadoAluno().Buscar());
+        }
+
+        [Autenticacao]
+        public ActionResult Menu()
+        {
+            return PartialView();
         }
 
         public ActionResult Sair()

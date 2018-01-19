@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Certificados";
+    ViewBag.Title = "Cursos que já fiz";
 }
 
 <div class="tg-bgparallax">
@@ -11,7 +11,7 @@
             <ol class="tg-breadcrumb">
                 <li><a href="~/Aluno">Painel</a></li>
                 <li class="tg-active">Perfil</li>
-                <li class="tg-active">Certificados</li>
+                <li class="tg-active">Cursos que já fiz</li>
             </ol>
         </div>
     </div>
@@ -22,46 +22,58 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_certificado">Localizar</button>
-                    &nbsp;<button class="tg-btn" type="button" onclick="CertificadosTodos();">Todos</button>
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Aluno")
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button" onclick="Certificados(0);">Novo</button>
-                    &nbsp;
-                    <button class="tg-btn" type="button" onclick="CertificadoAlterar()">Alterar</button>
-                    &nbsp;
-                    <button class="tg-btn" type="button" onclick="CertificadoExcluir()">Excluir</button>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <h4 class="font-azul">Diga-nos quais os cursos você já fez, quando foi, quem organizou, quem ministrou, e qual a nota você dá.</h4><br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn bt-m" type="button" id="pesquisa_certificado">Localizar</button>
+                            &nbsp;<button class="tg-btn bt-m" type="button" onclick="CertificadosTodos();">Todos</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                            <button class="tg-btn bt-m" type="button" onclick="Certificados(0);">Novo</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="CertificadoAlterar()">Alterar</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="CertificadoExcluir()">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="row pt">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                        <th width="20%">CERTIFICADORA</th>
+                                        <th width="20%">INSTRUTOR</th>
+                                        <th width="33%">CURSO</th>
+                                        <th width="17%">PERÍODO</th>
+                                        <th width="7%">NOTA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr style="font-size:14px;">
+                                            <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcertificado" /></th>
+                                            <td>@p.txcertificadora</td>
+                                            <td>@p.txinstrutor</td>
+                                            <td>@p.txcurso</td>
+                                            <td>@p.dtinicio.ToShortDateString() à @p.dtfim.ToShortDateString()</td>
+                                            <td>@p.nrnota</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    @*@Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")*@
                 </div>
             </div>
-            <div class="row pt">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="39%">CERTIFICADORA</th>
-                                <th width="39%">CURSO</th>
-                                <th width="19%">PERÍODO</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var p in Model)
-                            {
-                                <tr>
-                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcertificado" /></th>
-                                    <td>@p.txcertificadora</td>
-                                    <td>@p.txcurso</td>
-                                    <td>@p.dtinicio.ToShortDateString() à @p.dtfim.ToShortDateString()</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            @*@Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")*@
         </div>
     </div>
 </main>

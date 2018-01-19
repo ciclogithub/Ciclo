@@ -387,6 +387,32 @@ namespace Biblioteca.DB
             }
         }
 
+        public List<Especialidades> ListarEspecialidades(int id = 0)
+        {
+            try
+            {
+                List<Especialidades> list_especialidades = new List<Especialidades>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select e.idespecialidade, e.txespecialidade from Usuarios_Especialidades ue left join especialidades e on e.idespecialidade = ue.idespecialidade where ue.idusuario = @id order by e.txespecialidade");
+                query.SetParameter("id", id);
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_especialidades.Add(new Especialidades(Convert.ToInt32(reader["idespecialidade"]), Convert.ToString(reader["txespecialidade"]), 0));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_especialidades;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
         public List<Telefones> ListarTelefones(int id = 0)
         {
             try
@@ -455,6 +481,22 @@ namespace Biblioteca.DB
             }
         }
 
+        public void RemoverEspecialidades(int id)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("DELETE FROM Usuarios_Especialidades WHERE idusuario = @id");
+                query.SetParameter("id", id);
+                query.ExecuteUpdate();
+                session.Close();
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         public void RemoverTelefones(int id)
         {
             try
@@ -495,6 +537,24 @@ namespace Biblioteca.DB
                 Query query = session.CreateQuery("INSERT INTO Usuarios_Mercados (idusuario, idmercado) VALUES (@usuario, @mercado)");
                 query.SetParameter("usuario", id);
                 query.SetParameter("mercado", mercado);
+                query.ExecuteUpdate();
+                session.Close();
+
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        public void SalvarEspecialidade(int id, int especialidade)
+        {
+            try
+            {
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("INSERT INTO Usuarios_Especialidades (idusuario, idespecialidade) VALUES (@usuario, @especialidade)");
+                query.SetParameter("usuario", id);
+                query.SetParameter("especialidade", especialidade);
                 query.ExecuteUpdate();
                 session.Close();
 

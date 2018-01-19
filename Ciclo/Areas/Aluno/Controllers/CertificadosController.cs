@@ -61,13 +61,13 @@ namespace Ciclo.Areas.Aluno.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id, string certificadora, string curso, DateTime data_inicio, DateTime data_fim)
+        public JsonResult IncluirConcluir(int id, string certificadora, string curso, DateTime data_inicio, DateTime data_fim, string instrutor, int nota)
         {
             CertificadosDB db = new CertificadosDB();
 
             if (id == 0)
             {
-                db.Salvar(new Certificados(id, certificadora, curso, data_inicio, data_fim, 0));
+                db.Salvar(new Certificados(id, certificadora, curso, data_inicio, data_fim, 0, instrutor, nota));
                 Certificados certificado = db.Buscar(id);
             }
             else
@@ -77,6 +77,8 @@ namespace Ciclo.Areas.Aluno.Controllers
                 certificado.txcurso = curso;
                 certificado.dtinicio = data_inicio;
                 certificado.dtfim = data_fim;
+                certificado.nrnota = nota;
+                certificado.txinstrutor = instrutor;
 
                 db.Alterar(certificado);
             }

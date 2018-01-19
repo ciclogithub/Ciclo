@@ -21,7 +21,8 @@ namespace Ciclo.Areas.Aluno.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(string nome = "", string telefone = "", int cidade = 0, string empresa = "", string redes = "", string mercados = "")
+        //public JsonResult IncluirConcluir(string nome = "", string telefone = "", int cidade = 0, string empresa = "", string redes = "", string mercados = "")
+        public JsonResult IncluirConcluir(string nome = "", string telefone = "", int cidade = 0, string empresa = "", string redes = "")
         {
             UsuariosDB db = new UsuariosDB();
             HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
@@ -36,17 +37,17 @@ namespace Ciclo.Areas.Aluno.Controllers
 
             db.RemoverTelefones(ident);
             db.RemoverRedesSociais(ident);
-            db.RemoverMercados(ident);
+            //db.RemoverMercados(ident);
 
-            var arrM = mercados.Split(',');
-            foreach (var i in arrM)
-            {
-                if (i != "")
-                {
-                    var arrTemp = i.Split('|');
-                    new UsuariosDB().SalvarMercado(ident, Convert.ToInt32(arrTemp[0]));
-                }
-            }
+            //var arrM = mercados.Split(',');
+            //foreach (var i in arrM)
+            //{
+            //    if (i != "")
+            //    {
+            //        var arrTemp = i.Split('|');
+            //        new UsuariosDB().SalvarMercado(ident, Convert.ToInt32(arrTemp[0]));
+            //    }
+            //}
 
             var arrT = telefone.Split(',');
             foreach (var i in arrT)
