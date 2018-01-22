@@ -14,6 +14,7 @@ namespace Ciclo.Areas.Aluno.Models
         public List<Especialidades> especialidades { get; set; }
         public List<RedesSociais> redes { get; set; }
         public Usuarios usuarios = new Usuarios();
+        
 
         public PerfilView(int id)
         {
@@ -21,6 +22,7 @@ namespace Ciclo.Areas.Aluno.Models
             this.mercados = new MercadosDB().Listar();
             this.especialidades = new EspecialidadesDB().Listar();
             this.redes = new RedesSociaisDB().Listar();
+            
             if (id != 0)
             {
                 this.usuarios = new UsuariosDB().BuscarCompleto(id);

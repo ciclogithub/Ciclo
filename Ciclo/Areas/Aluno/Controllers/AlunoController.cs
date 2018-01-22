@@ -31,6 +31,14 @@ namespace Ciclo.Areas.Aluno.Controllers
             return PartialView();
         }
 
+        [Autenticacao]
+        public ActionResult Trilha()
+        {
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+
+            return PartialView(new PainelView(Convert.ToInt32(cookie.Value)));
+        }
+
         public ActionResult Sair()
         {
             HttpCookie cookie = Request.Cookies["ciclo_usuario"];

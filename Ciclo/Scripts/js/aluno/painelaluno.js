@@ -1,5 +1,31 @@
 ﻿$(function () {
-    
+    var today = moment().format('DD/MM/YYYY')
+    $('#filtro_data').daterangepicker({
+        "autoApply": true,
+        "ranges": {
+            "Hoje": [today, today],
+            "Amanhã": [moment().add(1, 'd'), moment().add(1, 'd')],
+            "Próximos 7 dias": [today, moment().add(7, 'd')],
+            "Próximos 15 dias": [today, moment().add(15, 'd')],
+            "Neste Mês": [moment().startOf('month'), moment().endOf('month')],
+            "Próximo Mês": [moment().add(1, 'M').startOf('month'), moment().add(1, 'M').endOf('month')]
+        },
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "daysOfWeek": ["Do", "Se", "Te", "Qu", "Qu", "Sex", "Sa"],
+            "monthNames": ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+            "firstDay": 1
+        },
+        "alwaysShowCalendars": true,
+        "opens": "left",
+    });
+    $('#filtro_data').val('');
+});
+
+
+$("#filtro_pesquisar").click(function () {
+    $("#filtro_form").submit();
 });
 
 var Aguarde;

@@ -13,6 +13,7 @@ namespace Ciclo.Areas.Aluno.Models
         public Boolean mercado { get; set; }
         public Boolean cursos { get; set; }
         public Boolean interesse { get; set; }
+        public List<Cursos_Site> lancamentos { get; set; }
 
         public PainelView(int id)
         {
@@ -20,6 +21,7 @@ namespace Ciclo.Areas.Aluno.Models
             this.mercado = new PainelAlunoDB().BuscarMercado(id);
             this.cursos = new PainelAlunoDB().BuscarCursos(id);
             this.interesse = new PainelAlunoDB().BuscarInteresse(id);
+            this.lancamentos = new Cursos_SiteDB().Ultimos();
         }
         
     }

@@ -18,6 +18,7 @@ namespace Biblioteca.Entidades
         public string txfoto { get; set; }
         public string txcidade { get; set; }
         public string txestado { get; set; }
+        public string txdescritivo { get; set; }
         public List<Cursos_Datas> datas { get; set; }
 
         public Cursos_Site()
@@ -30,9 +31,10 @@ namespace Biblioteca.Entidades
             this.txfoto = "";
             this.txcidade = "";
             this.txestado = "";
+            this.txdescritivo = "";
         }
 
-        public Cursos_Site(int total, int idcurso, string txcurso, string txcategoria, string instrutores, string txfoto, string cidade, string estado)
+        public Cursos_Site(int total, int idcurso, string txcurso, string txcategoria, string instrutores, string txfoto, string cidade, string estado, string descritivo)
         {
             this.total = total;
             this.idcurso = idcurso;
@@ -43,6 +45,7 @@ namespace Biblioteca.Entidades
             this.txcidade = cidade;
             this.txestado = estado;
             this.datas = new Cursos_DatasDB().Listar(idcurso);
+            this.txdescritivo = descritivo;
         }
 
         
