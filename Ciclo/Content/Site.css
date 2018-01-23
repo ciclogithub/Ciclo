@@ -304,7 +304,7 @@ table input {
     text-align: center;
     width: 100%;
     display: inline-block;
-    font-size:14px;
+    font-size:12px;
 }
 
 .verde_escuro {
@@ -813,17 +813,16 @@ h3.perfil span {
 }
 
 .alerta {
-    font-size:13px;
+    font-size:12px;
     text-align:center;
 }
 
 .alerta > div {
     text-align: center;
     background-color: #00ADEF;
-    border-radius: 40px;
-    height: 140px;
+    height: 156px;
     color: #FFF;
-    padding: 20px;
+    padding: 15px;
     font: 'Poppins', Arial, Helvetica, sans-serif !important;
     font-size: 13px;
     cursor: pointer;
@@ -839,7 +838,7 @@ h3.perfil span {
 }
 
 .alerta div b {
-    font-size:30px;
+    font-size:26px;
 }
 
 .font-azul {
@@ -886,6 +885,20 @@ h3.perfil span {
 
 .trilha img {
     max-height:50px;
+}
+
+.txt-alert {
+    color:red;
+    font-size:11px;
+    clear:both;
+}
+
+.txt-alert a {
+    font-weight:600;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    font-size:13px !important;
 }
 
 @media only screen and (max-device-width: 480px) {

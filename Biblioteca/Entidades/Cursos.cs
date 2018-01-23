@@ -34,6 +34,7 @@ namespace Biblioteca.Entidades
         public int total { get; set; }
         public List<Mercados> txmercado { get; set; }
         public List<Especialidades> txespecialidades { get; set; }
+        public List<Cursos_Datas> datas { get; set; }
 
         HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
@@ -87,6 +88,7 @@ namespace Biblioteca.Entidades
             this.total = total;
             this.txmercado = new CursosDB().ListarMercados(id);
             this.txespecialidades = new CursosDB().ListarEspecialidades(id);
+            this.datas = new Cursos_DatasDB().Listar(id);
         }
 
         public Cursos(int id, string curso)
@@ -105,6 +107,8 @@ namespace Biblioteca.Entidades
             this.txcor = new CoresDB().Buscar(cor);
             this.nome_categoria = new CategoriasDB().Buscar(categoria);
             this.total = total;
+            this.instrutores = new InstrutoresDB().ListarDoCurso(id);
+            this.datas = new Cursos_DatasDB().Listar(id);
         }
 
         public int Salvar()

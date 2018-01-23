@@ -21,7 +21,7 @@
 
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
-        <div class="container">
+        <div class="container pt30">
             @if (ViewBag.total > 0)
             {
             <div class="row">
@@ -29,17 +29,27 @@
                 {
                 <div class="col-md-4 col-xs-12 col-sm-6 div-curso">
                     <div>
-                        <a href="Curso?c=@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
+                        @if (p.txfoto != "")
+                        {
+                            <a href="Curso?c=@p.idcurso"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
+                        }
                         <div class="gray-box">
-                            <h3><a href="Curso/@p.idcurso">@p.txcurso</a></h3>
+                            <h4><a href="Curso?c=@p.idcurso">@p.txcurso</a></h4>
                             <p>
                                 <span><strong>Categoria:</strong> @p.txcategoria</span><br />
                                 <span><strong>Local:</strong> @p.txcidade / @p.txestado</span><br />
                                 <span><strong>Data:</strong> 
-                                @foreach (var i in p.datas)
+                                @if (p.datas.Count > 0)
                                 {
-                                    @Html.Raw(i.dtcurso + "<br />");
+                                    foreach (var i in p.datas)
+                                    {
+                                        @Html.Raw(i.dtcurso + "<br />");
+                                    }
                                 }
+                                else
+                                {
+                                    @: A definir
+                                }                                
                                 </span>
                             </p>
                         </div>

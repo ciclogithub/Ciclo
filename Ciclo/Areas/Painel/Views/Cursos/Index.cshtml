@@ -11,7 +11,7 @@
                 <h1>@Html.Action("Usuario", "Painel")</h1>
             </div>
             <ol class="tg-breadcrumb">
-                <li><a href="~/Painel">Dashboard</a></li>
+                <li><a href="~/Painel">Painel</a></li>
                 <li class="tg-active">Cadastros</li>
                 <li class="tg-active">Cursos</li>
             </ol>
@@ -22,62 +22,79 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
-
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_curso">Localizar</button>
-                    &nbsp;<button class="tg-btn" type="button" onclick="CursosTodos();">Todos</button>
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Painel")
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button" onclick="Cursos(0);">Novo</button>
-                    &nbsp;
-                    <button class="tg-btn" type="button" onclick="CursoAlterar()">Alterar</button>
-                    &nbsp;
-                    <button class="tg-btn" type="button" onclick="CursoExcluir()">Excluir</button>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn bt-m" type="button" id="pesquisa_curso">Localizar</button>
+                            &nbsp;<button class="tg-btn bt-m" type="button" onclick="CursosTodos();">Todos</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                            <button class="tg-btn bt-m" type="button" onclick="Cursos(0);">Novo</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="CursoAlterar()">Alterar</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="CursoExcluir()">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="row pt">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                        <th width="2%">&nbsp;</th>
+                                        <th width="54%">CURSO</th>
+                                        <th width="23%">CATEGORIA</th>
+                                        <th width="18%" colspan="6">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcurso" /></th>
+                                            <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
+                                            <td>
+                                                @p.txcurso
+                                            @if (@p.instrutores.Count == 0)
+                                            {
+                                                @: <div class="txt-alert">Este curso não possui nenhum instrutor cadastrado, <a href="javascript:CursoInstrutor(@p.idcurso)">clique aqui</a> para cadastrar.</div>
+                                    }
+
+                                            @if (@p.datas.Count == 0)
+                                            {
+                                                @: <div class="txt-alert">Este curso não possui nenhuma data cadastrada, <a href="javascript:CursoData(@p.idcurso)">clique aqui</a> para cadastrar.</div>
+                                    }
+                                        </td>
+                                        <td>@p.nome_categoria.txcategoria</td>
+                                        <td onclick="CursoInstrutor(@p.idcurso)" width="3%" title="Instrutores" class="td"><i class="glyphicon glyphicon-education border-icon"></i></td>
+                                        <td onclick="CursoAluno(@p.idcurso)" width="3%" title="Alunos" class="td"><i class="glyphicon glyphicon-user border-icon"></i></td>
+                                        <td onclick="CursoData(@p.idcurso)" width="3%" title="Datas" class="td"><i class="glyphicon glyphicon-calendar border-icon"></i></td>
+                                        @if (p.flgratuito)
+                                        {
+                                            <td width="3%">&nbsp;</td>
+                                        }
+                                        else
+                                        {
+                                            <td onclick="CursoValor(@p.idcurso)" width="3%" title="Valores" class="td"><i class="glyphicon glyphicon-usd border-icon"></i></td>
+                                        }
+                                        <td onclick="CursoAvaliacao(@p.idcurso)" width="3%" title="Avaliação" class="td"><i class="glyphicon glyphicon-star"></i></td>
+                                        <td onclick="CursoListaAluno(@p.idcurso)" width="3%" title="Lista de Alunos" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
                 </div>
             </div>
-            <div class="row pt">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="2%">&nbsp;</th>
-                                <th width="57%">CURSO</th>
-                                <th width="23%">CATEGORIA</th>
-                                <th width="15%" colspan="5">&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var p in Model)
-                            {
-                                <tr>
-                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idcurso" /></th>
-                                    <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
-                                    <td>@p.txcurso</td>
-                                    <td>@p.nome_categoria.txcategoria</td>
-                                    <td onclick="CursoInstrutor(@p.idcurso)" width="3%" title="Instrutores" class="td"><i class="glyphicon glyphicon-education border-icon"></i></td>
-                                    <td onclick="CursoAluno(@p.idcurso)" width="3%" title="Alunos" class="td"><i class="glyphicon glyphicon-user border-icon"></i></td>
-                                    <td onclick="CursoData(@p.idcurso)" width="3%" title="Datas" class="td"><i class="glyphicon glyphicon-calendar border-icon"></i></td>
-                                    @if (p.flgratuito)
-                                    {
-                                        <td width="3%">&nbsp;</td>
-                                    }
-                                    else
-                                    {
-                                        <td onclick="CursoValor(@p.idcurso)" width="3%" title="Valores" class="td"><i class="glyphicon glyphicon-usd border-icon"></i></td>
-                                    }
-                                    <td onclick="CursoAvaliacao(@p.idcurso)" width="3%" title="Avaliação" class="td"><i class="glyphicon glyphicon-star"></i></td>
-                                    @*<td onclick="CursoFolder(@p.idcurso)" width="3%" title="Folder" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>*@
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
         </div>
     </div>
 </main>

@@ -393,6 +393,22 @@ namespace Ciclo.Areas.Painel.Controllers
             return Json(new Retorno());
         }
 
+        // LISTA DE ALUNOS
+
+        [Autenticacao]
+        public ActionResult Lista(int id = 0)
+        {
+            Cursos curso = new Cursos();
+            if (id != 0)
+            {
+                curso = new CursosDB().Buscar(id);
+            }
+
+            ViewBag.alunos = new CursosAlunosDB().ListarDoCurso(id);
+
+            return PartialView(curso);
+        }
+
         private static Random random = new Random();
         public static string RandomString(int length)
         {

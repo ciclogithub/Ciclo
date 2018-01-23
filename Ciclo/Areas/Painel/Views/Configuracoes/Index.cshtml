@@ -11,7 +11,7 @@
                 <h1>@Html.Action("Usuario", "Painel")</h1>
             </div>
             <ol class="tg-breadcrumb">
-                <li><a href="~/Painel">Dashboard</a></li>
+                <li><a href="~/Painel">Painel</a></li>
                 <li class="tg-active">Configurações</li>
             </ol>
         </div>
@@ -22,49 +22,55 @@
     <div class="tg-sectionspace">
         <div class="container">
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <form method="post" action="" id="form-modal">
-                        <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
-                        <div class="form-group">
-                            <label class="control-label" for="txemail">E-Mail *</label>
-                            <h4 style="text-transform:lowercase">@Model.txemail</h4>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="txtema">Organizador *</label>
-                            <input value="@Model.txorganizador" type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" maxlength="200">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="txtelefone">Telefone *</label>
-                            <input value="@Model.txtelefone" type="text" name="txtelefone" id="txtelefone" class="form-control validate[required,minSize[3],maxSize[100]]" maxlength="100">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="txdescritivo">Descrição</label>
-                            <textarea name="txdescritivo" class="form-control" id="txdescritivo">@Model.txdescritivo</textarea>
-                        </div>
-                        <div class="text-center">
-                            <button id="incluir_btn" class="tg-btn text-center" type="button">Enviar</button>
-                        </div>
-                    </form>
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Painel")
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <form method="post" action="" id="form-modal_alterar">
-                        <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
-                        <div class="form-group">
-                            <label class="control-label" for="txsenhaatual">Senha Atual *</label>
-                            <input type="password" name="txsenhaatual" id="txsenhaatual" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="txnovasenha">Nova Senha *</label>
-                            <input type="password" name="txnovasenha" id="txnovasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfirmasenha],notEquals[txsenhaatual]]" placeholder="Nova Senha *" maxlength="20">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="txconfirmasenha">Confirmar Senha *</label>
-                            <input type="password" name="txconfirmasenha" id="txconfirmasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txnovasenha]]" placeholder="Confirmar Senha *" maxlength="20">
-                        </div>
-                        <div class="text-center">
-                            <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Alterar Senha</button>
-                        </div>
-                    </form>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <div class="row pt-inner">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <form method="post" action="" id="form-modal">
+                            <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
+                            <div class="form-group">
+                                <label class="control-label" for="txemail">E-Mail *</label>
+                                <h4 style="text-transform:lowercase">@Model.txemail</h4>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="txtema">Organizador *</label>
+                                <input value="@Model.txorganizador" type="text" name="txorganizador" id="txorganizador" class="form-control validate[required,minSize[3],maxSize[200]]" maxlength="200">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="txtelefone">Telefone *</label>
+                                <input value="@Model.txtelefone" type="text" name="txtelefone" id="txtelefone" class="form-control validate[required,minSize[3],maxSize[100]]" maxlength="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="txdescritivo">Descrição</label>
+                                <textarea name="txdescritivo" class="form-control" id="txdescritivo">@Model.txdescritivo</textarea>
+                            </div>
+                            <div class="text-center">
+                                <button id="incluir_btn" class="tg-btn text-center" type="button">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <form method="post" action="" id="form-modal_alterar">
+                            <input type="hidden" id="idorganizador" name="idorganizador" value="@Model.idorganizador" />
+                            <div class="form-group">
+                                <label class="control-label" for="txsenhaatual">Senha Atual *</label>
+                                <input type="password" name="txsenhaatual" id="txsenhaatual" class="form-control validate[required,minSize[3],maxSize[20]]" placeholder="Senha *" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="txnovasenha">Nova Senha *</label>
+                                <input type="password" name="txnovasenha" id="txnovasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfirmasenha],notEquals[txsenhaatual]]" placeholder="Nova Senha *" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="txconfirmasenha">Confirmar Senha *</label>
+                                <input type="password" name="txconfirmasenha" id="txconfirmasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txnovasenha]]" placeholder="Confirmar Senha *" maxlength="20">
+                            </div>
+                            <div class="text-center">
+                                <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Alterar Senha</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
 ﻿$(function () {
+
+    $(".bg-menu").height($("#tg-main").height());
+
     $('.table tr th[scope=row]').click(function (event) {
         if (!$(event.target).is('input')) {
             var obj = $(this).find('input');

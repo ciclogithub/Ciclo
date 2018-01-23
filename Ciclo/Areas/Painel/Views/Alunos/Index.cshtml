@@ -11,7 +11,7 @@
                 <h1>@Html.Action("Usuario", "Painel")</h1>
             </div>
             <ol class="tg-breadcrumb">
-                <li><a href="~/Painel">Dashboard</a></li>
+                <li><a href="~/Painel">Painel</a></li>
                 <li class="tg-active">Cadastros</li>
                 <li class="tg-active">Alunos</li>
             </ol>
@@ -22,73 +22,82 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container">
-
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn" type="button" id="pesquisa_aluno">Localizar</button>
-                    &nbsp;<button class="tg-btn" type="button" onclick="AlunosTodos();">Todos</button>
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Painel")
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                    <button class="tg-btn" type="button" onclick="Alunos(0);">Novo</button>
-                    &nbsp;
-                    <button class="tg-btn" type="button" onclick="AlunoAlterar()">Alterar</button>
-                    &nbsp;
-                    <button class="tg-btn" type="button" onclick="AlunoExcluir()">Excluir</button>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn bt-m" type="button" id="pesquisa_aluno">Localizar</button>
+                            &nbsp;<button class="tg-btn bt-m" type="button" onclick="AlunosTodos();">Todos</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                            <button class="tg-btn bt-m" type="button" onclick="Alunos(0);">Novo</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="AlunoAlterar()">Alterar</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="AlunoExcluir()">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="row pt">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                        <th width="2%">&nbsp;</th>
+                                        <th width="29%">ALUNO</th>
+                                        <th width="15%">CPF</th>
+                                        <th width="31%">E-MAIL</th>
+                                        <th width="15%">TELEFONE</th>
+                                        <th width="5%"><img src="~/images/diagweb-32x32.png" title="Possui cadastro no Diagweb" /></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idaluno" /></th>
+                                            <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
+                                            <td>@p.txaluno</td>
+                                            <td>@p.txcpf</td>
+                                            <td>
+                                                @foreach (var e in p.txemail)
+                                                {
+                                                    @e.txemail<br />
+                                                }
+                                            </td>
+                                            <td>
+                                                @foreach (var t in p.txtelefone)
+                                                {
+                                                    @t.txtelefone
+                                                    if (t.flwhatsapp == 1)
+                                                    {
+                                                        @Html.Raw("<a style='color:#006400 !important' href='https://api.whatsapp.com/send?phone=55" + t.txtelefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "") + "' target='_blank'> <i class='fa fa-whatsapp'></i></a>");
+                                                    }
+                                                    <br />
+                                                }
+                                            </td>
+                                            <td style="text-align:center">
+                                                @if (p.diagweb == 0)
+                                                { <span title="Não é cliente Diagweb"><i class="fa fa-circle red-icon" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle red-icon" aria-hidden="true"></i></span> }
+                                                @if (p.diagweb == 1)
+                                                { <span title="Cliente Diagweb"><i class="fa fa-circle green-icon aria-hidden="true"></i>&nbsp;<i class="fa fa-circle red-icon" aria-hidden="true"></i></span> }
+                                                @if (p.diagweb == 2)
+                                                { <span title="Cliente Diagweb com produtos"><i class="fa fa-circle green-icon" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle green-icon" aria-hidden="true"></i></span>  }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
                 </div>
             </div>
-            <div class="row pt">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                <th width="2%">&nbsp;</th>
-                                <th width="29%">ALUNO</th>
-                                <th width="15%">CPF</th>
-                                <th width="31%">E-MAIL</th>
-                                <th width="15%">TELEFONE</th>
-                                <th width="5%"><img src="~/images/diagweb-32x32.png" title="Possui cadastro no Diagweb" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var p in Model)
-                            {
-                                <tr>
-                                    <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idaluno" /></th>
-                                    <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
-                                    <td>@p.txaluno</td>
-                                    <td>@p.txcpf</td>
-                                    <td>
-                                        @foreach (var e in p.txemail)
-                                        {
-                                            @e.txemail<br />
-                                        }
-                                    </td>
-                                    <td>
-                                        @foreach (var t in p.txtelefone)
-                                        {
-                                            @t.txtelefone
-                                            if (t.flwhatsapp == 1)
-                                            {
-                                                @Html.Raw("<a style='color:#006400 !important' href='https://api.whatsapp.com/send?phone=55" + t.txtelefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "") + "' target='_blank'> <i class='fa fa-whatsapp'></i></a>");
-                                            }
-                                            <br />
-                                        }
-                                    </td>
-                                    <td style="text-align:center">
-                                    @if (p.diagweb == 0) { <span title="Não é cliente Diagweb"><i class="fa fa-circle red-icon" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle red-icon" aria-hidden="true"></i></span> }
-                                    @if (p.diagweb == 1) { <span title="Cliente Diagweb"><i class="fa fa-circle green-icon aria-hidden="true"></i>&nbsp;<i class="fa fa-circle red-icon" aria-hidden="true"></i></span> }
-                                    @if (p.diagweb == 2) { <span title="Cliente Diagweb com produtos"><i class="fa fa-circle green-icon" aria-hidden="true"></i>&nbsp;<i class="fa fa-circle green-icon" aria-hidden="true"></i></span>  }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
         </div>
     </div>
 </main>

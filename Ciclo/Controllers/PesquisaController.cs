@@ -22,7 +22,7 @@ namespace Ciclo.Controllers
 
             if (list.Count > 0)
             {
-                ViewBag.total = list.First().total;
+                ViewBag.total = 1; /* list.First().total;*/
                 ViewBag.pagina = pagina;
             }
             else

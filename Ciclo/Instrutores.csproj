@@ -280,6 +280,8 @@
     <Content Include="Areas\Aluno\Views\Mercado\Index.cshtml" />
     <Content Include="Areas\Aluno\Views\Aluno\Menu.cshtml" />
     <Content Include="Areas\Aluno\Views\Aluno\Trilha.cshtml" />
+    <Content Include="Areas\Painel\Views\Cursos\Lista.cshtml" />
+    <Content Include="Areas\Painel\Views\Painel\Menu.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\1.png" />
     <Content Include="images\2.png" />
@@ -592,6 +594,7 @@
     <Content Include="Scripts\js\organizador\cursos.js" />
     <Content Include="Scripts\js\organizador\configuracoes.js" />
     <Content Include="Scripts\js\organizador\especialidades.js" />
+    <Content Include="Scripts\js\organizador\lista_alunos.js" />
     <Content Include="Scripts\js\organizador\lista.js" />
     <Content Include="Scripts\js\organizador\relatorios.js" />
     <Content Include="Scripts\js\organizador\avaliacao.js" />

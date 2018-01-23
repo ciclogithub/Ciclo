@@ -791,10 +791,10 @@ function ShowHide(id) {
     }
 }
 
-/* FOLDER */
+/* LISTA DE ALUNOS */
 
-function CursoFolder(id) {
-    alert("Em desenvolvimento");
+function CursoListaAluno(id) {
+    Modal("/Painel/Cursos/Lista", id, "Cursos - Lista de Alunos", "");
 }
 
 

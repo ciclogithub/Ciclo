@@ -1,0 +1,39 @@
+﻿@model Biblioteca.Entidades.Cursos
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>@Model.txcurso</h3>
+        <input type="hidden" id="curso_name" name="curso_name" value="@Model.txcurso" />
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" id="table2excel">
+                <table class="table table-bordered table-hover" id="table_avaliacao">
+                    <thead>
+                        <tr>
+                            <th width="40%">ALUNO</th>
+                            <th width="30%">E-MAIL</th>
+                            <th width="30%">TELEFONE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in ViewBag.alunos)
+                        {
+                            <tr>
+                                <td>@p.aluno</td>
+                                <td>@p.emails</td>
+                                <td>@p.telefones</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <button id="incluir_exportar" class="tg-btn" type="button">Exportar para Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/table2excel")
+@Scripts.Render("~/bundles/lista_alunos")
