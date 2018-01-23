@@ -40,12 +40,12 @@ namespace Ciclo.Controllers
                     ViewBag.data = insc.dtinscricao;
                     ViewBag.status = insc.idstatus;
                 }
-                
+
                 return View(new CursoView(Convert.ToInt32(curso)));
             }
             else
             {
-                return RedirectToAction("Index", "Login", new { curso = curso });
+                return RedirectToAction("Index", "Cadastro/Aluno", new { curso = curso });
             }
         }
     }
