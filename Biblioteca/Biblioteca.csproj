@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\Painel_CicloDB.cs" />
     <Compile Include="DB\Meus_CursosDB.cs" />
     <Compile Include="DB\InscricoesDB.cs" />
     <Compile Include="DB\Curso_SiteDB.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="DB\OrganizadoresDB.cs" />
     <Compile Include="DB\InstrutoresDB.cs" />
     <Compile Include="DB\PainelDB.cs" />
+    <Compile Include="Entidades\Painel_Ciclo.cs" />
     <Compile Include="Entidades\Meus_Cursos.cs" />
     <Compile Include="Entidades\Inscricoes.cs" />
     <Compile Include="Entidades\Altera_Senha.cs" />

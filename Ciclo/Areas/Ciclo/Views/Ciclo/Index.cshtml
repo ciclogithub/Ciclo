@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Painel";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>CICLO</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row pt30">
+                <form id="form_ciclo" name="form_ciclo" action="Ciclo" method="POST">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <label class="control-label" for="dtini">Período</label>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control validate[required,minSize[10],maxSize[10],date]" id="dtini" name="dtini" value="@ViewBag.dtini" maxlength="10" data-mask="00/00/0000" />
+                                    <span class="input-group-addon" onclick="$('#dtini').datepicker('show');" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control validate[required,minSize[10],maxSize[10],date]" id="dtfim" name="dtfim" value="@ViewBag.dtfim" maxlength="10" data-mask="00/00/0000" />
+                                    <span class="input-group-addon" onclick="$('#dtfim').datepicker('show');" style="cursor:pointer"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <label class="control-label" for="tprelatorio">Tipo de Relatório</label>
+                        <select id="tprelatorio" name="tprelatorio" class="form-control validate[required]">
+                            <option value="">-- Selecione --</option>
+                            <option value="1" @(ViewBag.tipo == 1 ? "selected" : "")>Organizadores</option>
+                            <option value="2" @(ViewBag.tipo == 2 ? "selected" : "")>Usuários</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <label class="control-label" for="incluir_btn">&nbsp;</label>
+                        <button id="incluir_btn" class="tg-btn" type="button">Gerar Relatório</button>
+                    </div>
+                </form>
+            </div>
+
+            @{ int i = 1; }
+            @if (ViewBag.tipo == 1)
+            {
+                <div class="row pt30" id="table2excel">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="1%">#</th>
+                                    <th width="10%">CADASTRO</th>
+                                    <th width="26%">ORGANIZADOR</th>
+                                    <th width="16%">TELEFONE</th>
+                                    <th width="12%">E-MAIL</th>
+                                    <th width="6%">CURSOS</th>
+                                    <th width="6%">INSTRUTORES</th>
+                                    <th width="6%">TEMAS</th>
+                                    <th width="6%">LOCAIS</th>
+                                    <th width="6%">EMPRESAS</th>
+                                    <th width="6%">ALUNOS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.organizadores)
+                                {
+                                    <tr style="font-size:14px;">
+                                        <td>@i</td>
+                                        <td>@p.data.ToShortDateString()</td>
+                                        <td>@p.nome</td>
+                                        <td>@p.telefone</td>
+                                        <td>@p.email</td>
+                                        <td>@p.cursos</td>
+                                        <td>@p.instrutores</td>
+                                        <td>@p.temas</td>
+                                        <td>@p.locais</td>
+                                        <td>@p.empresas</td>
+                                        <td>@p.alunos</td>
+                                    </tr>
+                                    i = i + 1;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <button id="incluir_exportar" class="tg-btn" type="button">Exportar para excel</button><br />&nbsp;
+                    </div>
+                </div>
+             }
+
+            @if (ViewBag.tipo ==2)
+            {
+                <div class="row pt30" id="table2excel">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="1%">#</th>
+                                    <th width="10%">CADASTRO</th>
+                                    <th width="30%">USUÁRIO</th>
+                                    <th width="29%">TELEFONE</th>
+                                    <th width="29%">E-MAIL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.usuarios)
+                                {
+                                    <tr style="font-size:14px;">
+                                        <td>@i</td>
+                                        <td>@p.data.ToShortDateString()</td>
+                                        <td>@p.nome</td>
+                                        <td>@p.telefone</td>
+                                        <td>@p.email</td>
+                                    </tr>
+                                    i = i + 1;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <button id="incluir_exportar" class="tg-btn" type="button">Exportar para excel</button><br />&nbsp;
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/table2excel")
+}

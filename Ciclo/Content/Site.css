@@ -903,7 +903,7 @@ h3.perfil span {
 
 @media only screen and (max-device-width: 480px) {
     #slideshow {
-        margin: 80px 0px 0px 0px !important; /*0*/
+        margin: 0px 0px 0px 0px !important; /*0*/
         position: relative !important;
         height: 120px !important;
         overflow: hidden !important;
@@ -950,9 +950,15 @@ h3.perfil span {
     }
     .tg-btnbookseat {
         float: left !important;
-        margin-left:30px !important;
+        
     }
-}
+    .mt {
+        margin-top:20px;
+    }
+
+    .tg-sectiontreina .img-text2 {
+       width: 80% !important;
+    }
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 680px) {
     #slideshow {

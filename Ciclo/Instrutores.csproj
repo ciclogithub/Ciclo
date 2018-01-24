@@ -162,6 +162,9 @@
     <Compile Include="Areas\Aluno\Models\PainelView.cs" />
     <Compile Include="Areas\Aluno\Models\PerfilView.cs" />
     <Compile Include="Areas\Aluno\Models\NotificacoesView.cs" />
+    <Compile Include="Areas\Ciclo\CicloAreaRegistration.cs" />
+    <Compile Include="Areas\Ciclo\Controllers\CicloController.cs" />
+    <Compile Include="Areas\Ciclo\Models\CicloView.cs" />
     <Compile Include="Areas\Painel\Controllers\EmpresasController.cs" />
     <Compile Include="Areas\Painel\Controllers\AlunosController.cs" />
     <Compile Include="Areas\Painel\Controllers\InscricoesController.cs" />
@@ -282,6 +285,11 @@
     <Content Include="Areas\Aluno\Views\Aluno\Trilha.cshtml" />
     <Content Include="Areas\Painel\Views\Cursos\Lista.cshtml" />
     <Content Include="Areas\Painel\Views\Painel\Menu.cshtml" />
+    <Content Include="Areas\Ciclo\Views\web.config" />
+    <Content Include="Areas\Ciclo\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Ciclo\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Ciclo\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Ciclo\Views\Ciclo\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\1.png" />
     <Content Include="images\2.png" />
@@ -589,6 +597,7 @@
     <Content Include="Scripts\js\aluno\perfil.js" />
     <Content Include="Scripts\js\aluno\cursos.js" />
     <Content Include="Scripts\js\aluno\painelaluno.js" />
+    <Content Include="Scripts\js\ciclo\ciclo.js" />
     <Content Include="Scripts\js\organizador\inscricoes.js" />
     <Content Include="Scripts\js\organizador\empresas.js" />
     <Content Include="Scripts\js\organizador\cursos.js" />

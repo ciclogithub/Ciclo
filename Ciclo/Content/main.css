@@ -3680,7 +3680,7 @@ body.tg-comingsoonpage .tg-foorterbar .tg-socialicons{padding:0;}
 	left: 0;
 	width: 100%;
 	background: #fff;
-	position: fixed;
+	/*position: fixed;*/
 	padding: 15px 0;
 }
 .tg-homevtwo .tg-nav{padding: 8px 0 0;}

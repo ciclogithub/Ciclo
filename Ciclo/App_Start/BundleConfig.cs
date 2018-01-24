@@ -37,6 +37,16 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/home").Include(
                 "~/Scripts/js/home.js"));
 
+            // PAINEL CICLO 
+
+            bundles.Add(new ScriptBundle("~/bundles/ciclo").Include(
+                "~/Scripts/plugins/validate/js/jquery.validationEngine-pt_BR.js",
+                "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
+                "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
+                "~/Scripts/plugins/select2/js/select2.full.min.js",
+                "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
+                "~/Scripts/js/ciclo/ciclo.js"));
+
             // PAINEL ORGANIZADOR 
 
             bundles.Add(new ScriptBundle("~/bundles/painel").Include(
