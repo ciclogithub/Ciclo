@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AlteraSenhaController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InscricaoController.cs" />
@@ -726,6 +727,7 @@
     <Content Include="Views\Pesquisa\Index.cshtml" />
     <Content Include="Views\Cadastro\Aluno.cshtml" />
     <Content Include="Views\Cadastro\Instrutor.cshtml" />
+    <Content Include="Views\Cursos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
