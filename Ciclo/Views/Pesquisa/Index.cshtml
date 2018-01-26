@@ -22,6 +22,7 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container pt30">
+            @{  int i = 0; }
             @if (ViewBag.total > 0)
             {
             <div class="row">
@@ -41,9 +42,9 @@
                                 <span><strong>Data:</strong> 
                                 @if (p.datas.Count > 0)
                                 {
-                                    foreach (var i in p.datas)
+                                    foreach (var x in p.datas)
                                     {
-                                        @Html.Raw(i.dtcurso + "<br />");
+                                        @Html.Raw(x.dtcurso + "<br />");
                                     }
                                 }
                                 else
@@ -55,11 +56,16 @@
                         </div>
                     </div>
                 </div>
+                    i = i + 1;
+                    if (i % 3 == 0)
+                    {
+                        @: </div><div class="row">
+                    }
                 }
-            </div>
-            }
-            else
-            {
+                </div>
+                }
+                else
+                {
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12"><br />
                         <i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Nenhum resultado encontrado

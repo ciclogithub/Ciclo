@@ -45,7 +45,7 @@ namespace Biblioteca.DB
         private IDbConnection conexao;
         public DBSession()
         {
-            string conec = "Data Source=201.16.246.197; Initial Catalog=treinaauto; User ID=Treinaauto; Password=Tre!n@@uto2017; Language=Portuguese;  Max Pool Size=10000; Database=treinaauto";
+            string conec = "Data Source=201.16.140.69; Initial Catalog=treinaauto; User ID=Treinaauto; Password=Tre!n@@uto2017; Language=Portuguese;  Max Pool Size=10000; Database=treinaauto";
 
             conexao = new SqlConnection(conec);
 
