@@ -50,7 +50,11 @@
                 <br /><a href="~/Aluno/Certificados">CURSOS QUE JÁ FIZ</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                <img src="~/images/icones/final.png" /><br />PARABÉNS
+                @if ((Model.perfil) && (Model.interesse) && (Model.mercado) && (Model.cursos))
+                {
+                    <img src="~/images/icones/final.png" /><br />
+                    @:PARABÉNS
+                }
             </div>
         </div>
     </div>

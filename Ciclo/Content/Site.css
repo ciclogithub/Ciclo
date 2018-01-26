@@ -59,6 +59,10 @@ textarea {
     padding-top: 30px;
 }
 
+.pt60 {
+    padding-top: 60px;
+}
+
 .mb10 {
     margin-bottom:10px;
 }
@@ -776,7 +780,7 @@ h3.perfil span {
 }
 .bg-cinza .pt-inner {
     background-color: #FFF;
-    min-height:412px;
+    min-height:500px;
 }
 .bg-menu {
     background-color: #E2EAED;

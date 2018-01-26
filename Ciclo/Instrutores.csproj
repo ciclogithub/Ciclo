@@ -330,6 +330,10 @@
     <Content Include="images\icones\16.png" />
     <Content Include="images\icones\17.png" />
     <Content Include="images\icones\18.png" />
+    <Content Include="images\icones\19.png" />
+    <Content Include="images\icones\20.png" />
+    <Content Include="images\icones\21.png" />
+    <Content Include="images\icones\22.png" />
     <Content Include="images\icones\computador.png" />
     <Content Include="images\icones\final.png" />
     <Content Include="images\icones\seta.png" />

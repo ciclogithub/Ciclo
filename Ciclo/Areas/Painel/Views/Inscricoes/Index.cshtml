@@ -66,7 +66,12 @@
                                             <td>@p.usuario</td>
                                             <td>@p.curso</td>
                                             <td>@p.dtinscricao</td>
-                                            <td>@p.dtstatus</td>
+                                            <td>
+                                            @if (p.dtstatus.Year > 1900)
+                                            {
+                                                @p.dtstatus;
+                                            }
+                                            </td>
                                             <td>@p.motivo</td>
                                         </tr>
                                     }

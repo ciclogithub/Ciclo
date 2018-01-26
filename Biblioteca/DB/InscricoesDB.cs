@@ -7,6 +7,7 @@ using Biblioteca.Entidades;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web;
+using Biblioteca.Funcoes;
 
 namespace Biblioteca.DB
 {
@@ -73,14 +74,14 @@ namespace Biblioteca.DB
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("SELECT * FROM Inscricoes WHERE idusuario = @usuario and idcurso = @curso");
+                Query quey = session.CreateQuery("SELECT *, isnull(dtinscricao,'') as data_inscricao, isnull(dtstatus,'') as data_status FROM Inscricoes WHERE idusuario = @usuario and idcurso = @curso");
                 quey.SetParameter("usuario", usuario);
                 quey.SetParameter("curso", curso);
                 IDataReader reader = quey.ExecuteQuery();
 
                 if (reader.Read())
                 {
-                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"]));
+                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["data_inscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["data_status"]), Nulo.IfNull(Convert.ToString(reader["txmotivo"]), ""));
                 }
                 reader.Close();
                 session.Close();
@@ -108,7 +109,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["data_inscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["data_status"]), Convert.ToString(reader["txmotivo"]));
+                    inscricoes = new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToInt32(reader["idusuario"]), Convert.ToDateTime(reader["data_inscricao"]), Convert.ToInt32(reader["idcurso"]), Convert.ToInt32(reader["idstatus"]), Convert.ToDateTime(reader["data_status"]), Nulo.IfNull(Convert.ToString(reader["txmotivo"]), ""));
                 }
                 reader.Close();
                 session.Close();
@@ -139,7 +140,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"])));
+                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"]), Convert.ToDateTime(reader["dtstatus"]), Nulo.IfNull(Convert.ToString(reader["txmotivo"]), "")));
                 }
                 reader.Close();
                 session.Close();
@@ -171,7 +172,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"]), Convert.ToDateTime(reader["dtstatus"]), Convert.ToString(reader["txmotivo"])));
+                    inscricoes.Add(new Inscricoes(Convert.ToInt32(reader["idinscricao"]), Convert.ToDateTime(reader["dtinscricao"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txusuario"]), Convert.ToInt32(reader["total"]), Convert.ToDateTime(reader["dtstatus"]), Nulo.IfNull(Convert.ToString(reader["txmotivo"]), "")));
                 }
                 reader.Close();
                 session.Close();

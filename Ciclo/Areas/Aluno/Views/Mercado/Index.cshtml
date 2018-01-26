@@ -51,7 +51,7 @@
             foreach (var item in Model.usuarios.txespecialidade)
             {
                 especialidades = especialidades + "," + item.idespecialidade + "|" + item.txespecialidade;
-                list_especialidades = list_especialidades + "<li><i class='glyphicon glyphicon-trash' onclick='removeEspecialidade(" + i + ")'></i><span>" + item.txespecialidade;
+                list_especialidades = list_especialidades + "<li><i class='glyphicon glyphicon-trash' onclick='removeEspecialidades(" + i + ")'></i><span>" + item.txespecialidade;
                 list_especialidades = list_especialidades + "</span></li>";
                 i++;
             }
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Gravar Dados</button>
+                    <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Gravar Dados</button><br />&nbsp;
                 </div>
             </div>
         </div>

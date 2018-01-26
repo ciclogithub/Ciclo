@@ -16,7 +16,7 @@ namespace Biblioteca.DB
             {
                 bool retorno = false;
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select * from usuarios where idusuario = @codigo and (txempresa is not null or idcidade is not null)");
+                Query query = session.CreateQuery("select * from usuarios where idusuario = @codigo and ((txempresa <> '' and txempresa is not null) or (idcidade <> 0 and idcidade is not null))");
                 query.SetParameter("codigo", codigo);
                 IDataReader reader = query.ExecuteQuery();
 

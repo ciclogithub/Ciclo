@@ -86,8 +86,8 @@ namespace Biblioteca.Entidades
 
             Email mail = new Email();
             mail.destinatario = u.txemail;
-            mail.assunto = "Confirmação de inscrição no curso " + c.txcurso + " - www.treinaauto.com.br";
-            mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + u.txusuario + ",<br><br>O organizador confirmou sua inscrição no curso " + c.txcurso.ToUpper() + ".<br>Para mais informações sobre o curso, acesse <a href='http://www.treinaauto.com.br/curso?c="+curso+"'>www.treinaauto.com.br/curso?c="+curso+"</a>.<br><br>Att,<br><br>Treinaauto<br>contato@treinaauto.com.br";
+            mail.assunto = "Informações sobre inscrição no curso " + c.txcurso + " - www.treinaauto.com.br";
+            mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + u.txusuario + ",<br><br>O organizador está ciente de sua solicitação de inscrição no curso " + c.txcurso.ToUpper() + ".<br>Aguarde por mais informações para confirmar sua inscrição.<br>Para mais informações sobre o curso, acesse <a href='http://www.treinaauto.com.br/curso?c="+curso+"'>www.treinaauto.com.br/curso?c="+curso+"</a>.<br><br>Att,<br><br>Treinaauto<br>contato@treinaauto.com.br";
             string ret = mail.EnviaMensagem(mail);
         }
 

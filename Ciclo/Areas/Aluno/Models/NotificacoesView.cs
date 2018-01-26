@@ -28,33 +28,44 @@ namespace Ciclo.Areas.Aluno.Models
             {
                 string pais, estado, cidade, texto, valor;
                 string[] array = usuario.idlocalidade.Split(',');
+                texto = "";
+                valor = "";
                 foreach (string x in array)
                 {
-                    string[] array2 = x.Split('_');
-                    pais = new PaisesDB().BuscarPais(Convert.ToInt32(array2[0]));
-                    texto = pais;
-                    valor = array2[0];
-                    if (array2[1] != "")
+                    if (x != "")
                     {
-                        estado = new EstadosDB().BuscarEstado(Convert.ToInt32(array2[1]));
-                        texto = texto + " / " + estado;
-                        valor = valor + "_" + array2[1];
-                    } else
-                    {
-                        valor = valor + "_";
-                    }
+                        string[] array2 = x.Split('_');
 
-                    if (array2[2] != "")
-                    {
-                        cidade = new CidadesDB().BuscarCidade(Convert.ToInt32(array2[2]));
-                        texto = texto + " / " + cidade;
-                        valor = valor + "_" + array2[2];
-                    } else
-                    {
-                        valor = valor + "_";
-                    }
+                        if (array2[0] != "")
+                        {
+                            pais = new PaisesDB().BuscarPais(Convert.ToInt32(array2[0]));
+                            texto = pais;
+                            valor = array2[0];
+                        }
 
-                    this.localidades = this.localidades + "<li id='" + valor + "'><i class='glyphicon glyphicon-trash' onclick=\"remove('localidade', '" + valor + "')\"></i><span>" + texto + "</span></li>";
+                        if (array2[1] != "")
+                        {
+                            estado = new EstadosDB().BuscarEstado(Convert.ToInt32(array2[1]));
+                            texto = texto + " / " + estado;
+                            valor = valor + "_" + array2[1];
+                        }
+                        else
+                        {
+                            valor = valor + "_";
+                        }
+
+                        if (array2[2] != "")
+                        {
+                            cidade = new CidadesDB().BuscarCidade(Convert.ToInt32(array2[2]));
+                            texto = texto + " / " + cidade;
+                            valor = valor + "_" + array2[2];
+                        }
+                        else
+                        {
+                            valor = valor + "_";
+                        }
+                        this.localidades = this.localidades + "<li id='" + valor + "'><i class='glyphicon glyphicon-trash' onclick=\"remove('localidade', '" + valor + "')\"></i><span>" + texto + "</span></li>";
+                    }   
                 }
             }
         }

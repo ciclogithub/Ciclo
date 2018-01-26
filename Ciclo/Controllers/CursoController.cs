@@ -11,9 +11,19 @@ namespace Ciclo.Controllers
     public class CursoController : Controller
     {
         // GET: Curso
-        public ActionResult Index()
+        [Route("Curso/{curso}")]
+        public ActionResult Index(string curso = "")
         {
-            string code = Request.QueryString["c"];
+            string code = "";
+            if (curso.IndexOf("-") > 0)
+            {
+                code = curso.Substring(0, curso.IndexOf("-"));
+            }
+            else
+            {
+                code = curso;
+            }
+
             return View(new CursoView(Convert.ToInt32(code)));
         }
 
