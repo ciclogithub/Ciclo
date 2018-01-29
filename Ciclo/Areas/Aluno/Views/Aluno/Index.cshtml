@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Biblioteca.Funcoes
+
+@{
     ViewBag.Title = "Dashboard";
 }
 
@@ -34,10 +36,21 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             @foreach (var p in Model.lancamentos)
                             {
-                                <a href="/Curso?c=@p.idcurso">
+                                <a href="/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
                                     <strong>@p.txcurso</strong><br />
-                                    @p.txcategoria - @p.txcidade/@p.txestado
-                                </a><br /><br />
+                                    @p.txcategoria - @p.txcidade/@p.txestado<br />
+                                    Data(s): @if (p.datas.Count > 0)
+                                    {
+                                        foreach (var x in p.datas)
+                                        {
+                                            @Html.Raw(x.dtcurso + "<br />");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @: A definir<br />
+                                    }
+                                </a><br />
                             }
                         </div>
                     </div>

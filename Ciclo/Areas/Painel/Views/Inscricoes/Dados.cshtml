@@ -1,0 +1,33 @@
+﻿@model Biblioteca.Entidades.Usuarios
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" id="table2excel">
+                <table class="table table-bordered table-hover" id="table_avaliacao">
+                    <thead>
+                        <tr>
+                            <th width="30%">ALUNO</th>
+                            <th width="20%">CPF</th>
+                            <th width="30%">E-MAIL</th>
+                            <th width="20%">TELEFONE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.txusuario</td>
+                            <td>@Model.txcpf</td>
+                            <td>@Model.txemail</td>
+                            <td>
+                            @foreach (var p in Model.txtelefone)
+                            {
+                                @Html.Raw(p.txtelefone + "<br>");
+                            }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

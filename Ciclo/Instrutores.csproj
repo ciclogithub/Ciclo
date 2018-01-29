@@ -291,6 +291,9 @@
     <Content Include="Areas\Ciclo\Views\Shared\Error.cshtml" />
     <Content Include="Areas\Ciclo\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Ciclo\Views\Ciclo\Index.cshtml" />
+    <Content Include="Areas\Painel\Views\Inscricoes\Dados.cshtml" />
+    <Content Include="Areas\Painel\Views\Inscricoes\Recusar.cshtml" />
+    <Content Include="Areas\Painel\Views\Inscricoes\Confirmar.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\1.png" />
     <Content Include="images\2.png" />
@@ -603,6 +606,7 @@
     <Content Include="Scripts\js\aluno\cursos.js" />
     <Content Include="Scripts\js\aluno\painelaluno.js" />
     <Content Include="Scripts\js\ciclo\ciclo.js" />
+    <Content Include="Scripts\js\organizador\modelos_email.js" />
     <Content Include="Scripts\js\organizador\inscricoes.js" />
     <Content Include="Scripts\js\organizador\empresas.js" />
     <Content Include="Scripts\js\organizador\cursos.js" />

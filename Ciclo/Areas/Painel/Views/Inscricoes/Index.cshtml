@@ -53,9 +53,10 @@
                                         <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
                                         <th width="22%">USUÁRIO</th>
                                         <th width="22%">CURSO</th>
-                                        <th width="16%">DATA SOLICITAÇÃO</th>
+                                        <th width="17%">DATA SOLICITAÇÃO</th>
                                         <th width="16%">DATA STATUS</th>
-                                        <th width="21%">MOTIVO</th>
+                                        <th width="20%">MOTIVO</th>
+                                        <th width="3%">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,6 +74,7 @@
                                             }
                                             </td>
                                             <td>@p.motivo</td>
+                                            <td onclick="DadosAluno(@p.idinscricao)" width="3%" title="Dados do Aluno" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
                                         </tr>
                                     }
                                 </tbody>

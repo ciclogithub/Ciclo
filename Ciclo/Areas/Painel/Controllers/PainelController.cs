@@ -1,4 +1,6 @@
-﻿using Biblioteca.Filters;
+﻿using Biblioteca.DB;
+using Biblioteca.Entidades;
+using Biblioteca.Filters;
 using Ciclo.Models;
 using System;
 using System.Collections.Generic;
@@ -44,6 +46,24 @@ namespace Ciclo.Areas.Painel.Controllers
             Response.Cookies.Add(cookie2);
 
             return RedirectToAction("Index", "../");
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ModelosEmail(int tipo = 0)
+        {
+            HttpCookie cookie = Request.Cookies["ciclo_usuario"];
+
+            List<Modelos_Email> modelos = new Modelos_EmailDB().Listar(Convert.ToInt32(cookie.Value), tipo);
+            return Json(modelos);
+        }
+
+        [Autenticacao]
+        [HttpPost]
+        public ActionResult ModelosEmailCarregar(int id = 0)
+        {
+            Modelos_Email modelos = new Modelos_EmailDB().Buscar(id);
+            return Json(modelos);
         }
     }
 }

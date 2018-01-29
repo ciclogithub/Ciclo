@@ -97,7 +97,10 @@ namespace Ciclo
                 "~/Scripts/js/organizador/especialidades.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/configuracoes").Include(
-                "~/Scripts/js/organizador/configuracoes.js"));            
+                "~/Scripts/js/organizador/configuracoes.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/modelos_email").Include(
+                "~/Scripts/js/organizador/modelos_email.js"));
 
             // PAINEL ALUNO 
 

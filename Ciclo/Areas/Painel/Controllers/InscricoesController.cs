@@ -38,12 +38,39 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult Recusar(string id, string motivo)
+        public JsonResult GravarModelo(int id, int tipo, string titulo, string mensagem)
+        {
+            HttpCookie cookie = Request.Cookies["ciclo_usuario"];
+
+            Modelos_Email modelos = new Modelos_Email();
+            modelos.idmodelo = id;
+            modelos.idorganizador = Convert.ToInt32(cookie.Value);
+            modelos.idtipo = tipo;
+            modelos.txmensagem = mensagem;
+            modelos.txmodelo = titulo;
+            if (id == 0)
+            {
+                id = modelos.Salvar();
+            }
+            else
+            {
+                modelos.Alterar();
+            }
+
+            return Json(id);
+        }
+
+        [Autenticacao]
+        public JsonResult RecusarConcluir(string id, string mensagem)
         {
             var arr = id.Split(',');
             foreach (var i in arr)
             {
                 Inscricoes inscricao = new InscricoesDB().Buscar(Convert.ToInt32(i));
+                Cursos cursos = new CursosDB().Buscar(inscricao.idcurso);
+                Usuarios usuario = new UsuariosDB().Buscar(inscricao.idusuario);
+
+                string motivo = mensagem.Replace("[nome_aluno]", usuario.txusuario).Replace("[nome_curso]", cursos.txcurso);
                 new InscricoesDB().Recusar(Convert.ToInt32(i), motivo);
                 inscricao.EmailRecusa(inscricao.idcurso, inscricao.idusuario, motivo);
             }
@@ -52,7 +79,7 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult Confirmacao(string id)
+        public JsonResult ConfirmarConcluir(string id)
         {
             var arr = id.Split(',');
             foreach (var i in arr)
@@ -114,6 +141,34 @@ namespace Ciclo.Areas.Painel.Controllers
             }
 
             return Json(new Retorno());
+        }
+
+        [Autenticacao]
+        public ActionResult Dados(int id = 0)
+        {
+            Inscricoes inscricao = new Inscricoes();
+            Usuarios usuario = new Usuarios();
+            if (id != 0)
+            {
+                inscricao = new InscricoesDB().Buscar(id);
+                usuario = new UsuariosDB().BuscarCompleto(inscricao.idusuario);
+            }
+
+            return PartialView(usuario);
+        }
+
+        [Autenticacao]
+        public ActionResult Recusar(string id = "")
+        {
+            ViewBag.ids = id;
+            return PartialView();
+        }
+
+        [Autenticacao]
+        public ActionResult Confirmar(string id = "")
+        {
+            ViewBag.ids = id;
+            return PartialView();
         }
     }
 }
