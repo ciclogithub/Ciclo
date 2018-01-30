@@ -92,7 +92,7 @@ namespace Biblioteca.DB
                     qry += " and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) '" + d[0].Trim() + "' and '" + d[1].Trim() + "') or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) is null)) ";
                 }
                 //qry += "ORDER by cd.dtcurso ";
-                qry += "(select max(dtcurso) from Cursos_Datas cd where cd.idcurso = c.idcurso) ";
+                qry += "ORDER BY (select max(dtcurso) from Cursos_Datas cd where cd.idcurso = c.idcurso) ";
                 qry += "OFFSET " + regs + " * (" + page + " - 1) ROWS FETCH NEXT " + regs + " ROWS ONLY";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
