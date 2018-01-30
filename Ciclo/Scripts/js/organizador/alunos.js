@@ -6,6 +6,11 @@
         AlunoPesquisar();
     });
 
+    $("#importar_alunos").click(function () {
+        Modal("/Painel/Alunos/Importar", "", "Importar Alunos", "");
+    });
+
+
     $("#incluir_btn_aluno").click(function () {
         $('#form-modal_aluno').validationEngine('attach');
         if ($('#form-modal_aluno').validationEngine('validate')) {

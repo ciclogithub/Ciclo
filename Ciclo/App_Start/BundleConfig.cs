@@ -102,6 +102,9 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/modelos_email").Include(
                 "~/Scripts/js/organizador/modelos_email.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/importacao").Include(
+                "~/Scripts/js/organizador/importacao.js"));
+
             // PAINEL ALUNO 
 
             bundles.Add(new ScriptBundle("~/bundles/painelaluno").Include(

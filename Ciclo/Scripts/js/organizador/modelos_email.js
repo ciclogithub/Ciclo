@@ -2,7 +2,7 @@
     CarregarListaModelos($(".form-mail #idtipo").val(), 0);    
 });
 
-function CarregarRecusa() {
+function CarregarModelo() {
     var val = $(".form-mail #idmodelo").val();
     if (val > 0) {
         $.ajax({
@@ -22,10 +22,10 @@ function CarregarRecusa() {
     }
 }
 
-function GravarRecusa() {
+function GravarModelo() {
     var val = $(".form-mail #idmodelo").val();
     var msg = $(".form-mail #mensagem").val();
-
+    var tipo = $(".form-mail #idtipo").val();
     if (msg == "") {
         swal({ title: "Informe a mensagem", type: "error", timer: 3000 });
     } else {
@@ -59,12 +59,12 @@ function GravarRecusa() {
                 $.ajax({
                     type: "POST",
                     url: "/Painel/Inscricoes/GravarModelo",
-                    data: { id: val, tipo: 1, titulo: result.value, mensagem: msg },
+                    data: { id: val, tipo: tipo, titulo: result.value, mensagem: msg },
                     traditional: true,
                     async: false,
                     success: function (data) {
                         swal({ title: "Modelo cadastrado com sucesso", type: "success", timer: 3000 });
-                        CarregarListaModelos(1, data); 
+                        CarregarListaModelos(tipo, data); 
                     }
                 });
             }
@@ -128,54 +128,34 @@ function RecusarConfirmar() {
     }
 }
 
-
-//function InscricaoConfirmar() {
-
-//    ids = "";
-//    $("input[name='ident']").each(function () {
-//        if ($(this).is(":checked")) {
-//            ids = ids + "," + $(this).val();
-//        }
-//    });
-
-//    var ids = ids.substring(1);
-
-//    if (ids != "") {
-//        swal({
-//            title: 'Confirma a inscrição do(s) registro(s)',
-//            type: 'question',
-//            showCancelButton: true,
-//            confirmButtonText: 'Sim',
-//            cancelButtonText: 'Não'
-//        }).then((result) => {
-//            if (result.value) {
-//                $.ajax({
-//                    type: "POST",
-//                    url: '/Painel/Inscricoes/Confirmacao',
-//                    data: { id: ids },
-//                    dataType: "json",
-//                    traditional: true,
-//                    async: false,
-//                    success: function (json) {
-//                        swal({
-//                            title: 'Operação realizada com sucesso!',
-//                            type: 'success',
-//                            confirmButtonText: 'Fechar',
-//                            timer: 3000
-//                        }).then((result) => {
-//                            if (result.dismiss == 'timer') {
-//                                InscricaoPesquisar();
-//                            }
-//                            if (result.value) {
-//                                InscricaoPesquisar()
-//                            }
-//                        });
-
-//                    }
-//                });
-//            }
-//        });
-//    } else {
-//        swal({ title: "Selecione pelo menos 1 registro", type: "error", timer: 3000 });
-//    }
-//}
+function ConfirmaConfirmar() {
+    ids = $(".form-mail #ids").val();
+    msg = $(".form-mail #mensagem").val();
+    if (ids == "") {
+        swal({ title: "Nenhuma inscrição foi informada", type: "error", timer: 3000 });
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/Painel/Inscricoes/ConfirmarConcluir",
+            data: { id: ids, mensagem: msg },
+            dataType: "json",
+            traditional: true,
+            async: false,
+            success: function (json) {
+                swal({
+                    title: 'Operação realizada com sucesso!',
+                    type: 'success',
+                    confirmButtonText: 'Fechar',
+                    timer: 3000
+                }).then((result) => {
+                    if (result.dismiss == 'timer') {
+                        InscricaoPesquisar();
+                    }
+                    if (result.value) {
+                        InscricaoPesquisar()
+                    }
+                });
+            }
+        });
+    }
+}

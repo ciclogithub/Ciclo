@@ -1,6 +1,7 @@
 ﻿using Biblioteca.DB;
 using Biblioteca.Entidades;
 using Biblioteca.Filters;
+using Biblioteca.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 Cursos cursos = new CursosDB().Buscar(inscricao.idcurso);
                 Usuarios usuario = new UsuariosDB().Buscar(inscricao.idusuario);
 
-                string motivo = mensagem.Replace("[nome_aluno]", usuario.txusuario).Replace("[nome_curso]", cursos.txcurso);
+                string motivo = mensagem.Replace("[nome_aluno]", "<b>" + usuario.txusuario + "</b>").Replace("[nome_curso]", "<a href='http://www.treinaauto.com.br/Curso/" + cursos.idcurso + "-" + Diacritics.ReplaceDiacritics(cursos.txcurso) + "'><b>" + cursos.txcurso + "</b></a>").Replace("\n", "<br />");
                 new InscricoesDB().Recusar(Convert.ToInt32(i), motivo);
                 inscricao.EmailRecusa(inscricao.idcurso, inscricao.idusuario, motivo);
             }
@@ -79,18 +80,19 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult ConfirmarConcluir(string id)
+        public JsonResult ConfirmarConcluir(string id, string mensagem)
         {
             var arr = id.Split(',');
             foreach (var i in arr)
             {
                 Inscricoes inscricao = new InscricoesDB().Buscar(Convert.ToInt32(i));
+                Cursos cursos = new CursosDB().Buscar(inscricao.idcurso);
+                Usuarios usuario = new UsuariosDB().BuscarCompleto(inscricao.idusuario);
                 int aluno = new UsuariosDB().BuscarCodigoAluno(inscricao.idusuario);
 
                 // Verifica se o usuário já possui vínculo como aluno
                 if (aluno == 0)
                 {
-                    Usuarios usuario = new UsuariosDB().BuscarCompleto(inscricao.idusuario);
                     int cpf = new UsuariosDB().BuscarAlunoPorCpf(usuario.txcpf);
                     int email = new UsuariosDB().BuscarAlunoPorEmail(usuario.txemail);
 
@@ -117,7 +119,6 @@ namespace Ciclo.Areas.Painel.Controllers
                         // Grava relação usuario x aluno
                         usuario.GravaAluno(usuario.idusuario, aluno);
 
-                        new InscricoesDB().Confirmar(Convert.ToInt32(i));
                         new CursosDB().SalvarAlunos(inscricao.idcurso, aluno);
                     }
                     else
@@ -128,16 +129,18 @@ namespace Ciclo.Areas.Painel.Controllers
                         // Grava relação usuario x aluno
                         usuario.GravaAluno(usuario.idusuario, aluno);
 
-                        new InscricoesDB().Confirmar(Convert.ToInt32(i));
                         new CursosDB().SalvarAlunos(inscricao.idcurso, aluno);
                     }
                 }
                 else
                 {
-                    new InscricoesDB().Confirmar(Convert.ToInt32(i));
                     new CursosDB().SalvarAlunos(inscricao.idcurso, aluno);
                 }
-                inscricao.EmailConfirmacao(inscricao.idcurso, inscricao.idusuario);
+
+                string motivo = mensagem.Replace("[nome_aluno]", "<b>" + usuario.txusuario + "</b>").Replace("[nome_curso]", "<a href='http://www.treinaauto.com.br/Curso/" + cursos.idcurso + "-" + Diacritics.ReplaceDiacritics(cursos.txcurso) + "'><b>" + cursos.txcurso + "</b></a>").Replace("\n", "<br />");
+
+                new InscricoesDB().Confirmar(Convert.ToInt32(i), motivo);
+                inscricao.EmailConfirmacao(inscricao.idcurso, inscricao.idusuario, motivo);
             }
 
             return Json(new Retorno());

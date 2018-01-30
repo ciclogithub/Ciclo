@@ -49,13 +49,14 @@ namespace Biblioteca.DB
             }
         }
 
-        public void Confirmar(int inscricao = 0)
+        public void Confirmar(int inscricao = 0, string motivo = "")
         {
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Inscricoes set idstatus = 1, dtstatus = getdate() where idinscricao = @inscricao");
+                Query query = session.CreateQuery("UPDATE Inscricoes set idstatus = 1, dtstatus = getdate(), txmotivo = @motivo where idinscricao = @inscricao");
                 query.SetParameter("inscricao", inscricao);
+                query.SetParameter("motivo", motivo);
                 query.ExecuteUpdate();
                 session.Close();
             }

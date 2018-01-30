@@ -54,6 +54,9 @@
     <Reference Include="Correios, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Correios-Api.1.1.1\lib\portable-net45+win\Correios.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.3.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.3.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -91,6 +94,7 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -294,6 +298,7 @@
     <Content Include="Areas\Painel\Views\Inscricoes\Dados.cshtml" />
     <Content Include="Areas\Painel\Views\Inscricoes\Recusar.cshtml" />
     <Content Include="Areas\Painel\Views\Inscricoes\Confirmar.cshtml" />
+    <Content Include="Areas\Painel\Views\Alunos\Importar.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\1.png" />
     <Content Include="images\2.png" />
@@ -618,6 +623,7 @@
     <Content Include="Scripts\js\organizador\avaliacao.js" />
     <Content Include="Scripts\js\home.js" />
     <Content Include="Scripts\js\organizador\dashboard.js" />
+    <Content Include="Scripts\js\organizador\importacao.js" />
     <Content Include="Scripts\js\organizador\temas.js" />
     <Content Include="Scripts\js\organizador\locais.js" />
     <Content Include="Scripts\js\organizador\alunos.js" />
@@ -739,6 +745,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\importacao\" />
     <Folder Include="images\Instrutores\" />
   </ItemGroup>
   <ItemGroup>

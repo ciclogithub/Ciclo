@@ -51,11 +51,11 @@
                                 <thead>
                                     <tr>
                                         <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
-                                        <th width="22%">USUÁRIO</th>
-                                        <th width="22%">CURSO</th>
-                                        <th width="17%">DATA SOLICITAÇÃO</th>
-                                        <th width="16%">DATA STATUS</th>
-                                        <th width="20%">MOTIVO</th>
+                                        <th width="21%">USUÁRIO</th>
+                                        <th width="21%">CURSO</th>
+                                        <th width="12%">SOLICITAÇÃO</th>
+                                        <th width="10%">STATUS</th>
+                                        <th width="30%">MOTIVO</th>
                                         <th width="3%">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -66,15 +66,15 @@
                                             <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinscricao" /></th>
                                             <td>@p.usuario</td>
                                             <td>@p.curso</td>
-                                            <td>@p.dtinscricao</td>
+                                            <td>@p.dtinscricao.ToShortDateString()</td>
                                             <td>
                                             @if (p.dtstatus.Year > 1900)
                                             {
-                                                @p.dtstatus;
+                                                @p.dtstatus.ToShortDateString();
                                             }
                                             </td>
-                                            <td>@p.motivo</td>
-                                            <td onclick="DadosAluno(@p.idinscricao)" width="3%" title="Dados do Aluno" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
+                                            <td><div class="motivo">@Html.Raw(p.motivo)</div></td>
+                                            <td onclick="DadosAluno(@p.idinscricao)" title="Dados do Aluno" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
                                         </tr>
                                     }
                                 </tbody>

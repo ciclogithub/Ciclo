@@ -78,7 +78,7 @@ namespace Biblioteca.Entidades
             string ret = mail.EnviaMensagem(mail);
         }
 
-        public void EmailConfirmacao(int curso, int usuario)
+        public void EmailConfirmacao(int curso, int usuario, string motivo)
         {
             Cursos c = new CursosDB().Buscar(curso);
             Organizadores o = new OrganizadoresDB().Buscar(c.idorganizador);
@@ -87,7 +87,7 @@ namespace Biblioteca.Entidades
             Email mail = new Email();
             mail.destinatario = u.txemail;
             mail.assunto = "Informações sobre inscrição no curso " + c.txcurso + " - www.treinaauto.com.br";
-            mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + u.txusuario + ",<br><br>O organizador está ciente de sua solicitação de inscrição no curso " + c.txcurso.ToUpper() + ".<br>Aguarde por mais informações para confirmar sua inscrição.<br>Para mais informações sobre o curso, acesse <a href='http://www.treinaauto.com.br/curso?c="+curso+"'>www.treinaauto.com.br/curso?c="+curso+ "</a>.<br><br>Att,<br><br>Treinaauto<br><a href='mailto:contato@treinaauto.com.br'>contato@treinaauto.com.br</a>";
+            mail.mensagem = "<a href='http://www.treinaauto.com.br'><img src='http://www.treinaauto.com.br/images/logo.png' height='100'></a><br><br>Prezado(a) " + u.txusuario + ",<br><br>" + motivo + "<br><br>Treinaauto<br><a href='mailto:contato@treinaauto.com.br'>contato@treinaauto.com.br</a>";
             string ret = mail.EnviaMensagem(mail);
         }
 
