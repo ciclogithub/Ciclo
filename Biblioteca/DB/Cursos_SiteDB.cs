@@ -76,7 +76,7 @@ namespace Biblioteca.DB
                 qry += "left join Locais l on l.idlocal = c.idlocal ";
                 qry += "left join Cidades ci on ci.idcidade = l.idcidade ";
                 qry += "left join Estados es on es.idestado = ci.idestado ";
-                qry += "LEFT JOIN Cursos_Datas cd on cd.idcurso = c.idcurso ";
+                //qry += "LEFT JOIN Cursos_Datas cd on cd.idcurso = c.idcurso ";
                 qry += "where 1 = 1 ";
 
                 if (curso != "") { qry += " and c.txcurso like '%" + curso.Replace(" ","%") + "%' "; }
@@ -91,7 +91,8 @@ namespace Biblioteca.DB
                     //qry += " AND cd.dtcurso between '" + d[0].Trim() + "' and '" + d[1].Trim() + "' ";
                     qry += " and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) '" + d[0].Trim() + "' and '" + d[1].Trim() + "') or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) is null)) ";
                 }
-                qry += "ORDER by cd.dtcurso ";
+                //qry += "ORDER by cd.dtcurso ";
+                qry += "(select max(dtcurso) from Cursos_Datas cd where cd.idcurso = c.idcurso) ";
                 qry += "OFFSET " + regs + " * (" + page + " - 1) ROWS FETCH NEXT " + regs + " ROWS ONLY";
                 Query query = session.CreateQuery(qry);
                 IDataReader reader = query.ExecuteQuery();
