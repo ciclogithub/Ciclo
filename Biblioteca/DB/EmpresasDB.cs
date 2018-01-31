@@ -456,6 +456,62 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public int ExisteEmpresa(string emp)
+        {
+            try
+            {
+                int empresa = 0;
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idempresa FROM Empresas WHERE txempresa = @empresa AND idorganizador = @organizador");
+                query.SetParameter("empresa", emp);
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    empresa = Convert.ToInt32(reader["idempresa"]);
+                }
+                reader.Close();
+                session.Close();
+
+                return empresa;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public bool ExisteCNPJ(string cnpj)
+        {
+            try
+            {
+                bool empresa = false;
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idempresa FROM Empresas WHERE txcnpj = @cnpj AND idorganizador = @organizador");
+                query.SetParameter("cnpj", cnpj);
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    empresa = true;
+                }
+                reader.Close();
+                session.Close();
+
+                return empresa;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }
 

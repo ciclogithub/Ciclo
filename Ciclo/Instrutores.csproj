@@ -299,6 +299,7 @@
     <Content Include="Areas\Painel\Views\Inscricoes\Recusar.cshtml" />
     <Content Include="Areas\Painel\Views\Inscricoes\Confirmar.cshtml" />
     <Content Include="Areas\Painel\Views\Alunos\Importar.cshtml" />
+    <Content Include="Areas\Painel\Views\Empresas\Importar.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\1.png" />
     <Content Include="images\2.png" />

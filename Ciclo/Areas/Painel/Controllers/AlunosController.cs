@@ -8,8 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ciclo.Areas.Painel.Models;
 using System.IO;
-using System.Data.OleDb;
-using System.Data;
+using Biblioteca.Funcoes;
 
 namespace Ciclo.Areas.Painel.Controllers
 {
@@ -167,12 +166,15 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public ActionResult Importar()
         {
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+            ViewBag.organizador = Convert.ToInt32(cookie.Value);
             return PartialView();
         }
 
         [Autenticacao]
         public JsonResult ImportarConcluir(HttpPostedFileBase txArquivo)
         {
+            string result = "";
             HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
             if (txArquivo != null)
             {
@@ -181,42 +183,11 @@ namespace Ciclo.Areas.Painel.Controllers
                     string fileName = Path.GetExtension(txArquivo.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images/importacao"), Convert.ToInt32(cookie.Value) + fileName);
                     txArquivo.SaveAs(path);
-
-                    OleDbConnection conexao = null;
-
-                    if (fileName == ".xls")
-                    {
-                        conexao = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"");
-                    }
-                    else if (fileName == ".xlsx")
-                    {
-                        conexao = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"");
-                    }
-
-                    OleDbDataAdapter adapter = new OleDbDataAdapter("select * from Alunos", conexao); /*[Sheet1$]*/
-                    DataSet ds = new DataSet();
-                    try
-                    {
-                        conexao.Open();
-                        adapter.Fill(ds);
-                        foreach (DataRow linha in ds.Tables[0].Rows)
-                        {
-                            Console.WriteLine(linha["nome"].ToString());
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Ocorreu um erro ao ler o arquivo");
-                    }
-                    finally
-                    {
-                        conexao.Close();
-
-                    }
+                    result = Importacao.ImportaAluno(path);
                 }
             }
 
-            return Json(new Retorno());
+            return Json(result);
         }
 
     }

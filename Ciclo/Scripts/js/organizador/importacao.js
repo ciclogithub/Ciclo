@@ -1,4 +1,4 @@
-﻿function enviarArquivo() {
+﻿function enviarArquivo(tp) {
     var arquivo = $("#txArquivo").val();
     var ext = arquivo.replace(/^.*\./, '').toLowerCase();
     if (arquivo == "") {
@@ -10,17 +10,21 @@
             $("#processando").html("Aguarde, processando arquivo");
             var form = $('#form-modal_importar')[0];
             var data = new FormData(form);
+            if (tp == 1) { var url = "/Painel/Empresas/ImportarConcluir"; }
+            if (tp == 2) { var url = "/Painel/Alunos/ImportarConcluir"; }
             $.ajax({
                 type: "POST",
-                url: '/Painel/Alunos/ImportarConcluir',
+                url: url,
                 data: data,
                 processData: false,
                 contentType: false,
                 cache: false,
                 dataType: "json",
                 traditional: true,
-                success: function() {                          
-                    $("#processando").html("finalizado");
+                success: function (data) {                          
+                    //swal({ title: data, type: "success" })
+                    alert(data)
+                    $("#processando").html("Importação finalizada!");
                 }
             });
         }

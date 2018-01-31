@@ -659,6 +659,34 @@ namespace Biblioteca.DB
                 throw error;
             }
         }
+
+        public bool ExisteCPF(string cpf)
+        {
+            try
+            {
+                bool aluno = false;
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_usuario"];
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("SELECT idaluno FROM Alunos WHERE txcpf = @cpf AND idorganizador = @organizador");
+                query.SetParameter("cpf", cpf);
+                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                IDataReader reader = query.ExecuteQuery();
+
+                if (reader.Read())
+                {
+                    aluno = true;
+                }
+                reader.Close();
+                session.Close();
+
+                return aluno;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
     }
 }
 

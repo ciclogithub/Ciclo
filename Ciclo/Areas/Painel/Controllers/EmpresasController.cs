@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ciclo.Areas.Painel.Models;
+using System.IO;
+using Biblioteca.Funcoes;
 
 namespace Ciclo.Areas.Painel.Controllers
 {
@@ -139,6 +141,33 @@ namespace Ciclo.Areas.Painel.Controllers
         {
             int retorno = new EmpresasDB().VerificaEmpresaExcluir(id);
             return retorno;
+        }
+
+        [Autenticacao]
+        public ActionResult Importar()
+        {
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+            ViewBag.organizador = Convert.ToInt32(cookie.Value);
+            return PartialView();
+        }
+
+        [Autenticacao]
+        public JsonResult ImportarConcluir(HttpPostedFileBase txArquivo)
+        {
+            string result = "";
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
+            if (txArquivo != null)
+            {
+                if (txArquivo.ContentLength > 0)
+                {
+                    string fileName = Path.GetExtension(txArquivo.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/importacao"), Convert.ToInt32(cookie.Value) + fileName);
+                    txArquivo.SaveAs(path);
+                    result = Importacao.ImportaEmpresa(path);
+                }
+            }
+
+            return Json(result);
         }
     }
 }

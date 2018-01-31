@@ -2,6 +2,10 @@
 
     $('select').not('.no-js').select2();
 
+    $("#importar_empresas").click(function () {
+        Modal("/Painel/Empresas/Importar", "", "Importar Empresas", "");
+    });
+
     $("#pesquisa_empresa").click(function () {
         EmpresaPesquisar();
     });
