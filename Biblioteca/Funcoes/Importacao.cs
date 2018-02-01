@@ -15,7 +15,7 @@ namespace Biblioteca.Funcoes
             int i = 0;
             Boolean err = false;
             string line = "";
-            string nl = "\n";// System.Environment.NewLine;
+            string nl = System.Environment.NewLine;
 
             string nome = "";
             string cpf = "";
@@ -175,18 +175,18 @@ namespace Biblioteca.Funcoes
             reader.Close();
             reader = null;
 
-            return line;
+            string path_txt = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/importacao"), org + ".txt");
+            if (File.Exists(path_txt))
+            {
+                File.Delete(path_txt);
+            }
+            using (FileStream fs = File.Create(path_txt))
+            {
+                Byte[] info = new UTF8Encoding(true).GetBytes(line);
+                fs.Write(info, 0, info.Length);
+            }
 
-            //string path_txt = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/importacao"), org + ".txt");
-            //if (File.Exists(path_txt))
-            //{
-            //    File.Delete(path_txt);
-            //}
-            //using (FileStream fs = File.Create(path_txt))
-            //{
-            //    Byte[] info = new UTF8Encoding(true).GetBytes(line);
-            //    fs.Write(info, 0, info.Length);
-            //}
+            return "";
         }
 
         public static string ImportaEmpresa(string path)
@@ -194,7 +194,7 @@ namespace Biblioteca.Funcoes
             int i = 0;
             Boolean err = false;
             string line = "";
-            string nl = "\n";// System.Environment.NewLine;
+            string nl = System.Environment.NewLine;
 
             string codigo = "";
             string nome = "";
@@ -360,18 +360,18 @@ namespace Biblioteca.Funcoes
             reader.Close();
             reader = null;
 
-            return line;
+            string path_txt = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/importacao"), org + ".txt");
+            if (File.Exists(path_txt))
+            {
+                File.Delete(path_txt);
+            }
+            using (FileStream fs = File.Create(path_txt))
+            {
+                Byte[] info = new UTF8Encoding(true).GetBytes(line);
+                fs.Write(info, 0, info.Length);
+            }
 
-            //string path_txt = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/importacao"), org + ".txt");
-            //if (File.Exists(path_txt))
-            //{
-            //    File.Delete(path_txt);
-            //}
-            //using (FileStream fs = File.Create(path_txt))
-            //{
-            //    Byte[] info = new UTF8Encoding(true).GetBytes(line);
-            //    fs.Write(info, 0, info.Length);
-            //}
+            return "";
         }
     }
 }

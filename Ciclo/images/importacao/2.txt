@@ -1,2 +1,2 @@
-Linha 1 - NÃO IMPORTADO - CPF já cadastrado! 
-Linha 2 - NÃO IMPORTADO - CPF já cadastrado! 
+Linha 1 - IMPORTADO COM SUCESSO!
+Linha 2 - NÃO IMPORTADO - CNPJ não informado ou em formato incorreto! 

@@ -22,11 +22,13 @@
                 dataType: "json",
                 traditional: true,
                 success: function (data) {                          
-                    //swal({ title: data, type: "success" })
-                    alert(data)
-                    $("#processando").html("Importação finalizada!");
+                    $("#processando").html("Importação finalizada com sucesso!<br><a href='#' onClick='Relatorio()'>Clique aqui para ver o relatório final.</a>");
                 }
             });
         }
     }
+}
+
+function Relatorio() {
+    Modal2("/Painel/Painel/Relatorio", 0, "Relatório", "");
 }

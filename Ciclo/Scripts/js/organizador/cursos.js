@@ -227,7 +227,7 @@ function IncluirCurso() {
     var txmercados = $("#form-modal_curso #txmercados").val();
     var txespecialidades = $("#form-modal_curso #txespecialidades").val();
     
-    var form = $('#form-modal_curso #form-modal')[0];
+    var form = $('#form-modal_curso')[0];
     var data = new FormData(form);
     data.append("id", idcurso);
     data.append("nome_curso", txcurso);

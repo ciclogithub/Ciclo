@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Biblioteca.Funcoes
+@{
     ViewBag.Title = "Home";
 }
 
@@ -18,11 +19,67 @@
 
 <main id="tg-main" class="tg-main tg-haslayout">
 
+    <div class="tg-carousel pt30">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+                    <h2>Eventos em Destaque</h2>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right carousel-arrows">
+                    <a class="left" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a class="right" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="carousel slide multi-item-carousel" id="theCarousel">
+                        <div class="carousel-inner">
+                            @{ int i = 1; }
+                            @foreach (var p in Model)
+                            {
+                                <div class="item @(i == 1 ? "active" : "")">
+                                    <a href="Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                                        <div class="col-xs-4 div-curso">
+                                            <div class="div-curso-title">
+                                                <span>@p.txcurso</span>
+                                            </div>
+                                            <div class="gray-box">
+                                                <p>
+                                                    <span><strong>Categoria:</strong> @p.txcategoria</span><br />
+                                                    <span><strong>Local:</strong> @p.txcidade / @p.txestado</span><br />
+                                                    <span>
+                                                        <strong>Data:</strong>
+                                                        @if (p.datas.Count > 0)
+                                                        {
+                                                            foreach (var x in p.datas)
+                                                            {
+                                                                @Html.Raw(x.dtcurso + "<br />");
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            @: A definir
+                                                        }
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                i = i + 1;
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="tg-sectioncategorias">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <h2>Categorias</h2>
+                    <h2>Especialidades</h2>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
                     <a class="tg-btn tg-btnbookseat bg-branco" href="Cursos/Todos">VER TODOS OS CURSOS</a>

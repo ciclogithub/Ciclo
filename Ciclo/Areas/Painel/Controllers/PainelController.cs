@@ -4,6 +4,7 @@ using Biblioteca.Filters;
 using Ciclo.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,6 +26,15 @@ namespace Ciclo.Areas.Painel.Controllers
         public ActionResult Usuario()
         {
             return PartialView(new VerificaLogado().Buscar());
+        }
+
+        [Autenticacao]
+        public ActionResult Relatorio()
+        {
+            HttpCookie cookie = Request.Cookies["ciclo_usuario"];
+            string path_txt = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/importacao"), Convert.ToInt32(cookie.Value) + ".txt");
+            ViewBag.relatorio = System.IO.File.ReadAllText(path_txt);
+            return PartialView();
         }
 
         [Autenticacao]

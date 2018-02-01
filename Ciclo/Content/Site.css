@@ -396,16 +396,6 @@ h3.perfil span {
     color: green !important;
 }
 
-.div-curso {
-    margin-bottom: 40px;
-    font-size: 14px;
-}
-
-    .div-curso img {
-        width: 100%;
-        background-color: #ffffff;
-    }
-
 .gray-box p {
     margin-bottom: 0px !important;
     line-height: 25px;
@@ -683,13 +673,12 @@ h3.perfil span {
     padding-top:50px;
 }
 
-.tg-sectiontreina h2 {
+.tg-sectioncategorias h2 {
     color: #4EBDE8;
     font-weight: lighter;
-    margin-bottom: 20px;
 }
 
-.tg-sectioncategorias h2 {
+.tg-carousel h2 {
     color: #4EBDE8;
     font-weight: lighter;
 }
@@ -937,6 +926,38 @@ h3.perfil span {
     text-align:right;
 }
 
+.div-curso-title {
+    background-color: #136FB8;
+    padding: 0px 20px;
+    height: 200px;
+    line-height: 200px;
+}
+
+.div-curso-title {    
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:100% 100%;
+}
+
+.div-curso-title span {
+    font-size: 20px;
+    font-weight: lighter;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    color: #fff;
+}
+
+.carousel-arrows {
+    padding-top:15px;
+}
+
+.carousel-arrows a {
+    border:1px solid #ccc;
+    border-radius:25px;
+    padding:6px;
+}
+
 @media only screen and (max-device-width: 480px) {
     #slideshow {
         margin: 0px 0px 0px 0px !important; /*0*/
@@ -945,10 +966,10 @@ h3.perfil span {
         overflow: hidden !important;
     }
 
-        #slideshow img {
-            max-height: 120px !important;
-            width: 100% !important;
-        }
+    #slideshow img {
+        max-height: 120px !important;
+        width: 100% !important;
+    }
 
     #filtro_form input {
         margin-bottom: 10px !important;
@@ -1036,9 +1057,9 @@ h3.perfil span {
         height: 460px !important;
     }
 
-        #slideshow img {
-            max-height: 460px !important;
-        }
+    #slideshow img {
+        max-height: 460px !important;
+    }
 
     #tg-main {
         min-height: 414px !important;
@@ -1053,9 +1074,9 @@ h3.perfil span {
         height: 652px !important;
     }
 
-        #slideshow img {
-            max-height: 652px !important;
-        }
+    #slideshow img {
+        max-height: 652px !important;
+    }
 
     #tg-main {
         min-height: 701px !important;
