@@ -34,37 +34,54 @@
                 <div class="col-md-12">
                     <div class="carousel slide multi-item-carousel" id="theCarousel">
                         <div class="carousel-inner">
-                            @{ int i = 1; }
+                            @{ 
+                                int i = 1;
+                                string data = "";
+                            }
                             @foreach (var p in Model)
                             {
                                 <div class="item @(i == 1 ? "active" : "")">
-                                    <a href="Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
-                                        <div class="col-xs-4 div-curso">
-                                            <div class="div-curso-title">
+                                    <div class="col-xs-4 div-curso">
+                                        <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                                            <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : "")>
                                                 <span>@p.txcurso</span>
                                             </div>
                                             <div class="gray-box">
-                                                <p>
-                                                    <span><strong>Categoria:</strong> @p.txcategoria</span><br />
-                                                    <span><strong>Local:</strong> @p.txcidade / @p.txestado</span><br />
-                                                    <span>
-                                                        <strong>Data:</strong>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Local:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcidade / @p.txestado</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Data(s):</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                                                         @if (p.datas.Count > 0)
                                                         {
+                                                            data = "";
                                                             foreach (var x in p.datas)
                                                             {
-                                                                @Html.Raw(x.dtcurso + "<br />");
+                                                                data = data + ", " + x.dtcurso;
                                                             }
+                                                            @Html.Raw(data.Substring(2));
                                                         }
                                                         else
                                                         {
                                                             @: A definir
                                                         }
-                                                    </span>
-                                                </p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                        @*<div class="text-right redes-sociais">
+                                            Compartilhar:
+                                            <span onclick="window.open('https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no facebook"><i class="fa fa-facebook"></i></span>
+                                            <span onclick="window.open('https://twitter.com/share?original_referer=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))&amp;related=treinaauto&amp;source=tweetbutton&amp;text=@p.txcurso&amp;url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no twitter"><i class="fa fa-twitter"></i></span>
+                                            <span onclick="window.open('https://plus.google.com/share?url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no google plus"><i class="fa fa-google-plus"></i></span>
+                                        </div>*@
+                                    </div>
                                 </div>
                                 i = i + 1;
                             }

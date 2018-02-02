@@ -23,39 +23,56 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container pt30">
-        @{  int i = 0; }
+        @{
+            int i = 0;
+            string data = "";
+        }
         @if (ViewBag.total > 0)
         {
             <div class="row">
             @foreach (var p in Model)
             {
-                <div class="col-md-4 col-xs-12 col-sm-6 div-curso" style="margin-bottom:40px;">
-                    <div>
-                        @if (p.txfoto != "")
-                        {
-                            <a href="Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))"><img class="img-responsive" alt="@p.txcurso" src="~/images/banner.jpg"></a>
-                        }
-                        <div class="gray-box">
-                            <h4><a href="Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">@p.txcurso</a></h4>
-                            <p>
-                                <span><strong>Categoria:</strong> @p.txcategoria</span><br />
-                                <span><strong>Local:</strong> @p.txcidade / @p.txestado</span><br />
-                                <span>
-                                    <strong>Data:</strong>
-                                    @if (p.datas.Count > 0)
-                                    {
-                                        foreach (var x in p.datas)
+                <div>
+                    <div class="col-xs-4 div-curso" style="margin-bottom:40px;">
+                        <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                            <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : "")>
+                                <span>@p.txcurso</span>
+                            </div>
+                            <div class="gray-box">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Local:</strong></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcidade / @p.txestado</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Data(s):</strong></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                        @if (p.datas.Count > 0)
                                         {
-                                            @Html.Raw(x.dtcurso + "<br />");
+                                            data = "";
+                                            foreach (var x in p.datas)
+                                            {
+                                                data = data + ", " + x.dtcurso;
+                                            }
+                                            @Html.Raw(data.Substring(2));
                                         }
-                                    }
-                                    else
-                                    {
-                                        @: A definir
-                                    }
-                                </span>
-                            </p>
-                        </div>
+                                        else
+                                        {
+                                            @: A definir
+                                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        @*<div class="text-right redes-sociais">
+                                Compartilhar:
+                                <span onclick="window.open('https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no facebook"><i class="fa fa-facebook"></i></span>
+                                <span onclick="window.open('https://twitter.com/share?original_referer=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))&amp;related=treinaauto&amp;source=tweetbutton&amp;text=@p.txcurso&amp;url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no twitter"><i class="fa fa-twitter"></i></span>
+                                <span onclick="window.open('https://plus.google.com/share?url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no google plus"><i class="fa fa-google-plus"></i></span>
+                            </div>*@
                     </div>
                 </div>
                 i = i + 1;
@@ -71,13 +88,13 @@
             <div class="row">
                 <div class="col-md-12 col-xs-12 col-sm-12">
                     <br />
-                    <i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Nenhum resultado encontrado
+                    <i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Nenhum evento encontrado
                 </div>
             </div>
             <div class="row pt30 pesquisa_news">
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                    <h3>Não encontrou o curso que estava procurando?</h3>
-                    <p>Nós podemos te ajudar. Assine nossa lista de interesse que avisamos você quando um curso nesta área ficar disponível</p>
+                    <h3>Não encontrou o evento que estava procurando?</h3>
+                    <p>Nós podemos te ajudar. Assine nossa lista de interesse que avisamos você quando um evento nesta área ficar disponível</p>
                 </div>
             </div>
             <form method="post" id="news_form" name="news_form">

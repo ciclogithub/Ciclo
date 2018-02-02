@@ -37,6 +37,9 @@ namespace Ciclo
             bundles.Add(new ScriptBundle("~/bundles/home").Include(
                 "~/Scripts/js/home.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/curso-site").Include(
+                "~/Scripts/js/curso.js"));
+
             // PAINEL CICLO 
 
             bundles.Add(new ScriptBundle("~/bundles/ciclo").Include(

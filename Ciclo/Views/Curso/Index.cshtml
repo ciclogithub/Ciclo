@@ -1,101 +1,218 @@
-﻿@{
+﻿@using Biblioteca.Funcoes
+
+@{
     ViewBag.Title = @Model.cursos.txcurso;
+    string especialidade = "";
+    string mercado = "";
 }
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
-        <div class="container">
-            @if (Model.cursos.txfoto != "")
+        <div class="container" style="margin-bottom:30px;">
+            <div class="row pt30">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 div-curso-title2" @(Model.cursos.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + Model.cursos.txfoto + ") " : "")>
+                    <center><span>@Model.cursos.txcurso</span></center>
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                    <h4>Objetivo:</h4>
+                    <p>@Model.cursos.txdescritivo</p>
+                </div>
+            </div>
+
+            @if ((Model.cursos.especialidades.Count > 0) || (Model.cursos.mercados.Count > 0))
             {
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                    <img class="img-responsive" alt="@Model.cursos.txcurso" src="~/images/banner.jpg" style="width:100%; max-height:400px;">
+                <div class="row pt15">
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        <h4>Público Alvo:</h4>
+                        <p> 
+                            @foreach (var p in Model.cursos.especialidades)
+                            {
+                                especialidade = especialidade + ", " + @p.txespecialidade;
+                            }
+                            @if (especialidade != "")
+                            {
+                                @Html.Raw("Especialidades: " + especialidade.Substring(2) + "<br>")
+                            }
+
+                            @foreach (var p in Model.cursos.mercados)
+                            {
+                                mercado = mercado + ", " + @p.txmercado;
+                            }
+                            @if (mercado != "")
+                            {
+                                @Html.Raw("Mercados: " + mercado.Substring(2))
+                            }
+                        </p>
+                    </div>
                 </div>
-            </div>
             }
-            <div class="row pt30">
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                    <h2>@Model.cursos.txcurso</h2>
+            <div id="tabs" style="margin-top:30px;">
+                <ul>
+                    <li><a href="#tabs-1">Localização</a></li>
+                    <li><a href="#tabs-2">Data(s)</a></li>
+                    <li><a href="#tabs-3">Instrutor(es)</a></li>
+                    <li><a href="#tabs-4">Informações Gerais</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <p>@Model.cursos.txlocal
+                    <br />@Model.cursos.txlogradouro - @Model.cursos.txcidade/@Model.cursos.txestado, @Model.cursos.txpais</p>
                 </div>
-                @*<div class="col-lg-~2 col-md-2 col-xs-12 col-sm-12 text-right">
-                    <a href="javascript:void(0);"><i class="fa fa-facebook"></i></a>&nbsp;&nbsp;&nbsp;
-                    <a href="javascript:void(0);"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;&nbsp;
-                    <a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a>
-                </div>*@
+                <div id="tabs-2">
+                    <p>
+                        @if (Model.cursos.datas.Count > 0)
+                        {
+                            foreach (var p in Model.cursos.datas)
+                            {
+                                @Html.Raw("<br />" + p.dtcurso + " - " + @p.hrinicial + " às " + @p.hrfinal);
+                            }
+                        }
+                        else
+                        {
+                            @: <Br />A definir
+                        }
+                    </p>
+                </div>
+                <div id="tabs-3">
+                    <p>
+                        @foreach (var p in Model.cursos.instrutores)
+                        {
+                            <div class="row pt15">
+                                @if (@p.txfoto != "")
+                                {
+                                    <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
+                                        <img class="img-responsive" src="~/images/instrutores/@p.txfoto" style="width:100%;">
+                                    </div>
+                                }
+                                <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12">
+                                    @p.txinstrutor<br />@p.txdescritivo
+                                </div>
+                            </div>
+                        }
+                    </p>
+                </div>
+                <div id="tabs-4">
+                    <p><strong>Organizador:</strong> @Model.cursos.txorganizador<br /></br>
+                        <strong>Tema:</strong> @Model.cursos.txtema</br></br>
+                        <strong>Categoria:</strong> @Model.cursos.txcategoria<br /> </br>
+                        <strong>Carga Horária:</strong> 
+                        @if (@Model.cursos.txcargahoraria == "")
+                        {
+                            @Html.Raw("Não informado")
+                        }
+                        else
+                        {
+                            @Html.Raw(Model.cursos.txcargahoraria + "h")
+                        }
+                </p>
+            </div>
             </div>
             <div class="row pt30">
-                <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-                    <i class="fa fa-map"></i>&nbsp;&nbsp;<strong>LOCALIZAÇÃO</strong>
-                    <br />@Model.cursos.txlocal
-                    <br />@Model.cursos.txlogradouro - @Model.cursos.txcidade/@Model.cursos.txestado, @Model.cursos.txpais
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;<strong>DATA(S)</strong>
-                    @if (Model.cursos.datas.Count > 0)
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                    <h4>Valores de inscrição:</h4>
+                    <p>
+                    @if (Convert.ToBoolean(Model.cursos.flgratuito))
                     {
-                        foreach (var p in Model.cursos.datas)
-                        {
-                            @Html.Raw("<br />" + p.dtcurso + " - " + @p.hrinicial + " às " + @p.hrfinal);
-                        }
+                           @Html.Raw("Gratuito")
                     }
                     else
                     {
-                        @: <Br />A definir
+                        foreach (var p in Model.cursos.valores)
+                        {
+                            @Html.Raw("Até " + p.dtvalor + " - R$ " + p.valor + "<br>");
+                        }
                     }
-                </div>
-            </div>
-            <div class="row pt60">
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-                    <i class="fa fa-user"></i>&nbsp;&nbsp;<strong>ORGANIZADOR</strong>
-                    <br />@Model.cursos.txorganizador
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-                    <i class="fa fa-bars"></i>&nbsp;&nbsp;<strong>ESPECIALIDADE(S)</strong>
-                    @foreach (var p in Model.cursos.especialidades)
-                    {
-                        @Html.Raw("<br />" + @p.txespecialidade + "");
-                    }
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-                    <i class="fa fa-car"></i>&nbsp;&nbsp;<strong>MERCADO(S)</strong>
-                    @foreach (var p in Model.cursos.mercados)
-                    {
-                        @Html.Raw("<br />" + @p.txmercado + "");
-                    }
-                </div>
-            </div>
-            <div class="row pt60">
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                    <i class="fa fa-book"></i>&nbsp;&nbsp;<strong>DESCRIÇÃO DO CURSO</strong>
-                    <br />@Model.cursos.txdescritivo
-                </div>
-            </div>
-            <div class="row pt60">
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                    <i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;<strong>INSTRUTOR(ES)</strong>
-                    @foreach (var p in Model.cursos.instrutores)
-                    {
-                       <div class="row pt15">
-                           @if (@p.txfoto != "")
-                           {
-                           <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12">
-                               <img class="img-responsive" src="~/images/instrutores/@p.txfoto" style="width:100%;">
-                           </div>
-                           }
-                           <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12">
-                               @p.txinstrutor<br />@p.txdescritivo
-                           </div>
-                       </div>
-                    }
+                    </p>
                 </div>
             </div>
             <div class="row pt30 text-center">
                 <form id="form_inscricao" action="~/Inscricao" method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="curso" name="curso" value="@Model.cursos.idcurso" />
-                    <button class="tg-btn" type="button" id="btn_solicitar_inscricao">Solicitar Inscrição</button>
+                    <button class="tg-btn btn-verde" type="button" id="btn_solicitar_inscricao">GARANTIR VAGA</button>
                 </form>
                 <br />
             </div>
+
+            @if (@Model.outros.Count > 0)
+            {
+                <div class="tg-carousel pt30">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+                                <h2>@Model.cursos.txorganizador - Outros cursos</h2>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right carousel-arrows">
+                                <a class="left" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                <a class="right" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="carousel slide multi-item-carousel" id="theCarousel">
+                                    <div class="carousel-inner">
+                                        @{
+                                            int i = 1;
+                                            string data = "";
+                                        }
+                                        @foreach (var p in Model.outros)
+                                        {
+                                            <div class="item @(i == 1 ? "active" : "")">
+                                                <div class="col-xs-4 div-curso">
+                                                    <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                                                        <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : "")>
+                                                            <span>@p.txcurso</span>
+                                                        </div>
+                                                        <div class="gray-box">
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
+                                                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Local:</strong></div>
+                                                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcidade / @p.txestado</div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Data(s):</strong></div>
+                                                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                                                    @if (p.datas.Count > 0)
+                                                                    {
+                                                                        data = "";
+                                                                        foreach (var x in p.datas)
+                                                                        {
+                                                                            data = data + ", " + x.dtcurso;
+                                                                        }
+                                                                        @Html.Raw(data.Substring(2));
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @: A definir
+                                                            }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    @*<div class="text-right redes-sociais">
+                                                    Compartilhar:
+                                                    <span onclick="window.open('https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no facebook"><i class="fa fa-facebook"></i></span>
+                                                    <span onclick="window.open('https://twitter.com/share?original_referer=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))&amp;related=treinaauto&amp;source=tweetbutton&amp;text=@p.txcurso&amp;url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no twitter"><i class="fa fa-twitter"></i></span>
+                                                    <span onclick="window.open('https://plus.google.com/share?url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no google plus"><i class="fa fa-google-plus"></i></span>
+                                                </div>*@
+                                                </div>
+                                            </div>
+                                            i = i + 1;
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             }
         </div>
     </div>
 </main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/curso-site")
+}

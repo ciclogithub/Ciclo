@@ -30,6 +30,9 @@ namespace Biblioteca.Entidades
         public List<Cursos_Datas> datas { get; set; }
         public List<Mercados> mercados { get; set; }
         public List<Instrutores> instrutores { get; set; }
+        public List<Cursos_Valores> valores { get; set; }
+        public string txtema { get; set; }
+        public int idorganizador { get; set; }
 
         public Curso_Site()
         {
@@ -49,9 +52,11 @@ namespace Biblioteca.Entidades
             this.txcidade = "";
             this.txestado = "";
             this.txpais = "";
+            this.txtema = "";
+            this.idorganizador = 0;
         }
 
-        public Curso_Site(int id, string curso, string categoria, string organizador, int minimo, int maximo, string cargahoraria, byte gratuito, string localdesc, string descritivo, string foto, string local, string logradouro, string cidade, string estado, string pais)
+        public Curso_Site(int id, string curso, string categoria, string organizador, int minimo, int maximo, string cargahoraria, byte gratuito, string localdesc, string descritivo, string foto, string local, string logradouro, string cidade, string estado, string pais, string tema, int idorganizador)
         {
             this.idcurso = id;
             this.txcurso = curso;
@@ -73,6 +78,9 @@ namespace Biblioteca.Entidades
             this.datas = new Cursos_DatasDB().Listar(id);
             this.mercados = new CursosDB().ListarMercados(id);
             this.instrutores = new InstrutoresDB().ListarDoCurso(id);
+            this.valores = new Cursos_ValoresDB().Listar(id);
+            this.txtema = tema;
+            this.idorganizador = idorganizador;
         }
 
         

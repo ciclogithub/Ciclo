@@ -19,7 +19,34 @@ namespace Biblioteca.DB
                 List<Cursos_Site> list_cursos = new List<Cursos_Site>();
 
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("select TOP " + reg + " c.txdescritivo, c.idcurso, c.txcurso, ct.txcategoria, SUBSTRING((SELECT ', ' + i.txinstrutor + '|' + cast(i.idinstrutor as varchar) FROM Cursos_Instrutores ci inner join instrutores i on i.idinstrutor = ci.idinstrutor WHERE ci.idcurso = c.idcurso FOR XML PATH('')), 3, 999) as instrutores, c.txfoto, ci.txcidade, es.txsigla from cursos c left join categorias ct on ct.idcategoria = c.idcategoria left join Locais l on l.idlocal = c.idlocal left join Cidades ci on ci.idcidade = l.idcidade left join Estados es on es.idestado = ci.idestado where 1 = 1 and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) >= GETDATE()) or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) is null)) ORDER by c.idcurso desc");
+                Query query = session.CreateQuery("select TOP " + reg + " c.txdescritivo, c.idcurso, c.txcurso, ct.txcategoria, SUBSTRING((SELECT ', ' + i.txinstrutor + '|' + cast(i.idinstrutor as varchar) FROM Cursos_Instrutores ci inner join instrutores i on i.idinstrutor = ci.idinstrutor WHERE ci.idcurso = c.idcurso FOR XML PATH('')), 3, 999) as instrutores, c.txfoto, ci.txcidade, es.txsigla from cursos c left join categorias ct on ct.idcategoria = c.idcategoria left join Locais l on l.idlocal = c.idlocal left join Cidades ci on ci.idcidade = l.idcidade left join Estados es on es.idestado = ci.idestado where 1 = 1 and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso desc) >= GETDATE()) or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso desc) is null)) ORDER by c.idcurso desc");
+                IDataReader reader = query.ExecuteQuery();
+
+                while (reader.Read())
+                {
+                    list_cursos.Add(new Cursos_Site(0, Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txcategoria"]), Convert.ToString(reader["instrutores"]), Convert.ToString(reader["txfoto"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txsigla"]), Convert.ToString(reader["txdescritivo"])));
+                }
+                reader.Close();
+                session.Close();
+
+                return list_cursos;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+        public List<Cursos_Site> ListardoOrganizador(int curso = 0, int reg = 0, int organizador = 0)
+        {
+            try
+            {
+                List<Cursos_Site> list_cursos = new List<Cursos_Site>();
+
+                DBSession session = new DBSession();
+                Query query = session.CreateQuery("select TOP " + reg + " c.txdescritivo, c.idcurso, c.txcurso, ct.txcategoria, SUBSTRING((SELECT ', ' + i.txinstrutor + '|' + cast(i.idinstrutor as varchar) FROM Cursos_Instrutores ci inner join instrutores i on i.idinstrutor = ci.idinstrutor WHERE ci.idcurso = c.idcurso FOR XML PATH('')), 3, 999) as instrutores, c.txfoto, ci.txcidade, es.txsigla from cursos c left join categorias ct on ct.idcategoria = c.idcategoria left join Locais l on l.idlocal = c.idlocal left join Cidades ci on ci.idcidade = l.idcidade left join Estados es on es.idestado = ci.idestado where c.idcurso <> @curso and c.idorganizador = @organizador and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso desc) >= GETDATE()) or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso desc) is null)) ORDER by c.idcurso desc");
+                query.SetParameter("organizador", organizador);
+                query.SetParameter("curso", curso);
                 IDataReader reader = query.ExecuteQuery();
 
                 while (reader.Read())
@@ -84,7 +111,7 @@ namespace Biblioteca.DB
                 if (data == "")
                 {
                     //qry += " AND cd.dtcurso >= getdate() ";
-                    qry += " and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) >= GETDATE()) or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso) is null)) ";
+                    qry += " and(((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso desc) >= GETDATE()) or((select top 1 dtcurso from Cursos_Datas cc where cc.idcurso = c.idcurso order by cc.dtcurso desc) is null)) ";
                 }
                 else
                 {

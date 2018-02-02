@@ -585,17 +585,19 @@
     <Content Include="Scripts\highcharts\5.0.14\highcharts.js.map" />
     <Content Include="Scripts\highcharts\5.0.14\highcharts-more.js.map" />
     <Content Include="Scripts\highcharts\5.0.14\highcharts-3d.js.map" />
-    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="images\pattern.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\customScrollbar.min.js" />
     <Content Include="Scripts\highcharts\5.0.14\themes\sunset.src.js" />
     <Content Include="Scripts\isotope.pkgd.js" />
-    <Content Include="Scripts\jquery-3.2.1.js" />
-    <Content Include="Scripts\jquery-3.2.1.min.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.fullpage.js" />
     <Content Include="Scripts\jquery.hoverdir.js" />
@@ -629,6 +631,7 @@
     <Content Include="Scripts\js\organizador\temas.js" />
     <Content Include="Scripts\js\organizador\locais.js" />
     <Content Include="Scripts\js\organizador\alunos.js" />
+    <Content Include="Scripts\js\curso.js" />
     <Content Include="Scripts\js\site.js" />
     <Content Include="Scripts\js\organizador\instrutores.js" />
     <Content Include="Scripts\js\organizador\painel.js" />
@@ -753,8 +756,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Biblioteca\Biblioteca.csproj">

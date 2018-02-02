@@ -15,7 +15,7 @@ namespace Ciclo.Controllers
         public ActionResult Index()
         {
             List<Cursos_Site> list = new List<Cursos_Site>();
-            list = new Cursos_SiteDB().Listar(20);
+            list = new Cursos_SiteDB().Listar(10);
 
             return View(list);
         }

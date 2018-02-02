@@ -19,13 +19,13 @@ namespace Biblioteca.DB
                 Curso_Site cursos = null;
 
                 DBSession session = new DBSession();
-                Query quey = session.CreateQuery("select c.idcurso, c.txcurso, ca.txcategoria, o.txorganizador, isnull(c.nrminimo,0) as minimo, isnull(c.nrmaximo,0) as maximo, c.txcargahoraria, c.flgratuito, c.txlocal as localdesc, c.txdescritivo, c.txfoto, l.txlocal, l.txlogradouro, ci.txcidade, es.txsigla, p.txpais from Cursos c left join Categorias ca on ca.idcategoria = c.idcategoria left join Organizadores o on o.idorganizador = c.idorganizador left join Locais l on l.idlocal = c.idlocal left join Cidades ci on ci.idcidade = l.idcidade left join Estados es on es.idestado = ci.idestado left join Paises p on p.idpais = es.idpais where c.idcurso = @id");
+                Query quey = session.CreateQuery("select c.idorganizador, t.txtema, c.idcurso, c.txcurso, ca.txcategoria, o.txorganizador, isnull(c.nrminimo,0) as minimo, isnull(c.nrmaximo,0) as maximo, c.txcargahoraria, c.flgratuito, c.txlocal as localdesc, c.txdescritivo, c.txfoto, l.txlocal, l.txlogradouro, ci.txcidade, es.txsigla, p.txpais from Cursos c left join Categorias ca on ca.idcategoria = c.idcategoria left join Organizadores o on o.idorganizador = c.idorganizador left join Locais l on l.idlocal = c.idlocal left join Cidades ci on ci.idcidade = l.idcidade left join Estados es on es.idestado = ci.idestado left join Paises p on p.idpais = es.idpais left join Temas t on t.idtema = c.idtema where c.idcurso = @id");
                 quey.SetParameter("id", id);
                 IDataReader reader = quey.ExecuteQuery();
 
                 if (reader.Read())
                 {
-                    cursos = new Curso_Site(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txcategoria"]), Convert.ToString(reader["txorganizador"]), Convert.ToInt32(reader["minimo"]), Convert.ToInt32(reader["maximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToByte(reader["flgratuito"]), Convert.ToString(reader["localdesc"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txsigla"]), Convert.ToString(reader["txpais"]));
+                    cursos = new Curso_Site(Convert.ToInt32(reader["idcurso"]), Convert.ToString(reader["txcurso"]), Convert.ToString(reader["txcategoria"]), Convert.ToString(reader["txorganizador"]), Convert.ToInt32(reader["minimo"]), Convert.ToInt32(reader["maximo"]), Convert.ToString(reader["txcargahoraria"]), Convert.ToByte(reader["flgratuito"]), Convert.ToString(reader["localdesc"]), Convert.ToString(reader["txdescritivo"]), Convert.ToString(reader["txfoto"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txsigla"]), Convert.ToString(reader["txpais"]), Convert.ToString(reader["txtema"]), Convert.ToInt32(reader["idorganizador"]));
                 }
                 reader.Close();
                 session.Close();
