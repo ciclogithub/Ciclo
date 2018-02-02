@@ -117,9 +117,16 @@
                     }
                     else
                     {
-                        foreach (var p in Model.cursos.valores)
+                        if (Model.cursos.valore.Count > 0)
                         {
-                            @Html.Raw("Até " + p.dtvalor + " - R$ " + p.valor + "<br>");
+                            foreach (var p in Model.cursos.valores)
+                            {
+                                @Html.Raw("Até " + p.dtvalor + " - R$ " + p.valor + "<br>");
+                            }
+                        }
+                        else
+                        {
+                            @Html.Raw("Não informado")
                         }
                     }
                     </p>
