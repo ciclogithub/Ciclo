@@ -41,12 +41,15 @@
                             @foreach (var p in Model)
                             {
                                 <div class="item @(i == 1 ? "active" : "")">
-                                    <div class="col-xs-4 div-curso">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 div-curso">
                                         <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
-                                            <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : "")>
-                                                <span>@p.txcurso</span>
+                                            <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : " style=background-image:url(../../images/banner1.png) ")>
+                                                &nbsp;
                                             </div>
                                             <div class="gray-box">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h4><strong>@p.txcurso</strong></h4></div>
+                                                </div>                                                
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
                                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>

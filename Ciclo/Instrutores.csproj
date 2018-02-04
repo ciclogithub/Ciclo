@@ -306,6 +306,8 @@
     <Content Include="images\2.png" />
     <Content Include="images\3.png" />
     <Content Include="images\banner.jpg" />
+    <Content Include="images\banner1.png" />
+    <Content Include="images\banner2.png" />
     <Content Include="images\categorias\1.png" />
     <Content Include="images\categorias\2.png" />
     <Content Include="images\categorias\3.png" />
