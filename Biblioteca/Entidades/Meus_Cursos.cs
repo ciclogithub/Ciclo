@@ -12,7 +12,7 @@ namespace Biblioteca.Entidades
         public int idcurso { get; set; }
         public string txcurso { get; set; }
         public string txlocal { get; set; }
-        public Nullable<DateTime> dtcurso { get; set; }
+        public List<Cursos_Datas> datas { get; set; }
         public Nullable<DateTime> dtsolicitacao { get; set; }
         public Nullable<DateTime> dtstatus { get; set; }
         public string txmotivo { get; set; }
@@ -22,24 +22,26 @@ namespace Biblioteca.Entidades
         {
             this.idcurso = 0;
             this.txcurso = "";
-            this.txlocal = "";
-            this.dtcurso = null;
+            this.txlocal = "";            
             this.dtsolicitacao = null;
             this.dtstatus = null;
             this.txmotivo = "";
             this.avaliacao = null;
         }
 
-        public Meus_Cursos(int id, string curso, string local, Nullable<DateTime> dtcurso, Nullable<DateTime> dtsolicitacao, Nullable<DateTime> dtstatus, string motivo, Nullable<int> avaliacao)
+        public Meus_Cursos(int id, string curso, string local, Nullable<DateTime> dtsolicitacao, Nullable<DateTime> dtstatus, string motivo, Nullable<int> avaliacao)
         {
             this.idcurso = id;
             this.txcurso = curso;
             this.txlocal = local;
-            this.dtcurso = dtcurso;
             this.dtsolicitacao = dtsolicitacao;
             this.dtstatus = dtstatus;
             this.txmotivo = motivo;
             this.avaliacao = avaliacao;
+            if (id != null)
+            {
+                this.datas = new Cursos_DatasDB().Listar(id);
+            }
         }
 
     }

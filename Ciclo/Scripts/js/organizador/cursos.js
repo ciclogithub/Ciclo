@@ -161,11 +161,13 @@ function CursosTodos() {
 }
 
 function CursoPesquisar() {
-    window.location = "/Painel/Cursos/?pagina=1&filtro=" + $("#filtro_pesquisa").val();
+    val = "";
+    if ($("#filtro_pesquisa").length > 0) { val = $("#filtro_pesquisa").val() }
+    window.location = "/Painel/Cursos/?pagina=1&filtro=" + val;
 }
 
 function Cursos(id) {
-    Modal("/Painel/Cursos/Incluir", id, "Cursos", "");
+    Modal("/Painel/Cursos/Incluir", id, "Eventos", "");
 }
 
 function CursoAlterar() {
@@ -279,7 +281,7 @@ function ValidaCursoInclusao() {
     $.post("/Painel/Cursos/VerificaCurso", { id: $("#form-modal_curso #idcurso").val(), nome: $("#form-modal_curso #txcurso").val(), identificador: $("#form-modal_curso #txidentificador").val() }).done(function (data) {
         if (data == 1) {
             swal({
-                title: 'Já existe um curso com o mesmo nome, confirma a gravação de um novo registro',
+                title: 'Já existe um evento com o mesmo nome, confirma a gravação de um novo registro',
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',
@@ -292,7 +294,7 @@ function ValidaCursoInclusao() {
         } else {
             if (data == 2) {
                 swal({
-                    title: 'Já existe um curso com o mesmo identificador, confirma a gravação de um novo registro',
+                    title: 'Já existe um evento com o mesmo identificador, confirma a gravação de um novo registro',
                     type: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Sim',
@@ -313,7 +315,7 @@ function ValidaCursoExcluir(ids) {
     $.post("/Painel/Cursos/VerificaCursoExcluir", { id: ids.toString() }).done(function (data) {
         if (data == 1) {
             swal({
-                title: 'Existem alunos vinculados a um dos cursos selecionados, confirma a exclusão',
+                title: 'Existem alunos vinculados a um dos eventos selecionados, confirma a exclusão',
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',
@@ -342,7 +344,7 @@ function ValidaCursoExcluir(ids) {
 /* INSTRUTORES */
 
 function CursoInstrutor(id) {
-    Modal("/Painel/Cursos/Instrutores", id, "Cursos - Instrutores", "");
+    Modal("/Painel/Cursos/Instrutores", id, "Eventos - Instrutores", "");
 }
 
 function IncluirInstrutores() {
@@ -422,7 +424,7 @@ function addInstrutor() {
 /* ALUNOS */
 
 function CursoAluno(id) {
-    Modal("/Painel/Cursos/Alunos", id, "Cursos - Alunos", "");
+    Modal("/Painel/Cursos/Alunos", id, "Eventos - Alunos", "");
 }
 
 function IncluirAlunos() {
@@ -502,7 +504,7 @@ function addAluno() {
 /* DATAS */
 
 function CursoData(id) {
-    Modal("/Painel/Cursos/Datas", id, "Cursos - Datas", "ListaDatas");
+    Modal("/Painel/Cursos/Datas", id, "Eventos - Datas", "ListaDatas");
 }
 
 function NovaData() {
@@ -621,7 +623,7 @@ function ExcluirData(id) {
 /* VALORES */
 
 function CursoValor(id) {
-    Modal("/Painel/Cursos/Valores", id, "Cursos - Valores", "ListaValores");
+    Modal("/Painel/Cursos/Valores", id, "Eventos - Valores", "ListaValores");
 }
 
 function NovoValor() {
@@ -736,7 +738,7 @@ function ExcluirValor(id) {
 /* AVALIAÇÃO */
 
 function CursoAvaliacao(id) {
-    Modal("/Painel/Cursos/Avaliacao", id, "Cursos - Avaliações", "");
+    Modal("/Painel/Cursos/Avaliacao", id, "Eventos - Avaliações", "");
 }
 
 function IncluirAvaliacao() {
@@ -794,7 +796,7 @@ function ShowHide(id) {
 /* LISTA DE ALUNOS */
 
 function CursoListaAluno(id) {
-    Modal("/Painel/Cursos/Lista", id, "Cursos - Lista de Alunos", "");
+    Modal("/Painel/Cursos/Lista", id, "Eventos - Lista de Alunos", "");
 }
 
 

@@ -1,7 +1,7 @@
 ﻿@model List<Biblioteca.Entidades.Cursos>
 
 @{
-    ViewBag.Title = "Cursos";
+    ViewBag.Title = "Eventos";
 }
 
 <div class="tg-bgparallax">
@@ -13,7 +13,7 @@
             <ol class="tg-breadcrumb">
                 <li><a href="~/Painel">Painel</a></li>
                 <li class="tg-active">Cadastros</li>
-                <li class="tg-active">Cursos</li>
+                <li class="tg-active">Eventos</li>
             </ol>
         </div>
     </div>
@@ -33,11 +33,11 @@
                             &nbsp;<button class="tg-btn bt-m" type="button" onclick="CursosTodos();">Todos</button>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
-                            <button class="tg-btn bt-m" type="button" onclick="Cursos(0);">Novo</button>
+                            <button class="tg-btn bt-m btn-verde" type="button" onclick="Cursos(0);">Novo</button>
                             &nbsp;
-                            <button class="tg-btn bt-m" type="button" onclick="CursoAlterar()">Alterar</button>
+                            <button class="tg-btn bt-m btn-laranja" type="button" onclick="CursoAlterar()">Alterar</button>
                             &nbsp;
-                            <button class="tg-btn bt-m" type="button" onclick="CursoExcluir()">Excluir</button>
+                            <button class="tg-btn bt-m btn-vermelho" type="button" onclick="CursoExcluir()">Excluir</button>
                         </div>
                     </div>
                     <div class="row pt">
@@ -48,7 +48,7 @@
                                     <tr>
                                         <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
                                         <th width="2%">&nbsp;</th>
-                                        <th width="54%">CURSO</th>
+                                        <th width="54%">EVENTO</th>
                                         <th width="23%">CATEGORIA</th>
                                         <th width="18%" colspan="6">&nbsp;</th>
                                     </tr>
@@ -63,12 +63,12 @@
                                                 @p.txcurso
                                             @if (@p.instrutores.Count == 0)
                                             {
-                                                @: <div class="txt-alert">Este curso não possui nenhum instrutor cadastrado, <a href="javascript:CursoInstrutor(@p.idcurso)">clique aqui</a> para cadastrar.</div>
+                                                @: <div class="txt-alert">Este evento não possui nenhum instrutor cadastrado, <a href="javascript:CursoInstrutor(@p.idcurso)">clique aqui</a> para cadastrar.</div>
                                     }
 
                                             @if (@p.datas.Count == 0)
                                             {
-                                                @: <div class="txt-alert">Este curso não possui nenhuma data cadastrada, <a href="javascript:CursoData(@p.idcurso)">clique aqui</a> para cadastrar.</div>
+                                                @: <div class="txt-alert">Este evento não possui nenhuma data cadastrada, <a href="javascript:CursoData(@p.idcurso)">clique aqui</a> para cadastrar.</div>
                                     }
                                         </td>
                                         <td>@p.nome_categoria.txcategoria</td>

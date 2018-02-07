@@ -127,7 +127,7 @@ function ValidaTemaExcluir(ids) {
     $.post("/Painel/Temas/VerificaTemaExcluir", { id: ids.toString() }).done(function (data) {
         if (data == 1) {
             swal({
-                title: 'Existem cursos vinculados a um dos temas selecionados, confirma a exclusão',
+                title: 'Existem eventos vinculados a um dos temas selecionados, confirma a exclusão',
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',

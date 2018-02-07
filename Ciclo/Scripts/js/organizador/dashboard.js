@@ -4,7 +4,7 @@
 
     if (cont > 0) {
         swal({
-            title: 'Existem ' + cont + ' novas solicitações de inscrições para cursos',
+            title: 'Existem ' + cont + ' novas solicitações de inscrições para eventos',
             type: 'info',
             showCancelButton: true,
             confirmButtonText: 'Ver todas',

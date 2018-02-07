@@ -135,7 +135,7 @@ function ValidaLocalExcluir(ids) {
     $.post("/Painel/Locais/VerificaLocaisExcluir", { id: ids.toString() }).done(function (data) {
         if (data == 1) {
             swal({
-                title: 'Existem cursos vinculados a um dos locais selecionados, confirma a exclusão',
+                title: 'Existem eventos vinculados a um dos locais selecionados, confirma a exclusão',
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',

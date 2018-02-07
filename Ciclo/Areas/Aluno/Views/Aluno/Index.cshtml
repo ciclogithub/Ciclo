@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Dashboard";
+    string datas = "";
 }
 
 <div class="tg-bgparallax">
@@ -32,37 +33,43 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pt-inner">
                     <h4 class="font-azul">Últimos lançamentos</h4>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            @foreach (var p in Model.lancamentos)
-                            {
+                    @foreach (var p in Model.lancamentos)
+                    {
+                        datas = "";
+                        <div class="row pt30">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                            
                                 <a href="/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
-                                    <strong>@p.txcurso</strong><br />
-                                    @p.txcategoria - @p.txcidade/@p.txestado<br />
-                                    Data(s): @if (p.datas.Count > 0)
+                                    <h3>@p.txcurso</h3>
+                                    <strong>Organizador:</strong> @p.txorganizador<Br />
+                                    <strong>Categoria:</strong> @p.txcategoria<br />
+                                    <strong>Local:</strong> @p.txcidade/@p.txestado<br />
+                                    <strong>Data(s):</strong> 
+                                    @if (p.datas.Count > 0)
                                     {
                                         foreach (var x in p.datas)
                                         {
-                                            @Html.Raw(x.dtcurso + "<br />");
+                                            datas += ", " + x.dtcurso;
                                         }
+                                        @Html.Raw(datas.Substring(2));
                                     }
                                     else
                                     {
                                         @: A definir<br />
                                     }
-                                </a><br />
-                            }
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    <br />&nbsp;
                 </div>
                 <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
                     <form action="~/Pesquisa" method="post" id="filtro_form" name="filtro_form" style="padding:10px;">
                         <div class="pesquisa" style="margin-top:10px; padding-top:0px;">
-                            <h4 class="font-azul">Pesquisa Cursos</h4>
+                            <h4 class="font-azul">Pesquisar Eventos</h4>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                     <div id="lupa"></div>
-                                    <input type="text" id="filtro_curso" name="filtro_curso" placeholder="Pesquisar curso" class="frm" />
+                                    <input type="text" id="filtro_curso" name="filtro_curso" placeholder="Pesquisar evento" class="frm" />
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top:10px;">
                                     <div id="mapa"></div>

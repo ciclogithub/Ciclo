@@ -647,6 +647,7 @@ h3.perfil span {
 
 .tg-sectionicones img {
     min-height:60px;
+    margin-left:20px;
 }
 
 .tg-sectionicones .img-text {
@@ -741,7 +742,7 @@ h3.perfil span {
 }
 
 .btn-verde {
-    background-color: #28DA78 !important;
+    background-color: #73E474 !important;
     color: #FFF !important;
     border-radius: unset !important;
     -webkit-transition: all 300ms ease-in-out;
@@ -755,11 +756,50 @@ h3.perfil span {
     background-color: green !important;
 }
 
+.btn-laranja {
+    background-color: #F4B008 !important;
+    color: #FFF !important;
+    border-radius: unset !important;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-laranja:hover {
+    background-color: #ff6a00 !important;
+}
+
+.btn-vermelho {
+    background-color: #F7064B !important;
+    color: #FFF !important;
+    border-radius: unset !important;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-vermelho:hover {
+    background-color: #ff0000 !important;
+}
+
 
 .btn-azul {
     background-color: #1F95DD !important;
     color: #FFF !important;
     border-radius: unset !important;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-azul:hover {
+    background-color: #183765 !important;
 }
 
 .swal2-popup .swal2-styled {
@@ -847,7 +887,7 @@ h3.perfil span {
 
 .font-azul {
     color: #00ADEF;
-    font-size:21px;
+    font-size:19px;
 }
 
 .pt-inner {
@@ -866,7 +906,7 @@ h3.perfil span {
 
 .trilha div {
     text-align:center;
-    font-size:9px;
+    font-size:8.7px;
     font-weight:lighter!important;
 }
 
@@ -878,7 +918,10 @@ h3.perfil span {
     margin-top: 40px;
     font-size: 10.5px;
     color: #fff;
-    text-align: right;
+    text-align: right;    
+}
+
+.bg1 {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f95dd+45,1f95dd+45,ffffff+47,ffffff+53,1f95dd+54,1f95dd+54 */
     background: #1f95dd; /* Old browsers */
     background: -moz-linear-gradient(top, #1f95dd 45%, #1f95dd 45%, #ffffff 47%, #ffffff 53%, #1f95dd 54%, #1f95dd 54%); /* FF3.6-15 */
@@ -886,6 +929,23 @@ h3.perfil span {
     background: linear-gradient(to bottom, #1f95dd 47%,#1f95dd 47%,#ffffff 47%,#ffffff 53%,#1f95dd 54%,#1f95dd 54%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f95dd', endColorstr='#1f95dd',GradientType=0 ); /* IE6-9 */
 }
+
+.bg2 {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f95dd+45,1f95dd+45,ffffff+47,ffffff+53,1f95dd+54,1f95dd+54 */
+    background: #1f95dd; /* Old browsers */
+    background: -moz-linear-gradient(top, #1f95dd 45%, #1f95dd 45%, #dc3535 47%, #dc3535 53%, #1f95dd 54%, #1f95dd 54%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #1f95dd 45%,#1f95dd 45%,#dc3535 47%,#dc3535 53%,#1f95dd 54%,#1f95dd 54%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #1f95dd 47%,#1f95dd 47%,#dc3535 47%,#dc3535 53%,#1f95dd 54%,#1f95dd 54%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f95dd', endColorstr='#1f95dd',GradientType=0 ); /* IE6-9 */
+}
+
+    .bg2 img {
+        -webkit-filter: grayscale(1);
+        -webkit-filter: grayscale(100%);
+        filter: gray;
+        filter: grayscale(100%);
+        filter: url(desaturate.svg#greyscale);
+    }
 
 .trilha img {
     max-height:50px;
@@ -982,6 +1042,27 @@ h3.perfil span {
     font-size: 14px !important;
     cursor:pointer;
     margin: 0px 5px;
+}
+
+.mt {
+    float:right;
+    max-height:350px;
+}
+
+.middle {
+    padding-top:15px;
+}
+
+.bg-title {
+    color:#ff0000;
+    font-weight:600;
+    background-color:#f3f3f3;
+    padding:5px 10px;
+}
+
+.mais-addon {
+    color: #eee !important;
+    background-color: #555 !important;
 }
 
 @media only screen and (max-device-width: 480px) {

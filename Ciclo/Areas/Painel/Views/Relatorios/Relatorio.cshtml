@@ -23,10 +23,10 @@
                     case 3: <li class="tg-active">Por Classificação (Aluno)</li>
                         break;
 
-                    case 4: <li class="tg-active">Por Classificação (Curso)</li>
+                    case 4: <li class="tg-active">Por Classificação (Evento)</li>
                         break;
 
-                    case 5: <li class="tg-active">Por Cursos</li>
+                    case 5: <li class="tg-active">Por Eventos</li>
                         break;
 
                     case 6: <li class="tg-active">Por Mercados</li>
@@ -91,8 +91,8 @@
                                     case 1: <span>Relatório por Alunos</span>; break;
                                     case 2: <span>Relatório por Categorias</span>; break;
                                     case 3: <span>Relatório por Classificação (Aluno)</span>; break;
-                                    case 4: <span>Relatório por Classificação (Curso)</span>; break;
-                                    case 5: <span>Relatório por Cursos</span>; break;
+                                    case 4: <span>Relatório por Classificação (Evento)</span>; break;
+                                    case 5: <span>Relatório por Eventos</span>; break;
                                     case 6: <span>Relatório por Mercados</span>; break;
                                     case 7: <span>Relatório por Locais</span>; break;
                                     case 8: <span>Relatório por Instrutores</span>; break;
@@ -155,7 +155,7 @@
                         {
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             @{ string result = new Biblioteca.DB.CursosDB().ListarNomes(@ViewBag.form["tempcurso"]); }
-                            Cursos: @result
+                            Eventos: @result
                         </div>
                         }
 
@@ -179,7 +179,7 @@
                         {
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             @{ string result = new Biblioteca.DB.CoresDB().ListarNomes(@ViewBag.form["tempcorcurso"]); }
-                            Classificação (Cursos): @result
+                            Classificação (Eventos): @result
                         </div>
                         }
 
@@ -240,8 +240,8 @@
                                             <th bgcolor="#ECECEC">E-MAILS</th>
                                             <th bgcolor="#ECECEC">TELEFONES</th>
                                             <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
-                                            <th bgcolor="#ECECEC">CURSO</th>
-                                            <th bgcolor="#ECECEC">CÓDIGO CURSO</th>
+                                            <th bgcolor="#ECECEC">EVENTO</th>
+                                            <th bgcolor="#ECECEC">CÓDIGO EVENTO</th>
                                             <th bgcolor="#ECECEC">CATEGORIA</th>
                                             <th bgcolor="#ECECEC">TEMA</th>
                                             <th bgcolor="#ECECEC">LOCAL</th>
@@ -302,8 +302,8 @@
                                         @:     </tr>
                                         @:     <tr>
                                         @:         <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
-                                        @:         <th bgcolor="#ECECEC" width='34%'>CURSO</th>
-                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO CURSO</th>
+                                        @:         <th bgcolor="#ECECEC" width='34%'>EVENTO</th>
+                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO EVENTO</th>
                                         @:         <th bgcolor="#ECECEC" width='20%'>LOCAL</th>        
                                         @:         <th bgcolor="#ECECEC" width='20%'>TEMA</th>
                                         @:         <th bgcolor="#ECECEC" width='10%'>Nº ALUNOS</th>
@@ -413,8 +413,8 @@
                                         @:         <th class="@p.corcurso.Replace(" ","_")" colspan="6">CLASSIFICAÇÃO: @p.corcurso</th>
                                         @:     </tr>
                                         @:     <tr>
-                                        @:         <th bgcolor="#ECECEC" width='29%'>CURSO</th>
-                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO CURSO</th>
+                                        @:         <th bgcolor="#ECECEC" width='29%'>EVENTO</th>
+                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO EVENTO</th>
                                         @:         <th bgcolor="#ECECEC" width='15%'>TEMA</th>
                                         @:         <th bgcolor="#ECECEC" width='15%'>LOCAL</th>        
                                         @:         <th bgcolor="#ECECEC" width='15%'>CATEGORIA</th>
@@ -466,7 +466,7 @@
 
                                         @: <thead>
                                         @:     <tr>
-                                        @:         <th bgcolor="#DDDDDD" colspan="6">CURSO: @p.curso</th>
+                                        @:         <th bgcolor="#DDDDDD" colspan="6">EVENTO: @p.curso</th>
                                         @:     </tr>
                                         @:     <tr>
                                         @:         <th colspan="6" style="padding:5px !important;">
@@ -474,7 +474,7 @@
                                         @:                <thead>
                                         @:                  <tr>
                                         @:                      <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
-                                        @:                      <th bgcolor="#ECECEC" width='15%'>CÓDIGO CURSO</th>
+                                        @:                      <th bgcolor="#ECECEC" width='15%'>CÓDIGO EVENTO</th>
                                         @:                      <th bgcolor="#ECECEC" width='18%'>LOCAL</th>
                                         @:                      <th bgcolor="#ECECEC" width='20%'>CIDADE / ESTADO</th>        
                                         @:                      <th bgcolor="#ECECEC" width='18%'>CATEGORIA</th>
@@ -610,8 +610,8 @@
                                         @:     </tr>
                                         @:     <tr>
                                         @:         <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
-                                        @:         <th bgcolor="#ECECEC" width='34%'>CURSO</th>
-                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO CURSO</th>
+                                        @:         <th bgcolor="#ECECEC" width='34%'>EVENTO</th>
+                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO EVENTO</th>
                                         @:         <th bgcolor="#ECECEC" width='20%'>TEMA</th>        
                                         @:         <th bgcolor="#ECECEC" width='20%'>CATEGORIA</th>
                                         @:         <th bgcolor="#ECECEC" width='10%'>Nº ALUNOS</th>
@@ -683,8 +683,8 @@
                                         @:         </th>
                                         @:     </tr>
                                         @:         <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
-                                        @:         <th bgcolor="#ECECEC" width='30%'>CURSO</th>
-                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO CURSO</th>
+                                        @:         <th bgcolor="#ECECEC" width='30%'>EVENTO</th>
+                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO EVENTO</th>
                                         @:         <th bgcolor="#ECECEC" width='17%'>LOCAL</th>        
                                         @:         <th bgcolor="#ECECEC" width='17%'>CATEGORIA</th>
                                         @:         <th bgcolor="#ECECEC" width='10%'>Nº ALUNOS</th>
@@ -741,8 +741,8 @@
                                         @:     </tr>
                                         @:     <tr>
                                         @:         <th bgcolor="#ECECEC" width='1%'>&nbsp;</th>
-                                        @:         <th bgcolor="#ECECEC" width='34%'>CURSO</th>
-                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO CURSO</th>
+                                        @:         <th bgcolor="#ECECEC" width='34%'>EVENTO</th>
+                                        @:         <th bgcolor="#ECECEC" width='15%'>CÓDIGO EVENTO</th>
                                         @:         <th bgcolor="#ECECEC" width='20%'>LOCAL</th>        
                                         @:         <th bgcolor="#ECECEC" width='20%'>CATEGORIA</th>
                                         @:         <th bgcolor="#ECECEC" width='10%'>Nº ALUNOS</th>

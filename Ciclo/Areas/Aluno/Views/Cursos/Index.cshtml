@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Meus Cursos";
+    ViewBag.Title = "Meus Eventos";
+    string datas = "";
 }
 
 <div class="tg-bgparallax">
@@ -12,7 +13,7 @@
                     </div>
                     <ol class="tg-breadcrumb">
                         <li><a href="~/Aluno">Painel</a></li>
-                        <li class="tg-active">Meus Cursos</li>
+                        <li class="tg-active">Meus Eventos</li>
                     </ol>
                 </div>
             </div>
@@ -30,26 +31,40 @@
                     @Html.Action("Menu", "Aluno")
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
-                    <h4 class="font-azul">Acompanhe as suas inscrições e seus cursos realizados através do Treinaauto.</h4>
+                    <h4 class="font-azul">Acompanhe as suas inscrições e seus eventos realizados através do Treinaauto.</h4>
                     <div class="row pt">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                             <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr><th colspan="3" style="background-color:#ECECEC">CURSOS ATIVOS</th></tr>
+                                    <tr><th colspan="3" style="background-color:#ECECEC">EVENTOS ATIVOS</th></tr>
                                     <tr>
-                                        <th width="42%">CURSO</th>
-                                        <th width="42%">LOCAL</th>
-                                        <th width="16%">DATA DO CURSO</th>
+                                        <th width="40%">EVENTO</th>
+                                        <th width="40%">LOCAL</th>
+                                        <th width="20%">DATA(S) DO EVENTO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var p in Model.cursos_ativos)
                                     {
+                                        datas = "";
                                         <tr>
                                             <td>@p.txcurso</td>
                                             <td>@p.txlocal</td>
-                                            <td>@p.dtcurso.ToShortDateString()</td>
+                                            <td>
+                                                @if (p.datas.Count > 0)
+                                                {
+                                                    foreach (var x in p.datas)
+                                                    {
+                                                        datas += ", " + x.dtcurso;
+                                                    }
+                                                    @Html.Raw(datas.Substring(2));
+                                                }
+                                                else
+                                                {
+                                                    @: A definir<br />
+                                                }
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -57,22 +72,36 @@
 
                             <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr><th colspan="3" style="background-color:#ECECEC">CURSOS FINALIZADOS</th></tr>
+                                    <tr><th colspan="3" style="background-color:#ECECEC">EVENTOS FINALIZADOS</th></tr>
                                     <tr>
-                                        <th width="73%">CURSO</th>
-                                        <th width="17%">DATA DO CURSO</th>
+                                        <th width="70%">EVENTO</th>
+                                        <th width="20%">DATA(S) DO EVENTO</th>
                                         <th width="10%">AVALIAÇÃO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var p in Model.cursos_finalizados)
                                     {
+                                        datas = "";
                                         <tr>
                                             <td>@p.txcurso</td>
-                                            <td>@p.dtcurso.ToShortDateString()</td>
+                                            <td>
+                                                @if (p.datas.Count > 0)
+                                                {
+                                                    foreach (var x in p.datas)
+                                                    {
+                                                        datas += ", " + x.dtcurso;
+                                                    }
+                                                    @Html.Raw(datas.Substring(2));
+                                                }
+                                                else
+                                                {
+                                                    @: A definir<br />
+                                                }
+                                            </td>
                                             @if (p.avaliacao == 0)
                                             {
-                                                <td><a href="#">avaliar</a></td>
+                                                <td>@*<a href="#">avaliar</a>*@</td>
                                             }
                                             else
                                             {
@@ -87,17 +116,31 @@
                                 <thead>
                                     <tr><th colspan="3" style="background-color:#ECECEC">INSCRIÇÕES PENDENTES</th></tr>
                                     <tr>
-                                        <th width="60%">CURSO</th>
-                                        <th width="20%">DATA DO CURSO</th>
+                                        <th width="60%">EVENTO</th>
+                                        <th width="20%">DATA(S) DO EVENTO</th>
                                         <th width="20%">DATA DA SOLICITAÇÃO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var p in Model.inscricoes_pendentes)
                                     {
+                                        datas = "";
                                         <tr>
                                             <td>@p.txcurso</td>
-                                            <td>@p.dtcurso.ToShortDateString()</td>
+                                            <td>
+                                                @if (p.datas.Count > 0)
+                                                {
+                                                    foreach (var x in p.datas)
+                                                    {
+                                                        datas += ", " + x.dtcurso;
+                                                    }
+                                                    @Html.Raw(datas.Substring(2));
+                                                }
+                                                else
+                                                {
+                                                    @: A definir<br />
+                                                }
+                                            </td>
                                             <td>@p.dtsolicitacao.ToShortDateString()</td>
                                         </tr>
                                     }
@@ -108,7 +151,7 @@
                                 <thead>
                                     <tr><th colspan="4" style="background-color:#ECECEC">INSCRIÇÕES CANCELADAS</th></tr>
                                     <tr>
-                                        <th width="30%">CURSO</th>
+                                        <th width="30%">EVENTO</th>
                                         <th width="20%">DATA DA SOLICITAÇÃO</th>
                                         <th width="20%">DATA DA RESPOSTA</th>
                                         <th width="30%">MOTIVO</th>

@@ -29,6 +29,10 @@
     });
 });
 
+function NovoCurso() {
+    Modal("/Painel/Cursos/Incluir", 0, "Eventos", "");
+}
+
 
 
 $('.counter-count').each(function () {

@@ -92,7 +92,7 @@ function abreGrafico(id) {
         case 2: titulo = "Total de alunos por categoria"; titulo2 = "Alunos";  break;
         case 3: titulo = "Total de alunos por classificação"; titulo2 = "Alunos";  break;
         case 4: titulo = "Total de alunos por classificação"; titulo2 = "Alunos";  break;
-        case 5: titulo = "Total de alunos por curso"; titulo2 = "Alunos";  break;
+        case 5: titulo = "Total de alunos por evento"; titulo2 = "Alunos";  break;
         case 6: titulo = "Total de alunos por mercados"; titulo2 = "Alunos";  break;
         case 7: titulo = "Total de alunos por local"; titulo2 = "Alunos";  break;
         case 8: titulo = "Total de alunos por instrutor"; titulo2 = "Alunos";  break;

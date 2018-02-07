@@ -49,8 +49,8 @@
                                         <option value="1">Por Alunos</option>
                                         <option value="2">Por Categorias</option>
                                         <option value="3">Por Classificação (Aluno)</option>
-                                        <option value="4">Por Classificação (Curso)</option>
-                                        <option value="5">Por Cursos</option>
+                                        <option value="4">Por Classificação (Evento)</option>
+                                        <option value="5">Por Eventos</option>
                                         <option value="10">Por Localidade (Aluno)</option>
                                         <option value="6">Por Mercados</option>
                                         <option value="7">Por Locais</option>
@@ -115,12 +115,12 @@
                                                     <option value="@p.idinstrutor">@p.txinstrutor</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('instrutor')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('instrutor')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listinstrutor"></ul>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                        <label class="control-label" for="idcurso">Cursos</label>
+                                        <label class="control-label" for="idcurso">Eventos</label>
                                         <div class="input-group">
                                             <select id="idcurso" name="idcurso" class="form-control">
                                                 <option value="">-- Selecione --</option>
@@ -129,7 +129,7 @@
                                                     <option value="@c.idcurso">@c.txcurso</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('curso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('curso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listcurso"></ul>
                                     </div>
@@ -145,7 +145,7 @@
                                                     <option value="@a.idaluno">@a.txaluno</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('aluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('aluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listaluno"></ul>
                                     </div>
@@ -159,7 +159,7 @@
                                                     <option value="@t.idempresa">@t.txempresa</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('empresa')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('empresa')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listempresa"></ul>
                                     </div>
@@ -175,7 +175,7 @@
                                                     <option value="@c.idcategoria">@c.txcategoria</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('categoria')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listcategoria"></ul>
                                     </div>
@@ -189,7 +189,7 @@
                                                     <option value="@t.idtema">@t.txtema</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('tema')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('tema')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listtema"></ul>
                                     </div>
@@ -205,7 +205,7 @@
                                                     <option value="@e.idmercado">@e.txmercado</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('mercado')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('mercado')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listmercado"></ul>
                                     </div>
@@ -219,7 +219,7 @@
                                                     <option value="@e.idmercado">@e.txmercado</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('mercadocurso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('mercadocurso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listmercadocurso"></ul>
                                     </div>
@@ -235,7 +235,7 @@
                                                     <option value="@e.idespecialidade">@e.txespecialidade</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('especialidade')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listespecialidade"></ul>
                                     </div>
@@ -249,14 +249,14 @@
                                                     <option value="@l.idlocal">@l.txlocal</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('local')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('local')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listlocal"></ul>
                                     </div>
                                 </div>
                                 <div class="row pt15">
                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                        <label class="control-label" for="idcorcurso">Classificação (Curso)</label>
+                                        <label class="control-label" for="idcorcurso">Classificação (Evento)</label>
                                         <div class="input-group">
                                             <select id="idcorcurso" name="idcorcurso" class="form-control">
                                                 <option value="">-- Selecione --</option>
@@ -265,7 +265,7 @@
                                                     <option class="@c.txcor.Replace(" ","_")" value="@c.idcor">@c.txcor</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('corcurso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('corcurso')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listcorcurso"></ul>
                                     </div>
@@ -279,7 +279,7 @@
                                                     <option class="@c.txcor.Replace(" ","_")" value="@c.idcor">@c.txcor</option>
                                                 }
                                             </select>
-                                            <span class="input-group-addon" onclick="add('coraluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="add('coraluno')" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listcoraluno"></ul>
                                     </div>
@@ -311,13 +311,14 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <span class="input-group-addon" onclick="addLocalidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                            <span class="input-group-addon mais-addon" onclick="addLocalidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                         </div>
                                         <ul class="list-itens" id="listlocalidade"></ul>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        <br />&nbsp;
                     </div>
                 </div>
             </div>

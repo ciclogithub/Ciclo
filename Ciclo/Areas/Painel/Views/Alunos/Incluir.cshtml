@@ -123,7 +123,7 @@
                                         <option value="@t.idempresa" @(Model.alunos.idempresa == t.idempresa ? "selected" : "")>@t.txempresa</option>
                                     }
                                 </select>
-                                <span class="input-group-addon" onclick="addEmpresa()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                <span class="input-group-addon mais-addon" onclick="addEmpresa()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 form-group">
@@ -186,7 +186,7 @@
                                     <option value="@t.idmercado">@t.txmercado</option>
                                 }
                             </select>
-                            <span class="input-group-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            <span class="input-group-addon mais-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
                         <ul class="list-itens" id="listmercado">@Html.Raw(list_mercados)</ul>
                         <div id="error_mercado" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
@@ -199,7 +199,7 @@
                         <label class="control-label" for="tempemail">E-mail</label>
                         <div class="input-group">
                             <input type="text" class="form-control validate[required,minSize[3],maxSize[100],email]" id="tempemail" name="tempemail" value="" maxlength="100" />
-                            <span class="input-group-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            <span class="input-group-addon mais-addon" onclick="addEmail()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
                         <ul class="list-itens" id="listemail">@Html.Raw(list_emails)</ul>
                         <div id="error_email" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
@@ -215,7 +215,7 @@
                         <div class="input-group">
                             <span onclick="whatsapp()" class="input-group-addon" style="cursor:pointer" id="whatsapp_label"><i class="fa fa-whatsapp"></i><input type="checkbox" id="flwhatsapp" name="flwhatsapp" value="1" class="hide" /></span>
                             <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
-                            <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            <span class="input-group-addon mais-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
                         <ul class="list-itens" id="listtelefone">@Html.Raw(list_telefones)</ul>
                         <div id="error_telefone" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
@@ -234,7 +234,7 @@
                                 }
                             </select>
                             <input type="text" class="form-control validate[required,minSize[2],maxSize[50]] w80" id="tempredes" name="tempredes" value="" maxlength="50" />
-                            <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            <span class="input-group-addon mais-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                         </div>
                         <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>
                         <div id="error_redes" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>

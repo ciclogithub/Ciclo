@@ -75,7 +75,7 @@
                     @Html.Action("Menu", "Aluno")
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
-                    <h4 class="font-azul">Mantenha seus dados atualizados é a melhor forma de você ser notificado de cursos interessantes.</h4><br />
+                    <h4 class="font-azul">Mantenha seus dados atualizados é a melhor forma de você ser notificado de eventos interessantes.</h4><br />
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <form method="post" action="" id="form-modal_usuario">
@@ -138,7 +138,7 @@
                                     <div class="input-group">
                                         <span onclick="whatsapp()" class="input-group-addon" style="cursor:pointer" id="whatsapp_label"><i class="fa fa-whatsapp"></i><input type="checkbox" id="flwhatsapp" name="flwhatsapp" value="1" class="hide" /></span>
                                         <input type="text" class="form-control validate[required,minSize[14],maxSize[15],phone]" id="temptelefone" name="temptelefone" value="" maxlength="15" data-mask="(00) 0000-00000" placeholder="(__) ____-_____" />
-                                        <span class="input-group-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                        <span class="input-group-addon mais-addon" onclick="addTelefone()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                     </div>
                                     <ul class="list-itens" id="listtelefone">@Html.Raw(list_telefones)</ul>
                                     <div id="error_telefone" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
@@ -157,7 +157,7 @@
                                             }
                                         </select>
                                         <input type="text" class="form-control validate[required,minSize[2],maxSize[50]] w80" id="tempredes" name="tempredes" value="" maxlength="50" />
-                                        <span class="input-group-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                        <span class="input-group-addon mais-addon" onclick="addRedes()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                     </div>
                                     <ul class="list-itens" id="listredes">@Html.Raw(listredes)</ul>
                                     <div id="error_redes" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>

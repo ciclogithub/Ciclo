@@ -49,18 +49,22 @@
                                             <div class="gray-box">
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h4><strong>@p.txcurso</strong></h4></div>
-                                                </div>                                                
+                                                </div>       
                                                 <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><strong>Organizador:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">@p.txorganizador</div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Local:</strong></div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcidade / @p.txestado</div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><strong>Categoria:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">@p.txcategoria</div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Data(s):</strong></div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><strong>Local:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">@p.txcidade / @p.txestado</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><strong>Data(s):</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                                         @if (p.datas.Count > 0)
                                                         {
                                                             data = "";
@@ -102,7 +106,7 @@
                     <h2>Especialidades</h2>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
-                    <a class="tg-btn tg-btnbookseat bg-branco" href="Cursos/Todos">VER TODOS OS CURSOS</a>
+                    <a class="tg-btn tg-btnbookseat bg-branco" href="Cursos/Todos">VER TODOS OS EVENTOS</a>
                 </div>
             </div>
             <div class="row categorias pt30">
@@ -174,30 +178,35 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <h2>Aprender</h2>
-                    Para “Quem Quer APRENDER” a<br />
-                    Treina Auto oferece uma conta<br />
-                    gratuita onde o interessado pode,<br />
-                    entre outras coisas:
+                    Para “Quem Quer APRENDER” a Treina Auto oferece uma conta gratuita onde o interessado pode, entre outras coisas:
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <img src="~/images/icones/08.png" />
-                            <div class="img-text">Informar o mercado de atuação;</div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3"><img src="~/images/icones/08.png" /></div>
+                                <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 middle">Informar o mercado de atuação;</div>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <img src="~/images/icones/09.png" />
-                            <div class="img-text">Informar as áreas de interesse em cursos;</div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3"><img src="~/images/icones/09.png" /></div>
+                                <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 middle">Informar as áreas de interesse em eventos;</div>
+                            </div>
                         </div>
                     </div>
                     <div class="row pt30">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <img src="~/images/icones/10.png" />
-                            <div class="img-text">Cadastrar os certificados de cursos já feitos;</div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3"><img src="~/images/icones/10.png" /></div>
+                                <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 middle">Cadastrar os certificados de cursos já feitos;</div>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <img src="~/images/icones/11.png" />
-                            <div class="img-text">Receber comunicados de eventos dentro do seu mercado e área de interesse.</div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3"><img src="~/images/icones/11.png" /></div>
+                                <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 middle">Receber comunicados de eventos dentro do seu mercado e área de interesse.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -211,7 +220,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                     <h2>Cadastre-se agora</h2>
                     E receba por email em “primeira mão” informações com datas, locais e horários
-                    de novos cursos.
+                    de novos eventos.
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><br />
                     <a class="tg-btn tg-btnbookseat bg-azul" href="Cadastro/Aluno">CADASTRAR</a>
@@ -226,7 +235,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <h2>Treina Auto para Instrutores</h2>
                     Para “Quem Quer ENSINAR” a Treina Auto oferece gratuitamente uma conta específica para instrutores e professores. “Quem Quer ENSINAR” pode
-                    ser um instrutor ou uma empresa que deseja MULTIPLICAR CONHECIMENTO com a oferta de diversos cursos com diversos instrutores diferentes.
+                    ser um instrutor ou uma empresa que deseja MULTIPLICAR CONHECIMENTO com a oferta de diversos eventos com diversos instrutores diferentes.
                     Nela o instrutor/organizador poderá:
                 </div>                
             </div>
@@ -235,7 +244,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <img src="~/images/icones/01.png" />
-                            <div class="img-text">Cadastrar seus cursos com um mini-descritivo de cada tema;</div>
+                            <div class="img-text">Cadastrar seus eventos com um mini-descritivo de cada tema;</div>
                         </div>
                     </div>
                     <div class="row pt30">
@@ -247,36 +256,34 @@
                     <div class="row pt30">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <img src="~/images/icones/03.png" />
-                            <div class="img-text">Cadastrar locais de realização dos cursos ou eventos;</div>
+                            <div class="img-text" style="padding-top:12px;">Cadastrar locais de realização dos eventos;</div>
                         </div>
                     </div>
                     <div class="row pt30">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <img src="~/images/icones/04.png" />
-                            <div class="img-text">Cadastrar os cursos já realizados no passado para gerar estatísticas e relatórios;</div>
+                            <div class="img-text">Cadastrar os eventos já realizados no passado para gerar estatísticas e relatórios;</div>
                         </div>
                     </div>
                     <div class="row pt30">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <img src="~/images/icones/05.png" />
-                            <div class="img-text">Gerar vários tipos de relatórios;</div>
-                        </div>
-                    </div>
-                    <div class="row pt30">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <img src="~/images/icones/06.png" />
-                            <div class="img-text">Divulgar sua agenda de cursos gratuitamente na plataforma Treina Auto.</div>
+                            <div class="img-text" style="padding-top:5px;">Gerar vários tipos de relatórios;</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <img src="~/images/icones/computador.png" class="mt" />
-                    <div class="row pt30">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <img src="~/images/icones/07.png" />
-                            <div class="img-text2">Publicar eventos. Montar um folder do curso agregando o descritivo do curso, o currículodo instrutor, o local de realização e mais alguns dados específicos,  tais como: data, horário, valores, mercado, especialidades e uma imagem de divulgação;</div>
-                        </div>
-                    </div>
+                    <img src="~/images/icones/computador.png" class="mt img-responsive" />
+                </div>
+            </div>
+            <div class="row pt30">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <img src="~/images/icones/06.png" />
+                    <div class="img-text">Divulgar sua agenda de eventos gratuitamente na plataforma Treina Auto.</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">                   
+                    <img src="~/images/icones/07.png" />
+                    <div class="img-text2">Publicar eventos. Montar um folder do curso agregando o descritivo do curso, o currículo do instrutor, o local de realização e mais alguns dados específicos,  tais como: data, horário, valores, mercado, especialidades e uma imagem de divulgação;</div>
                 </div>
             </div>
         </div>
@@ -290,7 +297,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                                 <h2>A Treina Auto é pra você instrutor</h2>
-                                A plataforma completa para você criar, divulgar e administrar o seu curso, comece
+                                A plataforma completa para você criar, divulgar e administrar o seu eventos, comece
                                 agora e conheça todas as possibilidades.
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">

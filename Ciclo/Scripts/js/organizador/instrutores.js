@@ -152,7 +152,7 @@ function ValidaInstrutorExcluir(ids) {
     $.post("/Painel/Instrutores/VerificaInstrutorExcluir", { id: ids.toString() }).done(function (data) {
         if (data == 1) {
             swal({
-                title: 'Existem cursos vinculados a um dos instrutores selecionados, confirma a exclusão',
+                title: 'Existem eventos vinculados a um dos instrutores selecionados, confirma a exclusão',
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',

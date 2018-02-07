@@ -365,7 +365,7 @@ function ValidaAlunoExcluir(ids) {
     $.post("/Painel/Alunos/VerificaAlunoExcluir", { id: ids.toString() }).done(function (data) {
         if (data == 1) {
             swal({
-                title: 'Existem alunos selecionados que estão vinculados há cursos, confirma a exclusão',
+                title: 'Existem alunos selecionados que estão vinculados há eventos, confirma a exclusão',
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim',

@@ -11,7 +11,7 @@
             {
                 @: Editar
             }
-            - Curso
+            - Evento
         </h4>
     </div>
 
@@ -59,98 +59,24 @@
                     <input type="hidden" id="txmercados" name="txmercados" value="@mercados" />
                     <input type="hidden" id="idcurso" name="idcurso" value="@Model.cursos.idcurso" />
                     <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bg-title">Insira aqui as informações básicas do seu evento</div>
+                    </div>
+                    <div class="row pt15">
                         <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label class="control-label" for="txidentificador">Código Curso *</label>
+                            <label class="control-label" for="txidentificador">Código Evento *</label>
                             <input type="text" class="form-control validate[required,minSize[1],maxSize[20]]" id="txidentificador" name="txidentificador" value="@Model.cursos.txidentificador" maxlength="20" />
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <div class="form-group">
-                                <label class="control-label" for="txcurso">Nome do Curso *</label>
+                                <label class="control-label" for="txcurso">Nome do Evento *</label>
                                 <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txcurso" name="txcurso" value="@Model.cursos.txcurso" maxlength="300" />
                             </div>
                         </div>
                     </div>
-                    <div class="row pt15">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label class="control-label" for="txfoto">Foto</label>
-                                <input type="file" class="form-control" id="txfoto" name="txfoto" value="" onchange="readURL(this);" />
-                                <div class="prev_img">
-                                    @if (@Model.cursos.txfoto == "")
-                                    {
-                                        <img id="prev_img" src="#" alt="visualizar" />
-                                    }
-                                    else
-                                    {
-                                        <img id="prev_img" src="~/images/Cursos/@Model.cursos.txfoto" alt="visualizar" />
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label" for="tempmercado">Mercados</label>
-                                <div class="input-group">
-                                    <select id="idmercado" name="idmercado" class="form-control">
-                                        <option value="">-- Selecione --</option>
-                                        @foreach (var t in Model.mercados)
-                                        {
-                                            <option value="@t.idmercado">@t.txmercado</option>
-                                        }
-                                    </select>
-                                    <span class="input-group-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                                </div>
-                                <ul class="list-itens" id="listmercado">@Html.Raw(list_mercados)</ul>
-                                <div id="error_mercado" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label" for="tempespecialidade">Especialidades <a href="#" id="sugEspecialidade" class="link_p">(Não encontrou a especialidade? clique aqui)</a></label>
-                                <div class="input-group">
-                                    <select id="idespecialidade" name="idespecialidade" class="form-control">
-                                        <option value="">-- Selecione --</option>
-                                        @foreach (var t in Model.especialidades)
-                                        {
-                                            <option value="@t.idespecialidade">@t.txespecialidade</option>
-                                        }
-                                    </select>
-                                    <span class="input-group-addon" onclick="addEspecialidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                                </div>
-                                <ul class="list-itens" id="listespecialidade">@Html.Raw(list_especialidades)</ul>
-                                <div id="error_especialidade" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label" for="idtema">Tema *</label>
-                                <div class="input-group">
-                                    <select id="idtema" name="idtema" class="form-control validate[required]">
-                                        <option value="">-- Selecione --</option>
-                                        @foreach (var t in Model.temas)
-                                        {
-                                            <option value="@t.idtema" @(Model.cursos.idtema == t.idtema ? "selected" : "")>@t.txtema</option>
-                                        }
-                                    </select>
-                                    <span class="input-group-addon" onclick="addTema()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label" for="idcategoria">Categoria *</label>
-                                <select id="idcategoria" name="idcategoria" class="form-control validate[required]">
-                                    <option value="">-- Selecione --</option>
-                                    @foreach (var c in Model.categorias)
-                                    {
-                                        <option value="@c.idcategoria" @(Model.cursos.idcategoria == c.idcategoria ? "selected" : "")>@c.txcategoria</option>
-                                    }
-                                </select>
-                            </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                            <label class="control-label" for="txdescritivo">Descrição</label>
+                            <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição">@Model.cursos.txdescritivo</textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -165,7 +91,7 @@
                                             <option value="@l.idlocal" @(Model.cursos.idlocal == l.idlocal ? "selected" : "")>@l.txlocal</option>
                                         }
                                     </select>
-                                    <span class="input-group-addon" onclick="addLocal()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                    <span class="input-group-addon mais-addon" onclick="addLocal()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -214,19 +140,108 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="checkbox" name="flgratuito" id="flgratuito" value="1" @(Model.cursos.flgratuito ? "checked" : "")>&nbsp;&nbsp;Curso Gratuito
+                        </div>
+                    </div>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bg-title">Quer que o seu evento seja encontrado? Inclua as informações de segmentação</div>
+                    </div>
+                    <div class="row pt15">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="idtema">Tema *</label>
+                                <div class="input-group">
+                                    <select id="idtema" name="idtema" class="form-control validate[required]">
+                                        <option value="">-- Selecione --</option>
+                                        @foreach (var t in Model.temas)
+                                        {
+                                            <option value="@t.idtema" @(Model.cursos.idtema == t.idtema ? "selected" : "")>@t.txtema</option>
+                                        }
+                                    </select>
+                                    <span class="input-group-addon mais-addon" onclick="addTema()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="idcategoria">Categoria *</label>
+                                <select id="idcategoria" name="idcategoria" class="form-control validate[required]">
+                                    <option value="">-- Selecione --</option>
+                                    @foreach (var c in Model.categorias)
+                                    {
+                                        <option value="@c.idcategoria" @(Model.cursos.idcategoria == c.idcategoria ? "selected" : "")>@c.txcategoria</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="tempmercado">Mercados</label>
+                                <div class="input-group">
+                                    <select id="idmercado" name="idmercado" class="form-control">
+                                        <option value="">-- Selecione --</option>
+                                        @foreach (var t in Model.mercados)
+                                        {
+                                            <option value="@t.idmercado">@t.txmercado</option>
+                                        }
+                                    </select>
+                                    <span class="input-group-addon mais-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                </div>
+                                <ul class="list-itens" id="listmercado">@Html.Raw(list_mercados)</ul>
+                                <div id="error_mercado" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="tempespecialidade">Especialidades <a href="#" id="sugEspecialidade" class="link_p">(Não encontrou a especialidade? clique aqui)</a></label>
+                                <div class="input-group">
+                                    <select id="idespecialidade" name="idespecialidade" class="form-control">
+                                        <option value="">-- Selecione --</option>
+                                        @foreach (var t in Model.especialidades)
+                                        {
+                                            <option value="@t.idespecialidade">@t.txespecialidade</option>
+                                        }
+                                    </select>
+                                    <span class="input-group-addon mais-addon" onclick="addEspecialidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                </div>
+                                <ul class="list-itens" id="listespecialidade">@Html.Raw(list_especialidades)</ul>
+                                <div id="error_especialidade" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bg-title">Torne o seu evento memorável incluindo uma imagem personalizada</div>
+                    </div>
+                    <div class="row pt15">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="control-label" for="txfoto">Foto (1170x400, PNG, GIF ou JPG)</label>
+                                <input type="file" class="form-control" id="txfoto" name="txfoto" value="" onchange="readURL(this);" />
+                                <div class="prev_img">
+                                    @if (@Model.cursos.txfoto == "")
+                                    {
+                                        <img id="prev_img" src="#" alt="visualizar" />
+                                    }
+                                    else
+                                    {
+                                        <img id="prev_img" src="~/images/Cursos/@Model.cursos.txfoto" alt="visualizar" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-                    <label class="control-label" for="txdescritivo">Descrição</label>
-                    <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição">@Model.cursos.txdescritivo</textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <input type="checkbox" name="flgratuito" id="flgratuito" value="1" @(Model.cursos.flgratuito ? "checked" : "")>&nbsp;&nbsp;Curso Gratuito
-                </div>
-            </div>
+            
+            
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
