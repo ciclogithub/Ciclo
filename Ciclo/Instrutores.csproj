@@ -720,6 +720,20 @@
     <Content Include="Scripts\plugins\select2\js\select2.full.min.js" />
     <Content Include="Scripts\plugins\select2\js\select2.js" />
     <Content Include="Scripts\plugins\select2\js\select2.min.js" />
+    <Content Include="Scripts\plugins\share\font\fontello\css\animation.css" />
+    <Content Include="Scripts\plugins\share\font\fontello\css\fontello-codes.css" />
+    <Content Include="Scripts\plugins\share\font\fontello\css\fontello-embedded.css" />
+    <Content Include="Scripts\plugins\share\font\fontello\css\fontello-ie7-codes.css" />
+    <Content Include="Scripts\plugins\share\font\fontello\css\fontello-ie7.css" />
+    <Content Include="Scripts\plugins\share\font\fontello\css\fontello.css" />
+    <Content Include="Scripts\plugins\share\font\fontello\demo.html" />
+    <Content Include="Scripts\plugins\share\font\fontello\font\fontello.svg" />
+    <Content Include="Scripts\plugins\share\font\fontello\LICENSE.txt" />
+    <Content Include="Scripts\plugins\share\font\fontello\README.txt" />
+    <Content Include="Scripts\plugins\share\index.html" />
+    <Content Include="Scripts\plugins\share\jQuery-BEShare.js" />
+    <Content Include="Scripts\plugins\share\script.js" />
+    <Content Include="Scripts\plugins\share\styles.css" />
     <Content Include="Scripts\plugins\sweetalert\sweetalert2.all.js" />
     <Content Include="Scripts\plugins\table2excel\jquery.table2excel.js" />
     <Content Include="Scripts\plugins\table2excel\jquery.table2excel.min.js" />
@@ -754,6 +768,10 @@
     <Content Include="Views\Cadastro\Aluno.cshtml" />
     <Content Include="Views\Cadastro\Instrutor.cshtml" />
     <Content Include="Views\Cursos\Index.cshtml" />
+    <Content Include="Scripts\plugins\share\font\fontello\config.json" />
+    <Content Include="Scripts\plugins\share\font\fontello\font\fontello.eot" />
+    <Content Include="Scripts\plugins\share\font\fontello\font\fontello.ttf" />
+    <Content Include="Scripts\plugins\share\font\fontello\font\fontello.woff" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

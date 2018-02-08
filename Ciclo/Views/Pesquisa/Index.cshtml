@@ -36,7 +36,7 @@
                     <div class="col-xs-4 div-curso" style="margin-bottom:40px;">
                         <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
                             <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : " style=background-image:url(../../images/banner1.png)")>
-                                &nbsp;
+                                &nbsp;<span class="icon-share popup" url-share="http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))" title-share="@p.txcurso"></span>
                             </div>
                             <div class="gray-box">
                                 <div class="row">

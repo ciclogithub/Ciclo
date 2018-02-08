@@ -31,6 +31,7 @@ namespace Ciclo
                 "~/Scripts/plugins/validate/js/jquery.validationEngine.js",
                 "~/Scripts/plugins/sweetalert/sweetalert2.all.js",
                 "~/Scripts/plugins/calendar/js/bootstrap-datepicker.js",
+                "~/Scripts/plugins/share/jQuery-BEShare.js",
                 "~/Scripts/plugins/jquery-ui/jquery-ui.min.js",
                 "~/Scripts/js/site.js"));
 
@@ -183,6 +184,8 @@ namespace Ciclo
                 "~/Scripts/plugins/validate/css/validationEngine.jquery.css",
                 "~/Scripts/plugins/calendar/css/datepicker.css",
                 "~/Scripts/plugins/select2/css/select2.css",
+                "~/Scripts/plugins/share/styles.css",
+                 "~/Scripts/plugins/share/font/fontello/css/fontello.css",
                 "~/Content/responsive.css"));
         }
     }

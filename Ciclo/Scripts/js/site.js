@@ -1,4 +1,14 @@
 ﻿$(document).ready(function () {
+
+    $('.popup').BEShare({
+        'type': 'popup',
+        'targets': ['Facebook', 'Twitter', 'Google+'],
+        'class': 'popup-share',
+        'prefix': 'icon-',
+        'via': 'treinaautocursos',
+        'onShare': null,
+    });
+
     var today = moment().format('DD/MM/YYYY')
     $('#filtro_data').daterangepicker({
         "autoApply": true,
