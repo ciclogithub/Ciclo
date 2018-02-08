@@ -220,6 +220,7 @@
     <Content Include="Content\transitions.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontello.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\icomoon.svg" />
     <Content Include="Global.asax" />
@@ -301,6 +302,9 @@
     <Content Include="Areas\Painel\Views\Alunos\Importar.cshtml" />
     <Content Include="Areas\Painel\Views\Empresas\Importar.cshtml" />
     <Content Include="Areas\Painel\Views\Painel\Relatorio.cshtml" />
+    <Content Include="fonts\fontello.eot" />
+    <Content Include="fonts\fontello.ttf" />
+    <Content Include="fonts\fontello.woff" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\1.png" />
     <Content Include="images\2.png" />
