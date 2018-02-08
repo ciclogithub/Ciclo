@@ -1,5 +1,20 @@
 ﻿$(document).ready(function () {
 
+    $("i").tooltip({
+        position: {
+            my: "center bottom-20",
+            at: "center top",
+            using: function (position, feedback) {
+                $(this).css(position);
+                $("<div>")
+                    .addClass("arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(feedback.horizontal)
+                    .appendTo(this);
+            }
+        }
+    });
+
 $('select').not('.no-js').select2();
 
 $('#selectallav').click(function () {
