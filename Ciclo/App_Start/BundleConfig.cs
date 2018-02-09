@@ -185,7 +185,7 @@ namespace Ciclo
                 "~/Scripts/plugins/calendar/css/datepicker.css",
                 "~/Scripts/plugins/select2/css/select2.css",
                 "~/Scripts/plugins/share/styles.css",
-                 "~/Scripts/plugins/share/font/fontello/css/fontello.css",
+                 "~/Content/fontello.css",
                 "~/Content/responsive.css"));
         }
     }
