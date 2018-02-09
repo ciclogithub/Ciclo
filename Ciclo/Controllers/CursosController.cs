@@ -13,15 +13,15 @@ namespace Ciclo.Controllers
     {
         // GET: Curso
         [Route("Cursos/Todos")]
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
             List<Cursos_Site> list = new List<Cursos_Site>();
-            list = new Cursos_SiteDB().ListarPesquisa("", "", "", 1, 12);
+            list = new Cursos_SiteDB().ListarPesquisa("", "", "", pagina, 12);
 
             if (list.Count > 0)
             {
-                ViewBag.total = 1; /* list.First().total;*/
-                ViewBag.pagina = 1;
+                ViewBag.total = list.First().total;
+                ViewBag.pagina = pagina;
             }
             else
             {

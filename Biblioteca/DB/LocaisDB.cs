@@ -17,11 +17,12 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("INSERT INTO Locais (idorganizador, idcidade, txlocal, txlogradouro) VALUES (@organizador, @cidade, @local, @logradouro)");
+                Query query = session.CreateQuery("INSERT INTO Locais (idorganizador, idcidade, txlocal, txlogradouro, txmapa) VALUES (@organizador, @cidade, @local, @logradouro, @mapa)");
                 query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("cidade", variavel.idcidade);
                 query.SetParameter("local", variavel.txlocal);
                 query.SetParameter("logradouro", variavel.txlogradouro);
+                query.SetParameter("mapa", variavel.txmapa);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -36,11 +37,12 @@ namespace Biblioteca.DB
             try
             {
                 DBSession session = new DBSession();
-                Query query = session.CreateQuery("UPDATE Locais SET idcidade = @cidade, txlocal = @local, txlogradouro = @logradouro WHERE idlocal = @id");
+                Query query = session.CreateQuery("UPDATE Locais SET idcidade = @cidade, txlocal = @local, txlogradouro = @logradouro, txmapa = @mapa WHERE idlocal = @id");
                 query.SetParameter("id", variavel.idlocal);
                 query.SetParameter("cidade", variavel.idcidade);
                 query.SetParameter("local", variavel.txlocal);
                 query.SetParameter("logradouro", variavel.txlogradouro);
+                query.SetParameter("mapa", variavel.txmapa);
                 query.ExecuteUpdate();
                 session.Close();
             }
@@ -105,7 +107,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), 0));
+                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), 0, Convert.ToString(reader["txmapa"])));
                 }
                 reader.Close();
                 session.Close();
@@ -135,7 +137,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), Convert.ToInt32(reader["total"])));
+                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txmapa"])));
                 }
                 reader.Close();
                 session.Close();
@@ -166,7 +168,7 @@ namespace Biblioteca.DB
 
                 while (reader.Read())
                 {
-                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), Convert.ToInt32(reader["total"])));
+                    list_local.Add(new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), Convert.ToInt32(reader["total"]), Convert.ToString(reader["txmapa"])));
                 }
                 reader.Close();
                 session.Close();
@@ -192,7 +194,7 @@ namespace Biblioteca.DB
 
                 if (reader.Read())
                 {
-                    alunos = new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), 0);
+                    alunos = new Locais(Convert.ToInt32(reader["idlocal"]), Convert.ToInt32(reader["idcidade"]), Convert.ToString(reader["txlocal"]), Convert.ToString(reader["txlogradouro"]), Convert.ToString(reader["txcidade"]), Convert.ToString(reader["txestado"]), Convert.ToString(reader["txpais"]), 0, Convert.ToString(reader["txmapa"]));
                 }
                 reader.Close();
                 session.Close();

@@ -1,12 +1,9 @@
 @font-face {
-  font-family: 'fontello';
-  src: url('../fontello.eot?9606839');
-  src: url('../fontello.eot?9606839#iefix') format('embedded-opentype'),
-       url('../fontello.woff?9606839') format('woff'),
-       url('../fontello.ttf?9606839') format('truetype'),
-       url('../fontello.svg?9606839#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'fontello';
+    src: url('http://www.treinaauto.com.br/fonts/fontello.eot?9606839');
+    src: url('http://www.treinaauto.com.br/fonts/fontello.eot?9606839#iefix') format('embedded-opentype'), url('http://www.treinaauto.com.br/fonts/fontello.woff?9606839') format('woff'), url('http://www.treinaauto.com.br/fonts/fontello.ttf?9606839') format('truetype'), url('http://www.treinaauto.com.br/fonts/fontello.svg?9606839#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */

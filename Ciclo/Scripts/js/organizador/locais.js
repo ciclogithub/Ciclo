@@ -82,11 +82,12 @@ function IncluirLocal() {
     var idcidade = $("#form-modal_local #idcidade").val();
     var txlocal = $("#form-modal_local #txlocal").val();
     var txlogradouro = $("#form-modal_local #txlogradouro").val();
+    var txmapa = $("#form-modal_local #txmapa").val();
 
     $.ajax({
         type: "POST",
         url: '/Painel/Locais/IncluirConcluir',
-        data: { id: idlocal, cidade: idcidade, nome: txlocal, logradouro: txlogradouro },
+        data: { id: idlocal, cidade: idcidade, nome: txlocal, logradouro: txlogradouro, mapa: txmapa },
         dataType: "json",
         traditional: true,
         success: function (json) {

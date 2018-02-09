@@ -4,6 +4,25 @@
     ViewBag.Title = "Cursos";
 }
 
+@{
+    int min = 0;
+    int max = 0;
+    int pmin = 0;
+    int pmax = 0;
+    min = ((ViewBag.pagina - 1) * 12) + 1;
+    max = ViewBag.pagina * 12;
+    if (max > ViewBag.total) { max = ViewBag.total; }
+
+    int pages = 0;
+    pages = ViewBag.total / 12;
+    if ((ViewBag.total % 12) > 0) { pages = (pages + 1); }
+    pmin = (ViewBag.pagina - 5);
+    pmax = (ViewBag.pagina + 5);
+    if (pmin < 0) { pmin = 1; }
+    if (pmax > pages) { pmax = pages; }
+
+}
+
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace">
         <div class="container pt30">
@@ -58,12 +77,6 @@
                                     </div>
                                 </div>
                             </a>
-                            @*<div class="text-right redes-sociais">
-                                    Compartilhar:
-                                    <span onclick="window.open('https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no facebook"><i class="fa fa-facebook"></i></span>
-                                    <span onclick="window.open('https://twitter.com/share?original_referer=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))&amp;related=treinaauto&amp;source=tweetbutton&amp;text=@p.txcurso&amp;url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no twitter"><i class="fa fa-twitter"></i></span>
-                                    <span onclick="window.open('https://plus.google.com/share?url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no google plus"><i class="fa fa-google-plus"></i></span>
-                                </div>*@
                         </div>
                     </div>
                     i = i + 1;
@@ -73,6 +86,67 @@
                     }
                 }
             </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                @if (ViewBag.pagina > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:pagination(1)" aria-label="Primeira" title="Primeira">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Primeira</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:pagination(-1)" aria-label="Anterior" title="Anterior">
+                                            <span aria-hidden="true">&lsaquo;</span>
+                                            <span class="sr-only">Anterior</span>
+                                        </a>
+                                    </li>
+                                }
+                                @for (var x = pmin; x <= pmax; x++)
+                                {
+                                    <li class="page-item"><a href="javascript:pagination(@x)" class="page-link @(ViewBag.pagina == x ? "pagesel" : "")" href="#">@x</a></li>
+                                }
+                                @if (ViewBag.pagina < pages)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:pagination(0)" aria-label="Próxima" title="Próxima">
+                                            <span aria-hidden="true">&rsaquo;</span>
+                                            <span class="sr-only">Próxima</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:pagination(@pages)" aria-label="Última" title="Última">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Última</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:10px;">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-left">
+                        @if (ViewBag.total > 0)
+                        {
+                            @Html.Raw("Exibindo " + @min + " a " + @max + " de " + @ViewBag.total);
+                        }
+                        else
+                        {
+                            @Html.Raw("Nenhum registro encontrado");
+                        }
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                        Página <input type="text" value="@ViewBag.pagina" size="2" id="page_select" maxlength="4" /> de @pages
+                    </div>
+                </div>
+                <form action="Todos" method="post" id="form_pesquisa" name="form_pesquisa">
+                    <input type="hidden" id="pagina" name="pagina" value="@ViewBag.pagina" />
+                    <input type="hidden" id="totalpage" name="totalpage" value="@pages" />
+                </form>
         }
         else
         {

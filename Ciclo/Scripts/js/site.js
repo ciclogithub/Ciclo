@@ -18,7 +18,7 @@
             "Próximos 7 dias": [ today, moment().add(7, 'd') ],
             "Próximos 15 dias": [ today, moment().add(15, 'd') ],
             "Neste Mês": [ moment().startOf('month'), moment().endOf('month') ],
-            "Próximo Mês": [ moment().add(1, 'M').startOf('month'), moment().add(1, 'M').endOf('month') ]
+            "Próximo Mês": [moment().add(1, 'M').startOf('month'), moment().add(1, 'M').endOf('month')],
         },
         "locale": {
             "format": "DD/MM/YYYY",
@@ -30,77 +30,27 @@
         "alwaysShowCalendars": true,
         "opens": "left",
     });
-    $('#filtro_data').val('');
 
-    $(function () {
-        var availableTags = [
-            "ActionScript",
-            "AppleScript",
-            "Asp",
-            "BASIC",
-            "C",
-            "C++",
-            "Clojure",
-            "COBOL",
-            "ColdFusion",
-            "Erlang",
-            "Fortran",
-            "Groovy",
-            "Haskell",
-            "Java",
-            "JavaScript",
-            "Lisp",
-            "Perl",
-            "PHP",
-            "Python",
-            "Ruby",
-            "Scala",
-            "Scheme"
-        ];
-        $("#filtro_cidade").autocomplete({
-            source: availableTags
-        });
+    $("#clear").on("click", function () { $('#filtro_data').val('') })
+
+    if ($('#tempdata').length > 0) {
+        $('#filtro_data').val($('#tempdata').val());
+    } else {
+        $('#filtro_data').val('');
+    }
+
+    $("#page_select").on("blur", function () {
+        if ($(this).val() == "") {
+            alert("Informe o número da página");
+        } else {
+            if ((parseInt($(this).val()) < 1) || (parseInt($(this).val()) > parseInt($("#totalpage").val()))) {
+                alert("Página inválida");
+            } else {
+                pagination($(this).val());
+            }
+        }
     });
-
-    //$("#filtro_cidade").autocomplete({
-    //    source: function (request, response) {
-    //        $.ajax({
-    //            type: "POST",
-    //            url: '/Pesquisa/Cidades',
-    //            data: { term: request.term },
-    //            dataType: "json",
-    //            traditional: true,
-    //            success: function (json) {
-    //                response($.map(json, function (value, key) {
-    //                    return {
-    //                        label: value.label,
-    //                        value: value.value
-    //                    };
-    //                }));   
-    //            }
-    //        });
-    //    },
-    //    minLength: 3,
-    //});
-
-    //var cache = {};
-    //$("#filtro_cidade").autocomplete({
-    //    minLength: 3,
-    //    source: function (request, response) {
-    //        var term = request.term;
-    //        if (term in cache) {
-    //            response(cache[term]);
-    //            return;
-    //        }
-
-    //        $.getJSON("Pesquisa/Cidades", request, function (data, status, xhr) {
-    //            alert(data)
-    //            cache[term] = data;
-    //            response(data);
-    //        });
-    //    }
-    //});
-
+    
     $("#news_enviar").click(function () {
         $('#news_form').validationEngine('attach');
         if ($('#news_form').validationEngine('validate')) {
@@ -529,4 +479,20 @@ function SolicitarInscricao() {
     } else {
         $("#form_inscricao").submit();        
     }
+}
+
+function pagination(c) {
+    var p = $("#pagina").val();
+    var t = $("#totalpage").val();
+    if (c == -1) {
+        c = parseInt(p) - 1;
+        if (c <= 0) { c = 1; }
+    } else {
+        if (c == 0) {
+            c = parseInt(p) + 1;
+            if (c > t) { c = t; }
+        }
+    }
+    $("#pagina").val(c);
+    $("#form_pesquisa").submit();
 }

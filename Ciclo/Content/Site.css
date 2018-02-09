@@ -241,11 +241,11 @@ table input {
 }
 
 #tg-main {
-    min-height:442px !important;
+    min-height:414px !important;
 }
 
 .bg-menu {
-    min-height: 442px !important;
+    min-height: 414px !important;
 }
 
 .branco {
@@ -579,6 +579,16 @@ h3.perfil span {
     content: "\f041"
 }
 
+#clear:after {
+    right: 60px;
+    top: 5px;
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 14px;
+    content: "\f00d";
+    cursor:pointer;
+}
+
 .tg-sectioncategorias {
     padding:50px 0px 0px 0px;
 }
@@ -820,7 +830,7 @@ h3.perfil span {
 }
 .bg-cinza .pt-inner {
     background-color: #FFF;
-    min-height:500px;
+    min-height:380px;
 }
 .bg-menu {
     background-color: #E2EAED;

@@ -78,13 +78,13 @@ namespace Ciclo.Areas.Painel.Controllers
         }
 
         [Autenticacao]
-        public JsonResult IncluirConcluir(int id = 0, int cidade = 0, string nome = "", string logradouro = "")
+        public JsonResult IncluirConcluir(int id = 0, int cidade = 0, string nome = "", string logradouro = "", string mapa = "")
         {
             LocaisDB db = new LocaisDB();
 
             if (id == 0)
             {
-                db.Salvar(new Locais(id, cidade, nome, logradouro));
+                db.Salvar(new Locais(id, cidade, nome, logradouro, mapa));
                 Locais local = db.Buscar(id);
             }
             else
@@ -93,7 +93,7 @@ namespace Ciclo.Areas.Painel.Controllers
                 local.idcidade = cidade;
                 local.txlocal = nome;
                 local.txlogradouro = logradouro;
-
+                local.txmapa = mapa;
 
                 db.Alterar(local);
             }

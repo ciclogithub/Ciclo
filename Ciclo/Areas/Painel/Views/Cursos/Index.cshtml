@@ -23,10 +23,10 @@
     <div class="tg-sectionspace">
         <div class="container">
             <div class="row">
-                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
-                    @Html.Action("Menu", "Painel")
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                @*<div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+        @Html.Action("Menu", "Painel")
+    </div>*@
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pt-inner">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn bt-m" type="button" id="pesquisa_curso">Localizar</button>
@@ -61,31 +61,31 @@
                                             <td class="@p.txcor.Replace(" ","_")">&nbsp;</td>
                                             <td>
                                                 @p.txcurso
-                                            @if (@p.instrutores.Count == 0)
-                                            {
-                                                @: <div class="txt-alert">Este evento não possui nenhum instrutor cadastrado, <a href="javascript:CursoInstrutor(@p.idcurso)">clique aqui</a> para cadastrar.</div>
+                                                @if (@p.instrutores.Count == 0)
+                                                {
+                                                    @: <div class="txt-alert">Este evento não possui nenhum instrutor cadastrado, <a href="javascript:CursoInstrutor(@p.idcurso)">clique aqui</a> para cadastrar.</div>
                                     }
 
-                                            @if (@p.datas.Count == 0)
-                                            {
-                                                @: <div class="txt-alert">Este evento não possui nenhuma data cadastrada, <a href="javascript:CursoData(@p.idcurso)">clique aqui</a> para cadastrar.</div>
+                                                @if (@p.datas.Count == 0)
+                                                {
+                                                    @: <div class="txt-alert">Este evento não possui nenhuma data cadastrada, <a href="javascript:CursoData(@p.idcurso)">clique aqui</a> para cadastrar.</div>
                                     }
-                                        </td>
-                                        <td>@p.nome_categoria.txcategoria</td>
-                                        <td onclick="CursoInstrutor(@p.idcurso)" width="3%" title="Instrutores" class="td"><i class="glyphicon glyphicon-education border-icon"></i></td>
-                                        <td onclick="CursoAluno(@p.idcurso)" width="3%" title="Alunos" class="td"><i class="glyphicon glyphicon-user border-icon"></i></td>
-                                        <td onclick="CursoData(@p.idcurso)" width="3%" title="Datas" class="td"><i class="glyphicon glyphicon-calendar border-icon"></i></td>
-                                        @if (p.flgratuito)
-                                        {
-                                            <td width="3%">&nbsp;</td>
-                                        }
-                                        else
-                                        {
-                                            <td onclick="CursoValor(@p.idcurso)" width="3%" title="Valores" class="td"><i class="glyphicon glyphicon-usd border-icon"></i></td>
-                                        }
-                                        <td onclick="CursoAvaliacao(@p.idcurso)" width="3%" title="Avaliação" class="td"><i class="glyphicon glyphicon-star"></i></td>
-                                        <td onclick="CursoListaAluno(@p.idcurso)" width="3%" title="Lista de Alunos" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
-                                    </tr>
+                                            </td>
+                                            <td>@p.nome_categoria.txcategoria</td>
+                                            <td onclick="CursoInstrutor(@p.idcurso)" width="3%" title="Instrutores" class="td"><i class="glyphicon glyphicon-education border-icon"></i></td>
+                                            <td onclick="CursoAluno(@p.idcurso)" width="3%" title="Alunos" class="td"><i class="glyphicon glyphicon-user border-icon"></i></td>
+                                            <td onclick="CursoData(@p.idcurso)" width="3%" title="Datas" class="td"><i class="glyphicon glyphicon-calendar border-icon"></i></td>
+                                            @if (p.flgratuito)
+                                            {
+                                                <td width="3%">&nbsp;</td>
+                                            }
+                                            else
+                                            {
+                                                <td onclick="CursoValor(@p.idcurso)" width="3%" title="Valores" class="td"><i class="glyphicon glyphicon-usd border-icon"></i></td>
+                                            }
+                                            <td onclick="CursoAvaliacao(@p.idcurso)" width="3%" title="Avaliação" class="td"><i class="glyphicon glyphicon-star"></i></td>
+                                            <td onclick="CursoListaAluno(@p.idcurso)" width="3%" title="Lista de Alunos" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
