@@ -1105,6 +1105,19 @@ h3.perfil span {
 }
 
 @media only screen and (max-device-width: 480px) {
+
+    .ft-1 {
+        font-size:24px !important;
+    }
+
+    .carousel-arrows {
+        margin-top:-15px;
+    }
+
+    .carousel-inner > div.active > div.div-curso:not(:first-child) {
+        display: none !important;
+    }
+
     #slideshow {
         margin: 0px 0px 0px 0px !important; /*0*/
         position: relative !important;
@@ -1128,9 +1141,13 @@ h3.perfil span {
 
     .box2 {
         padding: 5px !important;
-        height:200px !important;
+        height:165px !important;
     }
 
+    .ptt { 
+        padding-top:30px;
+    } 
+    
     .tg-sectionparavoce div.box {
         margin: 11px !important;
         padding: 17px !important;
@@ -1141,7 +1158,7 @@ h3.perfil span {
     }
 
     .tg-innerbannercontent {
-        padding: 100px 0 20px !important;
+        padding: 30px 0 20px !important;
     }
 
     .panel-page .tg-innerbannercontent {
@@ -1152,9 +1169,14 @@ h3.perfil span {
         display:block !important;
     }
     .tg-btnbookseat {
-        float: left !important;
+        float: right !important;
         
     }
+    
+    .mtt {
+        margin-top: 10px;
+    }
+
     .mt {
         margin-top:20px;
     }
@@ -1162,6 +1184,25 @@ h3.perfil span {
     .tg-sectiontreina .img-text2 {
        width: 80% !important;
     }
+
+    #filtro_pesquisa {
+        width:100% !important;
+        margin-bottom:10px;
+    }
+
+    .btns {
+        text-align:left !important;
+        margin:10px 0px 0px 4px !important;
+    }
+
+    .bt1 {
+        float: unset !important;
+    }
+
+    .bt2 {
+        float:right !important;
+    }
+
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 680px) {
     #slideshow {

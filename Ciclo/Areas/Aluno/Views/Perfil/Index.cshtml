@@ -84,27 +84,27 @@
                                 <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.usuarios.idcidade" />
                                 <input type="hidden" id="tempestado" name="tempestado" value="@Model.usuarios.idestado" />
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                                    <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6 form-group">
                                         <label class="control-label">E-mail</label>
                                         <h4 style="text-transform:lowercase">@Model.usuarios.txemail</h4>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                                    <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6 form-group">
                                         <label class="control-label" for="txaluno">CPF</label>
                                         <h4>@Model.usuarios.txcpf</h4>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                    <div class="col-xs-12 col-lg-6 col-md-6 col-sm-12 form-group">
                                         <label class="control-label" for="txaluno">Nome *</label>
                                         <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txaluno" name="txaluno" value="@Model.usuarios.txusuario" maxlength="200" />
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                    <div class="col-xs-12 col-lg-6 col-md-6 col-sm-12 form-group">
                                         <label class="control-label" for="txempresa">Empresa Atual</label>
                                         <input type="text" class="form-control validate[minSize[2],maxSize[300]]" id="txempresa" name="txempresa" value="@Model.usuarios.txempresa" maxlength="300" />
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="col-xs-12 col-lg-4 col-md-4 col-sm-12">
                                         <label class="control-label" for="idpais">País</label>
                                         <select id="idpais" name="idpais" class="form-control validate[required]" onchange="MudaPais(this.value)">
                                             <option value="">-- Selecione --</option>
@@ -114,13 +114,13 @@
                                             }
                                         </select>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12" id="dv_estado">
+                                    <div class="col-xs-12 col-lg-4 col-md-4 col-sm-12 mt" id="dv_estado">
                                         <label class="control-label" for="idestado">Estado</label>
                                         <select id="idestado" name="idestado" class="form-control">
                                             <option value="">-- Selecione o país --</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 form-group" id="dv_cidade">
+                                    <div class="col-xs-12 col-lg-4 col-md-4 col-sm-12 mt" id="dv_cidade">
                                         <label class="control-label" for="idcidade">Cidade</label>
                                         <select id="idcidade" name="idcidade" class="form-control">
                                             <option value="">-- Selecione o estado --</option>
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xs-12 col-lg-6 col-md-6 col-sm-12 mt">
                             <form id="form-modal-telefone">
                                 <div class="form-group">
                                     <label class="control-label" for="temptelefone">Telefones</label>
