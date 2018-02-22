@@ -1,0 +1,178 @@
+﻿<div class="panel panel-default">
+    <div class="panel-body" style="font-size:12px">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                Para importar corretamente a sua lista de empresas para o sistema Treinaauto, veja as instruções abaixo:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                - Arquivo no formato XLS ou XLSX <a href="~/images/Modelo_empresas.xls">(baixar arquivo modelo)</a><br />
+                - O arquivo deve possuir uma coluna para cada campo, sendo a primeira linha com o nome informado abaixo, seguindo a ordem e as condições descritas de cada item.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="10%">POSIÇÃO</th>
+                            <th width="17%">NOME DA COLUNA</th>
+                            <th width="32%">CONTEÚDO</th>
+                            <th width="12%">TIPO</th>
+                            <th width="16%">TAMANHO/PADRÃO</th>
+                            <th width="13%">OBRIGATÓRIO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>CODIGO</td>
+                            <td>Identificação da empresa</td>
+                            <td>Texto</td>
+                            <td>3 à 200</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>NOME</td>
+                            <td>Nome da empresa</td>
+                            <td>Texto</td>
+                            <td>até 300</td>
+                            <td>S</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CNPJ</td>
+                            <td>CNPJ da empresa</td>
+                            <td>Texto</td>
+                            <td>00.000.000/0000-00</td>
+                            <td>S</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>PAIS</td>
+                            <td>País da empresa</td>
+                            <td>Texto</td>
+                            <td>até 50</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>ESTADO</td>
+                            <td>Estado da empresa, apenas UF</td>
+                            <td>Texto</td>
+                            <td>2</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>CIDADE</td>
+                            <td>Cidade da empresa</td>
+                            <td>Texto</td>
+                            <td>até 100</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>CEP</td>
+                            <td>CEP da empresa</td>
+                            <td>Texto</td>
+                            <td>00000-000</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>BAIRRO</td>
+                            <td>BAIRRO da empresa</td>
+                            <td>Texto</td>
+                            <td>até 100</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>ENDERECO</td>
+                            <td>ENDEREÇO da empresa</td>
+                            <td>Texto</td>
+                            <td>até 300</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>NUMERO</td>
+                            <td>NÚMERO da empresa</td>
+                            <td>Texto</td>
+                            <td>até 20</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>COMPLEMENTO</td>
+                            <td>COMPLEMENTO da empresa</td>
+                            <td>Texto</td>
+                            <td>até 100</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>EMAIL1</td>
+                            <td>E-mail do aluno</td>
+                            <td>Texto</td>
+                            <td>até 200</td>
+                            <td>S</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>EMAIL2</td>
+                            <td>Outro e-mail da empresa</td>
+                            <td>Texto</td>
+                            <td>até 200</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>TELEFONE1</td>
+                            <td>Número de telefone da empresa</td>
+                            <td>Texto</td>
+                            <td>(00) 00000-0000</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>TELEFONE2</td>
+                            <td>Outro número de telefone da empresa</td>
+                            <td>Texto</td>
+                            <td>(00) 00000-0000</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>WHATSAPP</td>
+                            <td>Número de whatsapp da empresa</td>
+                            <td>Texto</td>
+                            <td>(00) 00000-0000</td>
+                            <td>N</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <form method="post" action="" id="form-modal_importar" runat="server">
+                <input type="hidden" id="organizador" name="organizador" value="@ViewBag.organizador" />
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 form-group">
+                    <input type="file" class="form-control" id="txArquivo" name="txArquivo" value="" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-group">
+                    <button class="tg-btn bt-m" type="button" onclick="enviarArquivo(1)">Enviar Arquivo</button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                    Após enviar o arquivo, aguarde pelo relatório final de importação.
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" id="processando"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/importacao")

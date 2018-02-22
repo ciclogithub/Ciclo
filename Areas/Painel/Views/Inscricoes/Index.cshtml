@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Inscrições";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Painel")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Painel">Painel</a></li>
+                <li class="tg-active">Inscrições</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout bg-cinza">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Painel")
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                            <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />
+                            &nbsp;<select id="filtro_status" name="filtro_status" class="form-control w30">
+                                <option value="0" @(ViewBag.status == 0 ? "selected" : "")>Pendentes</option>
+                                <option value="1" @(ViewBag.status == 1 ? "selected" : "")>Confirmados</option>
+                                <option value="2" @(ViewBag.status == 2 ? "selected" : "")>Recusados</option>
+                            </select>
+                            &nbsp;<button class="tg-btn bt-m" type="button" id="pesquisa_inscricao">Localizar</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 text-right">
+                            @if (ViewBag.status == 0)
+                            {
+                                <text>
+                                    <button class="tg-btn bt-m" type="button" onclick="InscricaoConfirmar()">Confirmar</button>&nbsp;
+                                    <button class="tg-btn bt-m" type="button" onclick="InscricaoRecusar()">Recusar</button>
+                                </text>
+                            }
+                        </div>
+                    </div>
+                    <div class="row pt">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                        <th width="21%">USUÁRIO</th>
+                                        <th width="21%">CURSO</th>
+                                        <th width="12%">SOLICITAÇÃO</th>
+                                        <th width="10%">STATUS</th>
+                                        <th width="30%">MOTIVO</th>
+                                        <th width="3%">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idinscricao" /></th>
+                                            <td>@p.usuario</td>
+                                            <td>@p.curso</td>
+                                            <td>@p.dtinscricao.ToShortDateString()</td>
+                                            <td>
+                                            @if (p.dtstatus.Year > 1900)
+                                            {
+                                                @p.dtstatus.ToShortDateString();
+                                            }
+                                            </td>
+                                            <td><div class="motivo">@Html.Raw(p.motivo)</div></td>
+                                            <td onclick="DadosAluno(@p.idinscricao)" title="Dados do Aluno" class="td"><i class="glyphicon glyphicon-list-alt border-icon"></i></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/inscricoes")
+}
+
+

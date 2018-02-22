@@ -1,0 +1,67 @@
+﻿@model Biblioteca.Entidades.Instrutores
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idinstrutor == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Instrutor
+        </h4>
+    </div>
+
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal_instrutor" runat="server">
+            <input type="hidden" id="idinstrutor" name="idinstrutor" value="@Model.idinstrutor" />
+            <div class="row">                
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label" for="txinstrutor">Nome *</label>
+                        <input type="text" class="form-control validate[required,minSize[3],maxSize[200]]" id="txinstrutor" name="txinstrutor" value="@Model.txinstrutor" maxlength="200" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txemail">E-mail *</label>
+                        <input type="text" class="form-control validate[required,minSize[3],maxSize[200],email]" id="txemail" name="txemail" value="@Model.txemail" maxlength="200" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtelefone">Telefone *</label>
+                        <input type="text" class="form-control validate[required,minSize[3],maxSize[100]]" id="txtelefone" name="txtelefone" value="@Model.txtelefone" maxlength="100" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label" for="txfoto">Foto</label>
+                        <input type="file" class="form-control" id="txfoto" name="txfoto" value="" onchange="readURL(this);" />
+                        <div class="prev_img">
+                            @if (@Model.txfoto == "")
+                            {
+                                <img id="prev_img" src="#" alt="visualizar" />
+                            }
+                            else
+                            {
+                                <img id="prev_img" src="~/images/Instrutores/@Model.txfoto" alt="visualizar" />
+                            }
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                    <label class="control-label" for="txdescritivo">Descrição</label>
+                    <textarea name="txdescritivo" class="form-control" id="txdescritivo" placeholder="Descrição">@Model.txdescritivo</textarea>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <button id="incluir_btn_instrutor" class="tg-btn" type="button">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/instrutores")

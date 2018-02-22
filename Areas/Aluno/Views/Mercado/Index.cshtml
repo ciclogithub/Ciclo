@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Meu Mercado";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="tg-innerbannercontent">
+                    <div class="tg-pagetitle">
+                        <h1>@Html.Action("Usuario", "Aluno")</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="~/Aluno">Painel</a></li>
+                        <li class="tg-active">Perfil</li>
+                        <li class="tg-active">Meu Mercado</li>
+                    </ol>
+                </div>
+            </div>
+            <h1>@Html.Action("Trilha", "Aluno")</h1>
+        </div>
+    </div>
+</div>
+
+@{
+    string mercados = "";
+    string list_mercados = "";
+    string especialidades = "";
+    string list_especialidades = "";
+
+    int i = 0;
+    if (Model.usuarios.txmercado != null)
+    {
+        if (Model.usuarios.txmercado.Count > 0)
+        {
+            foreach (var item in Model.usuarios.txmercado)
+            {
+                mercados = mercados + "," + item.idmercado + "|" + item.txmercado;
+                list_mercados = list_mercados + "<li><i class='glyphicon glyphicon-trash' onclick='removeMercados(" + i + ")'></i><span>" + item.txmercado + "</span></li>";
+                i++;
+            }
+            mercados = mercados.Substring(1);
+        }
+    }
+
+    i = 0;
+    if (Model.usuarios.txespecialidade != null)
+    {
+        if (Model.usuarios.txespecialidade.Count > 0)
+        {
+            foreach (var item in Model.usuarios.txespecialidade)
+            {
+                especialidades = especialidades + "," + item.idespecialidade + "|" + item.txespecialidade;
+                list_especialidades = list_especialidades + "<li><i class='glyphicon glyphicon-trash' onclick='removeEspecialidades(" + i + ")'></i><span>" + item.txespecialidade;
+                list_especialidades = list_especialidades + "</span></li>";
+                i++;
+            }
+            especialidades = especialidades.Substring(1);
+        }
+    }
+
+}
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Aluno")
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <h4 class="font-azul">Onde atuo? Qual a minha especialidade?</h4><br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <form method="post" action="" id="form-modal_usuario">
+                                <input type="hidden" id="txmercados" name="txmercados" value="@mercados" />
+                                <input type="hidden" id="txespecialidades" name="txespecialidades" value="@especialidades" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <form id="form-modal-mercados">
+                                <div class="form-group">
+                                    <label class="control-label" for="tempmercado">Mercados</label>
+                                    <div class="input-group">
+                                        <select id="idmercado" name="idmercado" class="form-control validate[required]">
+                                            <option value="">-- Selecione --</option>
+                                            @foreach (var t in Model.mercados)
+                                            {
+                                                <option value="@t.idmercado">@t.txmercado</option>
+                                            }
+                                        </select>
+                                        <span class="input-group-addon" onclick="addMercado()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                    </div>
+                                    <ul class="list-itens" style="height:200px;" id="listmercado">@Html.Raw(list_mercados)</ul>
+                                    <div id="error_mercado" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <form id="form-modal-especialidades">
+                                <div class="form-group">
+                                    <label class="control-label" for="tempmercado">Especialidades</label>
+                                    <div class="input-group">
+                                        <select id="idespecialidade" name="idespecialidade" class="form-control validate[required]">
+                                            <option value="">-- Selecione --</option>
+                                            @foreach (var t in Model.especialidades)
+                                            {
+                                                <option value="@t.idespecialidade">@t.txespecialidade</option>
+                                            }
+                                        </select>
+                                        <span class="input-group-addon" onclick="addEspecialidade()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                                    </div>
+                                    <ul class="list-itens" style="height:200px;" id="listespecialidade">@Html.Raw(list_especialidades)</ul>
+                                    <div id="error_especialidade" class="parentFormform-modal formError"><div class="formErrorArrow formErrorArrowBottom"><div class="line1"><!-- --></div><div class="line2"><!-- --></div><div class="line3"><!-- --></div><div class="line4"><!-- --></div><div class="line5"><!-- --></div><div class="line6"><!-- --></div><div class="line7"><!-- --></div><div class="line8"><!-- --></div><div class="line9"><!-- --></div><div class="line10"><!-- --></div></div><div class="formErrorContent">Obrigatório<br></div></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="incluir_btn_alterar" class="tg-btn text-center" type="button">Gravar Dados</button><br />&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/mercados")
+    @Scripts.Render("~/bundles/mask")
+}

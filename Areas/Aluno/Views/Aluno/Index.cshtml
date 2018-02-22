@@ -1,0 +1,87 @@
+﻿@using Biblioteca.Funcoes
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="tg-innerbannercontent">
+                    <div class="tg-pagetitle">
+                        <h1>@Html.Action("Usuario", "Aluno")</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li class="tg-active">Painel</li>
+                    </ol>
+                </div>
+            </div>
+            <h1>@Html.Action("Trilha", "Aluno")</h1>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout bg-cinza">
+    <div class="tg-sectionspace">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Aluno")
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pt-inner">
+                    <h4 class="font-azul">Últimos lançamentos</h4>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            @foreach (var p in Model.lancamentos)
+                            {
+                                <a href="/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                                    <strong>@p.txcurso</strong><br />
+                                    @p.txcategoria - @p.txcidade/@p.txestado<br />
+                                    Data(s): @if (p.datas.Count > 0)
+                                    {
+                                        foreach (var x in p.datas)
+                                        {
+                                            @Html.Raw(x.dtcurso + "<br />");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @: A definir<br />
+                                    }
+                                </a><br />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    <form action="~/Pesquisa" method="post" id="filtro_form" name="filtro_form" style="padding:10px;">
+                        <div class="pesquisa" style="margin-top:10px; padding-top:0px;">
+                            <h4 class="font-azul">Pesquisa Cursos</h4>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                    <div id="lupa"></div>
+                                    <input type="text" id="filtro_curso" name="filtro_curso" placeholder="Pesquisar curso" class="frm" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top:10px;">
+                                    <div id="mapa"></div>
+                                    <input type="text" id="filtro_cidade" name="filtro_cidade" placeholder="Pesquisar por cidade" class="frm" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top:10px;">
+                                    <div id="calendar"></div>
+                                    <input readonly type="text" id="filtro_data" name="filtro_data" placeholder="Todas as datas" class="frm" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top:10px;">
+                                    <input type="button" id="filtro_pesquisar" name="filtro_pesquisar" value="Pesquisar" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>           
+        </div>
+    </div>
+</main>
+
+

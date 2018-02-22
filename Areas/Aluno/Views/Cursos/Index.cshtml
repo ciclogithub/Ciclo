@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Meus Cursos";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="tg-innerbannercontent">
+                    <div class="tg-pagetitle">
+                        <h1>@Html.Action("Usuario", "Aluno")</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="~/Aluno">Painel</a></li>
+                        <li class="tg-active">Meus Cursos</li>
+                    </ol>
+                </div>
+            </div>
+            <h1>@Html.Action("Trilha", "Aluno")</h1>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Aluno")
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <h4 class="font-azul">Acompanhe as suas inscrições e seus cursos realizados através do Treinaauto.</h4>
+                    <div class="row pt">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr><th colspan="3" style="background-color:#ECECEC">CURSOS ATIVOS</th></tr>
+                                    <tr>
+                                        <th width="42%">CURSO</th>
+                                        <th width="42%">LOCAL</th>
+                                        <th width="16%">DATA DO CURSO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model.cursos_ativos)
+                                    {
+                                        <tr>
+                                            <td>@p.txcurso</td>
+                                            <td>@p.txlocal</td>
+                                            <td>@p.dtcurso.ToShortDateString()</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr><th colspan="3" style="background-color:#ECECEC">CURSOS FINALIZADOS</th></tr>
+                                    <tr>
+                                        <th width="73%">CURSO</th>
+                                        <th width="17%">DATA DO CURSO</th>
+                                        <th width="10%">AVALIAÇÃO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model.cursos_finalizados)
+                                    {
+                                        <tr>
+                                            <td>@p.txcurso</td>
+                                            <td>@p.dtcurso.ToShortDateString()</td>
+                                            @if (p.avaliacao == 0)
+                                            {
+                                                <td><a href="#">avaliar</a></td>
+                                            }
+                                            else
+                                            {
+                                                Html.Raw("<td>" + p.avaliacao + "</td>");
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr><th colspan="3" style="background-color:#ECECEC">INSCRIÇÕES PENDENTES</th></tr>
+                                    <tr>
+                                        <th width="60%">CURSO</th>
+                                        <th width="20%">DATA DO CURSO</th>
+                                        <th width="20%">DATA DA SOLICITAÇÃO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model.inscricoes_pendentes)
+                                    {
+                                        <tr>
+                                            <td>@p.txcurso</td>
+                                            <td>@p.dtcurso.ToShortDateString()</td>
+                                            <td>@p.dtsolicitacao.ToShortDateString()</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr><th colspan="4" style="background-color:#ECECEC">INSCRIÇÕES CANCELADAS</th></tr>
+                                    <tr>
+                                        <th width="30%">CURSO</th>
+                                        <th width="20%">DATA DA SOLICITAÇÃO</th>
+                                        <th width="20%">DATA DA RESPOSTA</th>
+                                        <th width="30%">MOTIVO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model.inscricoes_recusada)
+                                    {
+                                        <tr>
+                                            <td>@p.txcurso</td>
+                                            <td>@p.dtsolicitacao.ToShortDateString()</td>
+                                            <td>@p.dtstatus.ToShortDateString()</td>
+                                            <td>@p.txmotivo</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/alunocursos")
+}

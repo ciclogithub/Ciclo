@@ -1,0 +1,75 @@
+﻿@model Biblioteca.Entidades.Altera_Senha
+
+@{
+    ViewBag.Title = "Criar nova senha";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>CRIAR NOVA SENHA</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="tg-active">Criar nova senha</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form id="form-modal_senha">
+                        @if (Model.idusuario == 0)
+                        {
+                            @Html.Raw("<center><h2>Link inválido</h2></center>");
+                        }
+                        else
+                        {
+                            if (Model.ativo == 0)
+                            {
+                                @Html.Raw("<center><h2>Link já utilizado</h2></center>");
+                            }
+                            else
+                            {
+                                TimeSpan horas = (DateTime.Now - Model.data);
+                                if (horas.Hours >= 24)
+                                {
+                                    @Html.Raw("<center><h2>Link expirado</h2></center>");
+                                }
+                                else
+                                {
+                                    <input type="hidden" id="perfil" name="perfil" value="@Model.idperfil" />
+                                    <input type="hidden" id="usuario" name="usuario" value="@Model.idusuario" />
+                                    <input type="hidden" id="codigo" name="codigo" value="@Model.codigo" />
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="txnovasenha">Nova Senha *</label>
+                                                <input type="password" name="txnovasenha" id="txnovasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txconfirmasenha]]" placeholder="Nova Senha *" maxlength="20">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="txconfirmasenha">Confirmar Senha *</label>
+                                                <input type="password" name="txconfirmasenha" id="txconfirmasenha" class="form-control validate[required,minSize[3],maxSize[20],equals[txnovasenha]]" placeholder="Confirmar Senha *" maxlength="20">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <label class="control-label">&nbsp;</label>
+                                            <button id="btn_alterar_senha" class="tg-btn text-center" type="button">Gravar</button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

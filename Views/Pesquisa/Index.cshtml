@@ -1,0 +1,143 @@
+﻿@using Biblioteca.Funcoes
+@{
+    ViewBag.Title = "Pesquisa";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>PESQUISA</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                @{ 
+                    if (ViewBag.curso == "") { @Html.Raw("<li>Curso: Todos</li>"); } else { @Html.Raw("<li>Curso: " + ViewBag.curso + "</li>"); }
+                    if (ViewBag.cidade == "") { @Html.Raw("<li>Cidade: Todas</li>"); } else { @Html.Raw("<li>Cidade: " + ViewBag.cidade + "</li>"); }
+                    if (ViewBag.data == "") { @Html.Raw("<li>Data: Todas</li>"); } else { @Html.Raw("<li>Data: " + ViewBag.data + "</li>"); }
+                }
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container pt30">
+        @{
+            int i = 0;
+            string data = "";
+        }
+        @if (ViewBag.total > 0)
+        {
+            <div class="row">
+            @foreach (var p in Model)
+            {
+                <div>
+                    <div class="col-xs-4 div-curso" style="margin-bottom:40px;">
+                        <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                            <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : " style=background-image:url(../../images/banner1.png)")>
+                                &nbsp;
+                            </div>
+                            <div class="gray-box">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h4><strong>@p.txcurso</strong></h4></div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Local:</strong></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcidade / @p.txestado</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Data(s):</strong></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                        @if (p.datas.Count > 0)
+                                        {
+                                            data = "";
+                                            foreach (var x in p.datas)
+                                            {
+                                                data = data + ", " + x.dtcurso;
+                                            }
+                                            @Html.Raw(data.Substring(2));
+                                        }
+                                        else
+                                        {
+                                            @: A definir
+                                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        @*<div class="text-right redes-sociais">
+                                Compartilhar:
+                                <span onclick="window.open('https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no facebook"><i class="fa fa-facebook"></i></span>
+                                <span onclick="window.open('https://twitter.com/share?original_referer=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))&amp;related=treinaauto&amp;source=tweetbutton&amp;text=@p.txcurso&amp;url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no twitter"><i class="fa fa-twitter"></i></span>
+                                <span onclick="window.open('https://plus.google.com/share?url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no google plus"><i class="fa fa-google-plus"></i></span>
+                            </div>*@
+                    </div>
+                </div>
+                i = i + 1;
+                if (i % 3 == 0)
+                {
+                    @:</div><div class="row">
+                }
+            }
+        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <br />
+                    <i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Nenhum evento encontrado
+                </div>
+            </div>
+            <div class="row pt30 pesquisa_news">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                    <h3>Não encontrou o evento que estava procurando?</h3>
+                    <p>Nós podemos te ajudar. Assine nossa lista de interesse que avisamos você quando um evento nesta área ficar disponível</p>
+                </div>
+            </div>
+            <form method="post" id="news_form" name="news_form">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        <input type="text" id="news_nome" name="news_nome" placeholder="Nome *" class="form-control validate[required,minSize[3],maxSize[200]]" maxlength="200" />
+                    </div>
+                </div>
+                <div class="row pt15">
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        <input type="text" id="news_curso" name="news_curso" placeholder="Curso de interesse *" class="form-control validate[required,minSize[3],maxSize[200]]" maxlength="200" />
+                    </div>
+                </div>
+                <div class="row pt15">
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                        <input type="text" id="news_email" name="news_email" placeholder="Email *" class="form-control validate[required,minSize[3],maxSize[100],email]" maxlength="100" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                        <input type="text" id="news_whatsapp" name="news_whatsapp" data-mask="(00) 00000-0000" placeholder="Telefone/Whatsapp" class="form-control" />
+                    </div>
+                </div>
+                <div class="row pt15">
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                        <input type="text" id="news_cidade" name="news_cidade" placeholder="Cidade" class="form-control validate[maxSize[100]]" maxlength="100" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                        <input type="text" id="news_estado" name="news_estado" placeholder="Estado" class="form-control validate[maxSize[100]]" maxlength="100" />
+                    </div>
+                </div>
+                <div class="row pt30">
+                    <div class="col-lg-3 col-lg-offset-9 col-md-12 col-xs-12 col-sm-12 text-right">
+                        <input type="button" id="news_enviar" name="news_enviar" class="tg-btn bg_azul_escuro" value="ENVIAR" />
+                    </div>
+                </div>
+            </form>
+        }
+        </div>
+    </div>
+</main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/mask")
+}

@@ -1,0 +1,45 @@
+﻿@model Biblioteca.Entidades.Cursos
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>@Model.txcurso</h3>
+        <form method="post" action="" id="form-modal">
+        <input type="hidden" id="idcurso" name="idcurso" value="@Model.idcurso" />
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+                    <label class="control-label" for="cmbaluno">Lista de Alunos</label>
+                    <select id="cmbaluno" name="cmbaluno" class="form-control combo no-js" multiple>
+                        @foreach (var i in ViewBag.alunos)
+                        {
+                            <option value="@i.idaluno">@i.txaluno</option>
+                        }
+                    </select>
+                    <span class="small">Clique no nome para adicionar o aluno ao curso</span>
+                    <div class="input-group mb10">
+                        <input type="text" class="form-control" id="txaluno" name="txaluno" placeholder="Localizar" value="" maxlength="300" />
+                        <span title="Localizar aluno" class="input-group-addon" onclick="BuscarAlunos()" style="cursor:pointer"><i class="glyphicon glyphicon-search"></i></span>
+                        <span title="Incluir aluno" class="input-group-addon" onclick="addAluno()" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+                    <label class="control-label" for="lstaluno">Alunos do Curso</label>
+                    <select id="lstaluno" name="lstaluno" class="form-control combo no-js" multiple>
+                        @foreach (var p in Model.alunos)
+                        {
+                            <option value="@p.idaluno">@p.txaluno</option>
+                        }
+                    </select>
+                    <span class="small">Clique no nome para remover o aluno do curso</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <button id="incluir_alunos_btn" class="tg-btn" type="button">Enviar</button>
+                </div>
+            </div>
+        </</form>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/cursos")
+@Scripts.Render("~/bundles/mask")

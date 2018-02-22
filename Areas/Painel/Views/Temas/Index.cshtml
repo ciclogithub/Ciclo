@@ -1,0 +1,82 @@
+﻿@model List<Biblioteca.Entidades.Temas>
+
+@{
+    ViewBag.Title = "Temas";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Painel")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Painel">Painel</a></li>
+                <li class="tg-active">Cadastros</li>
+                <li class="tg-active">Temas</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout bg-cinza">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Painel")
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" id="filtro_pesquisa" name="filtro_pesquisa" value="@ViewBag.filtro" />&nbsp;<button class="tg-btn bt-m" type="button" id="pesquisa_tema">Localizar</button>
+                            &nbsp;<button class="tg-btn bt-m" type="button" onclick="TemasTodos();">Todos</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                            <button class="tg-btn bt-m" type="button" onclick="Temas(0);">Novo</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="TemaAlterar()">Alterar</button>
+                            &nbsp;
+                            <button class="tg-btn bt-m" type="button" onclick="TemaExcluir()">Excluir</button>
+                        </div>
+                    </div>
+                    <div class="row pt">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="3%"><input type="checkbox" id="selectall" name="selectall" /></th>
+                                        <th width="33%">TEMA</th>
+                                        <th width="32%">SUBTÍTULO</th>
+                                        <th width="32%">DESCRIÇÃO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row"><input type="checkbox" id="ident" name="ident" value="@p.idtema" /></th>
+                                            <td>@p.txtema</td>
+                                            <td>@p.txsubtitulo</td>
+                                            <td>@p.txdescritivo</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    @Html.Partial("~/Areas/Painel/Views/Painel/Paginacao.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/temas")
+}
+
+

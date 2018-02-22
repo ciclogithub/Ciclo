@@ -64,19 +64,21 @@ namespace Ciclo.Areas.Painel.Controllers
         [Autenticacao]
         public JsonResult IncluirConcluir(HttpPostedFileBase txfoto, int id = 0, string nome = "", string email = "", string telefone = "", string descricao = "")
         {
+            HttpCookie cookie = HttpContext.Request.Cookies["ciclo_usuario"];
             InstrutoresDB db = new InstrutoresDB();
             int ident = 0;
             string fileName = "";
 
             if (id == 0)
             {
-                ident = db.Salvar(new Instrutores(id, nome, email, telefone, descricao, "", 0));
+                ident = db.Salvar(new Instrutores(Convert.ToInt32(cookie.Value), id, nome, email, telefone, descricao, "", 0));
                 Instrutores instrutor = db.Buscar(ident);
             }
             else
             {
                 ident = id;
                 Instrutores instrutor = db.Buscar(id);
+                instrutor.idorganizador = Convert.ToInt32(cookie.Value);
                 instrutor.txinstrutor = nome;
                 instrutor.txemail = email;
                 instrutor.txtelefone = telefone;

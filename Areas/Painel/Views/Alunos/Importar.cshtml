@@ -1,0 +1,146 @@
+﻿<div class="panel panel-default">
+    <div class="panel-body" style="font-size:12px">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                Para importar corretamente a sua lista de alunos para o sistema Treinaauto, veja as instruções abaixo:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                - Arquivo no formato XLS ou XLSX <a href="~/images/Modelo_alunos.xls">(baixar arquivo modelo)</a><br />
+                - O arquivo deve possuir uma coluna para cada campo, sendo a primeira linha com o nome informado abaixo, seguindo a ordem e as condições descritas de cada item.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="10%">POSIÇÃO</th>
+                            <th width="18%">NOME DA COLUNA</th>
+                            <th width="30%">CONTEÚDO</th>
+                            <th width="12%">TIPO</th>
+                            <th width="16%">TAMANHO/PADRÃO</th>
+                            <th width="14%">OBRIGATÓRIO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>NOME</td>
+                            <td>Nome do aluno</td>
+                            <td>Texto</td>
+                            <td>até 200</td>
+                            <td>S</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>CPF</td>
+                            <td>CPF do aluno</td>
+                            <td>Texto</td>
+                            <td>000.000.000-00</td>
+                            <td>S</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>EMPRESA</td>
+                            <td>Nome da atual empresa que trabalha</td>
+                            <td>Texto</td>
+                            <td>até 300</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>PAIS</td>
+                            <td>País do aluno</td>
+                            <td>Texto</td>
+                            <td>até 50</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>ESTADO</td>
+                            <td>Estado do aluno, apenas UF</td>
+                            <td>Texto</td>
+                            <td>2</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>CIDADE</td>
+                            <td>Cidade do aluno</td>
+                            <td>Texto</td>
+                            <td>até 100</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>OBSERVACAO</td>
+                            <td>Alguma observação sobre o aluno</td>
+                            <td>Texto</td>
+                            <td>sem limite</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>EMAIL1</td>
+                            <td>E-mail do aluno</td>
+                            <td>Texto</td>
+                            <td>até 200</td>
+                            <td>S</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>EMAIL2</td>
+                            <td>Outro e-mail do aluno</td>
+                            <td>Texto</td>
+                            <td>até 200</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>TELEFONE1</td>
+                            <td>Número de telefone do aluno</td>
+                            <td>Texto</td>
+                            <td>(00) 00000-0000</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>TELEFONE2</td>
+                            <td>Outro número de telefone do aluno</td>
+                            <td>Texto</td>
+                            <td>(00) 00000-0000</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>WHATSAPP</td>
+                            <td>Número de whatsapp do aluno</td>
+                            <td>Texto</td>
+                            <td>(00) 00000-0000</td>
+                            <td>N</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <form method="post" action="" id="form-modal_importar" runat="server">
+                <input type="hidden" id="organizador" name="organizador" value="@ViewBag.organizador" />
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 form-group">
+                    <input type="file" class="form-control" id="txArquivo" name="txArquivo" value="" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-group">
+                    <button class="tg-btn bt-m" type="button" onclick="enviarArquivo(2)">Enviar Arquivo</button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                    Após enviar o arquivo, aguarde pelo relatório final de importação.
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" id="processando"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/importacao")

@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Treina Auto - A 1º Plataforma de Eventos Automotivos</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/site.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/normalize.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/icomoon.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/customScrollbar.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/animate.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.fullpage.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/transitions.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/main.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/color.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/highcharts/5.0.14/css/highcharts.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/barrating/themes/fontawesome-stars.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/validate/css/validationEngine.jquery.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/calendar/css/datepicker.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/plugins/select2/css/select2.css?1" />
+    <link rel="stylesheet" type="text/css" href="~/Content/responsive.css?1" />
+
+    @*@Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/template")*@
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="tg-home tg-homevtwo panel-page">
+
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+
+        <header id="tg-header" class="tg-header tg-headervtwo tg-haslayout">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <strong class="tg-logo"><a href="~/Home"><img src="~/images/logo.png" alt="www.treinaauto.com.br" class="img-responsive"></a></strong>
+                        <div class="tg-navigationarea">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        @RenderBody()
+
+        <footer id="tg-footer" class="tg-haslayout">
+            <div class="tg-foorterbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                            <p class="tg-copyrights">@DateTime.Now.Year - Todos os direitos reservados</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6 text-center">
+                            <strong class="tg-logo2"><a href="~/Home"><img src="~/images/logo_branca.png" alt="www.treinaauto.com.br"></a></strong>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                            <ul class="tg-socialicons">
+                                <li class="tg-facebook"><a href="https://www.facebook.com/treinaautocursos" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="modal1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal modal-child fade" data-backdrop-limit="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-modal-parent="#myModal1" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/template")
+    @Scripts.Render("~/bundles/ciclo")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

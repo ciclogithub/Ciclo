@@ -1,0 +1,65 @@
+﻿@model Biblioteca.Entidades.Locais
+
+<div class="panel panel-default">
+    <div class="panel-heading modal-head">
+        <h4 class="panel-title nopad">
+            @if (Model.idlocal == 0)
+            {
+                @: Incluir
+            }
+            else
+            {
+                @: Editar
+            }
+            - Locais
+        </h4>
+    </div>
+
+    <div class="panel-body">
+        <form method="post" action="" id="form-modal_local">
+            <input type="hidden" id="idlocal" name="idlocal" value="@Model.idlocal" />
+            <input type="hidden" id="tempcidade" name="tempcidade" value="@Model.idcidade" />
+            <input type="hidden" id="tempestado" name="tempestado" value="@Model.idestado" />
+            <div class="form-group">
+                <label class="control-label" for="txlocal">Nome *</label>
+                <input type="text" class="form-control validate[required,minSize[2],maxSize[200]]" id="txlocal" name="txlocal" value="@Model.txlocal" maxlength="200" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="txlogradouro">Logradouro *</label>
+                <input type="text" class="form-control validate[required,minSize[3],maxSize[300]]" id="txlogradouro" name="txlogradouro" value="@Model.txlogradouro" maxlength="300" />
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label class="control-label" for="idpais">País</label>
+                        <select id="idpais" name="idpais" class="form-control" onchange="MudaPais(this.value)">
+                            <option value="">-- Selecione --</option>
+                            @foreach (var t in ViewBag.paises)
+                            {
+                                <option value="@t.idpais" @(Model.idpais == t.idpais ? "selected" : "")>@t.txpais</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" id="dv_estado">
+                        <label class="control-label" for="idestado">Estado</label>
+                        <select id="idestado" name="idestado" class="form-control">
+                            <option value="">-- Selecione o país --</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" id="dv_cidade">
+                        <label class="control-label" for="idcidade">Cidade</label>
+                        <select id="idcidade" name="idcidade" class="form-control">
+                            <option value="">-- Selecione o estado --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button id="incluir_btn_local" class="tg-btn text-center" type="button">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/locais")

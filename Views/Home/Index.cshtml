@@ -1,0 +1,311 @@
+﻿@using Biblioteca.Funcoes
+@{
+    ViewBag.Title = "Home";
+}
+
+<center>
+    <div id="slideshow">
+        <div>
+            <img src="~/images/slider/img1.jpg">
+        </div>
+        <div>
+            <img src="~/images/slider/img1.png">
+        </div>
+        <div>
+            <img src="~/images/slider/img2.png">
+        </div>
+    </div>
+</center>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+
+    <div class="tg-carousel pt30">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+                    <h2>Eventos em Destaque</h2>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right carousel-arrows">
+                    <a class="left" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a class="right" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="carousel slide multi-item-carousel" id="theCarousel">
+                        <div class="carousel-inner">
+                            @{ 
+                                int i = 1;
+                                string data = "";
+                            }
+                            @foreach (var p in Model)
+                            {
+                                <div class="item @(i == 1 ? "active" : "")">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 div-curso">
+                                        <a href="~/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))">
+                                            <div class="div-curso-title" @(p.txfoto != "" ? " style=background-image:url(../../images/Cursos/" + p.txfoto + ") " : " style=background-image:url(../../images/banner1.png) ")>
+                                                &nbsp;
+                                            </div>
+                                            <div class="gray-box">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h4><strong>@p.txcurso</strong></h4></div>
+                                                </div>                                                
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Categoria:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcategoria</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Local:</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">@p.txcidade / @p.txestado</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><strong>Data(s):</strong></div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                                        @if (p.datas.Count > 0)
+                                                        {
+                                                            data = "";
+                                                            foreach (var x in p.datas)
+                                                            {
+                                                                data = data + ", " + x.dtcurso;
+                                                            }
+                                                            @Html.Raw(data.Substring(2));
+                                                        }
+                                                        else
+                                                        {
+                                                            @: A definir
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        @*<div class="text-right redes-sociais">
+                                            Compartilhar:
+                                            <span onclick="window.open('https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.treinaauto.com.br/Curso/@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no facebook"><i class="fa fa-facebook"></i></span>
+                                            <span onclick="window.open('https://twitter.com/share?original_referer=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))&amp;related=treinaauto&amp;source=tweetbutton&amp;text=@p.txcurso&amp;url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no twitter"><i class="fa fa-twitter"></i></span>
+                                            <span onclick="window.open('https://plus.google.com/share?url=http:%3A%2F%2Fwww.treinaauto.com.br%2Curso%2@(p.idcurso + "-" + Diacritics.ReplaceDiacritics(p.txcurso))')" title="Compartilhar no google plus"><i class="fa fa-google-plus"></i></span>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                i = i + 1;
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-sectioncategorias">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <h2>Especialidades</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
+                    <a class="tg-btn tg-btnbookseat bg-branco" href="Cursos/Todos">VER TODOS OS CURSOS</a>
+                </div>
+            </div>
+            <div class="row categorias pt30">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item" style="background-image:url(images/categorias/1.png)">MOTOR E TRANSMISSÃO</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item" style="background-image:url(images/categorias/2.png)">GESTÃO E ADMINISTRAÇÃO DE OFICINA</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item" style="background-image:url(images/categorias/3.png)">CONFORTO E CONVENIÊNCIA</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item" style="background-image:url(images/categorias/4.png)">FUNILARIA E PINTURA</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item" style="background-image:url(images/categorias/5.png)">REPARO DE MÓDULOS</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item" style="background-image:url(images/categorias/6.png)">VEÍCULOS ELÉTRICOS E HÍBRIDOS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="tg-sectionspace tg-cursos">
+        <div class="container">
+            @*<div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <h3>Cursos em Destaque</h3>
+                </div>
+            </div>*@
+            <div class="row pt30">
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 text-center">
+                    <a href="Cadastro/Aluno"><img src="~/images/1.png" class="img-responsive" /></a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 text-center"">
+                    <a href="Cadastro/Aluno"><img src="~/images/2.png" class="img-responsive" /></a>
+                    
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 text-center"">
+                    <a href="Cadastro/Instrutor"><img src="~/images/3.png" class="img-responsive" /></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right mb100">
+                    @*<a class="tg-btn tg-btnbookseat bg-branco" href="#">VER TODOS OS CURSOS</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-sectionboxes">
+        <div class="container">
+            <div class="row boxes">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item box1">Por que a Treina Auto?</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="item box2">A Treina Auto tem a ambição de tornar-se a referência de eventos de treinamento para o mercado da reparação automotiva no Brasil.<br />Uma plataforma que seja excelente para “Quem Quer APRENDER”, para “Quem Quer ENSINAR” e "Quem Quer MULTIPLICAR CONHECIMENTO".</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-sectionicones">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <h2>Aprender</h2>
+                    Para “Quem Quer APRENDER” a<br />
+                    Treina Auto oferece uma conta<br />
+                    gratuita onde o interessado pode,<br />
+                    entre outras coisas:
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <img src="~/images/icones/08.png" />
+                            <div class="img-text">Informar o mercado de atuação;</div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <img src="~/images/icones/09.png" />
+                            <div class="img-text">Informar as áreas de interesse em cursos;</div>
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <img src="~/images/icones/10.png" />
+                            <div class="img-text">Cadastrar os certificados de cursos já feitos;</div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <img src="~/images/icones/11.png" />
+                            <div class="img-text">Receber comunicados de eventos dentro do seu mercado e área de interesse.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-sectioncadastro">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                    <h2>Cadastre-se agora</h2>
+                    E receba por email em “primeira mão” informações com datas, locais e horários
+                    de novos cursos.
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><br />
+                    <a class="tg-btn tg-btnbookseat bg-azul" href="Cadastro/Aluno">CADASTRAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-sectiontreina pb50">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2>Treina Auto para Instrutores</h2>
+                    Para “Quem Quer ENSINAR” a Treina Auto oferece gratuitamente uma conta específica para instrutores e professores. “Quem Quer ENSINAR” pode
+                    ser um instrutor ou uma empresa que deseja MULTIPLICAR CONHECIMENTO com a oferta de diversos cursos com diversos instrutores diferentes.
+                    Nela o instrutor/organizador poderá:
+                </div>                
+            </div>
+            <div class="row pt30">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/01.png" />
+                            <div class="img-text">Cadastrar seus cursos com um mini-descritivo de cada tema;</div>
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/02.png" />
+                            <div class="img-text">Cadastrar um mini-currículo com as especialidades e foto de cada instrutor;</div>
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/03.png" />
+                            <div class="img-text">Cadastrar locais de realização dos cursos ou eventos;</div>
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/04.png" />
+                            <div class="img-text">Cadastrar os cursos já realizados no passado para gerar estatísticas e relatórios;</div>
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/05.png" />
+                            <div class="img-text">Gerar vários tipos de relatórios;</div>
+                        </div>
+                    </div>
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/06.png" />
+                            <div class="img-text">Divulgar sua agenda de cursos gratuitamente na plataforma Treina Auto.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <img src="~/images/icones/computador.png" class="mt" />
+                    <div class="row pt30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <img src="~/images/icones/07.png" />
+                            <div class="img-text2">Publicar eventos. Montar um folder do curso agregando o descritivo do curso, o currículodo instrutor, o local de realização e mais alguns dados específicos,  tais como: data, horário, valores, mercado, especialidades e uma imagem de divulgação;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-sectionparavoce">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="box">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <h2>A Treina Auto é pra você instrutor</h2>
+                                A plataforma completa para você criar, divulgar e administrar o seu curso, comece
+                                agora e conheça todas as possibilidades.
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                <br /><br />
+                                <a class="tg-btn tg-btnbookseat bg-verde" href="Cadastro/Instrutor">COMEÇAR</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/home")
+}

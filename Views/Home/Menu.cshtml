@@ -1,0 +1,55 @@
+﻿@if (Model == null)
+{
+    <div class="tg-navigationarea">
+        <nav id="tg-nav" class="tg-nav hidden-md hidden-lg hidden-sm" style="float:right !important; margin-right:15px;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                <ul>
+                    <li><a href="~/Cadastro/Aluno">SOU ALUNO</a></li>
+                    <li><a href="~/Cadastro/Instrutor">SOU INSTRUTOR / ORGANIZADOR</a></li>
+                </ul>
+            </div>
+        </nav>
+        <a class="tg-btn tg-btnbookseat hidden-xs btn-azul" href="~/Cadastro/Aluno">SOU ALUNO</a>
+        <a class="tg-btn tg-btnbookseat hidden-xs btn-verde" href="~/Cadastro/Instrutor">SOU INSTRUTOR / ORGANIZADOR</a>
+    </div>
+}
+else
+{
+
+    HttpCookie cookie = HttpContext.Current.Request.Cookies["ciclo_perfil"];
+
+
+    <div class="tg-navigationarea">
+        <nav id="tg-nav" class="tg-nav hidden-md hidden-lg hidden-sm">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                <ul>
+                    <li><a href="~/Painel">Painel</a></li>
+                </ul>
+            </div>
+        </nav>
+        @if (Convert.ToInt32(cookie.Value) == 1)
+        {
+            <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Painel">Painel</a>
+        }
+        else
+        {
+            <a class="tg-btn tg-btnbookseat hidden-xs" href="~/Aluno">Painel</a>
+        }
+    </div>
+}

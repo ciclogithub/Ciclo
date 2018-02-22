@@ -56,6 +56,18 @@ namespace Biblioteca.Entidades
             this.total = total;
         }
 
+        public Instrutores(int organizador, int id, string instrutor, string email, string telefone, string descritivo, string foto, int total)
+        {
+            this.idinstrutor = id;
+            this.idorganizador = organizador;
+            this.txinstrutor = instrutor;
+            this.txemail = email;
+            this.txtelefone = telefone;
+            this.txdescritivo = descritivo;
+            this.txfoto = foto;
+            this.total = total;
+        }
+
         public int Salvar()
         {
             int ident = new InstrutoresDB().Salvar(this);

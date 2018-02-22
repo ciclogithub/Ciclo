@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Listas";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Painel")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Painel">Painel</a></li>
+                <li class="tg-active">Relatórios</li>
+                <li class="tg-active">Listas</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout bg-cinza">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2 hidden-xs bg-menu">
+                    @Html.Action("Menu", "Painel")
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 pt-inner">
+                    <div class="row" style="margin-right:6px;">
+                        <form method="post" action="Listas/Relatorio" id="form-modal">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <label class="control-label" for="tprelatorio">Tipo de Lista</label>
+                                    <select id="tprelatorio" name="tprelatorio" class="form-control validate[required]">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="1">Alunos cadastrados no Diagweb sem produtos</option>
+                                        <option value="2">Alunos cadastrados no Diagweb com produtos</option>
+                                        <option value="3">Alunos sem e-mails e CPF cadastrados</option>
+                                        <option value="4">Alunos não cadastrados no Diagweb</option>
+                                        <option value="5">Empresas cadastradas no Diagweb sem produtos</option>
+                                        <option value="6">Empresas cadastradas no Diagweb com produtos</option>
+                                        <option value="7">Empresas sem e-mails e CNPJ cadastrados</option>
+                                        <option value="8">Empresas não cadastradas no Diagweb</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+                                    <br />
+                                    <button id="incluir_btn" class="tg-btn" type="button">Gerar Lista</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/lista")
+}

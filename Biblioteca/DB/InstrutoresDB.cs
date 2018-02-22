@@ -20,7 +20,7 @@ namespace Biblioteca.DB
 
                 DBSession session = new DBSession();
                 Query query = session.CreateQuery("INSERT INTO Instrutores (idorganizador, txinstrutor, txemail, txtelefone, txdescritivo) output INSERTED.idinstrutor VALUES (@organizador, @instrutor, @email, @telefone, @descritivo)");
-                query.SetParameter("organizador", Convert.ToInt32(cookie.Value));
+                query.SetParameter("organizador", variavel.idorganizador);
                 query.SetParameter("instrutor", variavel.txinstrutor);
                 query.SetParameter("email", variavel.txemail);
                 query.SetParameter("telefone", variavel.txtelefone);

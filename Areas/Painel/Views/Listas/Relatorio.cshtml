@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "Listas";
+}
+
+<div class="tg-bgparallax">
+    <div class="container">
+        <div class="tg-innerbannercontent">
+            <div class="tg-pagetitle">
+                <h1>@Html.Action("Usuario", "Painel")</h1>
+            </div>
+            <ol class="tg-breadcrumb">
+                <li><a href="~/Painel">Dashboard</a></li>
+                <li class="tg-active">Relatórios</li>
+                <li><a href="~/Painel/Listas">Listas</a></li>
+                @switch (Convert.ToInt32(ViewBag.form["tprelatorio"]))
+                {
+                    case 1: <li class="tg-active">Alunos cadastrados no Diagweb sem produtos</li>
+                        break;
+
+                    case 2: <li class="tg-active">Alunos cadastrados no Diagweb com produtos</li>
+                        break;
+
+                    case 3: <li class="tg-active">Alunos sem e-mails e CPF cadastrados</li>
+                        break;
+
+                    case 4: <li class="tg-active">Alunos não cadastrados no Diagweb</li>
+                        break;
+
+                    case 5: <li class="tg-active">Empresas cadastradas no Diagweb sem produtos</li>
+                        break;
+
+                    case 6: <li class="tg-active">Empresas cadastradas no Diagweb com produtos</li>
+                        break;
+
+                    case 7: <li class="tg-active">Empresas sem e-mails e CNPJ cadastrados</li>
+                        break;
+
+                    case 8: <li class="tg-active">Empresas não cadastradas no Diagweb</li>
+                        break;
+                }
+            </ol>
+        </div>
+    </div>
+</div>
+
+<form method="post" action="" id="form-filtro">
+    <input type="hidden" id="tprelatorio" name="tprelatorio" value="@ViewBag.form["tprelatorio"]" />
+</form>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace">
+        <div class="container">
+            <div class="row pt-inner">
+                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1 text-left">
+                    <i class="fa fa-file-excel-o fa-3x" aria-hidden="true" id="exportar" style="color:#5fb536; cursor:pointer" title="Exportar para Excel"></i>
+                </div>
+                <div class="col-xs-6 col-sm-8 col-md-8 col-lg-10 text-right">
+                    <a href="~/Painel/Listas"><button class="tg-btn" type="button">Voltar</button></a>
+                </div>
+            </div>
+            <div id="div_grafico" style="width:100%; height:600px;" class="hide pt15"></div>
+            <div class="row pt">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="table2excel" style="overflow:auto;">
+
+                    @{
+                    int cont = 0;
+                    switch (Convert.ToInt32(ViewBag.form["tprelatorio"]))
+                    {
+                        // Alunos cadastrados no Diagweb com produtos
+                        case 1:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">ALUNOS CADASTRADOS NO DIAGWEB SEM PRODUTOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">ALUNO</th>
+                                        <th bgcolor="#ECECEC">CPF</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Alunos cadastrados no Diagweb com produtos
+                        case 2:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">ALUNOS CADASTRADOS NO DIAGWEB COM PRODUTOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">ALUNO</th>
+                                        <th bgcolor="#ECECEC">CPF</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Alunos sem e-mails ou CPF cadastrados
+                        case 3:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">ALUNOS SEM E-MAILS E CPF CADASTRADOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">ALUNO</th>
+                                        <th bgcolor="#ECECEC">CPF</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Alunos não cadastrados no Diagweb
+                        case 4:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">ALUNOS NÃO CADASTRADOS NO DIAGWEB</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">ALUNO</th>
+                                        <th bgcolor="#ECECEC">CPF</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Empresas cadastradas no Diagweb sem produtos
+                        case 5:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">EMPRESAS CADASTRADAS NO DIAGWEB SEM PRODUTOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">EMPRESA</th>
+                                        <th bgcolor="#ECECEC">CNPJ</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Empresas cadastradas no Diagweb com produtos
+                        case 6:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">EMPRESAS CADASTRADAS NO DIAGWEB COM PRODUTOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">EMPRESA</th>
+                                        <th bgcolor="#ECECEC">CNPJ</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Empresas sem e-mails ou CNPJ cadastrados
+                        case 7:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">EMPRESAS SEM E-MAILS E CNPJ CADASTRDOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">EMPRESA</th>
+                                        <th bgcolor="#ECECEC">CNPJ</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+
+                        // Empresas não cadastradas no Diagweb
+                        case 8:
+
+                            <table class="table table-bordered table-hover table-responsive table-relat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" bgcolor="#ECECEC" style="text-align:center !important">EMPRESAS NÃO CADASTRADAS NO DIAGWEB</th>
+                                    </tr>
+                                    <tr>
+                                        <th bgcolor="#ECECEC">EMPRESA</th>
+                                        <th bgcolor="#ECECEC">CNPJ</th>
+                                        <th bgcolor="#ECECEC">E-MAILS</th>
+                                        <th bgcolor="#ECECEC">TELEFONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.nome</td>
+                                            <td>@p.cpf_cnpj</td>
+                                            <td>@p.emails</td>
+                                            <td>@p.telefones</td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                    <tr>
+                                        <td style="text-align:right !important" colspan="4">TOTAL: @cont</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            break;
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+    @Scripts.Render("~/bundles/table2excel")
+    @Scripts.Render("~/bundles/lista")
+}
+
